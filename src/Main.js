@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { Text } from 'react-native';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
-class Main extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: true
-    };
-  }
+import HomePage from './HomePage';
 
-  render() {
-    return (
-      <Text>Hello Main</Text>
-    );
-  }
-};
+const Main = () => (
+  <Provider store={store}>
+    <HomePage />
+  </Provider>
+);
 
 export default Main;

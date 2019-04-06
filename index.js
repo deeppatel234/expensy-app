@@ -1,6 +1,6 @@
-import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
-// if(__DEV__) {
-// }
+if(__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+}
 
 /**
  * @format

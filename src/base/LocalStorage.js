@@ -11,5 +11,9 @@ export default {
 
   setToken(token) {
     return AsyncStorage.setItem(KEYS.AUTHTOKEN, token);
-  }
+  },
+
+  removeToken() {
+    return AsyncStorage.removeItem(KEYS.AUTHTOKEN);
+  },
 };

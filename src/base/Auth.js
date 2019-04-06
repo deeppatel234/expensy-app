@@ -18,8 +18,11 @@ class Auth {
       data: {
         token: authToken,
       },
-    });;
+    });
     MemoryStorage.set('token', isValid ? authToken : false);
+    if(!isValid) {
+      await LocalStorage.removeToken();
+    }
     return isValid ? Promise.resolve() : Promise.reject();
   }
 }

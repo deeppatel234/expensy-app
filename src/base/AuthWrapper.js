@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-native';
-import { Text } from 'native-base';
+import { Text } from 'react-native';
 
 import Auth from './Auth';
 
@@ -15,7 +15,7 @@ class AuthWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
+      isLoading: true,
       isAuthenticated: false,
     };
   }
@@ -23,12 +23,12 @@ class AuthWrapper extends Component {
   componentDidMount() {
     Auth.isAuthenticated().then(() => {
       this.setState({
-        isLoading: true,
+        isLoading: false,
         isAuthenticated: true,
       });
     }).catch(() => {
       this.setState({
-        isLoading: true,
+        isLoading: false,
         isAuthenticated: false,
       });
     });
@@ -38,7 +38,7 @@ class AuthWrapper extends Component {
     const { isLoading, isAuthenticated } = this.state;
     const { location } = this.props;
 
-    if (!isLoading) {
+    if (isLoading) {
       return <Text>Loading...</Text>;
     }
 

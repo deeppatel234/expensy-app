@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Text } from 'native-base';
+import { Text } from 'react-native';
 
 class SignUP extends Component {
   constructor(props) {

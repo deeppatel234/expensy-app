@@ -5,11 +5,11 @@ const KEYS = {
 };
 
 export default {
-  async getToken() {
-    await AsyncStorage.getItem(KEYS.AUTHTOKEN);
+  getToken() {
+    return AsyncStorage.getItem(KEYS.AUTHTOKEN);
   },
 
-  async setToken(token) {
-    await AsyncStorage.setItem(KEYS.AUTHTOKEN, token);
+  setToken(token) {
+    return AsyncStorage.setItem(KEYS.AUTHTOKEN, token);
   }
 };

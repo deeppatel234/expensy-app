@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-native";
 
-import { Container } from 'native-base';
+import { View } from 'react-native';
 
 import PrivateRoute from './src/base/PrivateRoute';
 
@@ -18,13 +18,13 @@ export default class App extends Component {
   render() {
     return (
       <NativeRouter>
-        <Container>
+        <View>
           <Switch>
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
             <PrivateRoute path="/" exact component={Main} />
           </Switch>
-        </Container>
+        </View>
       </NativeRouter>
     );
   }

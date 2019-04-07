@@ -1,4 +1,3 @@
-import Request from './Request';
 import MemoryStorage from './MemoryStorage';
 import LocalStorage from './LocalStorage';
 
@@ -12,18 +11,9 @@ class Auth {
     if (!authToken) {
       return Promise.reject();
     }
-    const { isValid } = await Request.api({
-      model: 'user',
-      method: 'varify',
-      data: {
-        token: authToken,
-      },
-    });
-    MemoryStorage.set('token', isValid ? authToken : false);
-    if(!isValid) {
-      await LocalStorage.removeToken();
-    }
-    return isValid ? Promise.resolve() : Promise.reject();
+
+    MemoryStorage.set('token', authToken);
+    return Promise.resolve();
   }
 }
 

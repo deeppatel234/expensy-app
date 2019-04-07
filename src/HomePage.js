@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openDatabase } from 'react-native-sqlite-storage';
 
 import { Text } from 'react-native';
 
@@ -10,12 +9,6 @@ class HomePage extends Component {
   componentDidMount() {
     const { fetchUser } = this.props;
     fetchUser();
-
-    openDatabase({
-        name: "TestDatabase",
-        location: "default"
-    });
-
   }
 
   render() {

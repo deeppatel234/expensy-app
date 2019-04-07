@@ -1,4 +1,5 @@
 import Request from '../base/Request';
+import Models from '../sql/models';
 
 class BaseRedux {
   constructor() {
@@ -6,6 +7,7 @@ class BaseRedux {
     this.reducers = this.getReducers();
     this.actions = this.getActions();
     this.request = Request;
+    this.models = Models;
   }
 
   getActions() {

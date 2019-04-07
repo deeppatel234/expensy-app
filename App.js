@@ -10,6 +10,7 @@ import { View, Text } from 'react-native';
 
 import PrivateRoute from './src/base/PrivateRoute';
 import SQLLite from './src/sql/sqllite';
+import ModelRegistry from './src/sql/models';
 
 import Login from './src/login';
 import SignUp from './src/signup';
@@ -27,8 +28,11 @@ class App extends Component {
 
   componentDidMount() {
     SQLLite.connect()
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ isLoading: false, errorMessage: 'Error in connecting to database' }))
+      .then(() => {
+        ModelRegistry.initTables().then(() => {
+          this.setState({ isLoading: false })
+        }).catch(() => this.setState({ isLoading: false, errorMessage: 'Error in creating tables' }))
+      }).catch(() => this.setState({ isLoading: false, errorMessage: 'Error in connecting to database' }))
   }
 
   render() {

@@ -26,7 +26,7 @@ class HomePage extends Component {
     }
 
     return (
-      <Text>Hello {user.firstname}</Text>
+      <Text>Hello {user.firstname} {user.lastname}</Text>
     );
   }
 }

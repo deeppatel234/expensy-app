@@ -1,6 +1,7 @@
 import Registry from '../../base/Registry';
 
 import UserModel from './UserModel';
+import CategoryModel from './CategoryModel';
 
 class ModelRegistry extends Registry {
   initTables() {
@@ -11,5 +12,6 @@ class ModelRegistry extends Registry {
 const modelRegistry = new ModelRegistry();
 
 modelRegistry.set('user', new UserModel());
+modelRegistry.set('category', new CategoryModel());
 
 export default modelRegistry;

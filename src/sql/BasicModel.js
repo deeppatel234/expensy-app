@@ -37,9 +37,14 @@ class BasicModel {
   getKeyValue(data) {
     const keys = Object.keys(data);
     const values = keys.map(k => data[k]);
-    const valueString = values.map(v => '?').join(',');
 
-    return { keys: keys.join(','), valueString, values };
+    return {
+      keys,
+      keysString: keys.join(','),
+      values,
+      valueString: values.join(','),
+      replaceString: values.map(v => '?').join(','),
+    };
   }
 
   initFields() {
@@ -48,6 +53,69 @@ class BasicModel {
 
   tableName() {
     throw new Error('Unimplemented Method: tableName');
+  }
+
+  /**
+   * =================
+   *   CRUD Methods
+   * =================
+   */
+
+  create(data) {
+    const createData = this.prepareSaveData(data);
+    const { keysString, replaceString, values } = this.getKeyValue(createData);
+    return this.db.executeSql(`INSERT INTO ${this.tableName()} (${keysString}) VALUES (${replaceString})`, values);
+  }
+
+  replaceOrCreate(data) {
+    const { keysString, replaceString, values } = this.getKeyValue(this.prepareSaveData(data));
+    return this.db.executeSql(`REPLACE INTO ${this.tableName()} (${keysString}) VALUES (${replaceString});`, values);
+  }
+
+  readAll() {
+    return new Promise(async (res, rej) => {
+      try {
+        const [data] = await this.db.executeSql(`SELECT * from ${this.tableName()}`);
+        if (data.rows.length) {
+          const resData = [];
+          for (let i = 0; i < data.rows.length; ++i) {
+            resData.push(this.prepareGetData(data.rows.item(i)));
+          }
+          res(resData);
+        } else {
+          res([]);
+        }
+      } catch (err) {
+        rej(err);
+      }
+    })
+  }
+
+  update(set, where) {
+    const setData = this.prepareSaveData(set);
+    const whereData = this.prepareSaveData(where);
+
+    const whereList = [];
+    Object.keys(whereData).forEach((key) => {
+      whereList.push(`${key}='${whereData[key]}'`)
+    });
+
+    const setList = [];
+    Object.keys(setData).forEach((key) => {
+      setList.push(`${key}='${setData[key]}'`)
+    });
+
+    return this.db.executeSql(`UPDATE ${this.tableName()} SET ${setList.join(',')} WHERE ${whereList.join(' and ')}`);
+  }
+
+  delete(query) {
+    const queryData = this.prepareSaveData(query);
+    const queryList = [];
+    Object.keys(queryData).forEach((key) => {
+      queryList.push(`${key}='${queryData[key]}'`)
+    });
+
+    return this.db.executeSql(`DELETE FROM ${this.tableName()} WHERE ${queryList.join(' and ')}`);
   }
 }
 

@@ -32,7 +32,7 @@ class UserRedux extends BaseRedux {
       fetchData() {
         return (dispatch) => {
           return self.request.api({ model: 'user', method: 'myinfo' }).then((user) => {
-            self.models.get('user').saveUser(user)
+            self.models.get('user').replaceOrCreate(user)
               .then(() => dispatch(self.actions.fetchDataSuccess(user)))
               .catch(() => dispatch(self.actions.loadingError()));
           }).catch(() => {

@@ -16,16 +16,8 @@ class UserModel extends BasicModel {
   }
 
   async getUser() {
-    const [res] = await this.db.executeSql(`SELECT * from ${this.tableName()}`);
-    if (res.rows.length) {
-      return this.prepareGetData(res.rows.item(0));
-    }
-    return false;
-  }
-
-  saveUser(user) {
-    const { keys, values, valueString } = this.getKeyValue(this.prepareSaveData(user));
-    return this.db.executeSql(`REPLACE INTO ${this.tableName()} (${keys}) VALUES (${valueString});`, values);
+    const data = await this.readAll();
+    return data.length ? data[0] : false;
   }
 }
 

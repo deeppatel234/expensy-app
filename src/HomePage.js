@@ -18,7 +18,7 @@ class HomePage extends Component {
     } = this.props;
 
     if (userLoadingStatus === 'IN_PROGRESS') {
-      return <Text>Loading....</Text>;
+      return <Text>fetching user....</Text>;
     }
 
     if (userLoadingStatus === 'ERROR') {

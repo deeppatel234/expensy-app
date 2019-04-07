@@ -39,7 +39,7 @@ class AuthWrapper extends Component {
     const { location } = this.props;
 
     if (isLoading) {
-      return <Text>Loading...</Text>;
+      return <Text>authenticate user...</Text>;
     }
 
     if (isAuthenticated) {

@@ -39,7 +39,7 @@ class App extends Component {
     const { isLoading, errorMessage } = this.state;
 
     if (isLoading) {
-      return <Text>Loading...</Text>
+      return <Text>connecting to database...</Text>
     }
 
     if (errorMessage) {

@@ -8,6 +8,9 @@ import {
 
 import { View, Text } from 'react-native';
 
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+
 import PrivateRoute from './src/base/PrivateRoute';
 import SQLLite from './src/sql/sqllite';
 import DBConfig from './src/sql/DBConfig';
@@ -47,15 +50,17 @@ class App extends Component {
     }
 
     return (
-      <NativeRouter>
-        <View>
-          <Switch>
-            <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute path="/" exact component={Main} />
-          </Switch>
-        </View>
-      </NativeRouter>
+      <Provider store={store}>
+        <NativeRouter>
+          <View>
+            <Switch>
+              <Route path="/signup" component={SignUp} />
+              <Route path="/login" component={Login} />
+              <PrivateRoute path="/" exact component={Main} />
+            </Switch>
+          </View>
+        </NativeRouter>
+      </Provider>
     );
   }
 }

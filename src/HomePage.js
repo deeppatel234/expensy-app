@@ -1,32 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
+import { Link } from 'react-router-native'
 
-import Redux from './redux/ReduxRegistry';
 
 class HomePage extends Component {
-  componentDidMount() {
-    const { fetchUser } = this.props;
-    fetchUser();
-  }
-
   render() {
     const {
       user,
-      userLoadingStatus,
     } = this.props;
 
-    if (userLoadingStatus === 'IN_PROGRESS') {
-      return <Text>fetching user....</Text>;
-    }
-
-    if (userLoadingStatus === 'ERROR') {
-      return <Text>Error fetch user</Text>;
-    }
-
     return (
-      <Text>Hello {user.firstname} {user.lastname}</Text>
+      <View>
+        <Text>Hello {user.firstname} {user.lastname}</Text>
+        <Link to='/create-category'><Text>Create Category</Text></Link>
+        <Link to='/view-category'><Text>View Category</Text></Link>
+      </View>
     );
   }
 }
@@ -35,15 +25,7 @@ class HomePage extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    userLoadingStatus: state.userLoadingStatus,
-    projectLoadingStatus: state.projectLoadingStatus,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUser: () => dispatch(Redux.get('user', 'fetchData')()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps)(HomePage);

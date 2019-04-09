@@ -1,8 +1,12 @@
 import SQLLite from './sqllite';
 
 class BasicModel {
-  initTable() {
+
+  setDB() {
     this.db = SQLLite.db;
+  }
+
+  initTable() {
     return this.createTable();
   }
 
@@ -15,10 +19,10 @@ class BasicModel {
     let fieldString = Object.keys(this.fields).map(field => `${field} ${this.fields[field]}`).join(',');
     const foreignKey = this.foreignKey();
     if (foreignKey) {
-      fieldString += `,${foreignKey}`;
+      fieldString += `, ${foreignKey}`;
     }
 
-    const createQuery = `CREATE TABLE IF NOT EXISTS ${this.tableName()}(${fieldString})`
+    const createQuery = `CREATE TABLE IF NOT EXISTS ${this.tableName()} (${fieldString})`
     return SQLLite.db.executeSql(createQuery, []);
   }
 

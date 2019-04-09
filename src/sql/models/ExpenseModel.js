@@ -1,8 +1,8 @@
 import BasicModel from '../BasicModel';
 
-class TransactionModel extends BasicModel {
+class ExpenseModel extends BasicModel {
   tableName() {
-    return 'transaction';
+    return 'expense';
   }
 
   initFields() {
@@ -11,7 +11,7 @@ class TransactionModel extends BasicModel {
       type: 'TEXT NOT NULL',
       amount: 'REAL NOT NULL',
       description: 'TEXT NOT NULL',
-      paymentMethod: 'INTEGER NOT NULL',
+      paymentmethod: 'INTEGER NOT NULL',
       category: 'INTEGER NOT NULL',
       dateTime: 'TEXT NOT NULL',
     };
@@ -19,10 +19,10 @@ class TransactionModel extends BasicModel {
 
   foreignKey() {
     return (`
-      FOREIGN KEY (paymentMethod) REFERENCES paymentmethod(sid),
+      FOREIGN KEY (paymentmethod) REFERENCES paymentmethod(sid),
       FOREIGN KEY (category) REFERENCES category(sid)
     `);
   }
 }
 
-export default TransactionModel;
+export default ExpenseModel;

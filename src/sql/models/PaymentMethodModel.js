@@ -7,7 +7,6 @@ class PaymentMethodModel extends BasicModel {
 
   initFields() {
     return {
-      sid: 'TEXT UNIQUE',
       name: 'TEXT NOT NULL',
       type: 'TEXT NOT NULL',
       icon: 'TEXT NOT NULL',

@@ -19,7 +19,7 @@ class ModelRegistry extends Registry {
     Object.values(this.data).forEach((model) => {
       const func = model[`updateTable_V${version}`];
       if (func) {
-        defs.push(func());
+        defs.push(func.call(model));
       }
     });
     return Promise.all(defs);

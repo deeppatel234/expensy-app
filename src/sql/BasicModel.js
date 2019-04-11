@@ -1,3 +1,4 @@
+import sortid from 'shortid';
 import _pick from 'lodash/pick';
 import SQLLite from './sqllite';
 
@@ -7,7 +8,8 @@ class BasicModel {
   setDB() {
     this.db = SQLLite.db;
     this.fields = {
-      id: 'INTEGER PRIMARY KEY AUTOINCREMENT',
+      _id: 'TEXT PRIMARY KEY',
+      sync: 'INTEGER DEFAULT 0',
       ...this.initFields(),
     };
   }
@@ -27,18 +29,13 @@ class BasicModel {
     return SQLLite.db.executeSql(createQuery, []);
   }
 
-  prepareSaveData(data) {
-    if(data._id) {
-      data.sid = data._id;
-      delete data._id;
-    }
+  filterFields(data) {
     return _pick(data, Object.keys(this.fields));
   }
 
-  prepareGetData(data) {
-    if(data.sid) {
-      data._id = data.sid;
-      delete data.sid;
+  prepareSaveData(data) {
+    if (!data._id) {
+      data._id = sortid.generate();
     }
     return data;
   }
@@ -75,7 +72,7 @@ class BasicModel {
    */
 
   create(data) {
-    const createData = this.prepareSaveData(data);
+    const createData = this.prepareSaveData(this.filterFields(data));
     const { keysString, replaceString, values } = this.getKeyValue(createData);
     return this.db.executeSql(`INSERT INTO ${this.tableName()} (${keysString}) VALUES (${replaceString})`, values)
       .then((res) => {
@@ -88,8 +85,17 @@ class BasicModel {
   }
 
   replaceOrCreate(data) {
-    const { keysString, replaceString, values } = this.getKeyValue(this.prepareSaveData(data));
+    const { keysString, replaceString, values } = this.getKeyValue(this.prepareSaveData(this.filterFields(data)));
     return this.db.executeSql(`REPLACE INTO ${this.tableName()} (${keysString}) VALUES (${replaceString});`, values);
+  }
+
+  replaceOrCreateMulti(datas, extraData) {
+    const sqlQueries = [];
+    datas.forEach((data) => {
+      const { keysString, replaceString, values } = this.getKeyValue(this.prepareSaveData(this.filterFields({ ...data, ...extraData })));
+      sqlQueries.push([`REPLACE INTO ${this.tableName()} (${keysString}) VALUES (${replaceString});`, values]);
+    });
+    return this.db.sqlBatch(sqlQueries);
   }
 
   readAll() {
@@ -99,7 +105,7 @@ class BasicModel {
         if (data.rows.length) {
           const resData = [];
           for (let i = 0; i < data.rows.length; ++i) {
-            resData.push(this.prepareGetData(data.rows.item(i)));
+            resData.push(data.rows.item(i));
           }
           res(resData);
         } else {
@@ -112,8 +118,8 @@ class BasicModel {
   }
 
   update(set, where) {
-    const setData = this.prepareSaveData(set);
-    const whereData = this.prepareSaveData(where);
+    const setData = this.filterFields(set);
+    const whereData = this.filterFields(where);
 
     const whereList = [];
     Object.keys(whereData).forEach((key) => {
@@ -129,7 +135,7 @@ class BasicModel {
   }
 
   delete(query) {
-    const queryData = this.prepareSaveData(query);
+    const queryData = this.filterFields(query);
     const queryList = [];
     Object.keys(queryData).forEach((key) => {
       queryList.push(`${key}='${queryData[key]}'`)

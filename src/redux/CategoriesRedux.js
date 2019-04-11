@@ -65,9 +65,19 @@ class CategoriesRedux extends BaseRedux {
             method: 'read',
             data: { own: true },
           }).then((categories) => {
-            console.tron.log(categories);
-            dispatch(self.actions.fetchDataSuccess(categories));
+            self.models.get('category').replaceOrCreateMulti(categories, { sync: 1 }).then(() => {
+              self.models.get('category').readAll().then((dbCategories) => {
+                console.tron.log('done', dbCategories);
+                dispatch(self.actions.fetchDataSuccess(dbCategories));
+              })
+            }).catch((err) => {
+              console.tron.log(err);
+            });
           }).catch((err) => {
+            self.models.get('category').readAll().then((dbCategories) => {
+              console.tron.log('done from local', dbCategories);
+              dispatch(self.actions.fetchDataSuccess(dbCategories));
+            })
             console.tron.log(err);
           });
         };

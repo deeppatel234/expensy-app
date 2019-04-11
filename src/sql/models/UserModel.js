@@ -7,7 +7,6 @@ class UserModel extends BasicModel {
 
   initFields() {
     return {
-      sid: 'TEXT UNIQUE',
       firstname: 'TEXT NOT NULL',
       lastname: 'TEXT NOT NULL',
       username: 'TEXT NOT NULL',

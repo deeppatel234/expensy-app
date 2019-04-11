@@ -7,7 +7,6 @@ class ExpenseModel extends BasicModel {
 
   initFields() {
     return {
-      sid: 'TEXT UNIQUE',
       type: 'TEXT NOT NULL',
       amount: 'REAL NOT NULL',
       description: 'TEXT NOT NULL',
@@ -19,8 +18,8 @@ class ExpenseModel extends BasicModel {
 
   foreignKey() {
     return (`
-      FOREIGN KEY (paymentmethod) REFERENCES paymentmethod(sid),
-      FOREIGN KEY (category) REFERENCES category(sid)
+      FOREIGN KEY (paymentmethod) REFERENCES paymentmethod(_id),
+      FOREIGN KEY (category) REFERENCES category(_id)
     `);
   }
 }

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import Registry from '../base/Registry';
 import UserRedux from './UserRedux';
+import CategoriesRedux from './CategoriesRedux';
 
 
 class ReduxRegistry extends Registry {
@@ -24,5 +25,6 @@ class ReduxRegistry extends Registry {
 const reduxRegistry = new ReduxRegistry();
 
 reduxRegistry.set('user', new UserRedux());
+reduxRegistry.set('categories', new CategoriesRedux());
 
 export default reduxRegistry;

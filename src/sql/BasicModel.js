@@ -1,9 +1,15 @@
+import _pick from 'lodash/pick';
 import SQLLite from './sqllite';
+
 
 class BasicModel {
 
   setDB() {
     this.db = SQLLite.db;
+    this.fields = {
+      id: 'INTEGER PRIMARY KEY AUTOINCREMENT',
+      ...this.initFields(),
+    };
   }
 
   initTable() {
@@ -11,11 +17,6 @@ class BasicModel {
   }
 
   createTable() {
-    this.fields = {
-      id: 'INTEGER PRIMARY KEY AUTOINCREMENT',
-      ...this.initFields(),
-    };
-
     let fieldString = Object.keys(this.fields).map(field => `${field} ${this.fields[field]}`).join(',');
     const foreignKey = this.foreignKey();
     if (foreignKey) {
@@ -31,7 +32,7 @@ class BasicModel {
       data.sid = data._id;
       delete data._id;
     }
-    return data;
+    return _pick(data, Object.keys(this.fields));
   }
 
   prepareGetData(data) {
@@ -76,7 +77,14 @@ class BasicModel {
   create(data) {
     const createData = this.prepareSaveData(data);
     const { keysString, replaceString, values } = this.getKeyValue(createData);
-    return this.db.executeSql(`INSERT INTO ${this.tableName()} (${keysString}) VALUES (${replaceString})`, values);
+    return this.db.executeSql(`INSERT INTO ${this.tableName()} (${keysString}) VALUES (${replaceString})`, values)
+      .then((res) => {
+        const row = res[0];
+        if (row.rowsAffected && row.insertId) {
+          return { id: row.insertId, ...data };
+        }
+        return {};
+      });
   }
 
   replaceOrCreate(data) {

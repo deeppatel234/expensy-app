@@ -23,13 +23,13 @@ class UserRedux extends BaseRedux {
           user,
         };
       },
-      updateData(user) {
+      update(user) {
         return {
           type: self.constants.USER_UPDATE_DATA,
           user,
         };
       },
-      fetchData() {
+      fetch() {
         return (dispatch) => {
           return self.request.api({ model: 'user', method: 'myinfo' }).then((user) => {
             self.models.get('user').replaceOrCreate(user)

@@ -17,19 +17,20 @@ import Redux from './redux/ReduxRegistry';
 
 class Main extends Component {
   componentDidMount() {
-    const { fetchUser } = this.props;
+    const { fetchUser, fetchCategories } = this.props;
     fetchUser();
+    fetchCategories();
   }
 
   render() {
-    const { userLoadingStatus } = this.props;
+    const { isLoading, isError } = this.props;
 
-    if (userLoadingStatus === 'IN_PROGRESS') {
-      return <Text>fetching user....</Text>;
+    if (isLoading) {
+      return <Text>fetching user or categories....</Text>;
     }
 
-    if (userLoadingStatus === 'ERROR') {
-      return <Text>Error fetch user</Text>;
+    if (isError) {
+      return <Text>Error fetch user or categories</Text>;
     }
 
     return (
@@ -51,15 +52,15 @@ class Main extends Component {
 // Maps state from store to props
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
-    userLoadingStatus: state.userLoadingStatus,
-    projectLoadingStatus: state.projectLoadingStatus,
+    isLoading: state.userLoadingStatus === 'IN_PROGRESS' || state.categoriesLoadingStatus === 'IN_PROGRESS',
+    isError: state.userLoadingStatus === 'ERROR' || state.categoriesLoadingStatus === 'ERROR',
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchUser: () => dispatch(Redux.get('user', 'fetchData')()),
+    fetchUser: () => dispatch(Redux.get('user', 'fetch')()),
+    fetchCategories: () => dispatch(Redux.get('categories', 'fetch')()),
   };
 };
 

@@ -25,10 +25,25 @@ class CategoriesRedux extends BaseRedux {
           categories,
         };
       },
-      create(category) {
+      createSuccess(category) {
         return {
           type: self.constants.CATEGORIES_CREATE_DATA,
           category,
+        };
+      },
+      create(category) {
+        return (dispatch) => {
+          return self.request.api({
+            model: 'category',
+            method: 'create',
+            data: { record: category }
+          }).then((apires) => {
+            self.models.get('category').create(apires)
+              .then((dbres) => dispatch(self.actions.createSuccess(dbres)))
+          }).catch(() => {
+            self.models.get('category').create(category)
+              .then((dbres) => dispatch(self.actions.createSuccess(dbres)));
+          });
         };
       },
       update(category) {
@@ -45,14 +60,15 @@ class CategoriesRedux extends BaseRedux {
       },
       fetch() {
         return (dispatch) => {
-          return self.request.api({ model: 'user', method: 'myinfo' }).then((user) => {
-            self.models.get('user').replaceOrCreate(user)
-              .then(() => dispatch(self.actions.fetchDataSuccess(user)))
-              .catch(() => dispatch(self.actions.loadingError()));
-          }).catch(() => {
-            self.models.get('user').getUser()
-              .then((user) => dispatch(self.actions.fetchDataSuccess(user)))
-              .catch(() => dispatch(self.actions.loadingError()));
+          return self.request.api({
+            model: 'category',
+            method: 'read',
+            data: { own: true },
+          }).then((categories) => {
+            console.tron.log(categories);
+            dispatch(self.actions.fetchDataSuccess(categories));
+          }).catch((err) => {
+            console.tron.log(err);
           });
         };
       },
@@ -72,12 +88,15 @@ class CategoriesRedux extends BaseRedux {
             return state;
         }
       },
-      categories(state = {}, action) {
+      categories(state = [], action) {
         switch (action.type) {
           case self.constants.CATEGORIES_FETCH_DATA_SUCCESS:
-            return action.categories;
+            return [ ...action.categories ];
+          case self.constants.CATEGORIES_CREATE_DATA:
+            return [ ...state, action.category ];
           case self.constants.CATEGORIES_UPDATE_DATA:
-            return { ...state, ...action.categories };
+            // TODO: handle this;
+            return [ ...state, action.category ];
           default:
             return state;
         }

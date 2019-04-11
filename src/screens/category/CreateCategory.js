@@ -1,15 +1,20 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import { Button, TextInput, View } from "react-native";
 import { Formik } from "formik";
 
+import Redux from '../../redux/ReduxRegistry';
+
 class CreateCategory extends Component {
   render() {
+    const { createCategory } = this.props;
+
     return (
       <View>
         <Formik
           initialValues={{ name: "my-name", icon: "my-icon" }}
-          onSubmit={values => console.tron.log(values)}
+          onSubmit={values => createCategory(values)}
         >
           {props => (
             <View>
@@ -32,4 +37,17 @@ class CreateCategory extends Component {
   }
 }
 
-export default CreateCategory;
+// Maps state from store to props
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createCategory: (category) => dispatch(Redux.get('categories', 'create')(category)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateCategory);

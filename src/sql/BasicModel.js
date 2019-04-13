@@ -6,6 +6,9 @@ import Request from '../base/Request';
 import store from '../redux/store';
 
 class BasicModel {
+  constructor() {
+    this.request = Request;
+  }
 
   setDB() {
     this.db = SQLLite.db;
@@ -65,6 +68,11 @@ class BasicModel {
 
   foreignKey() {
     return false;
+  }
+
+  isConnected() {
+    const { isConnected } = store.getState().network;
+    return isConnected;
   }
 
   /**
@@ -155,23 +163,21 @@ class BasicModel {
    */
 
   async createSync(param) {
-    const record = { ...param };
-    const { isConnected } = store.getState().network;
-
-    if (isConnected) {
-      const recordId = record._id;
-      delete record._id;
-
-      const createdData = await Request.api({
-        model: this.tableName(),
-        method: 'create',
-        data: { record },
-      });
-      await this.update({ _id: createdData._id, sync: 1 }, { _id: recordId });
-      param._id = createdData._id;
+    if (!this.isConnected()) {
+      return true;
     }
 
-    return true;
+    const record = { ...param };
+    const recordId = record._id;
+    delete record._id;
+
+    const createdData = await Request.api({
+      model: this.tableName(),
+      method: 'create',
+      data: { record },
+    });
+    await this.update({ _id: createdData._id, sync: 1 }, { _id: recordId });
+    param._id = createdData._id;
   }
 }
 

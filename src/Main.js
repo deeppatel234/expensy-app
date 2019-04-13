@@ -17,9 +17,11 @@ import Redux from './redux/ReduxRegistry';
 
 class Main extends Component {
   componentDidMount() {
-    const { fetchUser, fetchCategories } = this.props;
-    fetchUser();
-    fetchCategories();
+    const { fetchUser, fetchCategories, fetchNetwork } = this.props;
+    fetchNetwork().then(() => {
+      fetchUser();
+      fetchCategories();
+    });
   }
 
   render() {
@@ -61,6 +63,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchUser: () => dispatch(Redux.get('user', 'fetch')()),
     fetchCategories: () => dispatch(Redux.get('categories', 'fetch')()),
+    fetchNetwork: () => dispatch(Redux.get('network', 'fetch')()),
   };
 };
 

@@ -12,4 +12,6 @@ const enhancers = compose(applyMiddleware(thunk), Reactotron.createEnhancer());
 
 const store = createStore(combineReducers, enhancers);
 
+ReduxRegistry.setDispatch(store.dispatch);
+
 export default store;

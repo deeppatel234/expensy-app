@@ -52,9 +52,7 @@ class Request {
         } else {
           resolve(res.data);
         }
-      }).catch(function (error) {
-        rejects(error);
-      });
+      }).catch(rejects);
     });
   }
 
@@ -66,9 +64,7 @@ class Request {
         } else {
           resolve(res.data);
         }
-      }).catch(function (error) {
-        rejects(error);
-      });
+      }).catch(rejects);
     });
   }
 
@@ -80,9 +76,7 @@ class Request {
         } else {
           resolve(res.data);
         }
-      }).catch(function (error) {
-        rejects(error);
-      });
+      }).catch(rejects);
     });
   }
 }

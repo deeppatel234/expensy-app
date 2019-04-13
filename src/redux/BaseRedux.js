@@ -10,6 +10,10 @@ class BaseRedux {
     this.models = Models;
   }
 
+  setDispatch(dispatch) {
+    this.dispatch = dispatch;
+  }
+
   getActions() {
     throw new Error('Unimplemented Method: getActions');
   }

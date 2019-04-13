@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Text, View } from 'react-native';
-import { Link } from 'react-router-native'
+import { Link } from 'react-router-native';
 
 
 class HomePage extends Component {

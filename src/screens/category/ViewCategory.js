@@ -1,13 +1,33 @@
-import React, { Component } from 'react';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from 'react-router-native';
 
-import { Text } from 'react-native';
+import { View, Text } from "react-native";
 
-class ViewCategory extends Component {
-  render() {
-    return (
-      <Text>View Category</Text>
-    );
-  }
-}
+import Redux from "../../redux/ReduxRegistry";
 
-export default ViewCategory;
+const ViewCategory = ({ categories }) => (
+  <View>
+    {
+      categories.map((category) => (
+        <Text>{category.icon} - {category.name}</Text>
+      ))
+    }
+    <Link to='/create-category'><Text>Create Category</Text></Link>
+  </View>
+);
+
+// Maps state from store to props
+const mapStateToProps = state => {
+  return {
+    categories: state.categories
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteCategory: category => dispatch(Redux.get("categories", "delete")(category)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ViewCategory);

@@ -2,7 +2,7 @@ import Registry from '../../base/Registry';
 
 import UserModel from './UserModel';
 import CategoryModel from './CategoryModel';
-import PaymentMethodModel from './PaymentMethodModel';
+import WalletModel from './WalletModel';
 import ExpenseModel from './ExpenseModel';
 
 class ModelRegistry extends Registry {
@@ -30,7 +30,7 @@ const modelRegistry = new ModelRegistry();
 
 modelRegistry.set('user', new UserModel());
 modelRegistry.set('category', new CategoryModel());
-modelRegistry.set('paymentmethod', new PaymentMethodModel());
+modelRegistry.set('wallet', new WalletModel());
 modelRegistry.set('expense', new ExpenseModel());
 
 export default modelRegistry;

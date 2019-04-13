@@ -1,8 +1,8 @@
 import BasicModel from '../BasicModel';
 
-class PaymentMethodModel extends BasicModel {
+class WalletModel extends BasicModel {
   tableName() {
-    return 'paymentmethod';
+    return 'wallet';
   }
 
   initFields() {
@@ -15,4 +15,4 @@ class PaymentMethodModel extends BasicModel {
   }
 }
 
-export default PaymentMethodModel;
+export default WalletModel;

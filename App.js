@@ -15,8 +15,8 @@ import PrivateRoute from './src/base/PrivateRoute';
 import SQLLite from './src/sql/sqllite';
 import DBConfig from './src/sql/DBConfig';
 
-import Login from './src/login';
-import SignUp from './src/signup';
+import Login from './src/screens/login';
+import SignUp from './src/screens/signup';
 import Main from './src/Main';
 
 class App extends Component {

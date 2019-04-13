@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import { View, Text } from 'react-native';
 
-import HomePage from './HomePage';
+import HomePage from './screens/homepage';
 import CreateCategory from './screens/category/CreateCategory';
 import ViewCategory from './screens/category/ViewCategory';
 

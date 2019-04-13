@@ -10,7 +10,7 @@ const ViewCategory = ({ categories }) => (
   <View>
     {
       categories.map((category) => (
-        <Text>{category.icon} - {category.name}</Text>
+        <Text key={category._id}>{category.icon} - {category.name}</Text>
       ))
     }
     <Link to='/create-category'><Text>Create Category</Text></Link>

@@ -9,7 +9,7 @@ import Redux from "../../redux/ReduxRegistry";
 const ViewCategory = ({ categories }) => (
   <View>
     {
-      categories.map((category) => (
+      Object.values(categories).map((category) => (
         <Text key={category._id}>{category.icon} - {category.name}</Text>
       ))
     }
@@ -26,7 +26,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteCategory: category => dispatch(Redux.get("categories", "delete")(category)),
+    deleteCategory: category => dispatch(Redux.get("category", "delete")(category)),
   };
 };
 

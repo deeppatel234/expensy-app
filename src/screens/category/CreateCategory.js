@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createCategory: category => dispatch(Redux.get("categories", "create")(category))
+    createCategory: category => dispatch(Redux.get("category", "create")(category))
   };
 };
 

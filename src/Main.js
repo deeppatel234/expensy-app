@@ -62,7 +62,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchUser: () => dispatch(Redux.get('user', 'fetch')()),
-    fetchCategories: () => dispatch(Redux.get('categories', 'fetch')()),
+    fetchCategories: () => dispatch(Redux.get('category', 'fetch')()),
     fetchNetwork: () => dispatch(Redux.get('network', 'fetch')()),
   };
 };

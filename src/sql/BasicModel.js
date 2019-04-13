@@ -2,6 +2,8 @@ import sortid from 'shortid';
 import _pick from 'lodash/pick';
 import SQLLite from './sqllite';
 
+import Request from '../base/Request';
+import store from '../redux/store';
 
 class BasicModel {
 
@@ -71,16 +73,18 @@ class BasicModel {
    * =================
    */
 
-  create(data) {
+  create(data, sync) {
     const createData = this.prepareSaveData(this.filterFields(data));
     const { keysString, replaceString, values } = this.getKeyValue(createData);
+
     return this.db.executeSql(`INSERT INTO ${this.tableName()} (${keysString}) VALUES (${replaceString})`, values)
-      .then((res) => {
-        const row = res[0];
-        if (row.rowsAffected && row.insertId) {
-          return { id: row.insertId, ...data };
-        }
-        return {};
+      .then(async () => {
+        try {
+          if (sync) {
+            await this.createSync(createData);
+          }
+        } catch(err) {}
+        return createData;
       });
   }
 
@@ -142,6 +146,32 @@ class BasicModel {
     });
 
     return this.db.executeSql(`DELETE FROM ${this.tableName()} WHERE ${queryList.join(' and ')}`);
+  }
+
+  /**
+   * =================
+   *   Sync Methods
+   * =================
+   */
+
+  async createSync(param) {
+    const record = { ...param };
+    const { isConnected } = store.getState().network;
+
+    if (isConnected) {
+      const recordId = record._id;
+      delete record._id;
+
+      const createdData = await Request.api({
+        model: this.tableName(),
+        method: 'create',
+        data: { record },
+      });
+      await this.update({ _id: createdData._id, sync: 1 }, { _id: recordId });
+      param._id = createdData._id;
+    }
+
+    return true;
   }
 }
 

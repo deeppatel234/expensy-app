@@ -1,4 +1,6 @@
+import _keyBy from 'lodash/keyBy';
 import BaseRedux from './BaseRedux';
+
 
 class CategoriesRedux extends BaseRedux {
   getConstants() {
@@ -33,17 +35,8 @@ class CategoriesRedux extends BaseRedux {
       },
       create(category) {
         return (dispatch) => {
-          return self.request.api({
-            model: 'category',
-            method: 'create',
-            data: { record: category }
-          }).then((apires) => {
-            self.models.get('category').create(apires)
-              .then((dbres) => dispatch(self.actions.createSuccess(dbres)))
-          }).catch(() => {
-            self.models.get('category').create(category)
-              .then((dbres) => dispatch(self.actions.createSuccess(dbres)));
-          });
+          return self.models.get('category').create(category, true)
+            .then((dbRes) => dispatch(self.actions.createSuccess(dbRes)));
         };
       },
       update(category) {
@@ -60,25 +53,8 @@ class CategoriesRedux extends BaseRedux {
       },
       fetch() {
         return (dispatch) => {
-          return self.request.api({
-            model: 'category',
-            method: 'read',
-            data: { own: true },
-          }).then((categories) => {
-            self.models.get('category').replaceOrCreateMulti(categories, { sync: 1 }).then(() => {
-              self.models.get('category').readAll().then((dbCategories) => {
-                console.tron.log('done', dbCategories);
-                dispatch(self.actions.fetchDataSuccess(dbCategories));
-              })
-            }).catch((err) => {
-              console.tron.log(err);
-            });
-          }).catch((err) => {
-            self.models.get('category').readAll().then((dbCategories) => {
-              console.tron.log('done from local', dbCategories);
-              dispatch(self.actions.fetchDataSuccess(dbCategories));
-            })
-            console.tron.log(err);
+          return self.models.get('category').readAll().then((categories) => {
+            dispatch(self.actions.fetchDataSuccess(categories));
           });
         };
       },
@@ -98,15 +74,15 @@ class CategoriesRedux extends BaseRedux {
             return state;
         }
       },
-      categories(state = [], action) {
+      categories(state = {}, action) {
         switch (action.type) {
           case self.constants.CATEGORIES_FETCH_DATA_SUCCESS:
-            return [ ...action.categories ];
+            return _keyBy(action.categories, '_id');
           case self.constants.CATEGORIES_CREATE_DATA:
-            return [ ...state, action.category ];
+            return { ...state, [action.category._id] : action.category };
           case self.constants.CATEGORIES_UPDATE_DATA:
             // TODO: handle this;
-            return [ ...state, action.category ];
+            return state;
           default:
             return state;
         }

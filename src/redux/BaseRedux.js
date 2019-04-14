@@ -14,6 +14,10 @@ class BaseRedux {
     this.dispatch = dispatch;
   }
 
+  syncComplete() {
+    return true;
+  }
+
   getActions() {
     throw new Error('Unimplemented Method: getActions');
   }

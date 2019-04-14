@@ -1,9 +1,12 @@
 import sortid from 'shortid';
 import _pick from 'lodash/pick';
+import _isEmpty from 'lodash/isEmpty';
+import _omit from 'lodash/omit';
 import SQLLite from './sqllite';
 
 import Request from '../base/Request';
 import store from '../redux/store';
+import redux from '../redux/ReduxRegistry';
 
 class BasicModel {
   constructor() {
@@ -15,6 +18,7 @@ class BasicModel {
     this.fields = {
       _id: 'TEXT PRIMARY KEY',
       sync: 'INTEGER DEFAULT 0',
+      mid: 'TEXT',
       ...this.initFields(),
     };
   }
@@ -41,6 +45,7 @@ class BasicModel {
   prepareSaveData(data) {
     if (!data._id) {
       data._id = sortid.generate();
+      data.mid = data._id;
     }
     return data;
   }
@@ -96,6 +101,20 @@ class BasicModel {
       });
   }
 
+  updateIDs(datas) {
+    const sqlQueries = [];
+    datas.forEach((data) => {
+      const setData = this.filterFields({ ...data, sync: 1 });
+      const setList = [];
+      Object.keys(setData).forEach((key) => {
+        setList.push(`${key}='${setData[key]}'`)
+      });
+
+      sqlQueries.push(`UPDATE ${this.tableName()} SET ${setList.join(',')} WHERE mid='${data.mid}'`);
+    });
+    return this.db.sqlBatch(sqlQueries);
+  }
+
   replaceOrCreate(data) {
     const { keysString, replaceString, values } = this.getKeyValue(this.prepareSaveData(this.filterFields(data)));
     return this.db.executeSql(`REPLACE INTO ${this.tableName()} (${keysString}) VALUES (${replaceString});`, values);
@@ -108,6 +127,32 @@ class BasicModel {
       sqlQueries.push([`REPLACE INTO ${this.tableName()} (${keysString}) VALUES (${replaceString});`, values]);
     });
     return this.db.sqlBatch(sqlQueries);
+  }
+
+  read(where) {
+    const whereData = this.filterFields(where);
+
+    const whereList = [];
+    Object.keys(whereData).forEach((key) => {
+      whereList.push(`${key}='${whereData[key]}'`)
+    });
+
+    return new Promise(async (res, rej) => {
+      try {
+        const [data] = await this.db.executeSql(`SELECT * from ${this.tableName()} WHERE ${whereList.join(' and ')}`);
+        if (data.rows.length) {
+          const resData = [];
+          for (let i = 0; i < data.rows.length; ++i) {
+            resData.push(data.rows.item(i));
+          }
+          res(resData);
+        } else {
+          res([]);
+        }
+      } catch (err) {
+        rej(err);
+      }
+    })
   }
 
   readAll() {
@@ -161,6 +206,39 @@ class BasicModel {
    *   Sync Methods
    * =================
    */
+
+  async syncTable() {
+    if (!this.isConnected()) {
+      return true;
+    }
+
+    let records;
+    try {
+      records = await this.request.api({ model: this.tableName(), method: 'read', data: { own: true } });
+    } catch(err) {
+      return false;
+    }
+
+    if (!_isEmpty(records)) {
+      await this.replaceOrCreateMulti(records, { sync: 1 });
+    }
+
+    try {
+      let dataToUpload = await this.read({ sync: 0 });
+      if (!_isEmpty(dataToUpload)) {
+        const newCreatedRecords = await this.request.api({ model: this.tableName(), method: 'createmany', data: { records: dataToUpload } });
+        await this.updateIDs(newCreatedRecords)
+      }
+    } catch(err) {
+      return false;
+    }
+
+    const updatedRecord = await this.readAll();
+
+    redux.get(this.tableName()) && redux.get(this.tableName()).syncComplete(updatedRecord);
+
+    return true;
+  }
 
   async createSync(param) {
     if (!this.isConnected()) {

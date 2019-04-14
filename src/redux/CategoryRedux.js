@@ -3,6 +3,11 @@ import BaseRedux from './BaseRedux';
 
 
 class CategoriesRedux extends BaseRedux {
+
+  syncComplete(categories) {
+    this.dispatch(this.actions.fetchDataSuccess(categories));
+  }
+
   getConstants() {
     return {
       CATEGORIES_LOADING_ERROR: 'CATEGORIES_LOADING_ERROR',

@@ -31,6 +31,10 @@ class UserModel extends BasicModel {
 
     return user;
   }
+
+  syncTable() {
+    return Promise.resolve();
+  }
 }
 
 export default UserModel;

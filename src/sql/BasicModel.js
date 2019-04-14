@@ -215,25 +215,21 @@ class BasicModel {
     let records;
     try {
       records = await this.request.api({ model: this.tableName(), method: 'read', data: { own: true } });
-    } catch(err) {
-      return false;
-    }
+      if (!_isEmpty(records)) {
+        await this.replaceOrCreateMulti(records, { sync: 1 });
+      }
+    } catch(err) {}
 
-    if (!_isEmpty(records)) {
-      await this.replaceOrCreateMulti(records, { sync: 1 });
-    }
-
+    let dataToUpload;
     try {
-      let dataToUpload = await this.read({ sync: 0 });
+      dataToUpload = await this.read({ sync: 0 });
       if (!_isEmpty(dataToUpload)) {
         const newCreatedRecords = await this.request.api({ model: this.tableName(), method: 'createmany', data: { records: dataToUpload } });
         await this.updateIDs(newCreatedRecords)
       }
-    } catch(err) {
-      return false;
-    }
+    } catch(err) {}
 
-    if (updateStore) {
+    if (updateStore && (!_isEmpty(records) || !_isEmpty(dataToUpload))) {
       const updatedRecord = await this.readAll();
       redux.get(this.tableName()) && redux.get(this.tableName()).syncComplete(updatedRecord);
     }
@@ -247,7 +243,6 @@ class BasicModel {
     }
 
     const record = { ...param };
-    const recordId = record._id;
     delete record._id;
 
     const createdData = await Request.api({
@@ -255,7 +250,7 @@ class BasicModel {
       method: 'create',
       data: { record },
     });
-    await this.update({ _id: createdData._id, sync: 1 }, { _id: recordId });
+    await this.update({ _id: createdData._id, sync: 1 }, { _id: record.mid });
     param._id = createdData._id;
   }
 }

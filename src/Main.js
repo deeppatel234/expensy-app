@@ -14,18 +14,35 @@ import CreateCategory from './screens/category/CreateCategory';
 import ViewCategory from './screens/category/ViewCategory';
 
 import Redux from './redux/ReduxRegistry';
+import models from './sql/models'
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isSync: true,
+    };
+  }
+
   componentDidMount() {
     const { fetchUser, fetchCategories, fetchNetwork } = this.props;
     fetchNetwork().then(() => {
-      fetchUser();
-      fetchCategories();
+      models.syncTables(false).then(() => {
+        this.setState({ isSync: false })
+        fetchUser();
+        fetchCategories();
+      });
     });
   }
 
   render() {
     const { isLoading, isError } = this.props;
+    const { isSync } = this.state;
+
+    if (isSync) {
+       return <Text>Sync.....</Text>
+    }
 
     if (isLoading) {
       return <Text>fetching user or categories....</Text>;

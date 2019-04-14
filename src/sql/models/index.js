@@ -14,8 +14,8 @@ class ModelRegistry extends Registry {
     Object.values(this.data).map(d => d.setDB());
   }
 
-  syncTables() {
-    return Promise.all(Object.values(this.data).map(d => d.syncTable()));
+  syncTables(updateStore = true) {
+    return Promise.all(Object.values(this.data).map(d => d.syncTable(updateStore)));
   }
 
   updateTables(version) {

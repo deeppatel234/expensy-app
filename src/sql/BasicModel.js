@@ -207,7 +207,7 @@ class BasicModel {
    * =================
    */
 
-  async syncTable() {
+  async syncTable(updateStore) {
     if (!this.isConnected()) {
       return true;
     }
@@ -233,9 +233,10 @@ class BasicModel {
       return false;
     }
 
-    const updatedRecord = await this.readAll();
-
-    redux.get(this.tableName()) && redux.get(this.tableName()).syncComplete(updatedRecord);
+    if (updateStore) {
+      const updatedRecord = await this.readAll();
+      redux.get(this.tableName()) && redux.get(this.tableName()).syncComplete(updatedRecord);
+    }
 
     return true;
   }

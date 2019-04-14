@@ -16,14 +16,6 @@ class ExpenseModel extends BasicModel {
       dateTime: 'TEXT NOT NULL',
     };
   }
-
-  foreignKey() {
-    return (`
-      FOREIGN KEY (wallet) REFERENCES wallet(_id),
-      FOREIGN KEY (toWallet) REFERENCES wallet(_id),
-      FOREIGN KEY (category) REFERENCES category(_id)
-    `);
-  }
 }
 
 export default ExpenseModel;

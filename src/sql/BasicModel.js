@@ -28,12 +28,7 @@ class BasicModel {
   }
 
   createTable() {
-    let fieldString = Object.keys(this.fields).map(field => `${field} ${this.fields[field]}`).join(',');
-    const foreignKey = this.foreignKey();
-    if (foreignKey) {
-      fieldString += `, ${foreignKey}`;
-    }
-
+    const fieldString = Object.keys(this.fields).map(field => `${field} ${this.fields[field]}`).join(',');
     const createQuery = `CREATE TABLE IF NOT EXISTS ${this.tableName()} (${fieldString})`
     return SQLLite.db.executeSql(createQuery, []);
   }
@@ -69,10 +64,6 @@ class BasicModel {
 
   tableName() {
     throw new Error('Unimplemented Method: tableName');
-  }
-
-  foreignKey() {
-    return false;
   }
 
   isConnected() {

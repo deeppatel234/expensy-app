@@ -1,3 +1,5 @@
+import _sortBy from 'lodash/sortBy';
+
 import Registry from '../../base/Registry';
 
 import UserModel from './UserModel';
@@ -7,20 +9,33 @@ import ExpenseModel from './ExpenseModel';
 
 class ModelRegistry extends Registry {
   initTables() {
-    return Promise.all(Object.values(this.data).map(d => d.initTable()));
+    return Promise.all(this.getValues().map(d => d.initTable()));
   }
 
   setDB() {
-    Object.values(this.data).map(d => d.setDB());
+    this.getValues().map(d => d.setDB());
   }
 
-  syncTables(updateStore = true) {
-    return Promise.all(Object.values(this.data).map(d => d.syncTable(updateStore)));
+  async syncTables(updateStore = true) {
+    const values = this.getValues();
+    for(let i = 0; i < values.length; i++) {
+      await values[i].syncTable(updateStore);
+    }
+    return true;
+  }
+
+  set(seq, key, value) {
+    value.sequence = seq;
+    super.set(key, value);
+  }
+
+  getValues() {
+    return _sortBy(Object.values(this.data), 'sequence');
   }
 
   updateTables(version) {
     const defs = [];
-    Object.values(this.data).forEach((model) => {
+    this.getValues().forEach((model) => {
       const func = model[`updateTable_V${version}`];
       if (func) {
         defs.push(func.call(model));
@@ -32,9 +47,9 @@ class ModelRegistry extends Registry {
 
 const modelRegistry = new ModelRegistry();
 
-modelRegistry.set('user', new UserModel());
-modelRegistry.set('category', new CategoryModel());
-modelRegistry.set('wallet', new WalletModel());
-modelRegistry.set('expense', new ExpenseModel());
+modelRegistry.set(1, 'user', new UserModel());
+modelRegistry.set(2, 'category', new CategoryModel());
+modelRegistry.set(3, 'wallet', new WalletModel());
+modelRegistry.set(4, 'expense', new ExpenseModel());
 
 export default modelRegistry;

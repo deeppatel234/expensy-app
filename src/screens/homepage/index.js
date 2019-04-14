@@ -18,6 +18,7 @@ class HomePage extends Component {
         <Link to='/view-category'><Text>View Category</Text></Link>
         <Link to='/create-wallet'><Text>Create Wallet</Text></Link>
         <Link to='/view-wallet'><Text>View Wallet</Text></Link>
+        <Link to='/create-expense'><Text>Create Expense</Text></Link>
       </View>
     );
   }

@@ -8,7 +8,7 @@ class Request {
      */
     this.apiRequest = axios.create({
       method: 'post',
-      baseURL: 'http://192.168.0.100:5050/api/',
+      baseURL: 'http://192.168.0.101:5050/api/',
     });
     /**
      * get request for external call

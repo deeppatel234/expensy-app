@@ -11,7 +11,7 @@ class ExpenseModel extends BasicModel {
       amount: 'REAL NOT NULL',
       description: 'TEXT NOT NULL',
       wallet: 'TEXT NOT NULL',
-      toWallet: 'TEXT NOT NULL',
+      toWallet: 'TEXT',
       category: 'TEXT NOT NULL',
       dateTime: 'TEXT NOT NULL',
     };

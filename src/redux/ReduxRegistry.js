@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import Registry from '../base/Registry';
 import UserRedux from './UserRedux';
 import CategoryRedux from './CategoryRedux';
+import WalletRedux from './WalletRedux';
 import NetworkRedux from './NetworkRedux';
 
 
@@ -31,6 +32,7 @@ const reduxRegistry = new ReduxRegistry();
 
 reduxRegistry.set('user', new UserRedux());
 reduxRegistry.set('category', new CategoryRedux());
+reduxRegistry.set('wallet', new WalletRedux());
 reduxRegistry.set('network', new NetworkRedux());
 
 export default reduxRegistry;

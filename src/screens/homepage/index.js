@@ -16,6 +16,8 @@ class HomePage extends Component {
         <Text>Hello {user.firstname} {user.lastname}</Text>
         <Link to='/create-category'><Text>Create Category</Text></Link>
         <Link to='/view-category'><Text>View Category</Text></Link>
+        <Link to='/create-wallet'><Text>Create Wallet</Text></Link>
+        <Link to='/view-wallet'><Text>View Wallet</Text></Link>
       </View>
     );
   }

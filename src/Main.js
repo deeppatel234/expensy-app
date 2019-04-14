@@ -13,6 +13,9 @@ import HomePage from './screens/homepage';
 import CreateCategory from './screens/category/CreateCategory';
 import ViewCategory from './screens/category/ViewCategory';
 
+import CreateWallet from './screens/wallet/CreateWallet';
+import ViewWallet from './screens/wallet/ViewWallet';
+
 import Redux from './redux/ReduxRegistry';
 import models from './sql/models'
 
@@ -26,12 +29,13 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    const { fetchUser, fetchCategories, fetchNetwork } = this.props;
+    const { fetchUser, fetchCategories, fetchNetwork, fetchWallets } = this.props;
     fetchNetwork().then(() => {
       models.syncTables(false).then(() => {
         this.setState({ isSync: false })
         fetchUser();
         fetchCategories();
+        fetchWallets();
       });
     });
   }
@@ -59,6 +63,8 @@ class Main extends Component {
             <Switch>
               <Route path="/view-category" component={ViewCategory} />
               <Route path="/create-category" component={CreateCategory} />
+              <Route path="/view-wallet" component={ViewWallet} />
+              <Route path="/create-wallet" component={CreateWallet} />
               <Route path="/" exact component={HomePage} />
             </Switch>
           </View>
@@ -71,8 +77,8 @@ class Main extends Component {
 // Maps state from store to props
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.userLoadingStatus === 'IN_PROGRESS' || state.categoriesLoadingStatus === 'IN_PROGRESS',
-    isError: state.userLoadingStatus === 'ERROR' || state.categoriesLoadingStatus === 'ERROR',
+    isLoading: state.userLoadingStatus === 'IN_PROGRESS' || state.categoriesLoadingStatus === 'IN_PROGRESS' || state.walletsLoadingStatus === 'IN_PROGRESS',
+    isError: state.userLoadingStatus === 'ERROR' || state.categoriesLoadingStatus === 'ERROR' || state.walletsLoadingStatus === 'ERROR',
   };
 };
 
@@ -80,6 +86,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchUser: () => dispatch(Redux.get('user', 'fetch')()),
     fetchCategories: () => dispatch(Redux.get('category', 'fetch')()),
+    fetchWallets: () => dispatch(Redux.get('wallet', 'fetch')()),
     fetchNetwork: () => dispatch(Redux.get('network', 'fetch')()),
   };
 };

@@ -1,5 +1,6 @@
 import sortId from 'shortid';
 import _pick from 'lodash/pick';
+import _pickBy from 'lodash/pickBy';
 import _isEmpty from 'lodash/isEmpty';
 import _omit from 'lodash/omit';
 import SQLLite from './sqllite';
@@ -168,15 +169,6 @@ class BasicModel {
    * Helper CRUD Methods
    */
 
-  updateIDs(datas) {
-    const sqlQueries = [];
-    datas.forEach((data) => {
-      const setList = this.buildEqualQuery(this.filterFields({ ...data, sync: 1 }));
-      sqlQueries.push(`UPDATE ${this.tableName()} SET ${setList} WHERE mid='${data.mid}'`);
-    });
-    return this.db.sqlBatch(sqlQueries);
-  }
-
   replaceOrCreate(data) {
     const { keysString, replaceString, values } = this.getKeyValue(this.prepareSaveData(this.filterFields(data)));
     return this.db.executeSql(`REPLACE INTO ${this.tableName()} (${keysString}) VALUES (${replaceString});`, values);
@@ -204,19 +196,16 @@ class BasicModel {
 
     const time = syncTime[this.tableName()];
 
-
     let localRecords = await this.db.executeSql(`SELECT * from ${this.tableName()} WHERE sync != "1"`);
     localRecords = this.getRowData(localRecords);
 
-    console.tron.log('localRecords', localRecords);
+    localRecords = localRecords.map(lr => _pickBy(lr));
 
     let syncResponse = await this.request.api({
       model: this.tableName(),
       method: 'sync',
       data: { records: localRecords, syncTime: time },
     });
-
-    console.tron.log(syncResponse);
 
     syncTime[this.tableName()] = syncResponse.syncTime;
 

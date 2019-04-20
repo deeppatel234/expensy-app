@@ -213,6 +213,7 @@ class BasicModel {
       return true;
     }
 
+    // TODO: delete record
     await this.replaceOrCreateMulti(syncResponse.records, { sync: '1' });
 
     if (updateStore) {

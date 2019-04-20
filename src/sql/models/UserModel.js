@@ -14,6 +14,17 @@ class UserModel extends BasicModel {
     };
   }
 
+  readAll() {
+    return new Promise(async (res, rej) => {
+      try {
+        const data = await this.db.executeSql(`SELECT * from ${this.tableName()};`);
+        res(this.getRowData(data));
+      } catch (err) {
+        rej(err);
+      }
+    })
+  }
+
   async getUser() {
     let user;
     if (this.isConnected()) {

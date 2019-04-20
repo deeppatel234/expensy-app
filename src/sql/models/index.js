@@ -1,6 +1,7 @@
 import _sortBy from 'lodash/sortBy';
 
 import Registry from '../../base/Registry';
+import LocalStorage from '../../base/LocalStorage';
 
 import UserModel from './UserModel';
 import CategoryModel from './CategoryModel';
@@ -17,10 +18,14 @@ class ModelRegistry extends Registry {
   }
 
   async syncTables(updateStore = true) {
+    const syncTimes = await LocalStorage.getLastSync();
     const values = this.getValues();
     for(let i = 0; i < values.length; i++) {
-      await values[i].syncTable(updateStore);
+      try {
+        await values[i].syncTable(updateStore, syncTimes);
+      } catch(err) {}
     }
+    await LocalStorage.setSyncTime(syncTimes);
     return true;
   }
 

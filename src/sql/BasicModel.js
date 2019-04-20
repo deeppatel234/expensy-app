@@ -1,4 +1,4 @@
-import sortid from 'shortid';
+import sortId from 'shortid';
 import _pick from 'lodash/pick';
 import _isEmpty from 'lodash/isEmpty';
 import _omit from 'lodash/omit';
@@ -7,6 +7,7 @@ import SQLLite from './sqllite';
 import Request from '../base/Request';
 import store from '../redux/store';
 import redux from '../redux/ReduxRegistry';
+
 
 class BasicModel {
   constructor() {
@@ -17,8 +18,8 @@ class BasicModel {
     this.db = SQLLite.db;
     this.fields = {
       _id: 'TEXT PRIMARY KEY',
-      sync: 'INTEGER DEFAULT 0',
-      mid: 'TEXT',
+      sync: 'TEXT',
+      mid: 'TEXT UNIQUE',
       ...this.initFields(),
     };
   }
@@ -39,7 +40,7 @@ class BasicModel {
 
   prepareSaveData(data) {
     if (!data._id) {
-      data._id = sortid.generate();
+      data._id = sortId.generate();
       data.mid = data._id;
     }
     return data;
@@ -71,6 +72,25 @@ class BasicModel {
     return isConnected;
   }
 
+  getRowData([res]) {
+    if (res.rows.length) {
+      const resData = [];
+      for (let i = 0; i < res.rows.length; ++i) {
+        resData.push(res.rows.item(i));
+      }
+      return resData;
+    }
+    return [];
+  }
+
+  buildEqualQuery(data, joinWith = ',') {
+    const List = [];
+    Object.keys(data).forEach((key) => {
+      List.push(`${key}='${data[key]}'`)
+    });
+    return List.join(joinWith);
+  }
+
   /**
    * =================
    *   CRUD Methods
@@ -78,7 +98,9 @@ class BasicModel {
    */
 
   create(data, sync) {
-    const createData = this.prepareSaveData(this.filterFields(data));
+    let createData = this.prepareSaveData(this.filterFields(data));
+    createData = { ...createData, sync: 'create' };
+
     const { keysString, replaceString, values } = this.getKeyValue(createData);
 
     return this.db.executeSql(`INSERT INTO ${this.tableName()} (${keysString}) VALUES (${replaceString})`, values)
@@ -92,16 +114,65 @@ class BasicModel {
       });
   }
 
+  read(where) {
+    const whereList = this.buildEqualQuery(this.filterFields(where));
+    return new Promise(async (res, rej) => {
+      try {
+        const data = await this.db.executeSql(`SELECT * from ${this.tableName()} WHERE ${whereList}`);
+        res(this.getRowData(data));
+      } catch (err) {
+        rej(err);
+      }
+    })
+  }
+
+  readAll() {
+    return new Promise(async (res, rej) => {
+      try {
+        const data = await this.db.executeSql(`SELECT * from ${this.tableName()} where sync != "delete"`);
+        res(this.getRowData(data));
+      } catch (err) {
+        rej(err);
+      }
+    })
+  }
+
+  async update(set, where) {
+    const readData = await this.read(where);
+    const isNewRecord = readData && readData.length && readData[0].sync === 'create';
+
+    if (!isNewRecord) {
+      set.sync = 'update';
+    }
+
+    const setList = this.buildEqualQuery(this.filterFields(set));
+    const whereList = this.buildEqualQuery(this.filterFields(where), ' and ');
+    return this.db.executeSql(`UPDATE ${this.tableName()} SET ${setList} WHERE ${whereList}`);
+  }
+
+  async delete(where) {
+    const filterQuery = this.filterFields(where);
+    const readData = await this.read(filterQuery);
+    const isNewRecord = readData && readData.length && readData[0].sync === 'create';
+
+    const whereList = this.buildEqualQuery(filterQuery, ' and ');
+    if (isNewRecord) {
+      return this.db.executeSql(`DELETE FROM ${this.tableName()} WHERE ${whereList}`);
+    }
+
+    return this.db.executeSql(`UPDATE ${this.tableName()} SET sync="delete" WHERE ${whereList}`);
+  }
+
+
+  /**
+   * Helper CRUD Methods
+   */
+
   updateIDs(datas) {
     const sqlQueries = [];
     datas.forEach((data) => {
-      const setData = this.filterFields({ ...data, sync: 1 });
-      const setList = [];
-      Object.keys(setData).forEach((key) => {
-        setList.push(`${key}='${setData[key]}'`)
-      });
-
-      sqlQueries.push(`UPDATE ${this.tableName()} SET ${setList.join(',')} WHERE mid='${data.mid}'`);
+      const setList = this.buildEqualQuery(this.filterFields({ ...data, sync: 1 }));
+      sqlQueries.push(`UPDATE ${this.tableName()} SET ${setList} WHERE mid='${data.mid}'`);
     });
     return this.db.sqlBatch(sqlQueries);
   }
@@ -120,107 +191,42 @@ class BasicModel {
     return this.db.sqlBatch(sqlQueries);
   }
 
-  read(where) {
-    const whereData = this.filterFields(where);
-
-    const whereList = [];
-    Object.keys(whereData).forEach((key) => {
-      whereList.push(`${key}='${whereData[key]}'`)
-    });
-
-    return new Promise(async (res, rej) => {
-      try {
-        const [data] = await this.db.executeSql(`SELECT * from ${this.tableName()} WHERE ${whereList.join(' and ')}`);
-        if (data.rows.length) {
-          const resData = [];
-          for (let i = 0; i < data.rows.length; ++i) {
-            resData.push(data.rows.item(i));
-          }
-          res(resData);
-        } else {
-          res([]);
-        }
-      } catch (err) {
-        rej(err);
-      }
-    })
-  }
-
-  readAll() {
-    return new Promise(async (res, rej) => {
-      try {
-        const [data] = await this.db.executeSql(`SELECT * from ${this.tableName()}`);
-        if (data.rows.length) {
-          const resData = [];
-          for (let i = 0; i < data.rows.length; ++i) {
-            resData.push(data.rows.item(i));
-          }
-          res(resData);
-        } else {
-          res([]);
-        }
-      } catch (err) {
-        rej(err);
-      }
-    })
-  }
-
-  update(set, where) {
-    const setData = this.filterFields(set);
-    const whereData = this.filterFields(where);
-
-    const whereList = [];
-    Object.keys(whereData).forEach((key) => {
-      whereList.push(`${key}='${whereData[key]}'`)
-    });
-
-    const setList = [];
-    Object.keys(setData).forEach((key) => {
-      setList.push(`${key}='${setData[key]}'`)
-    });
-
-    return this.db.executeSql(`UPDATE ${this.tableName()} SET ${setList.join(',')} WHERE ${whereList.join(' and ')}`);
-  }
-
-  delete(query) {
-    const queryData = this.filterFields(query);
-    const queryList = [];
-    Object.keys(queryData).forEach((key) => {
-      queryList.push(`${key}='${queryData[key]}'`)
-    });
-
-    return this.db.executeSql(`DELETE FROM ${this.tableName()} WHERE ${queryList.join(' and ')}`);
-  }
-
   /**
    * =================
    *   Sync Methods
    * =================
    */
 
-  async syncTable(updateStore) {
+  async syncTable(updateStore, syncTime) {
     if (!this.isConnected()) {
       return true;
     }
 
-    let records;
-    try {
-      records = await this.request.api({ model: this.tableName(), method: 'read', data: { own: true } });
-      if (!_isEmpty(records)) {
-        await this.replaceOrCreateMulti(records, { sync: 1 });
-      }
-    } catch(err) {}
+    const time = syncTime[this.tableName()];
 
-    let dataToUpload;
-    try {
-      dataToUpload = await this.read({ sync: 0 });
-      if (!_isEmpty(dataToUpload)) {
-        const newCreatedRecords = await this.request.api({ model: this.tableName(), method: 'createmany', data: { records: dataToUpload } });
-        await this.updateIDs(newCreatedRecords)
-      }
-    } catch(err) {}
 
-    if (updateStore && (!_isEmpty(records) || !_isEmpty(dataToUpload))) {
+    let localRecords = await this.db.executeSql(`SELECT * from ${this.tableName()} WHERE sync != "1"`);
+    localRecords = this.getRowData(localRecords);
+
+    console.tron.log('localRecords', localRecords);
+
+    let syncResponse = await this.request.api({
+      model: this.tableName(),
+      method: 'sync',
+      data: { records: localRecords, syncTime: time },
+    });
+
+    console.tron.log(syncResponse);
+
+    syncTime[this.tableName()] = syncResponse.syncTime;
+
+    if(_isEmpty(syncResponse.records)) {
+      return true;
+    }
+
+    await this.replaceOrCreateMulti(syncResponse.records, { sync: '1' });
+
+    if (updateStore) {
       const updatedRecord = await this.readAll();
       redux.get(this.tableName()) && redux.get(this.tableName()).syncComplete(updatedRecord);
     }
@@ -241,7 +247,7 @@ class BasicModel {
       method: 'create',
       data: { record },
     });
-    await this.update({ _id: createdData._id, sync: 1 }, { _id: record.mid });
+    await this.update({ _id: createdData._id, sync: '1' }, { mid: record.mid });
     param._id = createdData._id;
   }
 }

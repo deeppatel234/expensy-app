@@ -27,13 +27,11 @@ class CreateExpense extends Component {
   }
 
   onSelectWallet(data, props) {
-    console.tron.log(data, props);
     props.setFieldValue('wallet', data._id);
     this.setState({ walletModelVisible: false });
   }
 
   onSelectCategory(data, props) {
-    console.tron.log(data);
     props.setFieldValue('category', data._id);
     this.setState({ categoryModelVisible: false });
   }
@@ -48,7 +46,6 @@ class CreateExpense extends Component {
 
   onSubmitForm(values) {
     values.amount = parseFloat(values.amount);
-    console.tron.log('Submited Value :::: ', values);
     models.get('expense').create(values, true).then((dbRes) => {
       console.tron.log(dbRes);
     });

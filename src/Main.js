@@ -34,7 +34,7 @@ class Main extends Component {
     const { fetchUser, fetchCategories, fetchNetwork, fetchWallets } = this.props;
     fetchNetwork().then(() => {
       models.syncTables(false).then(() => {
-        this.setState({ isSync: false })
+        this.setState({ isSync: false });
         fetchUser();
         fetchCategories();
         fetchWallets();

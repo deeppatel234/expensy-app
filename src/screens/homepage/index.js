@@ -4,8 +4,21 @@ import { connect } from 'react-redux';
 import { Text, View } from 'react-native';
 import { Link } from 'react-router-native';
 
+import models from '../../sql/models';
+
 
 class HomePage extends Component {
+  componentDidMount() {
+    const { categories, wallets } = this.props;
+    models.get('expense').readAll().then((expenses) => {
+      const pop = expenses.map(expense => {
+        // expense.category = categories[expense.category];
+        // expense.wallet = wallets[expense.wallet];
+        return expense;
+      });
+    });
+  }
+
   render() {
     const {
       user,
@@ -28,6 +41,8 @@ class HomePage extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    categories: state.categories,
+    wallets: state.wallets,
   };
 };
 

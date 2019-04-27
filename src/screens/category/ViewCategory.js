@@ -18,7 +18,7 @@ import {
 const ViewCategory = ({ categories }) => (
   <Container>
     <Heading>
-      <TypoGraphy type="heading">Categories</TypoGraphy>
+      <TypoGraphy type="heading" primary>Categories</TypoGraphy>
     </Heading>
     <Content>
       <ListWrapper>

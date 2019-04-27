@@ -7,7 +7,6 @@ export const Container = styled.View`
   padding: 20px;
 `;
 
-// background-color: #448AFF;
 export const Heading = styled.View`
   margin-bottom: 30px;
 `;

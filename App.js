@@ -6,6 +6,8 @@ import {
   Switch,
 } from "react-router-native";
 
+import { ThemeProvider } from 'styled-components';
+
 import { View, Text } from 'react-native';
 
 import { Provider } from 'react-redux';
@@ -18,6 +20,8 @@ import DBConfig from './src/sql/DBConfig';
 import Login from './src/screens/login';
 import SignUp from './src/screens/signup';
 import Main from './src/Main';
+
+import theme from './src/theme';
 
 class App extends Component {
   constructor(props) {
@@ -51,15 +55,17 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <NativeRouter>
-          <View>
-            <Switch>
-              <Route path="/signup" component={SignUp} />
-              <Route path="/login" component={Login} />
-              <PrivateRoute path="/" exact component={Main} />
-            </Switch>
-          </View>
-        </NativeRouter>
+        <ThemeProvider theme={theme}>
+          <NativeRouter>
+            <View>
+              <Switch>
+                <Route path="/signup" component={SignUp} />
+                <Route path="/login" component={Login} />
+                <PrivateRoute path="/" exact component={Main} />
+              </Switch>
+            </View>
+          </NativeRouter>
+        </ThemeProvider>
       </Provider>
     );
   }

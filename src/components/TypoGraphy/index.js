@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
+import { TypoGraphyText } from './styled';
+
 const FONT_FAMILY = {
   REGULAR: 'Montserrat-Regular',
   MEDIUM: 'Montserrat-Medium',
@@ -20,7 +22,7 @@ const TYPO_STYLE = StyleSheet.create({
 });
 
 const TypoGraphy = ({ children , type, ...props}) => {
-  return <Text style={TYPO_STYLE[type]} {...props}>{children}</Text>;
+  return <TypoGraphyText style={TYPO_STYLE[type]} {...props}>{children}</TypoGraphyText>;
 };
 
 TypoGraphy.defaultProps = {

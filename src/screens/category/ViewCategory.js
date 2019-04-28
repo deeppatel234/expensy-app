@@ -7,13 +7,15 @@ import TypoGraphy from '../../components/TypoGraphy';
 import Avatar from '../../components/Avatar';
 import Link from '../../components/Link';
 
-import { Container, Heading, Content, Footer } from '../../../globalStyle';
-
 import {
+  Container,
+  Heading,
+  Content,
+  Footer,
   ListWrapper,
   ListItem,
   ListText,
-} from './styled';
+} from '../../../globalStyle';
 
 const ViewCategory = ({ categories }) => (
   <Container>
@@ -32,9 +34,9 @@ const ViewCategory = ({ categories }) => (
         }
       </ListWrapper>
     </Content>
-    <Footer>
-      <Link to='/create-category' text="Add Category" appearance="primary" />
-    </Footer>
+      <Footer>
+        <Link to='/create-category' text="Add Category" appearance="primary" />
+      </Footer>
   </Container>
 );
 

@@ -1,41 +1,50 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import {
   Modal,
-  Text,
-  View,
   TouchableHighlight,
 } from 'react-native';
 
+import TypoGraphy from '../../components/TypoGraphy';
+import Avatar from '../../components/Avatar';
 
-class CategoryModel extends Component {
-  render() {
-    const {
-      visible,
-      onSelect,
-      categories,
-    } = this.props;
+import {
+  Container,
+  Heading,
+  Content,
+  ListWrapper,
+  ListItem,
+  ListText,
+} from '../../../globalStyle';
 
-    return (
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={visible}
-      >
-        <View>
+const CategoryModel = ({ visible, onSelect, categories }) => (
+  <Modal
+    animationType="slide"
+    transparent={false}
+    visible={visible}
+  >
+    <Container>
+      <Heading>
+        <TypoGraphy type="heading" appearance="primary">Categories</TypoGraphy>
+      </Heading>
+      <Content>
+        <ListWrapper>
           {
             Object.values(categories).map((category) => (
               <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
-                <Text>{category.icon} - {category.name}</Text>
+                <ListItem>
+                  <Avatar name="ios-laptop" />
+                  <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
+                </ListItem>
               </TouchableHighlight>
             ))
           }
-        </View>
-      </Modal>
-    );
-  }
-}
+        </ListWrapper>
+      </Content>
+    </Container>
+  </Modal>
+)
 
 // Maps state from store to props
 const mapStateToProps = (state) => {

@@ -12,4 +12,8 @@ export const Heading = styled.View`
 `;
 
 export const Content = styled.ScrollView`
+  flex:1;
+`;
+
+export const Footer = styled.View`
 `;

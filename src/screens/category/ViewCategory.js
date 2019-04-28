@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-native';
 
 import Redux from "../../redux/ReduxRegistry";
 
 import TypoGraphy from '../../components/TypoGraphy';
 import Avatar from '../../components/Avatar';
+import Link from '../../components/Link';
 
-import { Container, Heading, Content} from '../../../globalStyle';
+import { Container, Heading, Content, Footer } from '../../../globalStyle';
 
 import {
   ListWrapper,
@@ -18,7 +18,7 @@ import {
 const ViewCategory = ({ categories }) => (
   <Container>
     <Heading>
-      <TypoGraphy type="heading" primary>Categories</TypoGraphy>
+      <TypoGraphy type="heading" appearance="primary">Categories</TypoGraphy>
     </Heading>
     <Content>
       <ListWrapper>
@@ -32,7 +32,9 @@ const ViewCategory = ({ categories }) => (
         }
       </ListWrapper>
     </Content>
-    {/*<Link to='/create-category'><Text>Create Category</Text></Link> */}
+    <Footer>
+      <Link to='/create-category' text="Add Category" appearance="primary" />
+    </Footer>
   </Container>
 );
 

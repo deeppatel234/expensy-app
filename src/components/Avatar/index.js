@@ -13,8 +13,4 @@ const Avatar = ({ children , ...props}) => {
   );
 };
 
-Avatar.defaultProps = {
-  type: 'default',
-};
-
 export default Avatar;

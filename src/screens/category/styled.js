@@ -5,7 +5,7 @@ export const ListWrapper = styled.View`
 `;
 
 export const ListItem = styled.View`
-  padding: 20px;
+  padding: 15px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;

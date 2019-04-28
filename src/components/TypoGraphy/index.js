@@ -19,6 +19,10 @@ const TYPO_STYLE = StyleSheet.create({
     fontFamily: FONT_FAMILY.MEDIUM,
     fontSize: 18,
   },
+  small: {
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: 14,
+  },
 });
 
 const TypoGraphy = ({ children , type, ...props}) => {

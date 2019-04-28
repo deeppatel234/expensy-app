@@ -34,9 +34,9 @@ const ViewCategory = ({ categories }) => (
         }
       </ListWrapper>
     </Content>
-      <Footer>
-        <Link to='/create-category' text="Add Category" appearance="primary" />
-      </Footer>
+    <Footer>
+      <Link to='/create-category' text="Add Category" appearance="primary" />
+    </Footer>
   </Container>
 );
 

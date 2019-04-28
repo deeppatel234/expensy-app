@@ -33,3 +33,7 @@ export const ListItem = styled.View`
 export const ListText = styled(TypoGraphy)`
   margin-left: 20px;
 `;
+
+export const ListDetails = styled.View`
+  margin-left: 20px;
+`;

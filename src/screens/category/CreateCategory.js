@@ -86,7 +86,6 @@ class CreateCategory extends Component {
                     />
                   </RightInput>
                 </IconInputWrapper>
-
                 <IconModel
                   visible={iconModelVisible}
                   onSelect={data => this.onSelectIcon(data, props)}

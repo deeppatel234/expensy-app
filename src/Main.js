@@ -18,6 +18,8 @@ import ViewWallet from './screens/wallet/ViewWallet';
 
 import CreateExpense from './screens/expense/CreateExpense';
 
+import CurrencyModel from './screens/currency/CurrencyModel';
+
 import Redux from './redux/ReduxRegistry';
 import models from './sql/models'
 
@@ -68,7 +70,7 @@ class Main extends Component {
               <Route path="/view-wallet" component={ViewWallet} />
               <Route path="/create-wallet" component={CreateWallet} />
               <Route path="/create-expense" component={CreateExpense} />
-              <Route path="/" exact component={HomePage} />
+              <Route path="/" exact component={CurrencyModel} />
             </Switch>
           </View>
         </BackButton>

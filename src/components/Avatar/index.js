@@ -13,7 +13,11 @@ const Avatar = ({ children, type, ...props}) => {
   const Icon = ICON_TYPE[type];
   return (
     <AvatarWrapper>
-      <Icon size={25} {...props} />
+      {
+        children
+          ? children
+          : <Icon size={25} {...props} />
+      }
     </AvatarWrapper>
   );
 };

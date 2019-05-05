@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Input, InputWrapper } from './styled';
+import { Input } from './styled';
 import { TYPO_STYLE } from '../TypoGraphy';
 
 const TextInput = (props) => {

@@ -70,7 +70,7 @@ class Main extends Component {
               <Route path="/view-wallet" component={ViewWallet} />
               <Route path="/create-wallet" component={CreateWallet} />
               <Route path="/create-expense" component={CreateExpense} />
-              <Route path="/" exact component={CurrencyModel} />
+              <Route path="/" exact component={HomePage} />
             </Switch>
           </View>
         </BackButton>

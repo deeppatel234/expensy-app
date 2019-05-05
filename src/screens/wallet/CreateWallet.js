@@ -10,9 +10,13 @@ import TypoGraphy from "../../components/TypoGraphy";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import Avatar from "../../components/Avatar";
+import DropDown from "../../components/DropDown";
 
 import IconModel from "../icon/IconModel";
 import IconList from "../icon/IconList";
+
+import CurrencyModel from "../currency/CurrencyModel";
+import currencyCode from '../../utils/currencyCode';
 
 import {
   Container,
@@ -29,11 +33,14 @@ class CreateWallet extends Component {
     super(props);
 
     this.state = {
-      iconModelVisible: false
+      iconModelVisible: false,
+      currencyModelVisible: false,
     };
 
     this.onSelectIcon = this.onSelectIcon.bind(this);
     this.showIconModel = this.showIconModel.bind(this);
+    this.onSelectCurrency = this.onSelectCurrency.bind(this);
+    this.showCurrencyModel = this.showCurrencyModel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
@@ -52,8 +59,17 @@ class CreateWallet extends Component {
     this.setState({ iconModelVisible: false });
   }
 
+  showCurrencyModel() {
+    this.setState({ currencyModelVisible: true });
+  }
+
+  onSelectCurrency(data, props) {
+    props.setFieldValue("currency", data);
+    this.setState({ currencyModelVisible: false });
+  }
+
   render() {
-    const { iconModelVisible } = this.state;
+    const { iconModelVisible, currencyModelVisible } = this.state;
 
     return (
       <Container>
@@ -63,7 +79,7 @@ class CreateWallet extends Component {
           </TypoGraphy>
         </Heading>
         <Formik
-          initialValues={{ icon: "PLACEHOLDER" }}
+          initialValues={{ icon: "PLACEHOLDER", currency: "INDIAN_RUPEE" }}
           onSubmit={this.onSubmitForm}
         >
           {props => (
@@ -87,22 +103,36 @@ class CreateWallet extends Component {
                     />
                   </RightInput>
                 </IconInputWrapper>
+                <DropDown
+                  selectedValue={props.values.type}
+                  options={[{ value: 'bank', text: 'Bank' }, { value: 'cash', text: 'Cash' }]}
+                  onValueChange={props.handleChange("type")}
+                />
+                <IconInputWrapper>
+                  <LeftIcon>
+                    <TouchableHighlight onPress={this.showCurrencyModel}>
+                      <Avatar>
+                        <TypoGraphy>{currencyCode[props.values.currency].unicode}</TypoGraphy>
+                      </Avatar>
+                    </TouchableHighlight>
+                  </LeftIcon>
+                  <RightInput>
+                    <TextInput
+                      placeholder="Initial Balance"
+                      onChangeText={props.handleChange("balance")}
+                      onBlur={props.handleBlur("balance")}
+                      value={props.values.balance}
+                      keyboardType="numeric"
+                    />
+                  </RightInput>
+                </IconInputWrapper>
                 <IconModel
                   visible={iconModelVisible}
                   onSelect={data => this.onSelectIcon(data, props)}
                 />
-                <TextInput
-                  placeholder="Wallet Type"
-                  onChangeText={props.handleChange("type")}
-                  onBlur={props.handleBlur("type")}
-                  value={props.values.type}
-                />
-                <TextInput
-                  placeholder="Initial Balance"
-                  onChangeText={props.handleChange("balance")}
-                  onBlur={props.handleBlur("balance")}
-                  value={props.values.balance}
-                  keyboardType="numeric"
+                <CurrencyModel
+                  visible={currencyModelVisible}
+                  onSelect={data => this.onSelectCurrency(data, props)}
                 />
               </Content>
               <Footer>

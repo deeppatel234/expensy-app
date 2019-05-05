@@ -10,6 +10,7 @@ class WalletModel extends BasicModel {
       name: 'TEXT NOT NULL',
       type: 'TEXT NOT NULL',
       icon: 'TEXT NOT NULL',
+      currency: 'TEXT NOT NULL',
       balance: 'REAL NOT NULL',
     };
   }

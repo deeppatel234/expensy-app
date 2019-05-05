@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
-export const AvatarWrapper = styled.Text`
-  background: #C4C4C4;
+export const AvatarWrapper = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${props => props.theme.light};
   height: 35px;
   width: 35px;
   border-radius: 17;
-  padding: 5px 7px;
 `;

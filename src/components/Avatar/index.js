@@ -1,14 +1,19 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {
-  AvatarWrapper
+  AvatarWrapper,
 } from './styled';
 
-const Avatar = ({ children , ...props}) => {
+const ICON_TYPE = {
+  Ionicons,
+};
+
+const Avatar = ({ children, type, ...props}) => {
+  const Icon = ICON_TYPE[type];
   return (
     <AvatarWrapper>
-      <Icon {...props} size={25} />
+      <Icon size={25} {...props} />
     </AvatarWrapper>
   );
 };

@@ -31,7 +31,7 @@ const ViewWallet = ({ wallets }) => (
               <Avatar type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} />
               <ListDetails>
                 <TypoGraphy>{wallet.name}</TypoGraphy>
-                <TypoGraphy type="small">{wallet.balance} {currencyCode.INDIAN_RUPEE.unicode}</TypoGraphy>
+                <TypoGraphy type="small">{wallet.balance} {currencyCode[wallet.currency].unicode}</TypoGraphy>
               </ListDetails>
             </ListItem>
           ))

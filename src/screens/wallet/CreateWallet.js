@@ -79,7 +79,7 @@ class CreateWallet extends Component {
           </TypoGraphy>
         </Heading>
         <Formik
-          initialValues={{ icon: "PLACEHOLDER", currency: "INDIAN_RUPEE" }}
+          initialValues={{ icon: "PLACEHOLDER", currency: "INDIAN_RUPEE", type: "bank", balance: "0" }}
           onSubmit={this.onSubmitForm}
         >
           {props => (

@@ -7,6 +7,8 @@ import TypoGraphy from '../../components/TypoGraphy';
 import Avatar from '../../components/Avatar';
 import Link from '../../components/Link';
 
+import IconList from '../icon/IconList';
+
 import {
   Container,
   Heading,
@@ -27,7 +29,7 @@ const ViewCategory = ({ categories }) => (
         {
           Object.values(categories).map((category) => (
             <ListItem key={category._id}>
-              <Avatar name="ios-laptop" />
+              <Avatar type={IconList[category.icon].type} name={IconList[category.icon].name} />
               <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
             </ListItem>
           ))

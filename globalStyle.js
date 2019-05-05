@@ -37,3 +37,17 @@ export const ListText = styled(TypoGraphy)`
 export const ListDetails = styled.View`
   margin-left: 20px;
 `;
+
+export const IconInputWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
+export const LeftIcon = styled.View`
+  margin-right: 20px;
+`;
+
+export const RightInput = styled.View`
+  flex: 1;
+`;

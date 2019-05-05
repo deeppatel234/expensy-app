@@ -1,4 +1,8 @@
 export default {
+  PLACEHOLDER: {
+    name: "ios-help",
+    type: "Ionicons",
+  },
   IOS_LAPTOP: {
     name: "ios-laptop",
     type: "Ionicons"

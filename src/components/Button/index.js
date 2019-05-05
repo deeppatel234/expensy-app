@@ -9,14 +9,11 @@ const APPEARANCE_MAP = {
   default: 'primary',
 };
 
-const Button = (props) => {
-  console.tron.log(props);
-  return (
-    <ButtonElement  {...props}>
-      <TypoGraphy appearance={APPEARANCE_MAP[props.appearance]}>{props.text}</TypoGraphy>
-    </ButtonElement>
-  )
-};
+const Button = (props) => (
+  <ButtonElement  {...props}>
+    <TypoGraphy appearance={APPEARANCE_MAP[props.appearance]}>{props.text}</TypoGraphy>
+  </ButtonElement>
+);
 
 Button.defaultProps = {
   appearance: 'default',

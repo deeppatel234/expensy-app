@@ -1,35 +1,49 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Button, TextInput, View } from "react-native";
 import { Formik } from "formik";
 
 import Redux from "../../redux/ReduxRegistry";
+import TypoGraphy from '../../components/TypoGraphy';
+import Button from '../../components/Button';
+import TextInput from '../../components/TextInput';
 
+import {
+  Container,
+  Heading,
+  Content,
+} from '../../../globalStyle';
 
 const CreateCategory = ({ createCategory, history }) => (
-  <View>
-    <Formik
-      initialValues={{ name: "my-name", icon: "my-icon" }}
-      onSubmit={values => createCategory(values).then(() => history.goBack())}
-    >
-      {props => (
-        <View>
-          <TextInput
-            onChangeText={props.handleChange("icon")}
-            onBlur={props.handleBlur("icon")}
-            value={props.values.icon}
-          />
-          <TextInput
-            onChangeText={props.handleChange("name")}
-            onBlur={props.handleBlur("name")}
-            value={props.values.name}
-          />
-          <Button onPress={props.handleSubmit} title="Submit" />
-        </View>
-      )}
-    </Formik>
-  </View>
+  <Container>
+    <Heading>
+      <TypoGraphy type="heading" appearance="primary">Add Category</TypoGraphy>
+    </Heading>
+    <Content>
+      <Formik
+        // initialValues={{ name: "my-name", icon: "my-icon" }}
+        onSubmit={values => createCategory(values).then(() => history.goBack())}
+      >
+        {props => (
+          <React.Fragment>
+            <TextInput
+              placeholder="Enter Icon"
+              onChangeText={props.handleChange("icon")}
+              onBlur={props.handleBlur("icon")}
+              value={props.values.icon}
+            />
+            <TextInput
+              placeholder="Category Name"
+              onChangeText={props.handleChange("name")}
+              onBlur={props.handleBlur("name")}
+              value={props.values.name}
+            />
+            <Button onPress={props.handleSubmit} text="Add" appearance="primary" />
+          </React.Fragment>
+        )}
+      </Formik>
+    </Content>
+  </Container>
 );
 
 // Maps state from store to props

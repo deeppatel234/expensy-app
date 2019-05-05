@@ -10,7 +10,7 @@ const FONT_FAMILY = {
   BOLD: 'Montserrat-Bold',
 };
 
-const TYPO_STYLE = StyleSheet.create({
+export const TYPO_STYLE = StyleSheet.create({
   heading: {
     fontFamily: FONT_FAMILY.SEMI_BOLD,
     fontSize: 40,

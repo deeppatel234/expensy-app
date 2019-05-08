@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { Formik } from "formik";
 import { TouchableHighlight } from "react-native";
 
-import DatePicker from "react-native-datepicker";
 import formatDate from "date-fns/format";
 
 import WalletModel from "../wallet/WalletModel";
 import CategoryModel from "../category/CategoryModel";
 
+import DatePicker from "Components/DatePicker";
 import TextInput from "Components/TextInput";
 import TypoGraphy from "Components/TypoGraphy";
 import Button from "Components/Button";
@@ -28,7 +28,8 @@ import {
   IconInputWrapper,
   LeftIcon,
   RightInput,
-  FormSpace
+  FormSpace,
+  BorderBottom
 } from "../../../globalStyle";
 
 import models from "../../sql/models";
@@ -198,17 +199,25 @@ class CreateExpense extends Component {
                       onChangeText={props.handleChange("description")}
                       onBlur={props.handleBlur("description")}
                       value={props.values.description}
+                      placeholder="Write some note..."
                     />
                   </RightInput>
                 </IconInputWrapper>
-                <FormSpace>
-                  <DatePicker
-                    date={props.values.dateTime}
-                    placeholder="select date"
-                    format="DD/MM/YYYY"
-                    onDateChange={props.handleChange("dateTime")}
-                  />
-                </FormSpace>
+                <IconInputWrapper>
+                  <LeftIcon>
+                    <Avatar>
+                      <Icon type="Octicons" name="calendar" size={18} />
+                    </Avatar>
+                  </LeftIcon>
+                  <RightInput>
+                    <BorderBottom>
+                      <DatePicker
+                        date={props.values.dateTime}
+                        onDateChange={props.handleChange("dateTime")}
+                      />
+                    </BorderBottom>
+                    </RightInput>
+                </IconInputWrapper>
                 <WalletModel
                   visible={walletModelVisible}
                   onSelect={data => this.onSelectWallet(data, props)}

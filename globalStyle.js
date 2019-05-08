@@ -58,3 +58,8 @@ export const RightInput = styled.View`
 export const FormSpace = styled.View`
   margin-bottom: 20px;
 `;
+
+export const BorderBottom = styled.View`
+  border-bottom-color: ${props => props.theme.light};
+  border-bottom-width: 1px;
+`;

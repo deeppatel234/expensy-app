@@ -13,6 +13,7 @@ import CategoryModel from "../category/CategoryModel";
 import TextInput from "Components/TextInput";
 import TypoGraphy from "Components/TypoGraphy";
 import Button from "Components/Button";
+import Radio from "Components/RadioButton";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
 
@@ -116,11 +117,12 @@ class CreateExpense extends Component {
           {props => (
             <React.Fragment>
               <Content>
-                <TextInput
-                  onChangeText={props.handleChange("type")}
-                  onBlur={props.handleBlur("type")}
-                  value={props.values.type}
-                />
+                <FormSpace>
+                  <Radio.Group selectedValue={props.values.type} onChange={props.handleChange("type")}>
+                    <Radio.Button value="expense" text="Expense" style={{ flexGrow: 1 }} />
+                    <Radio.Button value="income" text="Incomes" style={{ flexGrow: 1 }} />
+                  </Radio.Group>
+                </FormSpace>
                 <TouchableHighlight onPress={this.showWalletModel}>
                   <FormSpace>
                     <IconInputWrapper center>

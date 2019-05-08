@@ -1,14 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { Text, View, TextInput, Button } from 'react-native';
 import { Formik } from "formik";
-import DatePicker from 'react-native-datepicker';
-import formatDate from 'date-fns/format';
+import { TouchableHighlight } from "react-native";
 
-import WalletModel from '../wallet/WalletModel';
-import CategoryModel from '../category/CategoryModel';
+import DatePicker from "react-native-datepicker";
+import formatDate from "date-fns/format";
 
-import models from '../../sql/models';
+import WalletModel from "../wallet/WalletModel";
+import CategoryModel from "../category/CategoryModel";
+
+import TextInput from "../../components/TextInput";
+import TypoGraphy from "../../components/TypoGraphy";
+import Button from "../../components/Button";
+import Avatar from "../../components/Avatar";
+import Icon from "../../components/Icon";
+
+import IconList from "../icon/IconList";
+import currencyCode from "../../utils/currencyCode";
+
+import {
+  Container,
+  Heading,
+  Content,
+  Footer,
+  IconInputWrapper,
+  LeftIcon,
+  RightInput,
+  FormSpace
+} from "../../../globalStyle";
+
+import models from "../../sql/models";
 
 class CreateExpense extends Component {
   constructor(props) {
@@ -16,7 +38,7 @@ class CreateExpense extends Component {
 
     this.state = {
       walletModelVisible: false,
-      categoryModelVisible: false,
+      categoryModelVisible: false
     };
 
     this.onSelectWallet = this.onSelectWallet.bind(this);
@@ -27,12 +49,12 @@ class CreateExpense extends Component {
   }
 
   onSelectWallet(data, props) {
-    props.setFieldValue('wallet', data._id);
+    props.setFieldValue("wallet", data._id);
     this.setState({ walletModelVisible: false });
   }
 
   onSelectCategory(data, props) {
-    props.setFieldValue('category', data._id);
+    props.setFieldValue("category", data._id);
     this.setState({ categoryModelVisible: false });
   }
 
@@ -46,67 +68,176 @@ class CreateExpense extends Component {
 
   onSubmitForm(values) {
     values.amount = parseFloat(values.amount);
-    models.get('expense').create(values, true).then((dbRes) => {
-      console.tron.log(dbRes);
-    });
+    models
+      .get("expense")
+      .create(values, true)
+      .then(dbRes => {
+        console.tron.log(dbRes);
+      });
+  }
+
+  getCategoryIcon(category) {
+    const { categories } = this.props;
+    return category
+      ? IconList[categories[category].icon]
+      : IconList.PLACEHOLDER;
+  }
+
+  getWalletIcon(wallet) {
+    const { wallets } = this.props;
+    return wallet ? IconList[wallets[wallet].icon] : IconList.PLACEHOLDER;
+  }
+
+  getCurrencyCode(wallet) {
+    const { wallets } = this.props;
+    return currencyCode[wallets[wallet].currency].unicode;
   }
 
   render() {
     const { walletModelVisible, categoryModelVisible } = this.state;
+    const { categories, wallets } = this.props;
 
     return (
-      <View>
-        <Text>Create Expense</Text>
+      <Container>
+        <Heading>
+          <TypoGraphy type="heading" appearance="primary">
+            Add Transaction
+          </TypoGraphy>
+        </Heading>
         <Formik
           initialValues={{
             type: "expense",
             amount: "123.3",
             description: "hello description",
-            dateTime: formatDate(new Date(), 'DD/MM/YYYY'),
+            dateTime: formatDate(new Date(), "DD/MM/YYYY")
           }}
           onSubmit={this.onSubmitForm}
         >
           {props => (
-            <View>
-              <TextInput
-                onChangeText={props.handleChange("type")}
-                onBlur={props.handleBlur("type")}
-                value={props.values.type}
-              />
-              <TextInput
-                onChangeText={props.handleChange("description")}
-                onBlur={props.handleBlur("description")}
-                value={props.values.description}
-              />
-              <TextInput
-                onChangeText={props.handleChange("amount")}
-                onBlur={props.handleBlur("amount")}
-                value={props.values.amount}
-                keyboardType="numeric"
-              />
-              <DatePicker
-                date={props.values.dateTime}
-                placeholder="select date"
-                format="DD/MM/YYYY"
-                onDateChange={props.handleChange("dateTime")}
-              />
-              <Button onPress={this.showWalletModel} title="Select Wallet" />
-              <WalletModel
-                visible={walletModelVisible}
-                onSelect={(data) => this.onSelectWallet(data, props)}
-              />
-              <Button onPress={this.showCategoryModel} title="Select Category" />
-              <CategoryModel
-                visible={categoryModelVisible}
-                onSelect={(data) => this.onSelectCategory(data, props)}
-              />
-              <Button onPress={props.handleSubmit} title="Submit" />
-            </View>
+            <React.Fragment>
+              <Content>
+                <TextInput
+                  onChangeText={props.handleChange("type")}
+                  onBlur={props.handleBlur("type")}
+                  value={props.values.type}
+                />
+                <TouchableHighlight onPress={this.showWalletModel}>
+                  <FormSpace>
+                    <IconInputWrapper center>
+                      <LeftIcon>
+                        <Avatar>
+                          <Icon
+                            type={this.getWalletIcon(props.values.wallet).type}
+                            name={this.getWalletIcon(props.values.wallet).name}
+                          />
+                        </Avatar>
+                      </LeftIcon>
+                      <RightInput>
+                        <TypoGraphy>
+                          {props.values.wallet
+                            ? wallets[props.values.wallet].name
+                            : "Select Wallet"}
+                        </TypoGraphy>
+                      </RightInput>
+                    </IconInputWrapper>
+                  </FormSpace>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={this.showCategoryModel}>
+                  <FormSpace>
+                    <IconInputWrapper center>
+                      <LeftIcon>
+                        <Avatar>
+                          <Icon
+                            type={
+                              this.getCategoryIcon(props.values.category).type
+                            }
+                            name={
+                              this.getCategoryIcon(props.values.category).name
+                            }
+                          />
+                        </Avatar>
+                      </LeftIcon>
+                      <RightInput>
+                        <TypoGraphy>
+                          {props.values.category
+                            ? categories[props.values.category].name
+                            : "Select Category"}
+                        </TypoGraphy>
+                      </RightInput>
+                    </IconInputWrapper>
+                  </FormSpace>
+                </TouchableHighlight>
+                {props.values.wallet && (
+                  <IconInputWrapper>
+                    <LeftIcon>
+                      <Avatar>
+                        <TypoGraphy>
+                          {this.getCurrencyCode(props.values.wallet)}
+                        </TypoGraphy>
+                      </Avatar>
+                    </LeftIcon>
+                    <RightInput>
+                      <TextInput
+                        onChangeText={props.handleChange("amount")}
+                        onBlur={props.handleBlur("amount")}
+                        value={props.values.amount}
+                        keyboardType="numeric"
+                      />
+                    </RightInput>
+                  </IconInputWrapper>
+                )}
+                <IconInputWrapper>
+                  <LeftIcon>
+                    <Avatar>
+                      <Icon type="SimpleLineIcons" name="note" size={20}/>
+                    </Avatar>
+                  </LeftIcon>
+                  <RightInput>
+                    <TextInput
+                      onChangeText={props.handleChange("description")}
+                      onBlur={props.handleBlur("description")}
+                      value={props.values.description}
+                    />
+                  </RightInput>
+                </IconInputWrapper>
+                <FormSpace>
+                  <DatePicker
+                    date={props.values.dateTime}
+                    placeholder="select date"
+                    format="DD/MM/YYYY"
+                    onDateChange={props.handleChange("dateTime")}
+                  />
+                </FormSpace>
+                <WalletModel
+                  visible={walletModelVisible}
+                  onSelect={data => this.onSelectWallet(data, props)}
+                />
+                <CategoryModel
+                  visible={categoryModelVisible}
+                  onSelect={data => this.onSelectCategory(data, props)}
+                />
+              </Content>
+              <Footer>
+                <Button
+                  onPress={props.handleSubmit}
+                  text="Submit"
+                  appearance="primary"
+                />
+              </Footer>
+            </React.Fragment>
           )}
         </Formik>
-      </View>
+      </Container>
     );
   }
 }
 
-export default CreateExpense;
+// Maps state from store to props
+const mapStateToProps = state => {
+  return {
+    wallets: state.wallets,
+    categories: state.categories
+  };
+};
+
+export default connect(mapStateToProps)(CreateExpense);

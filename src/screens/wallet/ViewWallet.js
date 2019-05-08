@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import TypoGraphy from '../../components/TypoGraphy';
 import Avatar from '../../components/Avatar';
+import Icon from '../../components/Icon';
 import Link from '../../components/Link';
 
 import IconList from "../icon/IconList";
@@ -28,7 +29,9 @@ const ViewWallet = ({ wallets }) => (
         {
           Object.values(wallets).map((wallet) => (
             <ListItem key={wallet._id}>
-              <Avatar type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} />
+              <Avatar>
+                <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} />
+              </Avatar>
               <ListDetails>
                 <TypoGraphy>{wallet.name}</TypoGraphy>
                 <TypoGraphy type="small">{wallet.balance} {currencyCode[wallet.currency].unicode}</TypoGraphy>

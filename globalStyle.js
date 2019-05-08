@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import TypoGraphy from './src/components/TypoGraphy';
 
 export const Container = styled.View`
@@ -42,6 +42,9 @@ export const IconInputWrapper = styled.View`
   display: flex;
   flex-direction: row;
   width: 100%;
+  ${props => props.center && css`
+    align-items: center;
+  `}
 `;
 
 export const LeftIcon = styled.View`
@@ -50,4 +53,8 @@ export const LeftIcon = styled.View`
 
 export const RightInput = styled.View`
   flex: 1;
+`;
+
+export const FormSpace = styled.View`
+  margin-bottom: 20px;
 `;

@@ -10,6 +10,7 @@ import TypoGraphy from "../../components/TypoGraphy";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import Avatar from "../../components/Avatar";
+import Icon from "../../components/Icon";
 import DropDown from "../../components/DropDown";
 
 import IconModel from "../icon/IconModel";
@@ -88,10 +89,12 @@ class CreateWallet extends Component {
                 <IconInputWrapper>
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showIconModel}>
-                      <Avatar
-                        type={IconList[props.values.icon].type}
-                        name={IconList[props.values.icon].name}
-                      />
+                      <Avatar>
+                        <Icon
+                          type={IconList[props.values.icon].type}
+                          name={IconList[props.values.icon].name}
+                        />
+                      </Avatar>
                     </TouchableHighlight>
                   </LeftIcon>
                   <RightInput>

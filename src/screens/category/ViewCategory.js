@@ -5,6 +5,8 @@ import Redux from "../../redux/ReduxRegistry";
 
 import TypoGraphy from '../../components/TypoGraphy';
 import Avatar from '../../components/Avatar';
+import Icon from '../../components/Icon';
+
 import Link from '../../components/Link';
 
 import IconList from '../icon/IconList';
@@ -29,7 +31,9 @@ const ViewCategory = ({ categories }) => (
         {
           Object.values(categories).map((category) => (
             <ListItem key={category._id}>
-              <Avatar type={IconList[category.icon].type} name={IconList[category.icon].name} />
+              <Avatar>
+                <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} />
+              </Avatar>
               <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
             </ListItem>
           ))

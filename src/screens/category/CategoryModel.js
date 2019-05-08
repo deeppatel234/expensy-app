@@ -8,6 +8,8 @@ import {
 
 import TypoGraphy from '../../components/TypoGraphy';
 import Avatar from '../../components/Avatar';
+import Icon from '../../components/Icon';
+
 import IconList from '../icon/IconList';
 
 import {
@@ -35,7 +37,9 @@ const CategoryModel = ({ visible, onSelect, categories }) => (
             Object.values(categories).map((category) => (
               <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
                 <ListItem>
-                  <Avatar type={IconList[category.icon].type} name={IconList[category.icon].name} />
+                  <Avatar>
+                    <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} />
+                  </Avatar>
                   <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
                 </ListItem>
               </TouchableHighlight>

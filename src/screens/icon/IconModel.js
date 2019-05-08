@@ -7,6 +7,7 @@ import {
 
 import TypoGraphy from '../../components/TypoGraphy';
 import Avatar from '../../components/Avatar';
+import Icon from '../../components/Icon';
 
 import IconList from './IconList';
 
@@ -34,7 +35,9 @@ const IconModel = ({ visible, onSelect }) => (
             Object.keys(IconList).map((icon) => (
               <TouchableHighlight key={icon} onPress={() => onSelect(icon)}>
                 <IconWrapper>
-                  <Avatar type={IconList[icon].type} name={IconList[icon].name} />
+                  <Avatar>
+                    <Icon type={IconList[icon].type} name={IconList[icon].name} />
+                  </Avatar>
                 </IconWrapper>
               </TouchableHighlight>
             ))

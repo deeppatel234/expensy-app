@@ -108,8 +108,7 @@ class CreateExpense extends Component {
         <Formik
           initialValues={{
             type: "expense",
-            amount: "123.3",
-            description: "hello description",
+            amount: "0",
             dateTime: formatDate(new Date(), "DD/MM/YYYY")
           }}
           onSubmit={this.onSubmitForm}
@@ -191,7 +190,7 @@ class CreateExpense extends Component {
                 <IconInputWrapper>
                   <LeftIcon>
                     <Avatar>
-                      <Icon type="SimpleLineIcons" name="note" size={20}/>
+                      <Icon type="SimpleLineIcons" name="note" size={18} />
                     </Avatar>
                   </LeftIcon>
                   <RightInput>

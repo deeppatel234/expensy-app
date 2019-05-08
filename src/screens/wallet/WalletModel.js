@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import { Modal, TouchableHighlight } from 'react-native';
 
-import TypoGraphy from '../../components/TypoGraphy';
-import Avatar from '../../components/Avatar';
-import Icon from '../../components/Icon';
+import TypoGraphy from 'Components/TypoGraphy';
+import Avatar from 'Components/Avatar';
+import Icon from 'Components/Icon';
 
-import IconList from "../icon/IconList";
-import currencyCode from '../../utils/currencyCode';
+import IconList from 'Utils/IconList';
+import CurrencyCode from 'Utils/CurrencyCode';
 
 import {
   Container,
@@ -41,7 +41,7 @@ const WalletModel = ({ visible, wallets, onSelect }) => (
                   </Avatar>
                   <ListDetails>
                     <TypoGraphy>{wallet.name}</TypoGraphy>
-                    <TypoGraphy type="small">{wallet.balance} {currencyCode[wallet.currency].unicode}</TypoGraphy>
+                    <TypoGraphy type="small">{wallet.balance} {CurrencyCode[wallet.currency].unicode}</TypoGraphy>
                   </ListDetails>
                 </ListItem>
               </TouchableHighlight>

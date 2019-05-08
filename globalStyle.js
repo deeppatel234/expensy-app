@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import TypoGraphy from './src/components/TypoGraphy';
+import TypoGraphy from 'Components/TypoGraphy';
 
 export const Container = styled.View`
   background-color: white;

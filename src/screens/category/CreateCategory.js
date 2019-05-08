@@ -6,14 +6,14 @@ import { TouchableHighlight } from "react-native";
 import { Formik } from "formik";
 
 import Redux from "../../redux/ReduxRegistry";
-import TypoGraphy from "../../components/TypoGraphy";
-import Button from "../../components/Button";
-import TextInput from "../../components/TextInput";
-import Avatar from "../../components/Avatar";
-import Icon from "../../components/Icon";
+import TypoGraphy from "Components/TypoGraphy";
+import Button from "Components/Button";
+import TextInput from "Components/TextInput";
+import Avatar from "Components/Avatar";
+import Icon from "Components/Icon";
 
 import IconModel from "../icon/IconModel";
-import IconList from "../icon/IconList";
+import IconList from 'Utils/IconList';
 
 import {
   Container,

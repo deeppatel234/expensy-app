@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 
 import Redux from "../../redux/ReduxRegistry";
 
-import TypoGraphy from '../../components/TypoGraphy';
-import Avatar from '../../components/Avatar';
-import Icon from '../../components/Icon';
+import TypoGraphy from 'Components/TypoGraphy';
+import Avatar from 'Components/Avatar';
+import Icon from 'Components/Icon';
 
-import Link from '../../components/Link';
+import Link from 'Components/Link';
 
-import IconList from '../icon/IconList';
+import IconList from 'Utils/IconList';
 
 import {
   Container,

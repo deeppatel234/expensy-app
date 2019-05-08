@@ -10,14 +10,14 @@ import formatDate from "date-fns/format";
 import WalletModel from "../wallet/WalletModel";
 import CategoryModel from "../category/CategoryModel";
 
-import TextInput from "../../components/TextInput";
-import TypoGraphy from "../../components/TypoGraphy";
-import Button from "../../components/Button";
-import Avatar from "../../components/Avatar";
-import Icon from "../../components/Icon";
+import TextInput from "Components/TextInput";
+import TypoGraphy from "Components/TypoGraphy";
+import Button from "Components/Button";
+import Avatar from "Components/Avatar";
+import Icon from "Components/Icon";
 
-import IconList from "../icon/IconList";
-import currencyCode from "../../utils/currencyCode";
+import IconList from 'Utils/IconList';
+import CurrencyCode from "Utils/CurrencyCode";
 
 import {
   Container,
@@ -90,7 +90,7 @@ class CreateExpense extends Component {
 
   getCurrencyCode(wallet) {
     const { wallets } = this.props;
-    return currencyCode[wallets[wallet].currency].unicode;
+    return CurrencyCode[wallets[wallet].currency].unicode;
   }
 
   render() {

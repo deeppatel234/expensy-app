@@ -5,9 +5,9 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-import TypoGraphy from '../../components/TypoGraphy';
+import TypoGraphy from 'Components/TypoGraphy';
 
-import currencyCode from '../../utils/currencyCode';
+import CurrencyCode from 'Utils/CurrencyCode';
 
 import {
   Container,
@@ -31,12 +31,12 @@ const CurrencyModel = ({ visible, onSelect }) => (
       <Content>
         <ListWrapper>
           {
-            Object.keys(currencyCode).map((code) => (
+            Object.keys(CurrencyCode).map((code) => (
               <TouchableHighlight key={code} onPress={() => onSelect(code)}>
                 <ListItem>
                   <ListDetails>
-                    <TypoGraphy>{currencyCode[code].name}</TypoGraphy>
-                    <TypoGraphy type="small">{currencyCode[code].unicode}</TypoGraphy>
+                    <TypoGraphy>{CurrencyCode[code].name}</TypoGraphy>
+                    <TypoGraphy type="small">{CurrencyCode[code].unicode}</TypoGraphy>
                   </ListDetails>
                 </ListItem>
               </TouchableHighlight>

@@ -6,18 +6,18 @@ import { TouchableHighlight } from "react-native";
 import { Formik } from "formik";
 
 import Redux from "../../redux/ReduxRegistry";
-import TypoGraphy from "../../components/TypoGraphy";
-import Button from "../../components/Button";
-import TextInput from "../../components/TextInput";
-import Avatar from "../../components/Avatar";
-import Icon from "../../components/Icon";
-import DropDown from "../../components/DropDown";
+import TypoGraphy from "Components/TypoGraphy";
+import Button from "Components/Button";
+import TextInput from "Components/TextInput";
+import Avatar from "Components/Avatar";
+import Icon from "Components/Icon";
+import DropDown from "Components/DropDown";
 
 import IconModel from "../icon/IconModel";
-import IconList from "../icon/IconList";
+import IconList from 'Utils/IconList';
 
 import CurrencyModel from "../currency/CurrencyModel";
-import currencyCode from '../../utils/currencyCode';
+import CurrencyCode from 'Utils/CurrencyCode';
 
 import {
   Container,
@@ -115,7 +115,7 @@ class CreateWallet extends Component {
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showCurrencyModel}>
                       <Avatar>
-                        <TypoGraphy>{currencyCode[props.values.currency].unicode}</TypoGraphy>
+                        <TypoGraphy>{CurrencyCode[props.values.currency].unicode}</TypoGraphy>
                       </Avatar>
                     </TouchableHighlight>
                   </LeftIcon>

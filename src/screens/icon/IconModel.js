@@ -5,11 +5,11 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-import TypoGraphy from '../../components/TypoGraphy';
-import Avatar from '../../components/Avatar';
-import Icon from '../../components/Icon';
+import TypoGraphy from 'Components/TypoGraphy';
+import Avatar from 'Components/Avatar';
+import Icon from 'Components/Icon';
 
-import IconList from './IconList';
+import IconList from 'Utils/IconList';
 
 import {
   Container,

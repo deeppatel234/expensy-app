@@ -8,17 +8,6 @@ import models from '../../sql/models';
 
 
 class HomePage extends Component {
-  componentDidMount() {
-    const { categories, wallets } = this.props;
-    models.get('expense').readAll().then((expenses) => {
-      const pop = expenses.map(expense => {
-        // expense.category = categories[expense.category];
-        // expense.wallet = wallets[expense.wallet];
-        return expense;
-      });
-    });
-  }
-
   render() {
     const {
       user,

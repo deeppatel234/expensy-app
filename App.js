@@ -57,13 +57,11 @@ class App extends Component {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <NativeRouter>
-            <View>
-              <Switch>
-                <Route path="/signup" component={SignUp} />
-                <Route path="/login" component={Login} />
-                <PrivateRoute path="/" exact component={Main} />
-              </Switch>
-            </View>
+            <Switch>
+              <Route path="/signup" component={SignUp} />
+              <Route path="/login" component={Login} />
+              <PrivateRoute path="/" exact component={Main} />
+            </Switch>
           </NativeRouter>
         </ThemeProvider>
       </Provider>

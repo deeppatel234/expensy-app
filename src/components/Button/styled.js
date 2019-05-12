@@ -4,9 +4,13 @@ import styled, { css } from 'styled-components';
 export const ButtonElement = styled.TouchableOpacity`
   background: ${props => props.theme.white};
   border: 1px solid ${props => props.theme.light};
-  border-radius: 5px;
-  padding: 10px;
+  padding: 10px 20px;
   align-items: center;
+  align-self: flex-start;
+
+  ${props => props.rounded && css`
+    border-radius: 30px;
+  `}
 
   ${props => props.appearance === 'primary' && css`
     background: ${props.theme.primary};

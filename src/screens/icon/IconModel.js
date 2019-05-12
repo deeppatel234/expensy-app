@@ -8,6 +8,7 @@ import {
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
+import Header from 'Components/Header';
 
 import IconList from 'Utils/IconList';
 
@@ -27,7 +28,7 @@ const IconModel = ({ visible, onSelect }) => (
   >
     <Container>
       <Heading>
-        <TypoGraphy type="heading" appearance="primary">Icons</TypoGraphy>
+        <Header text="Icons" />
       </Heading>
       <Content>
         <Wrapper>

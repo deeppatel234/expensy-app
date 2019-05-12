@@ -5,6 +5,7 @@ import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
+import Header from 'Components/Header';
 
 import IconList from 'Utils/IconList';
 import CurrencyCode from 'Utils/CurrencyCode';
@@ -14,6 +15,7 @@ import {
   Heading,
   Content,
   Footer,
+  FooterButton,
   ListWrapper,
   ListItem,
   ListDetails,
@@ -22,7 +24,7 @@ import {
 const ViewWallet = ({ wallets }) => (
   <Container>
     <Heading>
-      <TypoGraphy type="heading" appearance="primary">Wallets</TypoGraphy>
+      <Header text="Wallets" />
     </Heading>
     <Content>
       <ListWrapper>
@@ -42,7 +44,9 @@ const ViewWallet = ({ wallets }) => (
       </ListWrapper>
     </Content>
     <Footer>
-      <Link to='/create-wallet' text="Add Wallet" appearance="primary" />
+      <FooterButton>
+        <Link to='/create-wallet' text="Add Wallet" appearance="primary" rounded />
+      </FooterButton>
     </Footer>
   </Container>
 );

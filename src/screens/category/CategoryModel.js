@@ -9,6 +9,7 @@ import {
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
+import Header from 'Components/Header';
 
 import IconList from '../../utils/IconList';
 
@@ -29,7 +30,7 @@ const CategoryModel = ({ visible, onSelect, categories }) => (
   >
     <Container>
       <Heading>
-        <TypoGraphy type="heading" appearance="primary">Categories</TypoGraphy>
+        <Header text="Categories" />
       </Heading>
       <Content>
         <ListWrapper>

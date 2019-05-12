@@ -6,7 +6,7 @@ import { TouchableHighlight } from "react-native";
 import { Formik } from "formik";
 
 import Redux from "../../redux/ReduxRegistry";
-import TypoGraphy from "Components/TypoGraphy";
+import Header from 'Components/Header';
 import Button from "Components/Button";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
@@ -20,6 +20,7 @@ import {
   Heading,
   Content,
   Footer,
+  FooterButton,
   IconInputWrapper,
   LeftIcon,
   RightInput
@@ -58,9 +59,7 @@ class CreateCategory extends Component {
     return (
       <Container>
         <Heading>
-          <TypoGraphy type="heading" appearance="primary">
-            Add Category
-          </TypoGraphy>
+          <Header text="Add Category" />
         </Heading>
         <Formik
           initialValues={{ icon: "PLACEHOLDER" }}
@@ -95,11 +94,14 @@ class CreateCategory extends Component {
                 />
               </Content>
               <Footer>
-                <Button
-                  onPress={props.handleSubmit}
-                  text="Add"
-                  appearance="primary"
-                />
+                <FooterButton>
+                  <Button
+                    rounded
+                    onPress={props.handleSubmit}
+                    text="Add"
+                    appearance="primary"
+                  />
+                </FooterButton>
               </Footer>
             </React.Fragment>
           )}

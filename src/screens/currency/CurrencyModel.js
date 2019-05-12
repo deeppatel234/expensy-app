@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import TypoGraphy from 'Components/TypoGraphy';
+import Header from 'Components/Header';
 
 import CurrencyCode from 'Utils/CurrencyCode';
 
@@ -26,7 +27,7 @@ const CurrencyModel = ({ visible, onSelect }) => (
   >
     <Container>
       <Heading>
-        <TypoGraphy type="heading" appearance="primary">Currency</TypoGraphy>
+        <Header text="Currency" />
       </Heading>
       <Content>
         <ListWrapper>

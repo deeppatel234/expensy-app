@@ -6,6 +6,7 @@ import { Modal, TouchableHighlight } from 'react-native';
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
+import Header from 'Components/Header';
 
 import IconList from 'Utils/IconList';
 import CurrencyCode from 'Utils/CurrencyCode';
@@ -28,7 +29,7 @@ const WalletModel = ({ visible, wallets, onSelect }) => (
   >
     <Container>
       <Heading>
-        <TypoGraphy type="heading" appearance="primary">Wallets</TypoGraphy>
+        <Header text="Wallets" />
       </Heading>
       <Content>
         <ListWrapper>

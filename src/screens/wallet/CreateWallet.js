@@ -12,6 +12,7 @@ import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
 import DropDown from "Components/DropDown";
+import Header from 'Components/Header';
 
 import IconModel from "../icon/IconModel";
 import IconList from 'Utils/IconList';
@@ -24,6 +25,7 @@ import {
   Heading,
   Content,
   Footer,
+  FooterButton,
   IconInputWrapper,
   LeftIcon,
   RightInput
@@ -75,9 +77,7 @@ class CreateWallet extends Component {
     return (
       <Container>
         <Heading>
-          <TypoGraphy type="heading" appearance="primary">
-            Add Wallet
-          </TypoGraphy>
+          <Header text="Add Wallet" />
         </Heading>
         <Formik
           initialValues={{ icon: "PLACEHOLDER", currency: "INDIAN_RUPEE", type: "bank", balance: "0" }}
@@ -139,11 +139,14 @@ class CreateWallet extends Component {
                 />
               </Content>
               <Footer>
-                <Button
-                  onPress={props.handleSubmit}
-                  text="Add"
-                  appearance="primary"
-                />
+                <FooterButton>
+                  <Button
+                    rounded
+                    onPress={props.handleSubmit}
+                    text="Add"
+                    appearance="primary"
+                  />
+                </FooterButton>
               </Footer>
             </React.Fragment>
           )}

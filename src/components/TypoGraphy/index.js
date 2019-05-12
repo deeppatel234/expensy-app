@@ -13,15 +13,15 @@ const FONT_FAMILY = {
 export const TYPO_STYLE = StyleSheet.create({
   heading: {
     fontFamily: FONT_FAMILY.SEMI_BOLD,
-    fontSize: 40,
+    fontSize: 32,
   },
   default: {
     fontFamily: FONT_FAMILY.MEDIUM,
-    fontSize: 18,
+    fontSize: 14,
   },
   small: {
     fontFamily: FONT_FAMILY.REGULAR,
-    fontSize: 14,
+    fontSize: 12,
   },
 });
 

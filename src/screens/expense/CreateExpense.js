@@ -16,6 +16,7 @@ import Button from "Components/Button";
 import Radio from "Components/RadioButton";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
+import Header from 'Components/Header';
 
 import IconList from 'Utils/IconList';
 import CurrencyCode from "Utils/CurrencyCode";
@@ -25,6 +26,7 @@ import {
   Heading,
   Content,
   Footer,
+  FooterButton,
   IconInputWrapper,
   LeftIcon,
   RightInput,
@@ -69,12 +71,13 @@ class CreateExpense extends Component {
   }
 
   onSubmitForm(values) {
+    const { history } = this.props;
     values.amount = parseFloat(values.amount);
     models
       .get("expense")
       .create(values, true)
       .then(dbRes => {
-        console.tron.log(dbRes);
+        history.goBack();
       });
   }
 
@@ -102,9 +105,7 @@ class CreateExpense extends Component {
     return (
       <Container>
         <Heading>
-          <TypoGraphy type="heading" appearance="primary">
-            Add Transaction
-          </TypoGraphy>
+          <Header text="Add Transaction" />
         </Heading>
         <Formik
           initialValues={{
@@ -228,11 +229,14 @@ class CreateExpense extends Component {
                 />
               </Content>
               <Footer>
-                <Button
-                  onPress={props.handleSubmit}
-                  text="Submit"
-                  appearance="primary"
-                />
+                <FooterButton>
+                  <Button
+                    rounded
+                    onPress={props.handleSubmit}
+                    text="Save"
+                    appearance="primary"
+                  />
+                </FooterButton>
               </Footer>
             </React.Fragment>
           )}

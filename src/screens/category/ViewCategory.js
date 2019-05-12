@@ -6,7 +6,7 @@ import Redux from "../../redux/ReduxRegistry";
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
-
+import Header from 'Components/Header';
 import Link from 'Components/Link';
 
 import IconList from 'Utils/IconList';
@@ -16,6 +16,7 @@ import {
   Heading,
   Content,
   Footer,
+  FooterButton,
   ListWrapper,
   ListItem,
   ListText,
@@ -24,7 +25,7 @@ import {
 const ViewCategory = ({ categories }) => (
   <Container>
     <Heading>
-      <TypoGraphy type="heading" appearance="primary">Categories</TypoGraphy>
+      <Header text="Categories" />
     </Heading>
     <Content>
       <ListWrapper>
@@ -41,7 +42,9 @@ const ViewCategory = ({ categories }) => (
       </ListWrapper>
     </Content>
     <Footer>
-      <Link to='/create-category' text="Add Category" appearance="primary" />
+      <FooterButton>
+        <Link to='/create-category' text="Add Category" appearance="primary" rounded />
+      </FooterButton>
     </Footer>
   </Container>
 );

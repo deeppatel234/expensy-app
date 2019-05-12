@@ -4,12 +4,15 @@ export const WidgetWrapper = styled.View`
   border-color: ${props => props.theme.light};
   border-width: 1px;
   padding: 10px;
+  margin: 5px;
 `;
 
 export const Details = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 `;
 
 export const Line = styled.View`
@@ -20,4 +23,14 @@ export const Line = styled.View`
 
 export const WidgetTitle = styled.View`
   margin-bottom: 10px;
+`;
+
+export const LeftDetails = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const IconWrapper = styled.View`
+  margin-right: 10px;
 `;

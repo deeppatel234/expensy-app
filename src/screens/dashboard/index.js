@@ -14,6 +14,7 @@ import {
 } from "Src/globalStyle";
 
 import TotalAmount from "./widgets/TotalAmount";
+import CategoryWise from "./widgets/CategoryWise";
 
 class Dashboard extends Component {
   render() {
@@ -26,6 +27,8 @@ class Dashboard extends Component {
         </Heading>
         <Content>
           <TotalAmount />
+          <CategoryWise type="expense" />
+          <CategoryWise type="income" />
         </Content>
         <Footer>
           <FooterButton>

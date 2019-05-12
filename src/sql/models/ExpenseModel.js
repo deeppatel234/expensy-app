@@ -42,6 +42,13 @@ class ExpenseModel extends BasicModel {
     }
     return amounts;
   }
+
+  async getAmountByCategory(type) {
+    let localRecords = await this.db.executeSql(
+      `SELECT category, SUM(amount) as total from ${this.tableName()} WHERE type="${type}" GROUP BY category`
+    );
+    return this.getRowData(localRecords);
+  }
 }
 
 export default ExpenseModel;

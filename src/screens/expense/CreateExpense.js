@@ -21,6 +21,8 @@ import Header from 'Components/Header';
 import IconList from 'Utils/IconList';
 import CurrencyCode from "Utils/CurrencyCode";
 
+import { EXPENSE_TYPES } from 'Models/ExpenseModel';
+
 import {
   Container,
   Heading,
@@ -120,8 +122,8 @@ class CreateExpense extends Component {
               <Content>
                 <FormSpace>
                   <Radio.Group selectedValue={props.values.type} onChange={props.handleChange("type")}>
-                    <Radio.Button value="expense" text="Expense" style={{ flexGrow: 1 }} />
-                    <Radio.Button value="income" text="Incomes" style={{ flexGrow: 1 }} />
+                    <Radio.Button value={EXPENSE_TYPES.EXPENSE} text="Expense" style={{ flexGrow: 1 }} />
+                    <Radio.Button value={EXPENSE_TYPES.INCOME} text="Incomes" style={{ flexGrow: 1 }} />
                   </Radio.Group>
                 </FormSpace>
                 <TouchableHighlight onPress={this.showWalletModel}>

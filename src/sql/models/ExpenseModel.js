@@ -3,6 +3,11 @@ import _keyBy from 'lodash/keyBy';
 
 import BasicModel from '../BasicModel';
 
+export const EXPENSE_TYPES = {
+  INCOME: 'income',
+  EXPENSE: 'expense',
+};
+
 class ExpenseModel extends BasicModel {
   tableName() {
     return 'expense';
@@ -22,6 +27,20 @@ class ExpenseModel extends BasicModel {
 
   createSync() {
     return Promise.resolve();
+  }
+
+  async getTotalAmount() {
+    const amounts = {};
+
+    const types = Object.values(EXPENSE_TYPES);
+    for(let i = 0 ; i < types.length; i++) {
+      let localRecords = await this.db.executeSql(
+        `SELECT SUM(amount) as total from ${this.tableName()} WHERE type="${types[i]}"`
+      );
+      let records = this.getRowData(localRecords);
+      amounts[types[i]] = (records && records.length) ? records[0].total : 0;
+    }
+    return amounts;
   }
 }
 

@@ -15,6 +15,10 @@ export const TYPO_STYLE = StyleSheet.create({
     fontFamily: FONT_FAMILY.SEMI_BOLD,
     fontSize: 32,
   },
+  title: {
+    fontFamily: FONT_FAMILY.BOLD,
+    fontSize: 16,
+  },
   default: {
     fontFamily: FONT_FAMILY.MEDIUM,
     fontSize: 14,

@@ -31,6 +31,15 @@ export const LeftDetails = styled.View`
   align-items: center;
 `;
 
+export const RightDetails = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const IconWrapper = styled.View`
-  margin-right: 10px;
+  margin-${props => props.marginPosition}: 10px;
+`;
+
+export const SubDetails = styled.View`
 `;

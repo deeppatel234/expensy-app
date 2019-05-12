@@ -49,6 +49,13 @@ class ExpenseModel extends BasicModel {
     );
     return this.getRowData(localRecords);
   }
+
+  async getTransactionList(limit) {
+    let localRecords = await this.db.executeSql(
+      `SELECT * FROM ( SELECT * FROM ${this.tableName()} ORDER BY date(dateTime) DESC LIMIT ${limit}) ORDER BY date(dateTime) ASC;`
+    );
+    return this.getRowData(localRecords);
+  }
 }
 
 export default ExpenseModel;

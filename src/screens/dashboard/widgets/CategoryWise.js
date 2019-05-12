@@ -33,7 +33,6 @@ class CategoryWise extends Component {
     Models.get("expense")
       .getAmountByCategory(type)
       .then(amounts => {
-        console.tron.log(amounts);
         this.setState({ amounts, isLoading: false });
       })
       .catch(error => {
@@ -59,7 +58,7 @@ class CategoryWise extends Component {
             {amounts.map(amount => (
               <Details key={amount.category}>
                 <LeftDetails>
-                  <IconWrapper>
+                  <IconWrapper marginPosition="right">
                     <Avatar>
                       <Icon
                         type={IconList[categories[amount.category].icon].type}

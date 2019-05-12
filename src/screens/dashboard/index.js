@@ -15,6 +15,7 @@ import {
 
 import TotalAmount from "./widgets/TotalAmount";
 import CategoryWise from "./widgets/CategoryWise";
+import TransactionList from "./widgets/TransactionList";
 
 class Dashboard extends Component {
   render() {
@@ -27,6 +28,7 @@ class Dashboard extends Component {
         </Heading>
         <Content>
           <TotalAmount />
+          <TransactionList />
           <CategoryWise type="expense" />
           <CategoryWise type="income" />
         </Content>

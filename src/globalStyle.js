@@ -15,7 +15,7 @@ export const Heading = styled.View`
 
 export const Content = styled.ScrollView`
   flex:1;
-  padding: 10px 20px;
+  padding: 0 20px;
 `;
 
 export const Footer = styled.View`

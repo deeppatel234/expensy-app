@@ -25,6 +25,11 @@ import {
 
 const MENU = [
   {
+    url: "/",
+    icon: { type: "AntDesign", name: "dashboard" },
+    text: "Dashboard"
+  },
+  {
     url: "/view-wallet",
     icon: { type: "AntDesign", name: "wallet" },
     text: "Wallets"

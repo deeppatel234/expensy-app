@@ -5,7 +5,6 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
 import Header from 'Components/Header';

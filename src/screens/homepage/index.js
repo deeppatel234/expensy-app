@@ -1,34 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Text } from 'react-native';
-import { Link } from 'react-router-native';
-
 import Redux from "Redux/ReduxRegistry";
-import Button from 'Components/Button';
+import Header from 'Components/Header';
 
-import { Container } from '../../../globalStyle';
+import { Container, Heading, Content } from '../../../globalStyle';
 
 class HomePage extends Component {
   render() {
     const {
       user,
-      openMenuDrawer,
     } = this.props;
 
     return (
       <Container>
-        <Button
-          onPress={openMenuDrawer}
-          text="Open"
-          appearance="primary"
-        />
-        <Text>Hello {user.firstname} {user.lastname}</Text>
-        <Link to='/create-category'><Text>Create Category</Text></Link>
-        <Link to='/view-category'><Text>View Category</Text></Link>
-        <Link to='/create-wallet'><Text>Create Wallet</Text></Link>
-        <Link to='/view-wallet'><Text>View Wallet</Text></Link>
-        <Link to='/create-expense'><Text>Create Expense</Text></Link>
+        <Heading>
+          <Header text="Dashboard" />
+        </Heading>
+        <Content>
+
+        </Content>
       </Container>
     );
   }
@@ -43,10 +34,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    openMenuDrawer: () => dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(true)),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps)(HomePage);

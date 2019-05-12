@@ -70,7 +70,7 @@ class CategoryWise extends Component {
                   </IconWrapper>
                   <TypoGraphy>{categories[amount.category].name}</TypoGraphy>
                 </LeftDetails>
-                <TypoGraphy>{amount.total}</TypoGraphy>
+                <TypoGraphy>{amount.total.toFixed(2)}</TypoGraphy>
               </Details>
             ))}
           </React.Fragment>

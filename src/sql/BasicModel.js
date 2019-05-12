@@ -207,19 +207,18 @@ class BasicModel {
       data: { records: localRecords, syncTime: time },
     });
 
+
+    if(!_isEmpty(syncResponse.records)) {
+      // TODO: delete record
+      await this.replaceOrCreateMulti(syncResponse.records, { sync: '1' });
+
+      if (updateStore) {
+        const updatedRecord = await this.readAll();
+        redux.get(this.tableName()) && redux.get(this.tableName()).syncComplete(updatedRecord);
+      }
+    }
+
     syncTime[this.tableName()] = syncResponse.syncTime;
-
-    if(_isEmpty(syncResponse.records)) {
-      return true;
-    }
-
-    // TODO: delete record
-    await this.replaceOrCreateMulti(syncResponse.records, { sync: '1' });
-
-    if (updateStore) {
-      const updatedRecord = await this.readAll();
-      redux.get(this.tableName()) && redux.get(this.tableName()).syncComplete(updatedRecord);
-    }
 
     return true;
   }

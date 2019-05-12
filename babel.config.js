@@ -4,7 +4,7 @@ module.exports = {
     ["module-resolver", {
       "root": ["./"],
       "alias": {
-        "src": "./src",
+        "Src": "./src",
         "Components": "./src/components",
         "Utils": "./src/utils",
         "Redux": "./src/redux",

@@ -19,7 +19,6 @@ import Menu from "./screens/menu";
 import Redux from "Redux/ReduxRegistry";
 import models from "./sql/models";
 
-import { drawerStyles } from '../globalStyle';
 
 class Main extends Component {
   constructor(props) {
@@ -64,18 +63,18 @@ class Main extends Component {
     }
 
     return (
-      <Drawer
-        tapToClose
-        open={isDrawerOpen}
-        type="static"
-        content={<Menu />}
-        openDrawerOffset={100}
-        styles={drawerStyles}
-        tweenHandler={Drawer.tweenPresets.parallax}
-        onClose={closeMenuDrawer}
-      >
-        <NativeRouter>
-          <BackButton>
+      <NativeRouter>
+        <BackButton>
+          <Drawer
+            tapToClose
+            open={isDrawerOpen}
+            type="static"
+            content={<Menu />}
+            openDrawerOffset={100}
+            tweenDuration={150}
+            tweenHandler={Drawer.tweenPresets.parallax}
+            onClose={closeMenuDrawer}
+          >
             <Switch>
               <Route path="/view-category" component={ViewCategory} />
               <Route path="/create-category" component={CreateCategory} />
@@ -84,9 +83,9 @@ class Main extends Component {
               <Route path="/create-expense" component={CreateExpense} />
               <Route path="/" exact component={HomePage} />
             </Switch>
-          </BackButton>
-        </NativeRouter>
-      </Drawer>
+          </Drawer>
+        </BackButton>
+      </NativeRouter>
     );
   }
 }

@@ -1,10 +1,6 @@
 import styled, { css } from 'styled-components';
 import TypoGraphy from 'Components/TypoGraphy';
 
-export const drawerStyles = {
-  drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
-};
-
 export const Container = styled.View`
   display: flex;
   flex: 1;

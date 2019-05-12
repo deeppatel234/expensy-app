@@ -1,5 +1,5 @@
-import LocalStorage from '../base/LocalStorage';
-import ModelRegistry from './models';
+import LocalStorage from 'Base/LocalStorage';
+import ModelRegistry from 'Models';
 
 class DBConfig {
   constructor() {

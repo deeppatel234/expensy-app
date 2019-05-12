@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { TouchableHighlight } from "react-native";
-
 import { Formik } from "formik";
 
-import Redux from "../../redux/ReduxRegistry";
+import Redux from "Redux/ReduxRegistry";
 import Header from 'Components/Header';
 import Button from "Components/Button";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
 
-import IconModel from "../icon/IconModel";
+import IconModel from "Screens/icon/IconModel";
 import IconList from 'Utils/IconList';
 
 import {
@@ -24,7 +22,7 @@ import {
   IconInputWrapper,
   LeftIcon,
   RightInput
-} from "../../../globalStyle";
+} from "Src/globalStyle";
 
 class CreateCategory extends Component {
   constructor(props) {

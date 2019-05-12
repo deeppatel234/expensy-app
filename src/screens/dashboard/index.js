@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Redux from "Redux/ReduxRegistry";
 import Header from 'Components/Header';
 
-import { Container, Heading, Content } from '../../../globalStyle';
+import { Container, Heading, Content } from 'Src/globalStyle';
 
 class Dashboard extends Component {
   render() {

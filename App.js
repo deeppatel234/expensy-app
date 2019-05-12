@@ -8,20 +8,20 @@ import {
 
 import { ThemeProvider } from 'styled-components';
 
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 
 import { Provider } from 'react-redux';
-import store from './src/redux/store';
+import store from 'Redux/store';
 
-import PrivateRoute from './src/base/PrivateRoute';
-import SQLLite from './src/sql/sqllite';
-import DBConfig from './src/sql/DBConfig';
+import PrivateRoute from 'Base/PrivateRoute';
+import SQLLite from 'Src/sql/sqllite';
+import DBConfig from 'Src/sql/DBConfig';
 
-import Login from './src/screens/login';
-import SignUp from './src/screens/signup';
-import Main from './src/Main';
+import Login from 'Screens/login';
+import SignUp from 'Screens/signup';
+import Main from 'Src/Main';
 
-import theme from './src/theme';
+import theme from 'Src/theme';
 
 class App extends Component {
   constructor(props) {

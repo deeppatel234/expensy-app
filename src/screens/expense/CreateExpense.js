@@ -6,8 +6,8 @@ import { TouchableHighlight } from "react-native";
 
 import formatDate from "date-fns/format";
 
-import WalletModel from "../wallet/WalletModel";
-import CategoryModel from "../category/CategoryModel";
+import WalletModel from "Screens/wallet/WalletModel";
+import CategoryModel from "Screens/category/CategoryModel";
 
 import DatePicker from "Components/DatePicker";
 import TextInput from "Components/TextInput";
@@ -32,7 +32,7 @@ import {
   RightInput,
   FormSpace,
   BorderBottom
-} from "../../../globalStyle";
+} from "Src/globalStyle";
 
 import models from "../../sql/models";
 

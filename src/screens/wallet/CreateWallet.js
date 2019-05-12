@@ -5,7 +5,7 @@ import { TouchableHighlight } from "react-native";
 
 import { Formik } from "formik";
 
-import Redux from "../../redux/ReduxRegistry";
+import Redux from "Redux/ReduxRegistry";
 import TypoGraphy from "Components/TypoGraphy";
 import Button from "Components/Button";
 import TextInput from "Components/TextInput";
@@ -14,10 +14,10 @@ import Icon from "Components/Icon";
 import DropDown from "Components/DropDown";
 import Header from 'Components/Header';
 
-import IconModel from "../icon/IconModel";
+import IconModel from "Screens/icon/IconModel";
 import IconList from 'Utils/IconList';
 
-import CurrencyModel from "../currency/CurrencyModel";
+import CurrencyModel from "Screens/currency/CurrencyModel";
 import CurrencyCode from 'Utils/CurrencyCode';
 
 import {
@@ -29,7 +29,7 @@ import {
   IconInputWrapper,
   LeftIcon,
   RightInput
-} from "../../../globalStyle";
+} from "Src/globalStyle";
 
 class CreateWallet extends Component {
   constructor(props) {

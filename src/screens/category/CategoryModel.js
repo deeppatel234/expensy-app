@@ -11,7 +11,7 @@ import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
 import Header from 'Components/Header';
 
-import IconList from '../../utils/IconList';
+import IconList from 'Utils/IconList';
 
 import {
   Container,
@@ -20,7 +20,7 @@ import {
   ListWrapper,
   ListItem,
   ListText,
-} from '../../../globalStyle';
+} from 'Src/globalStyle';
 
 const CategoryModel = ({ visible, onSelect, categories }) => (
   <Modal

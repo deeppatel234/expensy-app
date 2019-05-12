@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Redux from "../../redux/ReduxRegistry";
+import Redux from "Redux/ReduxRegistry";
 
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
@@ -20,7 +20,7 @@ import {
   ListWrapper,
   ListItem,
   ListText,
-} from '../../../globalStyle';
+} from 'Src/globalStyle';
 
 const ViewCategory = ({ categories }) => (
   <Container>

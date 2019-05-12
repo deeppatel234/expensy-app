@@ -19,7 +19,7 @@ import {
   ListWrapper,
   ListItem,
   ListDetails,
-} from '../../../globalStyle';
+} from 'Src/globalStyle';
 
 const ViewWallet = ({ wallets }) => (
   <Container>

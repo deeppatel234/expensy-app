@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import { Redirect } from 'react-router-native';
 
-import Request from '../../base/Request';
-import LocalStorage from '../../base/LocalStorage';
-import MemoryStorage from '../../base/MemoryStorage';
+import Request from 'Base/Request';
+import LocalStorage from 'Base/LocalStorage';
+import MemoryStorage from 'Base/MemoryStorage';
 
 class Login extends Component {
   constructor(props) {

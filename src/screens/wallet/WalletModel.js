@@ -18,7 +18,7 @@ import {
   ListWrapper,
   ListItem,
   ListDetails,
-} from '../../../globalStyle';
+} from 'Src/globalStyle';
 
 
 const WalletModel = ({ visible, wallets, onSelect }) => (

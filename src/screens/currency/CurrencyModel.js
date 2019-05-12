@@ -17,7 +17,7 @@ import {
   ListWrapper,
   ListItem,
   ListDetails,
-} from '../../../globalStyle';
+} from 'Src/globalStyle';
 
 const CurrencyModel = ({ visible, onSelect }) => (
   <Modal

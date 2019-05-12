@@ -3,11 +3,11 @@ import _pick from 'lodash/pick';
 import _pickBy from 'lodash/pickBy';
 import _isEmpty from 'lodash/isEmpty';
 import _omit from 'lodash/omit';
-import SQLLite from './sqllite';
+import SQLLite from 'Src/sql/sqllite';
 
-import Request from '../base/Request';
-import store from '../redux/store';
-import redux from '../redux/ReduxRegistry';
+import Request from 'Base/Request';
+import store from 'Redux/store';
+import redux from 'Redux/ReduxRegistry';
 
 
 class BasicModel {

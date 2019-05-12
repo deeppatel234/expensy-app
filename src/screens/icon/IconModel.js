@@ -15,7 +15,7 @@ import {
   Container,
   Heading,
   Content,
-} from '../../../globalStyle';
+} from 'Src/globalStyle';
 
 import { IconWrapper, Wrapper } from './styled';
 

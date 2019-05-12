@@ -5,19 +5,19 @@ import Drawer from 'react-native-drawer';
 
 import { Text } from "react-native";
 
-import Dashboard from "./screens/dashboard";
-import CreateCategory from "./screens/category/CreateCategory";
-import ViewCategory from "./screens/category/ViewCategory";
+import Dashboard from "Screens/dashboard";
+import CreateCategory from "Screens/category/CreateCategory";
+import ViewCategory from "Screens/category/ViewCategory";
 
-import CreateWallet from "./screens/wallet/CreateWallet";
-import ViewWallet from "./screens/wallet/ViewWallet";
+import CreateWallet from "Screens/wallet/CreateWallet";
+import ViewWallet from "Screens/wallet/ViewWallet";
 
-import CreateExpense from "./screens/expense/CreateExpense";
+import CreateExpense from "Screens/expense/CreateExpense";
 
-import Menu from "./screens/menu";
+import Menu from "Screens/menu";
 
 import Redux from "Redux/ReduxRegistry";
-import models from "./sql/models";
+import models from "Src/sql/models";
 
 
 class Main extends Component {

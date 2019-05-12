@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { NativeRouter, Route, Switch, BackButton } from "react-router-native";
 import { connect } from "react-redux";
+import Drawer from 'react-native-drawer';
 
-import { View, Text } from "react-native";
+import { Text } from "react-native";
 
 import HomePage from "./screens/homepage";
 import CreateCategory from "./screens/category/CreateCategory";
@@ -13,8 +14,12 @@ import ViewWallet from "./screens/wallet/ViewWallet";
 
 import CreateExpense from "./screens/expense/CreateExpense";
 
-import Redux from "./redux/ReduxRegistry";
+import Menu from "./screens/menu";
+
+import Redux from "Redux/ReduxRegistry";
 import models from "./sql/models";
+
+import { drawerStyles } from '../globalStyle';
 
 class Main extends Component {
   constructor(props) {
@@ -43,7 +48,7 @@ class Main extends Component {
   }
 
   render() {
-    const { isLoading, isError } = this.props;
+    const { isLoading, isError, isDrawerOpen, closeMenuDrawer } = this.props;
     const { isSync } = this.state;
 
     if (isSync) {
@@ -59,9 +64,18 @@ class Main extends Component {
     }
 
     return (
-      <NativeRouter>
-        <BackButton>
-          <View>
+      <Drawer
+        tapToClose
+        open={isDrawerOpen}
+        type="static"
+        content={<Menu />}
+        openDrawerOffset={100}
+        styles={drawerStyles}
+        tweenHandler={Drawer.tweenPresets.parallax}
+        onClose={closeMenuDrawer}
+      >
+        <NativeRouter>
+          <BackButton>
             <Switch>
               <Route path="/view-category" component={ViewCategory} />
               <Route path="/create-category" component={CreateCategory} />
@@ -70,9 +84,9 @@ class Main extends Component {
               <Route path="/create-expense" component={CreateExpense} />
               <Route path="/" exact component={HomePage} />
             </Switch>
-          </View>
-        </BackButton>
-      </NativeRouter>
+          </BackButton>
+        </NativeRouter>
+      </Drawer>
     );
   }
 }
@@ -87,7 +101,8 @@ const mapStateToProps = state => {
     isError:
       state.userLoadingStatus === "ERROR" ||
       state.categoriesLoadingStatus === "ERROR" ||
-      state.walletsLoadingStatus === "ERROR"
+      state.walletsLoadingStatus === "ERROR",
+    isDrawerOpen: state.setting.isDrawerOpen,
   };
 };
 
@@ -96,7 +111,8 @@ const mapDispatchToProps = dispatch => {
     fetchUser: () => dispatch(Redux.get("user", "fetch")()),
     fetchCategories: () => dispatch(Redux.get("category", "fetch")()),
     fetchWallets: () => dispatch(Redux.get("wallet", "fetch")()),
-    fetchNetwork: () => dispatch(Redux.get("network", "fetch")())
+    fetchNetwork: () => dispatch(Redux.get("network", "fetch")()),
+    closeMenuDrawer: () => dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(false)),
   };
 };
 

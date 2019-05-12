@@ -6,7 +6,8 @@ module.exports = {
       "alias": {
         "src": "./src",
         "Components": "./src/components",
-        "Utils": "./src/utils"
+        "Utils": "./src/utils",
+        "Redux": "./src/redux",
       }
     }]
   ]

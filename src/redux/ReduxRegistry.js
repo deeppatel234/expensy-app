@@ -5,7 +5,7 @@ import UserRedux from './UserRedux';
 import CategoryRedux from './CategoryRedux';
 import WalletRedux from './WalletRedux';
 import NetworkRedux from './NetworkRedux';
-
+import SettingRedux from './SettingRedux';
 
 class ReduxRegistry extends Registry {
   get(key, action) {
@@ -34,5 +34,6 @@ reduxRegistry.set('user', new UserRedux());
 reduxRegistry.set('category', new CategoryRedux());
 reduxRegistry.set('wallet', new WalletRedux());
 reduxRegistry.set('network', new NetworkRedux());
+reduxRegistry.set('setting', new SettingRedux());
 
 export default reduxRegistry;

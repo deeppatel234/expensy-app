@@ -1,16 +1,20 @@
 import styled, { css } from 'styled-components';
 import TypoGraphy from 'Components/TypoGraphy';
 
+export const drawerStyles = {
+  drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3},
+};
+
 export const Container = styled.View`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   background-color: white;
   width: 100%;
   height: 100%;
-  padding: 0 20px;
-  flex:1;
 `;
 
 export const Heading = styled.View`
-  margin: 20px 0;
 `;
 
 export const Content = styled.ScrollView`
@@ -18,7 +22,6 @@ export const Content = styled.ScrollView`
 `;
 
 export const Footer = styled.View`
-  margin: 20px 0;
 `;
 
 export const ListWrapper = styled.View`

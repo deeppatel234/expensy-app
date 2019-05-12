@@ -6,7 +6,7 @@ import Header from 'Components/Header';
 
 import { Container, Heading, Content } from '../../../globalStyle';
 
-class HomePage extends Component {
+class Dashboard extends Component {
   render() {
     const {
       user,
@@ -35,4 +35,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps)(HomePage);
+export default connect(mapStateToProps)(Dashboard);

@@ -5,7 +5,7 @@ import Drawer from 'react-native-drawer';
 
 import { Text } from "react-native";
 
-import HomePage from "./screens/homepage";
+import Dashboard from "./screens/dashboard";
 import CreateCategory from "./screens/category/CreateCategory";
 import ViewCategory from "./screens/category/ViewCategory";
 
@@ -81,7 +81,7 @@ class Main extends Component {
               <Route path="/view-wallet" component={ViewWallet} />
               <Route path="/create-wallet" component={CreateWallet} />
               <Route path="/create-expense" component={CreateExpense} />
-              <Route path="/" exact component={HomePage} />
+              <Route path="/" exact component={Dashboard} />
             </Switch>
           </Drawer>
         </BackButton>

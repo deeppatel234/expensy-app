@@ -11,6 +11,10 @@ const FONT_FAMILY = {
 };
 
 export const TYPO_STYLE = StyleSheet.create({
+  appLogo: {
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: 40,
+  },
   heading: {
     fontFamily: FONT_FAMILY.SEMI_BOLD,
     fontSize: 32,

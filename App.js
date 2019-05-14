@@ -8,8 +8,6 @@ import {
 
 import { ThemeProvider } from 'styled-components';
 
-import { Text } from 'react-native';
-
 import { Provider } from 'react-redux';
 import store from 'Redux/store';
 
@@ -20,6 +18,7 @@ import DBConfig from 'Src/sql/DBConfig';
 import Login from 'Screens/login';
 import SignUp from 'Screens/signup';
 import Main from 'Src/Main';
+import SplashLoading from "Screens/splash/SplashLoading";
 
 import theme from 'Src/theme';
 
@@ -45,24 +44,28 @@ class App extends Component {
   render() {
     const { isLoading, errorMessage } = this.state;
 
-    if (isLoading) {
-      return <Text>connecting to database...</Text>
-    }
-
-    if (errorMessage) {
-      return <Text>{errorMessage}</Text>
-    }
-
     return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <NativeRouter>
-            <Switch>
-              <Route path="/signup" component={SignUp} />
-              <Route path="/login" component={Login} />
-              <PrivateRoute path="/" exact component={Main} />
-            </Switch>
-          </NativeRouter>
+          <React.Fragment>
+            {
+              isLoading && <SplashLoading message="Connecting to database" />
+            }
+            {
+              errorMessage && <SplashLoading message={errorMessage} />
+            }
+            {
+              (!isLoading && !errorMessage) && (
+                <NativeRouter>
+                  <Switch>
+                    <Route path="/signup" component={SignUp} />
+                    <Route path="/login" component={Login} />
+                    <PrivateRoute path="/" exact component={Main} />
+                  </Switch>
+                </NativeRouter>
+              )
+            }
+          </React.Fragment>
         </ThemeProvider>
       </Provider>
     );

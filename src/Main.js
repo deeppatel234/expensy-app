@@ -3,8 +3,6 @@ import { NativeRouter, Route, Switch, BackButton } from "react-router-native";
 import { connect } from "react-redux";
 import Drawer from 'react-native-drawer';
 
-import { Text } from "react-native";
-
 import Dashboard from "Screens/dashboard";
 import CreateCategory from "Screens/category/CreateCategory";
 import ViewCategory from "Screens/category/ViewCategory";
@@ -13,6 +11,7 @@ import CreateWallet from "Screens/wallet/CreateWallet";
 import ViewWallet from "Screens/wallet/ViewWallet";
 
 import CreateExpense from "Screens/expense/CreateExpense";
+import SplashLoading from "Screens/splash/SplashLoading";
 
 import Menu from "Screens/menu";
 
@@ -51,15 +50,15 @@ class Main extends Component {
     const { isSync } = this.state;
 
     if (isSync) {
-      return <Text>Sync.....</Text>;
+      return <SplashLoading message="Syncing data" />;
     }
 
     if (isLoading) {
-      return <Text>fetching user or categories....</Text>;
+      return <SplashLoading message="Loading data" />;
     }
 
     if (isError) {
-      return <Text>Error fetch user or categories</Text>;
+      return <SplashLoading message="Error Fetching Data" />;
     }
 
     return (

@@ -1,9 +1,8 @@
 import React from 'react';
+import { withTheme } from 'styled-components';
 import { ActivityIndicator } from 'react-native';
 
-import theme from 'Src/theme';
-
-const Loader = ({ size, color }) => (
+const Loader = ({ size, color, theme }) => (
   <ActivityIndicator size={size} color={theme[color]} />
 );
 
@@ -12,4 +11,4 @@ Loader.defaultProps = {
   color: 'primary',
 };
 
-export default Loader;
+export default withTheme(Loader);

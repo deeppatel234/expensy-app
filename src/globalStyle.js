@@ -5,7 +5,7 @@ export const Container = styled.View`
   display: flex;
   flex: 1;
   flex-direction: column;
-  background-color: white;
+  background-color: ${props => props.theme.white};
   width: 100%;
   height: 100%;
 `;

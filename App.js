@@ -7,7 +7,7 @@ import store from 'Redux/store';
 import Start from 'Src/Start';
 import AppAuthentication from 'Base/AppAuthentication';
 
-import theme from 'Src/theme';
+import { light } from 'Src/theme';
 
 
 class App extends Component {
@@ -15,7 +15,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={light}>
           <AppAuthentication>
             <Start />
           </AppAuthentication>

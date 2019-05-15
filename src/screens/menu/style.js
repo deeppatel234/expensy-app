@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MenuContainer = styled.View`
-  background-color: white;
+  background-color: ${props => props.theme.white};;
   padding-right: 10px;
   width: 100%;
   height: 100%;

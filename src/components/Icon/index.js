@@ -1,4 +1,5 @@
 import React from 'react';
+import { withTheme } from 'styled-components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
@@ -30,11 +31,15 @@ const ICON_TYPE = {
   Feather,
 };
 
-const Icon = ({ type, ...props}) => {
+const Icon = ({ type, appearance, theme, ...props}) => {
   const IconComp = ICON_TYPE[type];
   return (
-    <IconComp size={25} {...props} />
+    <IconComp size={25} style={{ color: theme[appearance] }} {...props} />
   );
 };
 
-export default Icon;
+Icon.defaultProps = {
+  appearance: 'default',
+};
+
+export default withTheme(Icon);

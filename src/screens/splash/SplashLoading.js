@@ -17,8 +17,12 @@ const SplashLoading = ({ message }) => {
         <TypoGraphy type="appLogo" appearance="white">Expensy</TypoGraphy>
       </AppNameWrapper>
       <LoadingWrapper>
-        <Loader color="white" />
-        <TypoGraphy appearance="white">{message}</TypoGraphy>
+        { message && (
+          <React.Fragment>
+            <Loader color="white" />
+            <TypoGraphy appearance="white">{message}</TypoGraphy>
+          </React.Fragment>
+        )}
       </LoadingWrapper>
       <FooterWrapper>
         <TypoGraphy appearance="white">Your Personal expense manager</TypoGraphy>

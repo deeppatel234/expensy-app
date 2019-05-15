@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
@@ -10,19 +10,14 @@ import AppAuthentication from 'Base/AppAuthentication';
 import { light } from 'Src/theme';
 
 
-class App extends Component {
-  render() {
-
-    return (
-      <Provider store={store}>
-        <ThemeProvider theme={light}>
-          <AppAuthentication>
-            <Start />
-          </AppAuthentication>
-        </ThemeProvider>
-      </Provider>
-    );
-  }
-}
+const App = () => (
+  <Provider store={store}>
+    <ThemeProvider theme={light}>
+      <AppAuthentication>
+        <Start />
+      </AppAuthentication>
+    </ThemeProvider>
+  </Provider>
+);
 
 export default App;

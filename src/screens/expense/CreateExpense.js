@@ -23,6 +23,8 @@ import CurrencyCode from "Utils/CurrencyCode";
 
 import { EXPENSE_TYPES } from 'Models/ExpenseModel';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -134,6 +136,7 @@ class CreateExpense extends Component {
                           <Icon
                             type={this.getWalletIcon(props.values.wallet).type}
                             name={this.getWalletIcon(props.values.wallet).name}
+                            color={BLACK}
                           />
                         </Avatar>
                       </LeftIcon>
@@ -159,6 +162,7 @@ class CreateExpense extends Component {
                             name={
                               this.getCategoryIcon(props.values.category).name
                             }
+                            color={BLACK}
                           />
                         </Avatar>
                       </LeftIcon>
@@ -176,7 +180,7 @@ class CreateExpense extends Component {
                   <IconInputWrapper>
                     <LeftIcon>
                       <Avatar>
-                        <TypoGraphy>
+                        <TypoGraphy color={BLACK}>
                           {this.getCurrencyCode(props.values.wallet)}
                         </TypoGraphy>
                       </Avatar>
@@ -194,7 +198,7 @@ class CreateExpense extends Component {
                 <IconInputWrapper>
                   <LeftIcon>
                     <Avatar>
-                      <Icon type="SimpleLineIcons" name="note" size={18} />
+                      <Icon type="SimpleLineIcons" name="note" size={18} color={BLACK} />
                     </Avatar>
                   </LeftIcon>
                   <RightInput>
@@ -209,7 +213,7 @@ class CreateExpense extends Component {
                 <IconInputWrapper>
                   <LeftIcon>
                     <Avatar>
-                      <Icon type="Octicons" name="calendar" size={18} />
+                      <Icon type="Octicons" name="calendar" size={18} color={BLACK} />
                     </Avatar>
                   </LeftIcon>
                   <RightInput>

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_URL } from 'react-native-dotenv';
 
 import MemoryStorage from './MemoryStorage';
 
@@ -10,7 +9,7 @@ class Request {
      */
     this.apiRequest = axios.create({
       method: 'post',
-      baseURL: API_URL,
+      baseURL: 'http://192.168.0.105:5050/api/',
     });
     /**
      * get request for external call

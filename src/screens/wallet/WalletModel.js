@@ -11,6 +11,8 @@ import Header from 'Components/Header';
 import IconList from 'Utils/IconList';
 import CurrencyCode from 'Utils/CurrencyCode';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -38,7 +40,7 @@ const WalletModel = ({ visible, wallets, onSelect }) => (
               <TouchableHighlight key={wallet._id} onPress={() => onSelect(wallet)}>
                 <ListItem>
                   <Avatar>
-                    <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} />
+                    <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} color={BLACK} />
                   </Avatar>
                   <ListDetails>
                     <TypoGraphy>{wallet.name}</TypoGraphy>

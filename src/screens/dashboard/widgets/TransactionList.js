@@ -11,6 +11,8 @@ import Models from "Models";
 import IconList from "Utils/IconList";
 import { EXPENSE_TYPES } from 'Models/ExpenseModel';
 
+import { BLACK } from 'Src/theme';
+
 import {
   WidgetWrapper,
   Details,
@@ -64,6 +66,7 @@ class CategoryWise extends Component {
                       <Icon
                         type={IconList[categories[transaction.category].icon].type}
                         name={IconList[categories[transaction.category].icon].name}
+                        color={BLACK}
                         size={20}
                       />
                     </Avatar>
@@ -87,6 +90,7 @@ class CategoryWise extends Component {
                       <Icon
                         type={IconList[wallets[transaction.wallet].icon].type}
                         name={IconList[wallets[transaction.wallet].icon].name}
+                        color={BLACK}
                         size={20}
                       />
                     </Avatar>

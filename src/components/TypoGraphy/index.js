@@ -40,6 +40,7 @@ const TypoGraphy = ({ children , type, ...props}) => {
 TypoGraphy.defaultProps = {
   type: 'default',
   appearance: 'default',
+  color: false,
 };
 
 export default TypoGraphy;

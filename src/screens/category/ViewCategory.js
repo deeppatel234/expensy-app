@@ -11,6 +11,8 @@ import Link from 'Components/Link';
 
 import IconList from 'Utils/IconList';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -33,7 +35,7 @@ const ViewCategory = ({ categories }) => (
           Object.values(categories).map((category) => (
             <ListItem key={category._id}>
               <Avatar>
-                <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} />
+                <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} color={BLACK} />
               </Avatar>
               <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
             </ListItem>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Redux from "Redux/ReduxRegistry";
 import Header from "Components/Header";
 import Link from "Components/Link";
 

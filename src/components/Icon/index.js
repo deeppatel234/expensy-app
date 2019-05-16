@@ -31,15 +31,16 @@ const ICON_TYPE = {
   Feather,
 };
 
-const Icon = ({ type, appearance, theme, ...props}) => {
+const Icon = ({ type, appearance, theme, color, ...props}) => {
   const IconComp = ICON_TYPE[type];
   return (
-    <IconComp size={25} style={{ color: theme[appearance] }} {...props} />
+    <IconComp size={25} style={{ color: color || theme[appearance] }} {...props} />
   );
 };
 
 Icon.defaultProps = {
   appearance: 'default',
+  color: false,
 };
 
 export default withTheme(Icon);

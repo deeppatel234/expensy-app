@@ -26,7 +26,7 @@ class ReduxLoader extends Component {
       return children;
     }
 
-    return <SplashLoading message="Loading Redux State..." />;
+    return <SplashLoading />;
   }
 }
 

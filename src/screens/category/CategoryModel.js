@@ -13,6 +13,8 @@ import Header from 'Components/Header';
 
 import IconList from 'Utils/IconList';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -39,7 +41,7 @@ const CategoryModel = ({ visible, onSelect, categories }) => (
               <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
                 <ListItem>
                   <Avatar>
-                    <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} />
+                    <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} color={BLACK} />
                   </Avatar>
                   <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
                 </ListItem>

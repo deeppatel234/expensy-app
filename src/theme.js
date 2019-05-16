@@ -1,6 +1,10 @@
+export const PRIMARY_COLOR = '#448AFF';
+export const BLACK = 'black';
+export const WHITE = 'white';
+
 export const light = {
-  primary: '#448AFF',
-  white: '#ffffff',
+  primary: PRIMARY_COLOR,
+  white: WHITE,
   light: '#E5E5E5',
   muted: '#6c757d',
   dark: 'black',
@@ -10,12 +14,12 @@ export const light = {
 };
 
 export const dark = {
-  primary: 'white',
-  white: 'black',
-  light: 'white',
-  muted: 'white',
-  dark: 'white',
-  default: '#ffffff',
+  primary: WHITE,
+  white: BLACK,
+  light: WHITE,
+  muted: WHITE,
+  dark: WHITE,
+  default: WHITE,
   danger: '#dc3545',
   warning: '#ffc107',
 };

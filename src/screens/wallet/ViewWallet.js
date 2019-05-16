@@ -10,6 +10,8 @@ import Header from 'Components/Header';
 import IconList from 'Utils/IconList';
 import CurrencyCode from 'Utils/CurrencyCode';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -32,7 +34,7 @@ const ViewWallet = ({ wallets }) => (
           Object.values(wallets).map((wallet) => (
             <ListItem key={wallet._id}>
               <Avatar>
-                <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} />
+                <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} color={BLACK} />
               </Avatar>
               <ListDetails>
                 <TypoGraphy>{wallet.name}</TypoGraphy>

@@ -1,26 +1,28 @@
 import React from 'react';
 
 import { ThemeProvider } from 'styled-components';
-import { Provider } from 'react-redux';
-import store from 'Redux/store';
+import { connect } from 'react-redux';
 
-import Start from 'Src/Start';
 import AppAuthentication from 'Base/AppAuthentication';
-import ReduxLoader from 'Base/ReduxLoader';
+import Start from 'Src/Start';
 
-import { light } from 'Src/theme';
+import { light, dark } from 'Src/theme';
 
 
-const App = () => (
-  <Provider store={store}>
-    <ThemeProvider theme={light}>
-      <ReduxLoader models={['setting', 'network']}>
-        <AppAuthentication>
-          <Start />
-        </AppAuthentication>
-      </ReduxLoader>
-    </ThemeProvider>
-  </Provider>
+const App = ({ isLightTheme }) => (
+  <ThemeProvider theme={isLightTheme ? light : dark}>
+    <AppAuthentication>
+      <Start />
+    </AppAuthentication>
+  </ThemeProvider>
 );
 
-export default App;
+// Maps state from store to props
+const mapStateToProps = (state) => {
+  return {
+    isLightTheme: state.setting.isLightTheme,
+  };
+};
+
+export default connect(mapStateToProps, null)(App);
+

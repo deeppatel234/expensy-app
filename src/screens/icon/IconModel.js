@@ -11,6 +11,8 @@ import Header from 'Components/Header';
 
 import IconList from 'Utils/IconList';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -36,7 +38,7 @@ const IconModel = ({ visible, onSelect }) => (
               <TouchableHighlight key={icon} onPress={() => onSelect(icon)}>
                 <IconWrapper>
                   <Avatar>
-                    <Icon type={IconList[icon].type} name={IconList[icon].name} />
+                    <Icon type={IconList[icon].type} name={IconList[icon].name} color={BLACK} />
                   </Avatar>
                 </IconWrapper>
               </TouchableHighlight>

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { PRIMARY_COLOR } from 'Src/theme';
 
 export const Wrapper = styled.View`
-  background-color: ${props => props.theme.primary};
+  background-color: ${PRIMARY_COLOR};
   height: 100%;
   width: 100%;
 `;

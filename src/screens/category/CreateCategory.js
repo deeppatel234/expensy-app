@@ -13,6 +13,8 @@ import Icon from "Components/Icon";
 import IconModel from "Screens/icon/IconModel";
 import IconList from 'Utils/IconList';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -73,6 +75,7 @@ class CreateCategory extends Component {
                         <Icon
                           type={IconList[props.values.icon].type}
                           name={IconList[props.values.icon].name}
+                          color={BLACK}
                         />
                       </Avatar>
                     </TouchableHighlight>

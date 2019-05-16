@@ -20,6 +20,8 @@ import IconList from 'Utils/IconList';
 import CurrencyModel from "Screens/currency/CurrencyModel";
 import CurrencyCode from 'Utils/CurrencyCode';
 
+import { BLACK } from 'Src/theme';
+
 import {
   Container,
   Heading,
@@ -93,6 +95,7 @@ class CreateWallet extends Component {
                         <Icon
                           type={IconList[props.values.icon].type}
                           name={IconList[props.values.icon].name}
+                          color={BLACK}
                         />
                       </Avatar>
                     </TouchableHighlight>
@@ -115,7 +118,7 @@ class CreateWallet extends Component {
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showCurrencyModel}>
                       <Avatar>
-                        <TypoGraphy>{CurrencyCode[props.values.currency].unicode}</TypoGraphy>
+                        <TypoGraphy color={BLACK}>{CurrencyCode[props.values.currency].unicode}</TypoGraphy>
                       </Avatar>
                     </TouchableHighlight>
                   </LeftIcon>

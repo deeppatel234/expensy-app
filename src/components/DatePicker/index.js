@@ -1,10 +1,11 @@
 import React from 'react';
+import { withTheme } from 'styled-components';
 
 import DatePicker from 'react-native-datepicker';
 
 import { TYPO_STYLE } from 'Components/TypoGraphy';
 
-export default ({ date, onDateChange }) => {
+const Date = ({ date, onDateChange, color, theme, appearance }) => {
   return (
     <DatePicker
       date={date}
@@ -17,8 +18,15 @@ export default ({ date, onDateChange }) => {
           borderWidth: 0,
           alignItems: 'flex-start',
         },
-        dateText: TYPO_STYLE.default,
+        dateText: { ...TYPO_STYLE.default, color: color || theme[appearance]},
       }}
     />
   )
 };
+
+Date.defaultProps = {
+  appearance: 'default',
+  color: false,
+};
+
+export default withTheme(Date);

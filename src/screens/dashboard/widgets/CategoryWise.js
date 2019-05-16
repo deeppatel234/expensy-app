@@ -10,6 +10,8 @@ import Icon from "Components/Icon";
 import Models from "Models";
 import IconList from "Utils/IconList";
 
+import { BLACK } from 'Src/theme';
+
 import {
   WidgetWrapper,
   Details,
@@ -63,6 +65,7 @@ class CategoryWise extends Component {
                       <Icon
                         type={IconList[categories[amount.category].icon].type}
                         name={IconList[categories[amount.category].icon].name}
+                        color={BLACK}
                         size={20}
                       />
                     </Avatar>

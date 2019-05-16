@@ -1,12 +1,21 @@
-import React from 'react';
+import React from "react";
+import { withTheme } from 'styled-components';
 
-import { Input } from './styled';
-import { TYPO_STYLE } from '../TypoGraphy';
+import { Input } from "./styled";
+import { TYPO_STYLE } from "../TypoGraphy";
 
-const TextInput = (props) => {
-  return (
-    <Input  {...props} style={TYPO_STYLE.small} placeholderStyle={TYPO_STYLE.small} />
-  )
+const TextInput = ({ appearance, theme, color, ...props }) => (
+  <Input
+    {...props}
+    style={{ ...TYPO_STYLE.small, color: color || theme[appearance] }}
+    placeholderStyle={TYPO_STYLE.small}
+    placeholderTextColor={color || theme[appearance]}
+  />
+);
+
+TextInput.defaultProps = {
+  appearance: 'default',
+  color: false,
 };
 
-export default TextInput;
+export default withTheme(TextInput);

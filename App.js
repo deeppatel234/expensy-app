@@ -14,7 +14,7 @@ import { light } from 'Src/theme';
 const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={light}>
-      <ReduxLoader models={["setting"]}>
+      <ReduxLoader models={['setting', 'network']}>
         <AppAuthentication>
           <Start />
         </AppAuthentication>

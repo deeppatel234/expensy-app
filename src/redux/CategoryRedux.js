@@ -10,7 +10,6 @@ class CategoriesRedux extends BaseRedux {
 
   getConstants() {
     return {
-      CATEGORIES_LOADING_ERROR: 'CATEGORIES_LOADING_ERROR',
       CATEGORIES_FETCH_DATA_SUCCESS: 'CATEGORIES_FETCH_DATA_SUCCESS',
       CATEGORIES_CREATE_DATA: 'CATEGORIES_CREATE_DATA',
       CATEGORIES_UPDATE_DATA: 'CATEGORIES_UPDATE_DATA',
@@ -21,11 +20,6 @@ class CategoriesRedux extends BaseRedux {
   getActions() {
     const self = this;
     return {
-      loadingError() {
-        return {
-          type: self.constants.CATEGORIES_LOADING_ERROR,
-        };
-      },
       fetchDataSuccess(categories) {
         return {
           type: self.constants.CATEGORIES_FETCH_DATA_SUCCESS,
@@ -57,11 +51,9 @@ class CategoriesRedux extends BaseRedux {
         };
       },
       fetch() {
-        return (dispatch) => {
-          return self.models.get('category').readAll().then((categories) => {
-            dispatch(self.actions.fetchDataSuccess(categories));
-          });
-        };
+        return self.models.get('category').readAll().then((categories) => {
+          self.dispatch(self.actions.fetchDataSuccess(categories));
+        });
       },
     };
   }
@@ -69,16 +61,6 @@ class CategoriesRedux extends BaseRedux {
   getReducers() {
     const self = this;
     return {
-      categoriesLoadingStatus(state = 'IN_PROGRESS', action) {
-        switch (action.type) {
-          case self.constants.CATEGORIES_LOADING_ERROR:
-            return 'ERROR';
-          case self.constants.CATEGORIES_FETCH_DATA_SUCCESS:
-            return 'SUCCESS';
-          default:
-            return state;
-        }
-      },
       categories(state = {}, action) {
         switch (action.type) {
           case self.constants.CATEGORIES_FETCH_DATA_SUCCESS:

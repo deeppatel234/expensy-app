@@ -3,7 +3,6 @@ import BaseRedux from './BaseRedux';
 class UserRedux extends BaseRedux {
   getConstants() {
     return {
-      USER_LOADING_ERROR: 'USER_LOADING_ERROR',
       USER_FETCH_DATA_SUCCESS: 'USER_FETCH_DATA_SUCCESS',
       USER_UPDATE_DATA: 'USER_UPDATE_DATA',
     };
@@ -12,11 +11,6 @@ class UserRedux extends BaseRedux {
   getActions() {
     const self = this;
     return {
-      loadingError() {
-        return {
-          type: self.constants.USER_LOADING_ERROR,
-        };
-      },
       fetchDataSuccess(user) {
         return {
           type: self.constants.USER_FETCH_DATA_SUCCESS,
@@ -30,11 +24,8 @@ class UserRedux extends BaseRedux {
         };
       },
       fetch() {
-        return (dispatch) => {
-          return self.models.get('user').getUser()
-            .then((user) => dispatch(self.actions.fetchDataSuccess(user)))
-            .catch(() => dispatch(self.actions.loadingError()));
-        };
+        return self.models.get('user').getUser()
+          .then((user) => self.dispatch(self.actions.fetchDataSuccess(user)))
       },
     };
   }
@@ -42,16 +33,6 @@ class UserRedux extends BaseRedux {
   getReducers() {
     const self = this;
     return {
-      userLoadingStatus(state = 'IN_PROGRESS', action) {
-        switch (action.type) {
-          case self.constants.USER_LOADING_ERROR:
-            return 'ERROR';
-          case self.constants.USER_FETCH_DATA_SUCCESS:
-            return 'SUCCESS';
-          default:
-            return state;
-        }
-      },
       user(state = {}, action) {
         switch (action.type) {
           case self.constants.USER_FETCH_DATA_SUCCESS:

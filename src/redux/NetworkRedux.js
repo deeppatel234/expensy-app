@@ -41,11 +41,9 @@ class NetworkRedux extends BaseRedux {
         };
       },
       fetch() {
-        return (dispatch) => {
-          return NetInfo.getConnectionInfo().then(data => {
-            dispatch(self.actions.changeNetworkStatus(data));
-          });
-        };
+        return NetInfo.getConnectionInfo().then(data => {
+          self.dispatch(self.actions.changeNetworkStatus(data));
+        });
       },
     };
   }

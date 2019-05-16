@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TouchID from 'react-native-touch-id';
 import SplashLoading from "Screens/splash/SplashLoading";
 
@@ -7,19 +8,22 @@ class AppAuthentication extends Component {
     super(props);
 
     this.state = {
-      isAuthenticated: true,
+      isAuthenticated: !props.setting.fingerPrintLock,
       errorMessage: false,
     };
   }
 
   componentDidMount() {
-    TouchID.authenticate('to demo this react-native component')
-      .then(success => {
-        this.setState({ isAuthenticated: true });
-      })
-      .catch(error => {
-        this.setState({ errorMessage: error });
-      });
+    const { setting: { fingerPrintLock } } = this.props;
+    if(fingerPrintLock) {
+      TouchID.authenticate('')
+        .then(() => {
+          this.setState({ isAuthenticated: true });
+        })
+        .catch(() => {
+          this.setState({ errorMessage: 'Authentication Error' });
+        });
+    }
   }
 
   render() {
@@ -34,4 +38,11 @@ class AppAuthentication extends Component {
   }
 }
 
-export default AppAuthentication;
+// Maps state from store to props
+const mapStateToProps = (state) => {
+  return {
+    setting: state.setting,
+  };
+};
+
+export default connect(mapStateToProps)(AppAuthentication);

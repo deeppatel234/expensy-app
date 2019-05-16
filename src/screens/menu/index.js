@@ -38,6 +38,11 @@ const MENU = [
     url: "/view-category",
     icon: { type: "AntDesign", name: "API" },
     text: "Categories"
+  },
+  {
+    url: "/setting",
+    icon: { type: "AntDesign", name: "setting" },
+    text: "Settings"
   }
 ];
 

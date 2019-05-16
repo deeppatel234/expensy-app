@@ -26,6 +26,10 @@ class ReduxRegistry extends Registry {
   setDispatch(dispatch) {
     Object.values(this.data).forEach(d => d.setDispatch(dispatch));
   }
+
+  setGetState(getState) {
+    Object.values(this.data).forEach(d => d.setGetState(getState));
+  }
 }
 
 const reduxRegistry = new ReduxRegistry();

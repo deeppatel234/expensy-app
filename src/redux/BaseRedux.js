@@ -14,6 +14,10 @@ class BaseRedux {
     this.dispatch = dispatch;
   }
 
+  setGetState(getState) {
+    this.getState = getState;
+  }
+
   syncComplete() {
     return true;
   }

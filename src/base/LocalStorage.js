@@ -4,6 +4,7 @@ const KEYS = {
   AUTH_TOKEN: 'authToken',
   DB_CONFIG: 'dbConfig',
   LAST_SYNC: 'lastSync',
+  SETTINGS: 'settings',
 };
 
 export default {
@@ -34,5 +35,13 @@ export default {
   async getLastSync() {
     const obj = await AsyncStorage.getItem(KEYS.LAST_SYNC);
     return obj ? JSON.parse(obj) : {};
+  },
+
+  setSettings(obj) {
+    return AsyncStorage.setItem(KEYS.SETTINGS, JSON.stringify(obj));
+  },
+
+  getSettings() {
+    return AsyncStorage.getItem(KEYS.SETTINGS);
   },
 };

@@ -6,6 +6,7 @@ import store from 'Redux/store';
 
 import Start from 'Src/Start';
 import AppAuthentication from 'Base/AppAuthentication';
+import ReduxLoader from 'Base/ReduxLoader';
 
 import { light } from 'Src/theme';
 
@@ -13,9 +14,11 @@ import { light } from 'Src/theme';
 const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={light}>
-      <AppAuthentication>
-        <Start />
-      </AppAuthentication>
+      <ReduxLoader models={["setting"]}>
+        <AppAuthentication>
+          <Start />
+        </AppAuthentication>
+      </ReduxLoader>
     </ThemeProvider>
   </Provider>
 );

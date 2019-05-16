@@ -12,6 +12,7 @@ import ViewWallet from "Screens/wallet/ViewWallet";
 
 import CreateExpense from "Screens/expense/CreateExpense";
 import SplashLoading from "Screens/splash/SplashLoading";
+import Setting from "Screens/setting";
 
 import Menu from "Screens/menu";
 
@@ -80,7 +81,8 @@ class Main extends Component {
               <Route path="/view-wallet" component={ViewWallet} />
               <Route path="/create-wallet" component={CreateWallet} />
               <Route path="/create-expense" component={CreateExpense} />
-              <Route path="/" exact component={Dashboard} />
+              <Route path="/setting" component={Setting} />
+              <Route path="/" component={Setting} />
             </Switch>
           </Drawer>
         </BackButton>

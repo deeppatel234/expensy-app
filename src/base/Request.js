@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import MemoryStorage from './MemoryStorage';
+import { API_URL } from '../../appConfig';
 
 class Request {
   constructor() {
@@ -9,7 +10,7 @@ class Request {
      */
     this.apiRequest = axios.create({
       method: 'post',
-      baseURL: 'http://192.168.0.105:5050/api/',
+      baseURL: API_URL,
     });
     /**
      * get request for external call

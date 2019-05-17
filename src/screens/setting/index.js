@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TouchID from 'react-native-touch-id';
 
 import TypoGraphy from 'Components/TypoGraphy';
 import Icon from 'Components/Icon';
@@ -22,47 +23,78 @@ import {
   SettingIcon,
 } from './style';
 
-const Setting = ({ setting, changeFingerPrintLock, changeTheme, changePinLock }) => (
-  <Container>
-    <Heading>
-      <Header text="Settings" />
-    </Heading>
-    <Content>
-      <SettingItem>
-        <SettingNameWrapper>
-          <SettingIcon>
-            <Icon type="MaterialCommunityIcons" name="theme-light-dark" size={20} />
-          </SettingIcon>
-          <TypoGraphy>Theme</TypoGraphy>
-        </SettingNameWrapper>
-        <ThemeSwitchWrapper>
-          <ThemeName>
-            <TypoGraphy type="small">{setting.isLightTheme ? 'light' : 'dark'}</TypoGraphy>
-          </ThemeName>
-          <Switch value={setting.isLightTheme} onValueChange={changeTheme} />
-        </ThemeSwitchWrapper>
-      </SettingItem>
-      <SettingItem>
-        <SettingNameWrapper>
-          <SettingIcon>
-            <Icon type="MaterialCommunityIcons" name="fingerprint" size={20} />
-          </SettingIcon>
-          <TypoGraphy>Fingerprint Lock</TypoGraphy>
-        </SettingNameWrapper>
-        <Switch value={setting.fingerPrintLock} onValueChange={changeFingerPrintLock} />
-      </SettingItem>
-      {/* <SettingItem>
-        <SettingNameWrapper>
-          <SettingIcon>
-            <Icon type="MaterialCommunityIcons" name="lock-outline" size={20} />
-          </SettingIcon>
-          <TypoGraphy>Pin Lock</TypoGraphy>
-        </SettingNameWrapper>
-        <Switch value={setting.pinLock} onValueChange={changePinLock} />
-      </SettingItem> */}
-    </Content>
-  </Container>
-);
+class Setting extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: true,
+      isFingerPrintSupported: false,
+    };
+  }
+
+  componentDidMount() {
+    TouchID
+      .isSupported()
+      .then(() => this.setState({ isFingerPrintSupported: true, isLoading: false }))
+      .catch(() => this.setState({ isLoading: false }));
+  }
+
+  render() {
+    const { setting, changeFingerPrintLock, changeTheme, changePinLock } = this.props;
+    const { isLoading, isFingerPrintSupported } = this.state;
+
+    if (isLoading) {
+      <TypoGraphy>Loading</TypoGraphy>
+    }
+
+    return (
+      <Container>
+        <Heading>
+          <Header text="Settings" />
+        </Heading>
+        <Content>
+          <SettingItem>
+            <SettingNameWrapper>
+              <SettingIcon>
+                <Icon type="MaterialCommunityIcons" name="theme-light-dark" size={20} />
+              </SettingIcon>
+              <TypoGraphy>Theme</TypoGraphy>
+            </SettingNameWrapper>
+            <ThemeSwitchWrapper>
+              <ThemeName>
+                <TypoGraphy type="small">{setting.isLightTheme ? 'light' : 'dark'}</TypoGraphy>
+              </ThemeName>
+              <Switch value={setting.isLightTheme} onValueChange={changeTheme} />
+            </ThemeSwitchWrapper>
+          </SettingItem>
+          {
+            isFingerPrintSupported && (
+              <SettingItem>
+                <SettingNameWrapper>
+                  <SettingIcon>
+                    <Icon type="MaterialCommunityIcons" name="fingerprint" size={20} />
+                  </SettingIcon>
+                  <TypoGraphy>Fingerprint Lock</TypoGraphy>
+                </SettingNameWrapper>
+                <Switch value={setting.fingerPrintLock} onValueChange={changeFingerPrintLock} />
+              </SettingItem>
+            )
+          }
+          {/* <SettingItem>
+            <SettingNameWrapper>
+              <SettingIcon>
+                <Icon type="MaterialCommunityIcons" name="lock-outline" size={20} />
+              </SettingIcon>
+              <TypoGraphy>Pin Lock</TypoGraphy>
+            </SettingNameWrapper>
+            <Switch value={setting.pinLock} onValueChange={changePinLock} />
+          </SettingItem> */}
+        </Content>
+      </Container>
+    );
+  }
+}
 
 // Maps state from store to props
 const mapStateToProps = (state) => {

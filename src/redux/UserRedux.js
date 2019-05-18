@@ -1,16 +1,32 @@
 import BaseRedux from './BaseRedux';
+import LocalStorage from 'Base/LocalStorage';
+import MemoryStorage from 'Base/MemoryStorage';
+import Models from 'Models';
 
 class UserRedux extends BaseRedux {
+  async logoutUser() {
+    await LocalStorage.clearStorage();
+    MemoryStorage.clear();
+    await Models.clearAllData();
+    this.dispatch(this.actions.logout());
+  }
+
   getConstants() {
     return {
       USER_FETCH_DATA_SUCCESS: 'USER_FETCH_DATA_SUCCESS',
       USER_UPDATE_DATA: 'USER_UPDATE_DATA',
+      USER_LOGOUT: 'USER_LOGOUT',
     };
   }
 
   getActions() {
     const self = this;
     return {
+      logout() {
+        return {
+          type: self.constants.USER_LOGOUT,
+        };
+      },
       fetchDataSuccess(user) {
         return {
           type: self.constants.USER_FETCH_DATA_SUCCESS,

@@ -20,7 +20,14 @@ class ReduxRegistry extends Registry {
     const reducersList = Object.values(this.data).map(d => d.getReducers());
     const reducers = {};
     reducersList.forEach(reducer => Object.assign(reducers, reducer));
-    return combineReducers(reducers);
+    const appReducer = combineReducers(reducers);
+
+    return (state, action) => {
+      if (action.type === this.data.user.constants.USER_LOGOUT) {
+        state = undefined
+      }
+      return appReducer(state, action)
+    };
   }
 
   setDispatch(dispatch) {

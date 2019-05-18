@@ -48,6 +48,10 @@ class ModelRegistry extends Registry {
     });
     return Promise.all(defs);
   }
+
+  clearAllData() {
+    return Promise.all(this.getValues().map(d => d.clearData()));
+  }
 }
 
 const modelRegistry = new ModelRegistry();

@@ -44,4 +44,8 @@ export default {
   getSettings() {
     return AsyncStorage.getItem(KEYS.SETTINGS);
   },
+
+  clearStorage() {
+    return AsyncStorage.multiRemove(Object.values(KEYS));
+  }
 };

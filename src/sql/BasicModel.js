@@ -29,6 +29,10 @@ class BasicModel {
     return this.createTable();
   }
 
+  clearData() {
+    return this.db.executeSql(`DELETE FROM ${this.tableName()}`);
+  }
+
   createTable() {
     const fieldString = Object.keys(this.fields).map(field => `${field} ${this.fields[field]}`).join(',');
     const createQuery = `CREATE TABLE IF NOT EXISTS ${this.tableName()} (${fieldString})`

@@ -59,7 +59,7 @@ class Start extends Component {
         <Switch>
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/" exact component={Main} />
+          <PrivateRoute path="/" component={Main} />
         </Switch>
       </NativeRouter>
     );

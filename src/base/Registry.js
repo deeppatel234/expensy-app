@@ -11,7 +11,7 @@ class Registry {
     this.data[key] = value;
   }
 
-  detete(key) {
+  delete(key) {
     delete this.data[key];
   }
 }

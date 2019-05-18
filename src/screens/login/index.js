@@ -14,9 +14,6 @@ import LocalStorage from 'Base/LocalStorage';
 import MemoryStorage from 'Base/MemoryStorage';
 
 
-import { API_URL } from 'react-native-dotenv';
-
-
 class Login extends Component {
   constructor(props) {
     super(props)
@@ -68,7 +65,6 @@ class Login extends Component {
 
     return (
       <View>
-        <Text>{API_URL}</Text>
         <TextInput
           placeholder="username"
           value={username}

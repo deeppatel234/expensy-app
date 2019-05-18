@@ -20,30 +20,28 @@ import Redux from "Redux/ReduxRegistry";
 
 const Main = ({ isDrawerOpen, closeMenuDrawer }) => (
   <ReduxLoader models={['wallet', 'category', 'user']}>
-    <NativeRouter>
-      <BackButton>
-        <Drawer
-          tapToClose
-          open={isDrawerOpen}
-          type="static"
-          content={<Menu />}
-          openDrawerOffset={100}
-          tweenDuration={150}
-          tweenHandler={Drawer.tweenPresets.parallax}
-          onClose={closeMenuDrawer}
-        >
-          <Switch>
-            <Route path="/view-category" component={ViewCategory} />
-            <Route path="/create-category" component={CreateCategory} />
-            <Route path="/view-wallet" component={ViewWallet} />
-            <Route path="/create-wallet" component={CreateWallet} />
-            <Route path="/create-expense" component={CreateExpense} />
-            <Route path="/setting" component={Setting} />
-            <Route path="/" component={Dashboard} />
-          </Switch>
-        </Drawer>
-      </BackButton>
-    </NativeRouter>
+    <BackButton>
+      <Drawer
+        tapToClose
+        open={isDrawerOpen}
+        type="static"
+        content={<Menu />}
+        openDrawerOffset={100}
+        tweenDuration={150}
+        tweenHandler={Drawer.tweenPresets.parallax}
+        onClose={closeMenuDrawer}
+      >
+        <Switch>
+          <Route path="/view-category" component={ViewCategory} />
+          <Route path="/create-category" component={CreateCategory} />
+          <Route path="/view-wallet" component={ViewWallet} />
+          <Route path="/create-wallet" component={CreateWallet} />
+          <Route path="/create-expense" component={CreateExpense} />
+          <Route path="/setting" component={Setting} />
+          <Route path="/" component={Dashboard} />
+        </Switch>
+      </Drawer>
+    </BackButton>
   </ReduxLoader>
 );
 

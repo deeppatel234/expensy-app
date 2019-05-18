@@ -1,7 +1,7 @@
 import React from "react";
 import { withTheme } from "styled-components";
 import { SwitchComp } from "./style";
-import { LightenDarkenColor } from 'Utils/utility'
+import { LightenDarkenColor } from 'Utils/utility';
 
 import { PRIMARY_COLOR } from 'Src/theme';
 

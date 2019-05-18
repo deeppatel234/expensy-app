@@ -25,3 +25,5 @@ export const LightenDarkenColor = (col, amt) => {
 
   return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
 };
+
+export const fixedAmount = (amount) => amount ? amount.toFixed(2) : 0;

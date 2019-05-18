@@ -6,6 +6,7 @@ import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import Header from 'Components/Header';
+import Footer from 'Components/Footer';
 
 import IconList from 'Utils/IconList';
 import CurrencyCode from 'Utils/CurrencyCode';
@@ -16,8 +17,6 @@ import {
   Container,
   Heading,
   Content,
-  Footer,
-  FooterButton,
   ListWrapper,
   ListItem,
   ListDetails,
@@ -46,9 +45,7 @@ const ViewWallet = ({ wallets }) => (
       </ListWrapper>
     </Content>
     <Footer>
-      <FooterButton>
-        <Link to='/create-wallet' text="Add Wallet" appearance="primary" rounded />
-      </FooterButton>
+      <Link to='/create-wallet' component={Footer.AddButton} />
     </Footer>
   </Container>
 );

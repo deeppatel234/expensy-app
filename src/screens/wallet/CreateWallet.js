@@ -7,12 +7,12 @@ import { Formik } from "formik";
 
 import Redux from "Redux/ReduxRegistry";
 import TypoGraphy from "Components/TypoGraphy";
-import Button from "Components/Button";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
 import DropDown from "Components/DropDown";
 import Header from 'Components/Header';
+import Footer from 'Components/Footer';
 
 import IconModel from "Screens/icon/IconModel";
 import IconList from 'Utils/IconList';
@@ -26,8 +26,6 @@ import {
   Container,
   Heading,
   Content,
-  Footer,
-  FooterButton,
   IconInputWrapper,
   LeftIcon,
   RightInput
@@ -142,14 +140,7 @@ class CreateWallet extends Component {
                 />
               </Content>
               <Footer>
-                <FooterButton>
-                  <Button
-                    rounded
-                    onPress={props.handleSubmit}
-                    text="Add"
-                    appearance="primary"
-                  />
-                </FooterButton>
+                <Footer.AddButton onPress={props.handleSubmit} />
               </Footer>
             </React.Fragment>
           )}

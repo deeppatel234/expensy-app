@@ -5,10 +5,10 @@ import { Formik } from "formik";
 
 import Redux from "Redux/ReduxRegistry";
 import Header from 'Components/Header';
-import Button from "Components/Button";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
+import Footer from 'Components/Footer';
 
 import IconModel from "Screens/icon/IconModel";
 import IconList from 'Utils/IconList';
@@ -19,8 +19,6 @@ import {
   Container,
   Heading,
   Content,
-  Footer,
-  FooterButton,
   IconInputWrapper,
   LeftIcon,
   RightInput
@@ -95,14 +93,7 @@ class CreateCategory extends Component {
                 />
               </Content>
               <Footer>
-                <FooterButton>
-                  <Button
-                    rounded
-                    onPress={props.handleSubmit}
-                    text="Add"
-                    appearance="primary"
-                  />
-                </FooterButton>
+                <Footer.AddButton onPress={props.handleSubmit} />
               </Footer>
             </React.Fragment>
           )}

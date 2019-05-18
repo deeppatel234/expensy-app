@@ -8,7 +8,7 @@ export const ButtonElement = styled.TouchableOpacity`
   align-items: center;
   align-self: flex-start;
 
-  ${props => props.rounded && css`
+  ${props => props.borderRadius && css`
     border-radius: 30px;
   `}
 

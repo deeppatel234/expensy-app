@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 
 import Header from "Components/Header";
 import Link from "Components/Link";
+import Footer from 'Components/Footer';
 
 import {
   Container,
   Heading,
   Content,
-  Footer,
-  FooterButton
 } from "Src/globalStyle";
 
 import TotalAmount from "./widgets/TotalAmount";
@@ -32,14 +31,7 @@ class Dashboard extends Component {
           <CategoryWise type="income" />
         </Content>
         <Footer>
-          <FooterButton>
-            <Link
-              rounded
-              to="/create-expense"
-              text="Add Transaction"
-              appearance="primary"
-            />
-          </FooterButton>
+          <Link to='/create-expense' component={Footer.AddButton} />
         </Footer>
       </Container>
     );

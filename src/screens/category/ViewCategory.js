@@ -8,6 +8,7 @@ import Avatar from 'Components/Avatar';
 import Icon from 'Components/Icon';
 import Header from 'Components/Header';
 import Link from 'Components/Link';
+import Footer from 'Components/Footer';
 
 import IconList from 'Utils/IconList';
 
@@ -17,8 +18,6 @@ import {
   Container,
   Heading,
   Content,
-  Footer,
-  FooterButton,
   ListWrapper,
   ListItem,
   ListText,
@@ -44,9 +43,7 @@ const ViewCategory = ({ categories }) => (
       </ListWrapper>
     </Content>
     <Footer>
-      <FooterButton>
-        <Link to='/create-category' text="Add Category" appearance="primary" rounded />
-      </FooterButton>
+      <Link to='/create-category' component={Footer.AddButton} />
     </Footer>
   </Container>
 );

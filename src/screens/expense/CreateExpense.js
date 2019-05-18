@@ -12,11 +12,11 @@ import CategoryModel from "Screens/category/CategoryModel";
 import DatePicker from "Components/DatePicker";
 import TextInput from "Components/TextInput";
 import TypoGraphy from "Components/TypoGraphy";
-import Button from "Components/Button";
 import Radio from "Components/RadioButton";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
 import Header from 'Components/Header';
+import Footer from 'Components/Footer';
 
 import IconList from 'Utils/IconList';
 import CurrencyCode from "Utils/CurrencyCode";
@@ -29,8 +29,6 @@ import {
   Container,
   Heading,
   Content,
-  Footer,
-  FooterButton,
   IconInputWrapper,
   LeftIcon,
   RightInput,
@@ -235,14 +233,7 @@ class CreateExpense extends Component {
                 />
               </Content>
               <Footer>
-                <FooterButton>
-                  <Button
-                    rounded
-                    onPress={props.handleSubmit}
-                    text="Save"
-                    appearance="primary"
-                  />
-                </FooterButton>
+                <Footer.AddButton onPress={props.handleSubmit} />
               </Footer>
             </React.Fragment>
           )}

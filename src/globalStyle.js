@@ -11,23 +11,15 @@ export const Container = styled.View`
 `;
 
 export const Heading = styled.View`
+  z-index: 100;
+  background-color: ${props => props.theme.white};
 `;
 
 export const Content = styled.ScrollView`
+  overflow: visible;
   flex:1;
   padding: 0 20px;
-`;
-
-export const Footer = styled.View`
-  width: 100%;
-`;
-
-export const FooterButton = styled.View`
-  width: 100%;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  margin-bottom: 30px;
 `;
 
 export const ListWrapper = styled.View`

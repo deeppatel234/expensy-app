@@ -7,7 +7,6 @@ class NetworkRedux extends BaseRedux {
     super(props);
 
     NetInfo.addEventListener('connectionChange', this.onChangeNetwork.bind(this));
-    NetInfo.isConnected.addEventListener('connectionChange', this.onChangeConnected.bind(this));
   }
 
   onChangeNetwork(data) {
@@ -41,8 +40,9 @@ class NetworkRedux extends BaseRedux {
         };
       },
       fetch() {
-        return NetInfo.getConnectionInfo().then(data => {
-          self.dispatch(self.actions.changeNetworkStatus(data));
+        return NetInfo.isConnected.fetch().then(isConnected => {
+          self.onChangeConnected(isConnected);
+          NetInfo.isConnected.addEventListener('change', self.onChangeConnected.bind(self));
         });
       },
     };

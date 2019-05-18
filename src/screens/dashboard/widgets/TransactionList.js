@@ -20,7 +20,8 @@ import {
   RightDetails,
   WidgetTitle,
   IconWrapper,
-  SubDetails
+  SubDetails,
+  RightText,
 } from "./style";
 
 class CategoryWise extends Component {
@@ -78,11 +79,13 @@ class CategoryWise extends Component {
                 </LeftDetails>
                 <RightDetails>
                   <SubDetails>
-                    {
-                      EXPENSE_TYPES.EXPENSE === transaction.type
-                        ? <TypoGraphy appearance="danger">{transaction.amount.toFixed(2)}</TypoGraphy>
-                        : <TypoGraphy>{transaction.amount.toFixed(2)}</TypoGraphy>
-                    }
+                    <RightText>
+                      {
+                        EXPENSE_TYPES.EXPENSE === transaction.type
+                          ? <TypoGraphy appearance="danger">{transaction.amount.toFixed(2)}</TypoGraphy>
+                          : <TypoGraphy>{transaction.amount.toFixed(2)}</TypoGraphy>
+                      }
+                    </RightText>
                     <TypoGraphy appearance="muted">{transaction.dateTime}</TypoGraphy>
                   </SubDetails>
                   <IconWrapper marginPosition="left">

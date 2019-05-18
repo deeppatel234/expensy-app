@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const WidgetWrapper = styled.View`
   border-color: ${props => props.theme.light};
@@ -42,4 +42,8 @@ export const IconWrapper = styled.View`
 `;
 
 export const SubDetails = styled.View`
+`;
+
+export const RightText = styled.View`
+  align-self: flex-end;
 `;

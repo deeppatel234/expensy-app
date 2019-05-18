@@ -11,6 +11,7 @@ import Loader from "Components/Loader";
 import TextInput from "Components/TextInput";
 import Button from "Components/Button";
 import Link from "Components/Link";
+import ReduxLoader from 'Base/ReduxLoader';
 
 import { PRIMARY_COLOR } from "Src/theme";
 
@@ -74,77 +75,79 @@ class SignUP extends Component {
     }
 
     return (
-      <Wrapper>
-        <AppNameWrapper>
-          <TypoGraphy type="appLogo" color={PRIMARY_COLOR}>
-            Expensy
-          </TypoGraphy>
-        </AppNameWrapper>
-        <SignUpWrapper>
-          <Formik
-            initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
-            onSubmit={this.onSubmitForm}
-          >
-            {props => (
-              <React.Fragment>
-                <TextInput
-                  placeholder="name"
-                  onChangeText={props.handleChange("name")}
-                  onBlur={props.handleBlur("name")}
-                  value={props.values.name}
-                />
-                <TextInput
-                  placeholder="email"
-                  onChangeText={props.handleChange("email")}
-                  onBlur={props.handleBlur("email")}
-                  value={props.values.email}
-                />
-                <TextInput
-                  secureTextEntry
-                  placeholder="password"
-                  onChangeText={props.handleChange("password")}
-                  onBlur={props.handleBlur("password")}
-                  value={props.values.password}
-                />
-                <TextInput
-                  secureTextEntry
-                  placeholder="confirm password"
-                  onChangeText={props.handleChange("confirmPassword")}
-                  onBlur={props.handleBlur("confirmPassword")}
-                  value={props.values.confirmPassword}
-                />
-                {isLoading ? (
-                  <Loader size="large" />
-                ) : (
-                  <Button
-                    text="Signup"
-                    appearance="primary"
-                    onPress={props.handleSubmit}
-                    borderRadius
-                    block
+      <ReduxLoader models={['network']}>
+        <Wrapper>
+          <AppNameWrapper>
+            <TypoGraphy type="appLogo" color={PRIMARY_COLOR}>
+              Expensy
+            </TypoGraphy>
+          </AppNameWrapper>
+          <SignUpWrapper>
+            <Formik
+              initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
+              onSubmit={this.onSubmitForm}
+            >
+              {props => (
+                <React.Fragment>
+                  <TextInput
+                    placeholder="name"
+                    onChangeText={props.handleChange("name")}
+                    onBlur={props.handleBlur("name")}
+                    value={props.values.name}
                   />
-                )}
-              </React.Fragment>
+                  <TextInput
+                    placeholder="email"
+                    onChangeText={props.handleChange("email")}
+                    onBlur={props.handleBlur("email")}
+                    value={props.values.email}
+                  />
+                  <TextInput
+                    secureTextEntry
+                    placeholder="password"
+                    onChangeText={props.handleChange("password")}
+                    onBlur={props.handleBlur("password")}
+                    value={props.values.password}
+                  />
+                  <TextInput
+                    secureTextEntry
+                    placeholder="confirm password"
+                    onChangeText={props.handleChange("confirmPassword")}
+                    onBlur={props.handleBlur("confirmPassword")}
+                    value={props.values.confirmPassword}
+                  />
+                  {isLoading ? (
+                    <Loader size="large" />
+                  ) : (
+                    <Button
+                      text="Signup"
+                      appearance="primary"
+                      onPress={props.handleSubmit}
+                      borderRadius
+                      block
+                    />
+                  )}
+                </React.Fragment>
+              )}
+            </Formik>
+            {errorMessage && (
+              <ErrorMessage>
+                <TypoGraphy appearance="danger">{errorMessage}</TypoGraphy>
+              </ErrorMessage>
             )}
-          </Formik>
-          {errorMessage && (
-            <ErrorMessage>
-              <TypoGraphy appearance="danger">{errorMessage}</TypoGraphy>
-            </ErrorMessage>
-          )}
-        </SignUpWrapper>
-        <LoginFormWrapper>
-          <LoginLink>
-            <TypoGraphy color={PRIMARY_COLOR}>already have an account</TypoGraphy>
-          </LoginLink>
-          <Link to="/login" text="Login" borderRadius block />
-        </LoginFormWrapper>
-        <FooterWrapper>
-          <TypoGraphy color={PRIMARY_COLOR}>
-            Your Personal expense manager
-          </TypoGraphy>
-        </FooterWrapper>
-      </Wrapper>
+          </SignUpWrapper>
+          <LoginFormWrapper>
+            <LoginLink>
+              <TypoGraphy color={PRIMARY_COLOR}>already have an account</TypoGraphy>
+            </LoginLink>
+            <Link to="/login" text="Login" borderRadius block />
+          </LoginFormWrapper>
+          <FooterWrapper>
+            <TypoGraphy color={PRIMARY_COLOR}>
+              Your Personal expense manager
+            </TypoGraphy>
+          </FooterWrapper>
+        </Wrapper>
+      </ReduxLoader>
     );
   }
 }

@@ -17,7 +17,7 @@ import TransactionList from "./widgets/TransactionList";
 
 class Dashboard extends Component {
   render() {
-    const { user } = this.props;
+    const { user, categories, wallets } = this.props;
 
     return (
       <Container>
@@ -26,9 +26,9 @@ class Dashboard extends Component {
         </Heading>
         <Content>
           <TotalAmount />
-          <TransactionList />
-          <CategoryWise type="expense" />
-          <CategoryWise type="income" />
+          <TransactionList categories={categories} wallets={wallets} />
+          <CategoryWise type="expense" categories={categories} />
+          <CategoryWise type="income" categories={categories} />
         </Content>
         <Footer>
           <Link to='/create-expense' component={Footer.AddButton} />

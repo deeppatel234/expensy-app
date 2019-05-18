@@ -1,5 +1,10 @@
 import BasicModel from '../BasicModel';
 
+export const WALLET_TYPES = {
+  BANK: 'bank',
+  CASH: 'cash',
+};
+
 class WalletModel extends BasicModel {
   tableName() {
     return 'wallet';

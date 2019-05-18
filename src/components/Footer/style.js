@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const FooterWrapper = styled.View`
   width: 100%;
   background-color: ${props => props.theme.primary};
-  height: 50px;
+  height: 40px;
   position: relative;
 `;
 
@@ -18,7 +18,7 @@ export const FooterButton = styled.TouchableOpacity`
   align-self: center;
   border-radius: 50px;
   border-width: 5px;
-  height: 70px;
-  width: 70px;
-  margin-bottom: 15px;
+  height: 65px;
+  width: 65px;
+  margin-bottom: 10px;
 `;

@@ -13,6 +13,7 @@ export const Container = styled.View`
 export const Heading = styled.View`
   z-index: 100;
   background-color: ${props => props.theme.white};
+  padding-bottom: 15px;
 `;
 
 export const Content = styled.ScrollView`

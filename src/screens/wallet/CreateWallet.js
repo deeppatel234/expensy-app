@@ -13,6 +13,7 @@ import Icon from "Components/Icon";
 import DropDown from "Components/DropDown";
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
+import Radio from "Components/RadioButton";
 
 import IconModel from "Screens/icon/IconModel";
 import IconList from 'Utils/IconList';
@@ -21,6 +22,7 @@ import CurrencyModel from "Screens/currency/CurrencyModel";
 import CurrencyCode from 'Utils/CurrencyCode';
 
 import { BLACK } from 'Src/theme';
+import { WALLET_TYPES } from 'Models/WalletModel';
 
 import {
   Container,
@@ -28,7 +30,8 @@ import {
   Content,
   IconInputWrapper,
   LeftIcon,
-  RightInput
+  RightInput,
+  FormSpace,
 } from "Src/globalStyle";
 
 class CreateWallet extends Component {
@@ -86,6 +89,12 @@ class CreateWallet extends Component {
           {props => (
             <React.Fragment>
               <Content>
+                <FormSpace>
+                  <Radio.Group selectedValue={props.values.type} onChange={props.handleChange("type")}>
+                    <Radio.Button value={WALLET_TYPES.BANK} text="Bank" style={{ flexGrow: 1 }} />
+                    <Radio.Button value={WALLET_TYPES.CASH} text="Cash" style={{ flexGrow: 1 }} />
+                  </Radio.Group>
+                </FormSpace>
                 <IconInputWrapper>
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showIconModel}>
@@ -107,11 +116,6 @@ class CreateWallet extends Component {
                     />
                   </RightInput>
                 </IconInputWrapper>
-                <DropDown
-                  selectedValue={props.values.type}
-                  options={[{ value: 'bank', text: 'Bank' }, { value: 'cash', text: 'Cash' }]}
-                  onValueChange={props.handleChange("type")}
-                />
                 <IconInputWrapper>
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showCurrencyModel}>

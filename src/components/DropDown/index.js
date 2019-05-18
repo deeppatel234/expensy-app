@@ -17,4 +17,9 @@ const DropDown = ({ options, ...props }) => {
   )
 }
 
+DropDown.defaultProps = {
+  appearance: 'default',
+  color: false,
+};
+
 export default DropDown;

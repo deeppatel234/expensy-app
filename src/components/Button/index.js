@@ -17,6 +17,7 @@ const Button = (props) => (
 
 Button.defaultProps = {
   appearance: 'default',
+  block: false,
 };
 
 export default Button;

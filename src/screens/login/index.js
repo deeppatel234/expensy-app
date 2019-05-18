@@ -1,90 +1,133 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Redirect } from "react-router-native";
+import { Formik } from "formik";
+
+import Request from "Base/Request";
+import LocalStorage from "Base/LocalStorage";
+import MemoryStorage from "Base/MemoryStorage";
+
+import TypoGraphy from "Components/TypoGraphy";
+import Loader from "Components/Loader";
+import TextInput from "Components/TextInput";
+import Button from "Components/Button";
+import Link from "Components/Link";
+
+import { PRIMARY_COLOR } from "Src/theme";
 
 import {
-  TextInput,
-  View,
-  Text,
-  Button,
-  ActivityIndicator,
-} from 'react-native';
-import { Redirect } from 'react-router-native';
-
-import Request from 'Base/Request';
-import LocalStorage from 'Base/LocalStorage';
-import MemoryStorage from 'Base/MemoryStorage';
-
+  Wrapper,
+  AppNameWrapper,
+  LoginFormWrapper,
+  FooterWrapper,
+  SignUpLink,
+  SignUpWrapper,
+  ErrorMessage
+} from "./style";
 
 class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      username: 'deep',
-      password: 'deep123',
       isLoading: false,
       errorMessage: false,
-      redirectToApp: false,
+      redirectToApp: false
     };
 
-    this.onPressLogin = this.onPressLogin.bind(this);
+    this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
-  onChangeText(text, name) {
-    this.setState({ [name]: text });
-  }
-
-  onPressLogin() {
-    const { username, password } = this.state;
+  onSubmitForm(values) {
     this.setState({ isLoading: true });
 
     Request.api({
-      model: 'user',
-      method: 'login',
-      data: { username, password }
+      model: "user",
+      method: "login",
+      data: values
     }).then(({ token }) => {
-      LocalStorage.setToken(token).then(() => {
-        MemoryStorage.set('token', token);
-        this.setState({ errorMessage: token, isLoading: false, redirectToApp: true });
+        LocalStorage.setToken(token).then(() => {
+          MemoryStorage.set("token", token);
+          this.setState({
+            errorMessage: token,
+            isLoading: false,
+            redirectToApp: true
+          });
+        });
+      })
+      .catch(err => {
+        this.setState({ errorMessage: err.message, isLoading: false });
       });
-    }).catch((err) => {
-      this.setState({ errorMessage: err.message, isLoading: false })
-    });
   }
 
   render() {
     const {
-      username,
-      password,
       isLoading,
       errorMessage,
-      redirectToApp,
+      redirectToApp
     } = this.state;
 
     if (redirectToApp) {
-      return <Redirect to="/" />
+      return <Redirect to="/" />;
     }
 
     return (
-      <View>
-        <TextInput
-          placeholder="username"
-          value={username}
-          onChangeText={(text) => this.onChangeText(text, 'username')}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="password"
-          value={password}
-          onChangeText={(text) => this.onChangeText(text, 'password')}
-        />
-        {
-          isLoading
-            ? <ActivityIndicator size="large" color="#0000ff" />
-            : <Button title="Login" onPress={this.onPressLogin} />
-        }
-        {
-          errorMessage && <Text>{errorMessage}</Text>
-        }
-      </View>
+      <Wrapper>
+        <AppNameWrapper>
+          <TypoGraphy type="appLogo" color={PRIMARY_COLOR}>
+            Expensy
+          </TypoGraphy>
+        </AppNameWrapper>
+        <LoginFormWrapper>
+          <Formik
+            initialValues={{ email: '', password: '' }}
+            onSubmit={this.onSubmitForm}
+          >
+            {props => (
+              <React.Fragment>
+                <TextInput
+                  placeholder="email"
+                  onChangeText={props.handleChange("email")}
+                  onBlur={props.handleBlur("email")}
+                  value={props.values.email}
+                />
+                <TextInput
+                  secureTextEntry
+                  placeholder="password"
+                  onChangeText={props.handleChange("password")}
+                  onBlur={props.handleBlur("password")}
+                  value={props.values.password}
+                />
+                {isLoading ? (
+                  <Loader size="large" />
+                ) : (
+                  <Button
+                    text="Login"
+                    appearance="primary"
+                    onPress={props.handleSubmit}
+                    borderRadius
+                    block
+                  />
+                )}
+              </React.Fragment>
+            )}
+          </Formik>
+          {errorMessage && (
+            <ErrorMessage>
+              <TypoGraphy appearance="danger">{errorMessage}</TypoGraphy>
+            </ErrorMessage>
+          )}
+        </LoginFormWrapper>
+        <SignUpWrapper>
+          <SignUpLink>
+            <TypoGraphy color={PRIMARY_COLOR}>Don't have an account</TypoGraphy>
+          </SignUpLink>
+          <Link to="/signup" text="Sign Up" borderRadius block />
+        </SignUpWrapper>
+        <FooterWrapper>
+          <TypoGraphy color={PRIMARY_COLOR}>
+            Your Personal expense manager
+          </TypoGraphy>
+        </FooterWrapper>
+      </Wrapper>
     );
   }
 }

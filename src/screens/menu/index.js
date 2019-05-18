@@ -68,7 +68,7 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
             </AvatarContainer>
             <UserDetails>
               <TypoGraphy type="small" appearance="white">
-                {user.firstname} {user.lastname}
+                {user.name}
               </TypoGraphy>
               <TypoGraphy type="small" appearance="white">
                 {user.email}

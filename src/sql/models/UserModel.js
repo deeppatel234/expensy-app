@@ -7,9 +7,7 @@ class UserModel extends BasicModel {
 
   initFields() {
     return {
-      firstname: 'TEXT NOT NULL',
-      lastname: 'TEXT NOT NULL',
-      username: 'TEXT NOT NULL',
+      name: 'TEXT NOT NULL',
       email: 'TEXT NOT NULL',
     };
   }

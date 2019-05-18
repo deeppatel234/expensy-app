@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-native';
-import { Text } from 'react-native';
+import SplashLoading from "Screens/splash/SplashLoading";
 
 import Auth from './Auth';
 
@@ -39,7 +39,7 @@ class AuthWrapper extends Component {
     const { location } = this.props;
 
     if (isLoading) {
-      return <Text>authenticate user...</Text>;
+      return <SplashLoading message="Authenticating User" />;
     }
 
     if (isAuthenticated) {

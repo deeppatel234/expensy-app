@@ -6,7 +6,10 @@ export const ButtonElement = styled.TouchableOpacity`
   border: 1px solid ${props => props.theme.light};
   padding: 10px 20px;
   align-items: center;
-  align-self: flex-start;
+
+  ${props => !props.block && css`
+    align-self: flex-start;
+  `}
 
   ${props => props.borderRadius && css`
     border-radius: 30px;

@@ -8,14 +8,22 @@ export const Wrapper = styled.View`
 `;
 
 export const AppNameWrapper = styled.View`
-  height: 30%;
+  height: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
+export const SignUpWrapper = styled.View`
+  height: 50%;
+  margin: 0 70px;
+`;
+
 export const LoginFormWrapper = styled.View`
-  height: 40%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 0 70px;
 `;
 
@@ -26,7 +34,7 @@ export const FooterWrapper = styled.View`
   justify-content: center;
 `;
 
-export const SignUpLink = styled.View`
+export const LoginLink = styled.View`
   margin: 10px 0;
 `;
 
@@ -37,10 +45,3 @@ export const ErrorMessage = styled.View`
   margin: 10px 0;
 `;
 
-export const SignUpWrapper = styled.View`
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 70px;
-`;

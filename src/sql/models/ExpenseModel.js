@@ -17,7 +17,7 @@ class ExpenseModel extends BasicModel {
     return {
       type: 'TEXT NOT NULL',
       amount: 'REAL NOT NULL',
-      description: 'TEXT NOT NULL',
+      description: 'TEXT',
       wallet: 'TEXT NOT NULL',
       toWallet: 'TEXT',
       category: 'TEXT NOT NULL',

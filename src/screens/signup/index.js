@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-native";
 import { Formik } from "formik";
+import * as Yup from 'yup';
 
 import Request from "Base/Request";
 import LocalStorage from "Base/LocalStorage";
@@ -24,6 +25,20 @@ import {
   SignUpWrapper,
   ErrorMessage
 } from "./style";
+
+const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .min(8, 'Too Short!')
+    .required('Required'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], "Passwords don't match")
+    .required('Required'),
+});
 
 class SignUP extends Component {
   constructor(props) {
@@ -86,6 +101,9 @@ class SignUP extends Component {
             <Formik
               initialValues={{ name: '', email: '', password: '', confirmPassword: '' }}
               onSubmit={this.onSubmitForm}
+              validationSchema={SignupSchema}
+              validateOnChange={false}
+              validateOnBlur={false}
             >
               {props => (
                 <React.Fragment>
@@ -94,12 +112,14 @@ class SignUP extends Component {
                     onChangeText={props.handleChange("name")}
                     onBlur={props.handleBlur("name")}
                     value={props.values.name}
+                    error={props.errors.name}
                   />
                   <TextInput
                     placeholder="email"
                     onChangeText={props.handleChange("email")}
                     onBlur={props.handleBlur("email")}
                     value={props.values.email}
+                    error={props.errors.email}
                   />
                   <TextInput
                     secureTextEntry
@@ -107,6 +127,7 @@ class SignUP extends Component {
                     onChangeText={props.handleChange("password")}
                     onBlur={props.handleBlur("password")}
                     value={props.values.password}
+                    error={props.errors.password}
                   />
                   <TextInput
                     secureTextEntry
@@ -114,6 +135,7 @@ class SignUP extends Component {
                     onChangeText={props.handleChange("confirmPassword")}
                     onBlur={props.handleBlur("confirmPassword")}
                     value={props.values.confirmPassword}
+                    error={props.errors.confirmPassword}
                   />
                   {isLoading ? (
                     <Loader size="large" />

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Formik } from "formik";
+import * as Yup from 'yup';
+
 import { TouchableHighlight } from "react-native";
 
 import formatDate from "date-fns/format";
@@ -37,6 +39,18 @@ import {
 } from "Src/globalStyle";
 
 import models from "../../sql/models";
+
+const CategorySchema = Yup.object().shape({
+  amount: Yup.string()
+    .required('Required')
+    .test("len", "Amount should be greater than 0", val => {
+      return parseFloat(val || 0) > 0;
+    }),
+  wallet: Yup.string()
+    .required('Required'),
+  category: Yup.string()
+    .required('Required'),
+});
 
 class CreateExpense extends Component {
   constructor(props) {
@@ -74,11 +88,11 @@ class CreateExpense extends Component {
 
   onSubmitForm(values) {
     const { history } = this.props;
-    values.amount = parseFloat(values.amount);
+    values.amount = parseFloat(values.amount || 0);
     models
       .get("expense")
       .create(values, true)
-      .then(dbRes => {
+      .then(() => {
         history.goBack();
       });
   }
@@ -116,6 +130,9 @@ class CreateExpense extends Component {
             dateTime: formatDate(new Date(), "DD/MM/YYYY")
           }}
           onSubmit={this.onSubmitForm}
+          validationSchema={CategorySchema}
+          validateOnChange={false}
+          validateOnBlur={false}
         >
           {props => (
             <React.Fragment>
@@ -144,6 +161,9 @@ class CreateExpense extends Component {
                             ? wallets[props.values.wallet].name
                             : "Select Wallet"}
                         </TypoGraphy>
+                        {
+                          props.errors.wallet && <TypoGraphy type="small" appearance="danger">{props.errors.wallet}</TypoGraphy>
+                        }
                       </RightInput>
                     </IconInputWrapper>
                   </FormSpace>
@@ -170,6 +190,9 @@ class CreateExpense extends Component {
                             ? categories[props.values.category].name
                             : "Select Category"}
                         </TypoGraphy>
+                        {
+                          props.errors.category && <TypoGraphy type="small" appearance="danger">{props.errors.category}</TypoGraphy>
+                        }
                       </RightInput>
                     </IconInputWrapper>
                   </FormSpace>
@@ -189,6 +212,7 @@ class CreateExpense extends Component {
                         onBlur={props.handleBlur("amount")}
                         value={props.values.amount}
                         keyboardType="numeric"
+                        error={props.errors.amount}
                       />
                     </RightInput>
                   </IconInputWrapper>

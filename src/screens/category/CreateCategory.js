@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { TouchableHighlight } from "react-native";
 import { Formik } from "formik";
+import * as Yup from 'yup';
 
 import Redux from "Redux/ReduxRegistry";
 import Header from 'Components/Header';
@@ -23,6 +24,11 @@ import {
   LeftIcon,
   RightInput
 } from "Src/globalStyle";
+
+const CategorySchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Required'),
+});
 
 class CreateCategory extends Component {
   constructor(props) {
@@ -62,6 +68,9 @@ class CreateCategory extends Component {
         <Formik
           initialValues={{ icon: "PLACEHOLDER" }}
           onSubmit={this.onSubmitForm}
+          validationSchema={CategorySchema}
+          validateOnChange={false}
+          validateOnBlur={false}
         >
           {props => (
             <React.Fragment>
@@ -84,6 +93,7 @@ class CreateCategory extends Component {
                       onChangeText={props.handleChange("name")}
                       onBlur={props.handleBlur("name")}
                       value={props.values.name}
+                      error={props.errors.name}
                     />
                   </RightInput>
                 </IconInputWrapper>

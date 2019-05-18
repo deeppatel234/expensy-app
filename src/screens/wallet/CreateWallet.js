@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { TouchableHighlight } from "react-native";
 
 import { Formik } from "formik";
+import * as Yup from 'yup';
 
 import Redux from "Redux/ReduxRegistry";
 import TypoGraphy from "Components/TypoGraphy";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
-import DropDown from "Components/DropDown";
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import Radio from "Components/RadioButton";
@@ -34,6 +34,12 @@ import {
   FormSpace,
 } from "Src/globalStyle";
 
+const WalletSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Required'),
+  balance: Yup.number().default(0),
+});
+
 class CreateWallet extends Component {
   constructor(props) {
     super(props);
@@ -52,7 +58,7 @@ class CreateWallet extends Component {
 
   onSubmitForm(values) {
     const { createWallet, history } = this.props;
-    values.balance = parseFloat(values.balance);
+    values.balance = parseFloat(values.balance || 0);
     createWallet(values).then(() => history.goBack());
   }
 
@@ -85,6 +91,9 @@ class CreateWallet extends Component {
         <Formik
           initialValues={{ icon: "PLACEHOLDER", currency: "INDIAN_RUPEE", type: "bank", balance: "0" }}
           onSubmit={this.onSubmitForm}
+          validationSchema={WalletSchema}
+          validateOnChange={false}
+          validateOnBlur={false}
         >
           {props => (
             <React.Fragment>
@@ -113,6 +122,7 @@ class CreateWallet extends Component {
                       onChangeText={props.handleChange("name")}
                       onBlur={props.handleBlur("name")}
                       value={props.values.name}
+                      error={props.errors.name}
                     />
                   </RightInput>
                 </IconInputWrapper>
@@ -131,6 +141,7 @@ class CreateWallet extends Component {
                       onBlur={props.handleBlur("balance")}
                       value={props.values.balance}
                       keyboardType="numeric"
+                      error={props.errors.balance}
                     />
                   </RightInput>
                 </IconInputWrapper>

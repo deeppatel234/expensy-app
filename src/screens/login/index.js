@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-native";
 import { Formik } from "formik";
+import * as Yup from 'yup';
 
 import Request from "Base/Request";
 import LocalStorage from "Base/LocalStorage";
@@ -24,6 +25,15 @@ import {
   SignUpWrapper,
   ErrorMessage
 } from "./style";
+
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
+  password: Yup.string()
+    .required('Required'),
+});
 
 class Login extends Component {
   constructor(props) {
@@ -82,6 +92,9 @@ class Login extends Component {
             <Formik
               initialValues={{ email: '', password: '' }}
               onSubmit={this.onSubmitForm}
+              validationSchema={LoginSchema}
+              validateOnChange={false}
+              validateOnBlur={false}
             >
               {props => (
                 <React.Fragment>
@@ -90,6 +103,7 @@ class Login extends Component {
                     onChangeText={props.handleChange("email")}
                     onBlur={props.handleBlur("email")}
                     value={props.values.email}
+                    error={props.errors.email}
                   />
                   <TextInput
                     secureTextEntry
@@ -97,6 +111,7 @@ class Login extends Component {
                     onChangeText={props.handleChange("password")}
                     onBlur={props.handleBlur("password")}
                     value={props.values.password}
+                    error={props.errors.password}
                   />
                   {isLoading ? (
                     <Loader size="large" />

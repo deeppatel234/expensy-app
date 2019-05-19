@@ -21,11 +21,12 @@ import {
 
 import { IconWrapper, Wrapper } from './styled';
 
-const IconModel = ({ visible, onSelect }) => (
+const IconModel = ({ visible, onClose, onSelect }) => (
   <Modal
     animationType="slide"
     transparent={false}
     visible={visible}
+    onRequestClose={onClose}
   >
     <Container>
       <Heading>

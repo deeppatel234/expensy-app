@@ -19,11 +19,12 @@ import {
   ListDetails,
 } from 'Src/globalStyle';
 
-const CurrencyModel = ({ visible, onSelect }) => (
+const CurrencyModel = ({ visible, onClose, onSelect }) => (
   <Modal
     animationType="slide"
     transparent={false}
     visible={visible}
+    onRequestClose={onClose}
   >
     <Container>
       <Heading>

@@ -23,11 +23,12 @@ import {
 } from 'Src/globalStyle';
 
 
-const WalletModel = ({ visible, wallets, onSelect }) => (
+const WalletModel = ({ visible, wallets, onClose, onSelect }) => (
   <Modal
     animationType="slide"
     transparent={false}
     visible={visible}
+    onRequestClose={onClose}
   >
     <Container>
       <Heading>

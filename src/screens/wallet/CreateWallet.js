@@ -51,8 +51,10 @@ class CreateWallet extends Component {
 
     this.onSelectIcon = this.onSelectIcon.bind(this);
     this.showIconModel = this.showIconModel.bind(this);
+    this.closeIconModel = this.closeIconModel.bind(this);
     this.onSelectCurrency = this.onSelectCurrency.bind(this);
     this.showCurrencyModel = this.showCurrencyModel.bind(this);
+    this.closeCurrencyModel = this.closeCurrencyModel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
@@ -66,6 +68,10 @@ class CreateWallet extends Component {
     this.setState({ iconModelVisible: true });
   }
 
+  closeIconModel() {
+    this.setState({ iconModelVisible: false });
+  }
+
   onSelectIcon(data, props) {
     props.setFieldValue("icon", data);
     this.setState({ iconModelVisible: false });
@@ -73,6 +79,10 @@ class CreateWallet extends Component {
 
   showCurrencyModel() {
     this.setState({ currencyModelVisible: true });
+  }
+
+  closeCurrencyModel() {
+    this.setState({ currencyModelVisible: false });
   }
 
   onSelectCurrency(data, props) {
@@ -148,10 +158,12 @@ class CreateWallet extends Component {
                 <IconModel
                   visible={iconModelVisible}
                   onSelect={data => this.onSelectIcon(data, props)}
+                  onClose={this.closeIconModel}
                 />
                 <CurrencyModel
                   visible={currencyModelVisible}
                   onSelect={data => this.onSelectCurrency(data, props)}
+                  onClose={this.closeCurrencyModel}
                 />
               </Content>
               <Footer>

@@ -64,7 +64,9 @@ class CreateExpense extends Component {
     this.onSelectWallet = this.onSelectWallet.bind(this);
     this.onSelectCategory = this.onSelectCategory.bind(this);
     this.showWalletModel = this.showWalletModel.bind(this);
+    this.closeWalletModel = this.closeWalletModel.bind(this);
     this.showCategoryModel = this.showCategoryModel.bind(this);
+    this.closeCategoryModel = this.closeCategoryModel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
@@ -84,6 +86,14 @@ class CreateExpense extends Component {
 
   showCategoryModel() {
     this.setState({ categoryModelVisible: true });
+  }
+
+  closeCategoryModel() {
+    this.setState({ categoryModelVisible: false });
+  }
+
+  closeWalletModel() {
+    this.setState({ walletModelVisible: false });
   }
 
   onSubmitForm(values) {
@@ -250,10 +260,12 @@ class CreateExpense extends Component {
                 <WalletModel
                   visible={walletModelVisible}
                   onSelect={data => this.onSelectWallet(data, props)}
+                  onClose={this.closeWalletModel}
                 />
                 <CategoryModel
                   visible={categoryModelVisible}
                   onSelect={data => this.onSelectCategory(data, props)}
+                  onClose={this.closeCategoryModel}
                 />
               </Content>
               <Footer>

@@ -24,11 +24,12 @@ import {
   ListText,
 } from 'Src/globalStyle';
 
-const CategoryModel = ({ visible, onSelect, categories }) => (
+const CategoryModel = ({ visible, onSelect, onClose, categories }) => (
   <Modal
     animationType="slide"
     transparent={false}
     visible={visible}
+    onRequestClose={onClose}
   >
     <Container>
       <Heading>

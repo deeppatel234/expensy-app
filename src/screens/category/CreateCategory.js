@@ -40,6 +40,7 @@ class CreateCategory extends Component {
 
     this.onSelectIcon = this.onSelectIcon.bind(this);
     this.showIconModel = this.showIconModel.bind(this);
+    this.closeIconModel = this.closeIconModel.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
@@ -50,6 +51,10 @@ class CreateCategory extends Component {
 
   showIconModel() {
     this.setState({ iconModelVisible: true });
+  }
+
+  closeIconModel() {
+    this.setState({ iconModelVisible: false });
   }
 
   onSelectIcon(data, props) {
@@ -100,6 +105,7 @@ class CreateCategory extends Component {
                 <IconModel
                   visible={iconModelVisible}
                   onSelect={data => this.onSelectIcon(data, props)}
+                  onClose={this.closeIconModel}
                 />
               </Content>
               <Footer>

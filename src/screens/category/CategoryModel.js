@@ -22,6 +22,7 @@ import {
   ListWrapper,
   ListItem,
   ListText,
+  SafeAreaView,
 } from 'Src/globalStyle';
 
 const CategoryModel = ({ visible, onSelect, onClose, categories }) => (
@@ -31,27 +32,29 @@ const CategoryModel = ({ visible, onSelect, onClose, categories }) => (
     visible={visible}
     onRequestClose={onClose}
   >
-    <Container>
-      <Heading>
-        <Header text="Categories" />
-      </Heading>
-      <Content>
-        <ListWrapper>
-          {
-            Object.values(categories).map((category) => (
-              <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
-                <ListItem>
-                  <Avatar>
-                    <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} color={BLACK} />
-                  </Avatar>
-                  <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
-                </ListItem>
-              </TouchableHighlight>
-            ))
-          }
-        </ListWrapper>
-      </Content>
-    </Container>
+    <SafeAreaView>
+      <Container>
+        <Heading>
+          <Header text="Categories" />
+        </Heading>
+        <Content>
+          <ListWrapper>
+            {
+              Object.values(categories).map((category) => (
+                <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
+                  <ListItem>
+                    <Avatar>
+                      <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} color={BLACK} />
+                    </Avatar>
+                    <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
+                  </ListItem>
+                </TouchableHighlight>
+              ))
+            }
+          </ListWrapper>
+        </Content>
+      </Container>
+    </SafeAreaView>
   </Modal>
 )
 

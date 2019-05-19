@@ -20,6 +20,7 @@ import {
   ListWrapper,
   ListItem,
   ListDetails,
+  SafeAreaView,
 } from 'Src/globalStyle';
 
 
@@ -30,30 +31,32 @@ const WalletModel = ({ visible, wallets, onClose, onSelect }) => (
     visible={visible}
     onRequestClose={onClose}
   >
-    <Container>
-      <Heading>
-        <Header text="Wallets" />
-      </Heading>
-      <Content>
-        <ListWrapper>
-          {
-            Object.values(wallets).map((wallet) => (
-              <TouchableHighlight key={wallet._id} onPress={() => onSelect(wallet)}>
-                <ListItem>
-                  <Avatar>
-                    <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} color={BLACK} />
-                  </Avatar>
-                  <ListDetails>
-                    <TypoGraphy>{wallet.name}</TypoGraphy>
-                    <TypoGraphy type="small">{wallet.balance} {CurrencyCode[wallet.currency].unicode}</TypoGraphy>
-                  </ListDetails>
-                </ListItem>
-              </TouchableHighlight>
-            ))
-          }
-        </ListWrapper>
-      </Content>
-    </Container>
+    <SafeAreaView>
+      <Container>
+        <Heading>
+          <Header text="Wallets" />
+        </Heading>
+        <Content>
+          <ListWrapper>
+            {
+              Object.values(wallets).map((wallet) => (
+                <TouchableHighlight key={wallet._id} onPress={() => onSelect(wallet)}>
+                  <ListItem>
+                    <Avatar>
+                      <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} color={BLACK} />
+                    </Avatar>
+                    <ListDetails>
+                      <TypoGraphy>{wallet.name}</TypoGraphy>
+                      <TypoGraphy type="small">{wallet.balance} {CurrencyCode[wallet.currency].unicode}</TypoGraphy>
+                    </ListDetails>
+                  </ListItem>
+                </TouchableHighlight>
+              ))
+            }
+          </ListWrapper>
+        </Content>
+      </Container>
+    </SafeAreaView>
   </Modal>
 );
 

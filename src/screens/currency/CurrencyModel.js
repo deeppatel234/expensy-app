@@ -17,6 +17,7 @@ import {
   ListWrapper,
   ListItem,
   ListDetails,
+  SafeAreaView,
 } from 'Src/globalStyle';
 
 const CurrencyModel = ({ visible, onClose, onSelect }) => (
@@ -26,27 +27,29 @@ const CurrencyModel = ({ visible, onClose, onSelect }) => (
     visible={visible}
     onRequestClose={onClose}
   >
-    <Container>
-      <Heading>
-        <Header text="Currency" />
-      </Heading>
-      <Content>
-        <ListWrapper>
-          {
-            Object.keys(CurrencyCode).map((code) => (
-              <TouchableHighlight key={code} onPress={() => onSelect(code)}>
-                <ListItem>
-                  <ListDetails>
-                    <TypoGraphy>{CurrencyCode[code].name}</TypoGraphy>
-                    <TypoGraphy type="small">{CurrencyCode[code].unicode}</TypoGraphy>
-                  </ListDetails>
-                </ListItem>
-              </TouchableHighlight>
-            ))
-          }
-        </ListWrapper>
-      </Content>
-    </Container>
+    <SafeAreaView>
+      <Container>
+        <Heading>
+          <Header text="Currency" />
+        </Heading>
+        <Content>
+          <ListWrapper>
+            {
+              Object.keys(CurrencyCode).map((code) => (
+                <TouchableHighlight key={code} onPress={() => onSelect(code)}>
+                  <ListItem>
+                    <ListDetails>
+                      <TypoGraphy>{CurrencyCode[code].name}</TypoGraphy>
+                      <TypoGraphy type="small">{CurrencyCode[code].unicode}</TypoGraphy>
+                    </ListDetails>
+                  </ListItem>
+                </TouchableHighlight>
+              ))
+            }
+          </ListWrapper>
+        </Content>
+      </Container>
+    </SafeAreaView>
   </Modal>
 )
 

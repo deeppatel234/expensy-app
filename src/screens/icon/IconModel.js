@@ -17,6 +17,7 @@ import {
   Container,
   Heading,
   Content,
+  SafeAreaView,
 } from 'Src/globalStyle';
 
 import { IconWrapper, Wrapper } from './styled';
@@ -28,26 +29,28 @@ const IconModel = ({ visible, onClose, onSelect }) => (
     visible={visible}
     onRequestClose={onClose}
   >
-    <Container>
-      <Heading>
-        <Header text="Icons" />
-      </Heading>
-      <Content>
-        <Wrapper>
-          {
-            Object.keys(IconList).map((icon) => (
-              <TouchableHighlight key={icon} onPress={() => onSelect(icon)}>
-                <IconWrapper>
-                  <Avatar>
-                    <Icon type={IconList[icon].type} name={IconList[icon].name} color={BLACK} />
-                  </Avatar>
-                </IconWrapper>
-              </TouchableHighlight>
-            ))
-          }
-        </Wrapper>
-      </Content>
-    </Container>
+    <SafeAreaView>
+      <Container>
+        <Heading>
+          <Header text="Icons" />
+        </Heading>
+        <Content>
+          <Wrapper>
+            {
+              Object.keys(IconList).map((icon) => (
+                <TouchableHighlight key={icon} onPress={() => onSelect(icon)}>
+                  <IconWrapper>
+                    <Avatar>
+                      <Icon type={IconList[icon].type} name={IconList[icon].name} color={BLACK} />
+                    </Avatar>
+                  </IconWrapper>
+                </TouchableHighlight>
+              ))
+            }
+          </Wrapper>
+        </Content>
+      </Container>
+    </SafeAreaView>
   </Modal>
 )
 

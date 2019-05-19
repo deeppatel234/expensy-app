@@ -8,11 +8,14 @@ import Start from 'Src/Start';
 
 import { light, dark } from 'Src/theme';
 
+import { SafeAreaView } from 'Src/globalStyle';
 
 const App = ({ isLightTheme }) => (
   <ThemeProvider theme={isLightTheme ? light : dark}>
     <AppAuthentication>
-      <Start />
+      <SafeAreaView>
+        <Start />
+      </SafeAreaView>
     </AppAuthentication>
   </ThemeProvider>
 );

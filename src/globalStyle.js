@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 import TypoGraphy from 'Components/TypoGraphy';
 
+export const SafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${props => props.theme.primary};
+`;
+
 export const Container = styled.View`
   display: flex;
   flex: 1;

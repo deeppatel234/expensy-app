@@ -150,9 +150,6 @@ android {
 
 dependencies {
     implementation project(':react-native-touch-id')
-    implementation project(':appcenter-crashes')
-    implementation project(':appcenter-analytics')
-    implementation project(':appcenter')
     implementation project(':@react-native-community_netinfo')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-sqlite-storage')

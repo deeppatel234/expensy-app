@@ -1,4 +1,4 @@
-package com.expensyapp;
+package com.devivetech.expensy;
 
 import android.app.Application;
 

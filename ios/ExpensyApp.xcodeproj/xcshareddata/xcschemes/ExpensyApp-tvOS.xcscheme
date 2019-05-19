@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "ExpensyApp-tvOS.app"
-               BlueprintName = "ExpensyApp-tvOS"
-               ReferencedContainer = "container:ExpensyApp.xcodeproj">
+               BuildableName = "Expensy-tvOS.app"
+               BlueprintName = "Expensy-tvOS"
+               ReferencedContainer = "container:Expensy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "ExpensyApp-tvOSTests.xctest"
-               BlueprintName = "ExpensyApp-tvOSTests"
-               ReferencedContainer = "container:ExpensyApp.xcodeproj">
+               BuildableName = "Expensy-tvOSTests.xctest"
+               BlueprintName = "Expensy-tvOSTests"
+               ReferencedContainer = "container:Expensy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "ExpensyApp-tvOSTests.xctest"
-               BlueprintName = "ExpensyApp-tvOSTests"
-               ReferencedContainer = "container:ExpensyApp.xcodeproj">
+               BuildableName = "Expensy-tvOSTests.xctest"
+               BlueprintName = "Expensy-tvOSTests"
+               ReferencedContainer = "container:Expensy.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ExpensyApp-tvOS.app"
-            BlueprintName = "ExpensyApp-tvOS"
-            ReferencedContainer = "container:ExpensyApp.xcodeproj">
+            BuildableName = "Expensy-tvOS.app"
+            BlueprintName = "Expensy-tvOS"
+            ReferencedContainer = "container:Expensy.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ExpensyApp-tvOS.app"
-            BlueprintName = "ExpensyApp-tvOS"
-            ReferencedContainer = "container:ExpensyApp.xcodeproj">
+            BuildableName = "Expensy-tvOS.app"
+            BlueprintName = "Expensy-tvOS"
+            ReferencedContainer = "container:Expensy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "ExpensyApp-tvOS.app"
-            BlueprintName = "ExpensyApp-tvOS"
-            ReferencedContainer = "container:ExpensyApp.xcodeproj">
+            BuildableName = "Expensy-tvOS.app"
+            BlueprintName = "Expensy-tvOS"
+            ReferencedContainer = "container:Expensy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

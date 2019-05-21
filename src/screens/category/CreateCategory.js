@@ -10,7 +10,7 @@ import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Footer from 'Components/Footer';
 
-import IconModel from "Screens/icon/IconModel";
+import IconModal from "Screens/icon/IconModal";
 
 import {
   Container,
@@ -31,12 +31,12 @@ class CreateCategory extends Component {
     super(props);
 
     this.state = {
-      iconModelVisible: false
+      iconModalVisible: false
     };
 
     this.onSelectIcon = this.onSelectIcon.bind(this);
-    this.showIconModel = this.showIconModel.bind(this);
-    this.closeIconModel = this.closeIconModel.bind(this);
+    this.showIconModal = this.showIconModal.bind(this);
+    this.closeIconModal = this.closeIconModal.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
@@ -45,21 +45,21 @@ class CreateCategory extends Component {
     createCategory(values).then(() => history.goBack());
   }
 
-  showIconModel() {
-    this.setState({ iconModelVisible: true });
+  showIconModal() {
+    this.setState({ iconModalVisible: true });
   }
 
-  closeIconModel() {
-    this.setState({ iconModelVisible: false });
+  closeIconModal() {
+    this.setState({ iconModalVisible: false });
   }
 
   onSelectIcon(data, props) {
     props.setFieldValue("icon", data);
-    this.setState({ iconModelVisible: false });
+    this.setState({ iconModalVisible: false });
   }
 
   render() {
-    const { iconModelVisible } = this.state;
+    const { iconModalVisible } = this.state;
 
     return (
       <Container>
@@ -78,7 +78,7 @@ class CreateCategory extends Component {
               <Content>
                 <IconInputWrapper>
                   <LeftIcon>
-                    <TouchableHighlight onPress={this.showIconModel}>
+                    <TouchableHighlight onPress={this.showIconModal}>
                       <Avatar.Icon iconKey={props.values.icon} />
                     </TouchableHighlight>
                   </LeftIcon>
@@ -92,10 +92,10 @@ class CreateCategory extends Component {
                     />
                   </RightInput>
                 </IconInputWrapper>
-                <IconModel
-                  visible={iconModelVisible}
+                <IconModal
+                  visible={iconModalVisible}
                   onSelect={data => this.onSelectIcon(data, props)}
-                  onClose={this.closeIconModel}
+                  onClose={this.closeIconModal}
                 />
               </Content>
               <Footer>

@@ -8,8 +8,8 @@ import { TouchableHighlight } from "react-native";
 
 import formatDate from "date-fns/format";
 
-import WalletModel from "Screens/wallet/WalletModel";
-import CategoryModel from "Screens/category/CategoryModel";
+import WalletModal from "Screens/wallet/WalletModal";
+import CategoryModal from "Screens/category/CategoryModal";
 
 import DatePicker from "Components/DatePicker";
 import TextInput from "Components/TextInput";
@@ -20,7 +20,6 @@ import Icon from "Components/Icon";
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 
-import IconList from 'Utils/IconList';
 import CurrencyCode from "Utils/CurrencyCode";
 
 import { EXPENSE_TYPES } from 'Models/ExpenseModel';
@@ -57,43 +56,43 @@ class CreateExpense extends Component {
     super(props);
 
     this.state = {
-      walletModelVisible: false,
-      categoryModelVisible: false
+      walletModalVisible: false,
+      categoryModalVisible: false
     };
 
     this.onSelectWallet = this.onSelectWallet.bind(this);
     this.onSelectCategory = this.onSelectCategory.bind(this);
-    this.showWalletModel = this.showWalletModel.bind(this);
-    this.closeWalletModel = this.closeWalletModel.bind(this);
-    this.showCategoryModel = this.showCategoryModel.bind(this);
-    this.closeCategoryModel = this.closeCategoryModel.bind(this);
+    this.showWalletModal = this.showWalletModal.bind(this);
+    this.closeWalletModal = this.closeWalletModal.bind(this);
+    this.showCategoryModal = this.showCategoryModal.bind(this);
+    this.closeCategoryModal = this.closeCategoryModal.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
   onSelectWallet(data, props) {
     props.setFieldValue("wallet", data._id);
-    this.setState({ walletModelVisible: false });
+    this.setState({ walletModalVisible: false });
   }
 
   onSelectCategory(data, props) {
     props.setFieldValue("category", data._id);
-    this.setState({ categoryModelVisible: false });
+    this.setState({ categoryModalVisible: false });
   }
 
-  showWalletModel() {
-    this.setState({ walletModelVisible: true });
+  showWalletModal() {
+    this.setState({ walletModalVisible: true });
   }
 
-  showCategoryModel() {
-    this.setState({ categoryModelVisible: true });
+  showCategoryModal() {
+    this.setState({ categoryModalVisible: true });
   }
 
-  closeCategoryModel() {
-    this.setState({ categoryModelVisible: false });
+  closeCategoryModal() {
+    this.setState({ categoryModalVisible: false });
   }
 
-  closeWalletModel() {
-    this.setState({ walletModelVisible: false });
+  closeWalletModal() {
+    this.setState({ walletModalVisible: false });
   }
 
   onSubmitForm(values) {
@@ -123,7 +122,7 @@ class CreateExpense extends Component {
   }
 
   render() {
-    const { walletModelVisible, categoryModelVisible } = this.state;
+    const { walletModalVisible, categoryModalVisible } = this.state;
     const { categories, wallets } = this.props;
 
     return (
@@ -151,7 +150,7 @@ class CreateExpense extends Component {
                     <Radio.Button value={EXPENSE_TYPES.INCOME} text="Incomes" style={{ flexGrow: 1 }} />
                   </Radio.Group>
                 </FormSpace>
-                <TouchableHighlight onPress={this.showWalletModel}>
+                <TouchableHighlight onPress={this.showWalletModal}>
                   <FormSpace>
                     <IconInputWrapper center>
                       <LeftIcon>
@@ -170,7 +169,7 @@ class CreateExpense extends Component {
                     </IconInputWrapper>
                   </FormSpace>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.showCategoryModel}>
+                <TouchableHighlight onPress={this.showCategoryModal}>
                   <FormSpace>
                     <IconInputWrapper center>
                       <LeftIcon>
@@ -239,15 +238,15 @@ class CreateExpense extends Component {
                     </BorderBottom>
                     </RightInput>
                 </IconInputWrapper>
-                <WalletModel
-                  visible={walletModelVisible}
+                <WalletModal
+                  visible={walletModalVisible}
                   onSelect={data => this.onSelectWallet(data, props)}
-                  onClose={this.closeWalletModel}
+                  onClose={this.closeWalletModal}
                 />
-                <CategoryModel
-                  visible={categoryModelVisible}
+                <CategoryModal
+                  visible={categoryModalVisible}
                   onSelect={data => this.onSelectCategory(data, props)}
-                  onClose={this.closeCategoryModel}
+                  onClose={this.closeCategoryModal}
                 />
               </Content>
               <Footer>

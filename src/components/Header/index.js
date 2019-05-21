@@ -12,13 +12,17 @@ import {
   MenuButton,
 } from './style';
 
-const Header = ({ text, openMenuDrawer }) => (
+const Header = ({ text, openMenuDrawer, menu = true }) => (
   <HeaderWrapper>
-    <MenuButton>
-      <TouchableOpacity onPress={openMenuDrawer}>
-        <Icon type="Feather" name="menu" size={30} />
-      </TouchableOpacity>
-    </MenuButton>
+    {
+      menu && (
+        <MenuButton>
+          <TouchableOpacity onPress={openMenuDrawer}>
+            <Icon type="Feather" name="menu" size={30} />
+          </TouchableOpacity>
+        </MenuButton>
+      )
+    }
     <TypoGraphy type="heading" appearance="primary">{text}</TypoGraphy>
   </HeaderWrapper>
 );

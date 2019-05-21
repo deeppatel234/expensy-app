@@ -14,9 +14,9 @@ import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import Radio from "Components/RadioButton";
 
-import IconModel from "Screens/icon/IconModel";
+import IconModal from "Screens/icon/IconModal";
 
-import CurrencyModel from "Screens/currency/CurrencyModel";
+import CurrencyModal from "Screens/currency/CurrencyModal";
 import CurrencyCode from 'Utils/CurrencyCode';
 
 import { BLACK } from 'Src/theme';
@@ -43,16 +43,16 @@ class CreateWallet extends Component {
     super(props);
 
     this.state = {
-      iconModelVisible: false,
-      currencyModelVisible: false,
+      iconModalVisible: false,
+      currencyModalVisible: false,
     };
 
     this.onSelectIcon = this.onSelectIcon.bind(this);
-    this.showIconModel = this.showIconModel.bind(this);
-    this.closeIconModel = this.closeIconModel.bind(this);
+    this.showIconModal = this.showIconModal.bind(this);
+    this.closeIconModal = this.closeIconModal.bind(this);
     this.onSelectCurrency = this.onSelectCurrency.bind(this);
-    this.showCurrencyModel = this.showCurrencyModel.bind(this);
-    this.closeCurrencyModel = this.closeCurrencyModel.bind(this);
+    this.showCurrencyModal = this.showCurrencyModal.bind(this);
+    this.closeCurrencyModal = this.closeCurrencyModal.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
   }
 
@@ -62,34 +62,34 @@ class CreateWallet extends Component {
     createWallet(values).then(() => history.goBack());
   }
 
-  showIconModel() {
-    this.setState({ iconModelVisible: true });
+  showIconModal() {
+    this.setState({ iconModalVisible: true });
   }
 
-  closeIconModel() {
-    this.setState({ iconModelVisible: false });
+  closeIconModal() {
+    this.setState({ iconModalVisible: false });
   }
 
   onSelectIcon(data, props) {
     props.setFieldValue("icon", data);
-    this.setState({ iconModelVisible: false });
+    this.setState({ iconModalVisible: false });
   }
 
-  showCurrencyModel() {
-    this.setState({ currencyModelVisible: true });
+  showCurrencyModal() {
+    this.setState({ currencyModalVisible: true });
   }
 
-  closeCurrencyModel() {
-    this.setState({ currencyModelVisible: false });
+  closeCurrencyModal() {
+    this.setState({ currencyModalVisible: false });
   }
 
   onSelectCurrency(data, props) {
     props.setFieldValue("currency", data);
-    this.setState({ currencyModelVisible: false });
+    this.setState({ currencyModalVisible: false });
   }
 
   render() {
-    const { iconModelVisible, currencyModelVisible } = this.state;
+    const { iconModalVisible, currencyModalVisible } = this.state;
 
     return (
       <Container>
@@ -114,7 +114,7 @@ class CreateWallet extends Component {
                 </FormSpace>
                 <IconInputWrapper>
                   <LeftIcon>
-                    <TouchableHighlight onPress={this.showIconModel}>
+                    <TouchableHighlight onPress={this.showIconModal}>
                       <Avatar.Icon iconKey={props.values.icon} />
                     </TouchableHighlight>
                   </LeftIcon>
@@ -130,7 +130,7 @@ class CreateWallet extends Component {
                 </IconInputWrapper>
                 <IconInputWrapper>
                   <LeftIcon>
-                    <TouchableHighlight onPress={this.showCurrencyModel}>
+                    <TouchableHighlight onPress={this.showCurrencyModal}>
                       <Avatar>
                         <TypoGraphy color={BLACK}>{CurrencyCode[props.values.currency].unicode}</TypoGraphy>
                       </Avatar>
@@ -147,15 +147,15 @@ class CreateWallet extends Component {
                     />
                   </RightInput>
                 </IconInputWrapper>
-                <IconModel
-                  visible={iconModelVisible}
+                <IconModal
+                  visible={iconModalVisible}
                   onSelect={data => this.onSelectIcon(data, props)}
-                  onClose={this.closeIconModel}
+                  onClose={this.closeIconModal}
                 />
-                <CurrencyModel
-                  visible={currencyModelVisible}
+                <CurrencyModal
+                  visible={currencyModalVisible}
                   onSelect={data => this.onSelectCurrency(data, props)}
-                  onClose={this.closeCurrencyModel}
+                  onClose={this.closeCurrencyModal}
                 />
               </Content>
               <Footer>

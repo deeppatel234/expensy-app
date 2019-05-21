@@ -109,14 +109,12 @@ class CreateExpense extends Component {
 
   getCategoryIcon(category) {
     const { categories } = this.props;
-    return category
-      ? IconList[categories[category].icon]
-      : IconList.PLACEHOLDER;
+    return category ? categories[category].icon : 'PLACEHOLDER';
   }
 
   getWalletIcon(wallet) {
     const { wallets } = this.props;
-    return wallet ? IconList[wallets[wallet].icon] : IconList.PLACEHOLDER;
+    return wallet ? wallets[wallet].icon : 'PLACEHOLDER';
   }
 
   getCurrencyCode(wallet) {
@@ -157,13 +155,7 @@ class CreateExpense extends Component {
                   <FormSpace>
                     <IconInputWrapper center>
                       <LeftIcon>
-                        <Avatar>
-                          <Icon
-                            type={this.getWalletIcon(props.values.wallet).type}
-                            name={this.getWalletIcon(props.values.wallet).name}
-                            color={BLACK}
-                          />
-                        </Avatar>
+                        <Avatar.Icon iconKey={this.getWalletIcon(props.values.wallet)} />
                       </LeftIcon>
                       <RightInput>
                         <TypoGraphy>
@@ -182,17 +174,7 @@ class CreateExpense extends Component {
                   <FormSpace>
                     <IconInputWrapper center>
                       <LeftIcon>
-                        <Avatar>
-                          <Icon
-                            type={
-                              this.getCategoryIcon(props.values.category).type
-                            }
-                            name={
-                              this.getCategoryIcon(props.values.category).name
-                            }
-                            color={BLACK}
-                          />
-                        </Avatar>
+                        <Avatar.Icon iconKey={this.getCategoryIcon(props.values.category)} />
                       </LeftIcon>
                       <RightInput>
                         <TypoGraphy>

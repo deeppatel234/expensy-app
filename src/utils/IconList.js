@@ -1,66 +1,417 @@
 export default {
   PLACEHOLDER: {
-    name: "ios-help",
-    type: "Ionicons",
+    type: 'icon',
+    icon: 'ios-help',
+    iconType: 'Ionicons',
+    group: 'category',
   },
-  IOS_LAPTOP: {
-    name: "ios-laptop",
-    type: "Ionicons"
+  CREDIT_CARD: {
+    type: 'icon',
+    icon: 'creditcard',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_airplane: {
-    name: "ios-airplane",
-    type: "Ionicons"
+  BOOK: {
+    type: 'icon',
+    icon: 'book',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_AMERICAN_FOOTBALL: {
-    name: "ios-american-football",
-    type: "Ionicons"
+  MAIL: {
+    type: 'icon',
+    icon: 'mail',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BASKET: {
-    name: "ios-basket",
-    type: "Ionicons"
+  HOME: {
+    type: 'icon',
+    icon: 'home',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BICYCLE: {
-    name: "ios-bicycle",
-    type: "Ionicons"
+  SHOPPING_CART: {
+    type: 'icon',
+    icon: 'shoppingcart',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BOAT: {
-    name: "ios-boat",
-    type: "Ionicons"
+  PHONE: {
+    type: 'icon',
+    icon: 'phone',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BODY: {
-    name: "ios-body",
-    type: "Ionicons"
+  LINE_CHART: {
+    type: 'icon',
+    icon: 'linechart',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BOOK: {
-    name: "ios-book",
-    type: "Ionicons"
+  DESKTOP: {
+    type: 'icon',
+    icon: 'iconfontdesktop',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BRUSH: {
-    name: "ios-brush",
-    type: "Ionicons"
+  MOBILE: {
+    type: 'icon',
+    icon: 'mobile1',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BUILD: {
-    name: "ios-build",
-    type: "Ionicons"
+  KEY: {
+    type: 'icon',
+    icon: 'key',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BULB: {
-    name: "ios-bulb",
-    type: "Ionicons"
+  TOOL: {
+    type: 'icon',
+    icon: 'tool',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_BUS: {
-    name: "ios-bus",
-    type: "Ionicons"
+  SKIN: {
+    type: 'icon',
+    icon: 'skin',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_CAFE: {
-    name: "ios-cafe",
-    type: "Ionicons"
+  CAR: {
+    type: 'icon',
+    icon: 'car',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_CALCULATOR: {
-    name: "ios-calculator",
-    type: "Ionicons"
+  ISV: {
+    type: 'icon',
+    icon: 'isv',
+    iconType: 'AntDesign',
+    group: 'category',
   },
-  IOS_CALL: {
-    name: "ios-call",
-    type: "Ionicons"
-  }
+  GIFT: {
+    type: 'icon',
+    icon: 'gift',
+    iconType: 'AntDesign',
+    group: 'category',
+  },
+  MEDICINE_BOX: {
+    type: 'icon',
+    icon: 'medicinebox',
+    iconType: 'AntDesign',
+    group: 'category',
+  },
+  REST: {
+    type: 'icon',
+    icon: 'rest',
+    iconType: 'AntDesign',
+    group: 'category',
+  },
+  WALLET: {
+    type: 'icon',
+    icon: 'wallet',
+    iconType: 'AntDesign',
+    group: 'category',
+  },
+  BANK: {
+    type: 'icon',
+    icon: 'bank',
+    iconType: 'AntDesign',
+    group: 'category',
+  },
+  BULB: {
+    type: 'icon',
+    icon: 'bulb1',
+    iconType: 'AntDesign',
+    group: 'category',
+  },
+  WIFI: {
+    type: 'icon',
+    icon: 'wifi',
+    iconType: 'AntDesign',
+    group: 'category',
+  },
+  AWARD: {
+    type: 'icon',
+    icon: 'award',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  BRIEFCASE: {
+    type: 'icon',
+    icon: 'briefcase',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  FILM: {
+    type: 'icon',
+    icon: 'film',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  HEADPHONES: {
+    type: 'icon',
+    icon: 'headphones',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  MAP: {
+    type: 'icon',
+    icon: 'map',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  MUSIC: {
+    type: 'icon',
+    icon: 'music',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  PACKAGE: {
+    type: 'icon',
+    icon: 'package',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  TRUCK: {
+    type: 'icon',
+    icon: 'truck',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  WATCH: {
+    type: 'icon',
+    icon: 'watch',
+    iconType: 'Feather',
+    group: 'category',
+  },
+  BICYCLE: {
+    type: 'icon',
+    icon: 'ios-bicycle',
+    iconType: 'Ionicons',
+    group: 'category',
+  },
+  BUS: {
+    type: 'icon',
+    icon: 'ios-bus',
+    iconType: 'Ionicons',
+    group: 'category',
+  },
+  WINE: {
+    type: 'icon',
+    icon: 'ios-wine',
+    iconType: 'Ionicons',
+    group: 'category',
+  },
+  BANK_TRANSFER: {
+    type: 'icon',
+    icon: 'bank-transfer',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  BANK_TRANSFER_IN: {
+    type: 'icon',
+    icon: 'bank-transfer-in',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  BANK_REMOVE: {
+    type: 'icon',
+    icon: 'bank-remove',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  BANK_PLUS: {
+    type: 'icon',
+    icon: 'bank-plus',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  BANK_MINUS: {
+    type: 'icon',
+    icon: 'bank-minus',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  BANK: {
+    type: 'icon',
+    icon: 'bank',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  CAR_SPORTS: {
+    type: 'icon',
+    icon: 'car-sports',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  CONTROLLER_CLASSIC: {
+    type: 'icon',
+    icon: 'controller-classic-outline',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  CUBE_OUTLINE: {
+    type: 'icon',
+    icon: 'cube-outline',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  DELETE_OUTLINE: {
+    type: 'icon',
+    icon: 'delete-outline',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  DOG_SIDE: {
+    type: 'icon',
+    icon: 'dog-side',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  HAMBURGER: {
+    type: 'icon',
+    icon: 'hamburger',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  HOSPITAL: {
+    type: 'icon',
+    icon: 'hospital',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  MOVIE_OUTLINE: {
+    type: 'icon',
+    icon: 'movie-outline',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  PAPERCLIP: {
+    type: 'icon',
+    icon: 'paperclip',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  RECEIPT: {
+    type: 'icon',
+    icon: 'receipt',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  STORE: {
+    type: 'icon',
+    icon: 'store',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  TRAIN: {
+    type: 'icon',
+    icon: 'train',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  TROPHY_OUTLINE: {
+    type: 'icon',
+    icon: 'trophy-outline',
+    iconType: 'MaterialCommunityIcons',
+    group: 'category',
+  },
+  ENERGY: {
+    type: 'icon',
+    icon: 'energy',
+    iconType: 'SimpleLineIcons',
+    group: 'category',
+  },
+  GAME_CONTROLLER: {
+    type: 'icon',
+    icon: 'game-controller',
+    iconType: 'SimpleLineIcons',
+    group: 'category',
+  },
+  AXIS_BANK: {
+    image: require('Src/assets/icons/axis.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  SBI_BANK: {
+    image: require('Src/assets/icons/sbi.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  AMAZON_PAY: {
+    image: require('Src/assets/icons/amazon.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  PAYTM_PAY: {
+    image: require('Src/assets/icons/paytm.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  BANK_OF_BARODA: {
+    image: require('Src/assets/icons/bob.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  PAYTM_PAY: {
+    image: require('Src/assets/icons/paytm.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  CANARA_BANK: {
+    image: require('Src/assets/icons/canara-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  CENTRAL_BANK: {
+    image: require('Src/assets/icons/central-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  CITY_BANK: {
+    image: require('Src/assets/icons/citybank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  FREECHARGE_BANK: {
+    image: require('Src/assets/icons/freecharge.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  HDFC_BANK: {
+    image: require('Src/assets/icons/hdfc.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  ICICI_BANK: {
+    image: require('Src/assets/icons/icici-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  IDBI_BANK: {
+    image: require('Src/assets/icons/IDBI-Bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  INDUS_BANK: {
+    image: require('Src/assets/icons/indusbank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  MOBIKWIK: {
+    image: require('Src/assets/icons/mobikwik.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  UNION_BANK: {
+    image: require('Src/assets/icons/union-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  YES_BANK: {
+    image: require('Src/assets/icons/yes-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
 };

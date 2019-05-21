@@ -5,14 +5,9 @@ import Redux from "Redux/ReduxRegistry";
 
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
-import Icon from 'Components/Icon';
 import Header from 'Components/Header';
 import Link from 'Components/Link';
 import Footer from 'Components/Footer';
-
-import IconList from 'Utils/IconList';
-
-import { BLACK } from 'Src/theme';
 
 import {
   Container,
@@ -33,9 +28,7 @@ const ViewCategory = ({ categories }) => (
         {
           Object.values(categories).map((category) => (
             <ListItem key={category._id}>
-              <Avatar>
-                <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} color={BLACK} />
-              </Avatar>
+              <Avatar.Icon iconKey={category.icon} />
               <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
             </ListItem>
           ))

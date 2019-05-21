@@ -3,15 +3,11 @@ import { connect } from "react-redux";
 
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
-import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 
-import IconList from 'Utils/IconList';
 import CurrencyCode from 'Utils/CurrencyCode';
-
-import { BLACK } from 'Src/theme';
 
 import {
   Container,
@@ -32,9 +28,7 @@ const ViewWallet = ({ wallets }) => (
         {
           Object.values(wallets).map((wallet) => (
             <ListItem key={wallet._id}>
-              <Avatar>
-                <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} color={BLACK} />
-              </Avatar>
+              <Avatar.Icon iconKey={wallet.icon} />
               <ListDetails>
                 <TypoGraphy>{wallet.name}</TypoGraphy>
                 <TypoGraphy type="small">{wallet.balance} {CurrencyCode[wallet.currency].unicode}</TypoGraphy>

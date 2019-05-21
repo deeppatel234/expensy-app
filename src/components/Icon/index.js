@@ -31,10 +31,10 @@ const ICON_TYPE = {
   Feather,
 };
 
-const Icon = ({ type, appearance, theme, color, ...props}) => {
-  const IconComp = ICON_TYPE[type];
+const Icon = ({ iconType, icon, appearance, theme, color, name, type, ...props}) => {
+  const IconComp = ICON_TYPE[iconType || type];
   return (
-    <IconComp size={25} style={{ color: color || theme[appearance] }} {...props} />
+    <IconComp size={20} name={icon || name} style={{ color: color || theme[appearance] }} {...props} />
   );
 };
 

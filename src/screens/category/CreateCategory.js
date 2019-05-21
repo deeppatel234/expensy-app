@@ -8,13 +8,9 @@ import Redux from "Redux/ReduxRegistry";
 import Header from 'Components/Header';
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
-import Icon from "Components/Icon";
 import Footer from 'Components/Footer';
 
 import IconModel from "Screens/icon/IconModel";
-import IconList from 'Utils/IconList';
-
-import { BLACK } from 'Src/theme';
 
 import {
   Container,
@@ -83,13 +79,7 @@ class CreateCategory extends Component {
                 <IconInputWrapper>
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showIconModel}>
-                      <Avatar>
-                        <Icon
-                          type={IconList[props.values.icon].type}
-                          name={IconList[props.values.icon].name}
-                          color={BLACK}
-                        />
-                      </Avatar>
+                      <Avatar.Icon iconKey={props.values.icon} />
                     </TouchableHighlight>
                   </LeftIcon>
                   <RightInput>

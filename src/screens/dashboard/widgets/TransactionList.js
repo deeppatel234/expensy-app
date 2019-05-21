@@ -5,13 +5,9 @@ import _isEmpty from "lodash/isEmpty";
 import TypoGraphy from "Components/TypoGraphy";
 import Loader from "Components/Loader";
 import Avatar from "Components/Avatar";
-import Icon from "Components/Icon";
 
 import Models from "Models";
-import IconList from "Utils/IconList";
 import { EXPENSE_TYPES } from 'Models/ExpenseModel';
-
-import { BLACK } from 'Src/theme';
 
 import {
   WidgetWrapper,
@@ -67,14 +63,7 @@ class TransactionList extends Component {
               <Details key={transaction._id}>
                 <LeftDetails>
                   <IconWrapper marginPosition="right">
-                    <Avatar>
-                      <Icon
-                        type={IconList[categories[transaction.category].icon].type}
-                        name={IconList[categories[transaction.category].icon].name}
-                        color={BLACK}
-                        size={20}
-                      />
-                    </Avatar>
+                    <Avatar.Icon iconKey={categories[transaction.category].icon} />
                   </IconWrapper>
                   <SubDetails>
                     <TypoGraphy>{categories[transaction.category].name}</TypoGraphy>
@@ -93,14 +82,7 @@ class TransactionList extends Component {
                     <TypoGraphy appearance="muted">{transaction.dateTime}</TypoGraphy>
                   </SubDetails>
                   <IconWrapper marginPosition="left">
-                    <Avatar>
-                      <Icon
-                        type={IconList[wallets[transaction.wallet].icon].type}
-                        name={IconList[wallets[transaction.wallet].icon].name}
-                        color={BLACK}
-                        size={20}
-                      />
-                    </Avatar>
+                    <Avatar.Icon iconKey={wallets[transaction.wallet].icon} />
                   </IconWrapper>
                 </RightDetails>
               </Details>

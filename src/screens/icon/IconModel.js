@@ -6,12 +6,9 @@ import {
 } from 'react-native';
 
 import Avatar from 'Components/Avatar';
-import Icon from 'Components/Icon';
 import Header from 'Components/Header';
 
 import IconList from 'Utils/IconList';
-
-import { BLACK } from 'Src/theme';
 
 import {
   Container,
@@ -37,12 +34,10 @@ const IconModel = ({ visible, onClose, onSelect }) => (
         <Content>
           <Wrapper>
             {
-              Object.keys(IconList).map((icon) => (
-                <TouchableHighlight key={icon} onPress={() => onSelect(icon)}>
+              Object.keys(IconList).map((key) => (
+                <TouchableHighlight key={key} onPress={() => onSelect(key)}>
                   <IconWrapper>
-                    <Avatar>
-                      <Icon type={IconList[icon].type} name={IconList[icon].name} color={BLACK} />
-                    </Avatar>
+                    <Avatar.Icon iconKey={key} />
                   </IconWrapper>
                 </TouchableHighlight>
               ))

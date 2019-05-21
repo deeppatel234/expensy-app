@@ -5,12 +5,8 @@ import _isEmpty from "lodash/isEmpty";
 import TypoGraphy from "Components/TypoGraphy";
 import Loader from "Components/Loader";
 import Avatar from "Components/Avatar";
-import Icon from "Components/Icon";
 
 import Models from "Models";
-import IconList from "Utils/IconList";
-
-import { BLACK } from 'Src/theme';
 
 import {
   WidgetWrapper,
@@ -66,14 +62,7 @@ class CategoryWise extends Component {
               <Details key={amount.category}>
                 <LeftDetails>
                   <IconWrapper marginPosition="right">
-                    <Avatar>
-                      <Icon
-                        type={IconList[categories[amount.category].icon].type}
-                        name={IconList[categories[amount.category].icon].name}
-                        color={BLACK}
-                        size={20}
-                      />
-                    </Avatar>
+                    <Avatar.Icon iconKey={categories[amount.category].icon} />
                   </IconWrapper>
                   <TypoGraphy>{categories[amount.category].name}</TypoGraphy>
                 </LeftDetails>

@@ -5,13 +5,9 @@ import { Modal, TouchableHighlight } from 'react-native';
 
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
-import Icon from 'Components/Icon';
 import Header from 'Components/Header';
 
-import IconList from 'Utils/IconList';
 import CurrencyCode from 'Utils/CurrencyCode';
-
-import { BLACK } from 'Src/theme';
 
 import {
   Container,
@@ -42,9 +38,7 @@ const WalletModel = ({ visible, wallets, onClose, onSelect }) => (
               Object.values(wallets).map((wallet) => (
                 <TouchableHighlight key={wallet._id} onPress={() => onSelect(wallet)}>
                   <ListItem>
-                    <Avatar>
-                      <Icon type={IconList[wallet.icon].type} name={IconList[wallet.icon].name} color={BLACK} />
-                    </Avatar>
+                    <Avatar.Icon iconKey={wallet.icon} />
                     <ListDetails>
                       <TypoGraphy>{wallet.name}</TypoGraphy>
                       <TypoGraphy type="small">{wallet.balance} {CurrencyCode[wallet.currency].unicode}</TypoGraphy>

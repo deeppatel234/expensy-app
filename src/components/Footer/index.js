@@ -12,7 +12,7 @@ const Footer = ({ children, ...props }) => (
 
 const FooterAddButton = (props) => (
   <Footer.Button {...props} >
-    <Icon type="MaterialIcons" name="add" appearance="white" size={30} />
+    <Icon iconType="MaterialIcons" icon="add" appearance="white" size={30} />
   </Footer.Button>
 );
 

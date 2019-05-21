@@ -10,13 +10,11 @@ import Redux from "Redux/ReduxRegistry";
 import TypoGraphy from "Components/TypoGraphy";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
-import Icon from "Components/Icon";
 import Header from 'Components/Header';
 import Footer from 'Components/Footer';
 import Radio from "Components/RadioButton";
 
 import IconModel from "Screens/icon/IconModel";
-import IconList from 'Utils/IconList';
 
 import CurrencyModel from "Screens/currency/CurrencyModel";
 import CurrencyCode from 'Utils/CurrencyCode';
@@ -117,13 +115,7 @@ class CreateWallet extends Component {
                 <IconInputWrapper>
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showIconModel}>
-                      <Avatar>
-                        <Icon
-                          type={IconList[props.values.icon].type}
-                          name={IconList[props.values.icon].name}
-                          color={BLACK}
-                        />
-                      </Avatar>
+                      <Avatar.Icon iconKey={props.values.icon} />
                     </TouchableHighlight>
                   </LeftIcon>
                   <RightInput>

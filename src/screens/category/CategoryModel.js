@@ -8,12 +8,7 @@ import {
 
 import TypoGraphy from 'Components/TypoGraphy';
 import Avatar from 'Components/Avatar';
-import Icon from 'Components/Icon';
 import Header from 'Components/Header';
-
-import IconList from 'Utils/IconList';
-
-import { BLACK } from 'Src/theme';
 
 import {
   Container,
@@ -43,9 +38,7 @@ const CategoryModel = ({ visible, onSelect, onClose, categories }) => (
               Object.values(categories).map((category) => (
                 <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
                   <ListItem>
-                    <Avatar>
-                      <Icon type={IconList[category.icon].type} name={IconList[category.icon].name} color={BLACK} />
-                    </Avatar>
+                    <Avatar.Icon iconKey={category.icon} />
                     <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
                   </ListItem>
                 </TouchableHighlight>

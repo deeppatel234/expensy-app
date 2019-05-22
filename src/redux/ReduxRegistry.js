@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import Registry from '../base/Registry';
-import UserRedux from './UserRedux';
-import CategoryRedux from './CategoryRedux';
-import WalletRedux from './WalletRedux';
-import NetworkRedux from './NetworkRedux';
-import SettingRedux from './SettingRedux';
+import Registry from "../base/Registry";
+import UserRedux from "./UserRedux";
+import CategoryRedux from "./CategoryRedux";
+import WalletRedux from "./WalletRedux";
+import NetworkRedux from "./NetworkRedux";
+import SettingRedux from "./SettingRedux";
 
 class ReduxRegistry extends Registry {
   get(key, action) {
@@ -24,9 +24,9 @@ class ReduxRegistry extends Registry {
 
     return (state, action) => {
       if (action.type === this.data.user.constants.USER_LOGOUT) {
-        state = undefined
+        state = undefined;
       }
-      return appReducer(state, action)
+      return appReducer(state, action);
     };
   }
 
@@ -41,10 +41,10 @@ class ReduxRegistry extends Registry {
 
 const reduxRegistry = new ReduxRegistry();
 
-reduxRegistry.set('user', new UserRedux());
-reduxRegistry.set('category', new CategoryRedux());
-reduxRegistry.set('wallet', new WalletRedux());
-reduxRegistry.set('network', new NetworkRedux());
-reduxRegistry.set('setting', new SettingRedux());
+reduxRegistry.set("user", new UserRedux());
+reduxRegistry.set("category", new CategoryRedux());
+reduxRegistry.set("wallet", new WalletRedux());
+reduxRegistry.set("network", new NetworkRedux());
+reduxRegistry.set("setting", new SettingRedux());
 
 export default reduxRegistry;

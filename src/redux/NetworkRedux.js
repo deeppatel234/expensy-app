@@ -1,12 +1,15 @@
 import NetInfo from "@react-native-community/netinfo";
 
-import BaseRedux from './BaseRedux';
+import BaseRedux from "./BaseRedux";
 
 class NetworkRedux extends BaseRedux {
   constructor(props) {
     super(props);
 
-    NetInfo.addEventListener('connectionChange', this.onChangeNetwork.bind(this));
+    NetInfo.addEventListener(
+      "connectionChange",
+      this.onChangeNetwork.bind(this)
+    );
   }
 
   onChangeNetwork(data) {
@@ -19,8 +22,8 @@ class NetworkRedux extends BaseRedux {
 
   getConstants() {
     return {
-      CHANGE_NETWORK_STATUS: 'CHANGE_NETWORK_STATUS',
-      CHANGE_NETWORK_CONNECT: 'CHANGE_NETWORK_CONNECT',
+      CHANGE_NETWORK_STATUS: "CHANGE_NETWORK_STATUS",
+      CHANGE_NETWORK_CONNECT: "CHANGE_NETWORK_CONNECT"
     };
   }
 
@@ -30,21 +33,24 @@ class NetworkRedux extends BaseRedux {
       changeNetworkStatus(status) {
         return {
           type: self.constants.CHANGE_NETWORK_STATUS,
-          status,
+          status
         };
       },
       changeNetworkConnect(isConnected) {
         return {
           type: self.constants.CHANGE_NETWORK_CONNECT,
-          isConnected,
+          isConnected
         };
       },
       fetch() {
         return NetInfo.isConnected.fetch().then(isConnected => {
           self.onChangeConnected(isConnected);
-          NetInfo.isConnected.addEventListener('change', self.onChangeConnected.bind(self));
+          NetInfo.isConnected.addEventListener(
+            "change",
+            self.onChangeConnected.bind(self)
+          );
         });
-      },
+      }
     };
   }
 
@@ -60,7 +66,7 @@ class NetworkRedux extends BaseRedux {
           default:
             return state;
         }
-      },
+      }
     };
   }
 }

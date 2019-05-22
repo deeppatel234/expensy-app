@@ -1,22 +1,22 @@
-import BaseRedux from './BaseRedux';
-import LocalStorage from 'Base/LocalStorage';
+import BaseRedux from "./BaseRedux";
+import LocalStorage from "Base/LocalStorage";
 
 const DEFAULT_SETTINGS = {
   isDrawerOpen: false,
   fingerPrintLock: false,
   pinLock: false,
   pin: false,
-  isLightTheme: true,
+  isLightTheme: true
 };
 
 class SettingRedux extends BaseRedux {
   getConstants() {
     return {
-      SETTING_FETCH_DATA_SUCCESS: 'SETTING_FETCH_DATA_SUCCESS',
-      CHANGE_MENU_DRAWER_VISIBILITY: 'CHANGE_MENU_DRAWER_VISIBILITY',
-      CHANGE_FINGERPRINT_LOCK: 'CHANGE_FINGERPRINT_LOCK',
-      CHANGE_PIN_LOCK: 'CHANGE_PIN_LOCK',
-      CHANGE_THEME: 'CHANGE_THEME',
+      SETTING_FETCH_DATA_SUCCESS: "SETTING_FETCH_DATA_SUCCESS",
+      CHANGE_MENU_DRAWER_VISIBILITY: "CHANGE_MENU_DRAWER_VISIBILITY",
+      CHANGE_FINGERPRINT_LOCK: "CHANGE_FINGERPRINT_LOCK",
+      CHANGE_PIN_LOCK: "CHANGE_PIN_LOCK",
+      CHANGE_THEME: "CHANGE_THEME"
     };
   }
 
@@ -31,51 +31,51 @@ class SettingRedux extends BaseRedux {
       fetchDataSuccess(setting) {
         return {
           type: self.constants.SETTING_FETCH_DATA_SUCCESS,
-          setting,
+          setting
         };
       },
       changeTheme(isLightTheme) {
-        return (dispatch) => {
+        return dispatch => {
           dispatch({
             type: self.constants.CHANGE_THEME,
-            isLightTheme,
-          })
+            isLightTheme
+          });
           self.saveSetting({ isLightTheme });
         };
       },
       changeMenuDrawerVisibility(isVisible) {
-        return (dispatch) => {
+        return dispatch => {
           dispatch({
             type: self.constants.CHANGE_MENU_DRAWER_VISIBILITY,
-            isVisible,
-          })
+            isVisible
+          });
         };
       },
       changeFingerPrintLock(isLocked) {
-        return (dispatch) => {
+        return dispatch => {
           dispatch({
             type: self.constants.CHANGE_FINGERPRINT_LOCK,
-            isLocked,
-          })
+            isLocked
+          });
           self.saveSetting({ fingerPrintLock: isLocked });
         };
       },
       changePinLock(isLocked, pin = false) {
-        return (dispatch) => {
+        return dispatch => {
           dispatch({
             type: self.constants.CHANGE_PIN_LOCK,
             isLocked,
-            pin,
-          })
+            pin
+          });
           self.saveSetting({ pinLock: isLocked, pin });
         };
       },
       fetch() {
-        return LocalStorage.getSettings().then((setting) => {
+        return LocalStorage.getSettings().then(setting => {
           const settings = setting ? JSON.parse(setting) : DEFAULT_SETTINGS;
           self.dispatch(self.actions.fetchDataSuccess(settings));
         });
-      },
+      }
     };
   }
 
@@ -97,7 +97,7 @@ class SettingRedux extends BaseRedux {
           default:
             return state;
         }
-      },
+      }
     };
   }
 }

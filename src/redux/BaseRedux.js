@@ -1,5 +1,6 @@
-import Request from '../base/Request';
-import Models from '../sql/models';
+import Request from 'Base/Request';
+import Models from 'Models';
+
 
 class BaseRedux {
   constructor() {

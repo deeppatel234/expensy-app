@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { TouchableHighlight } from "react-native";
 
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 import Avatar from "Components/Avatar";
 import Modal from 'Components/Modal';
 
@@ -25,10 +25,10 @@ const WalletModal = ({ visible, wallets, onClose, onSelect }) => (
             <ListItem>
               <Avatar.Icon iconKey={wallet.icon} />
               <ListDetails>
-                <TypoGraphy>{wallet.name}</TypoGraphy>
-                <TypoGraphy type="small">
+                <Typography>{wallet.name}</Typography>
+                <Typography type="small">
                   {wallet.balance} {CurrencyCode[wallet.currency].unicode}
-                </TypoGraphy>
+                </Typography>
               </ListDetails>
             </ListItem>
           </TouchableHighlight>

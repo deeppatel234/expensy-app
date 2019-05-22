@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Redux from "Redux/ReduxRegistry";
 
-import TypoGraphy from 'Components/TypoGraphy';
+import Typography from 'Components/Typography';
 import Avatar from 'Components/Avatar';
 import Header from 'Components/Header';
 import Link from 'Components/Link';
@@ -29,7 +29,7 @@ const ViewCategory = ({ categories }) => (
           Object.values(categories).map((category) => (
             <ListItem key={category._id}>
               <Avatar.Icon iconKey={category.icon} />
-              <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
+              <ListText><Typography>{category.name}</Typography></ListText>
             </ListItem>
           ))
         }

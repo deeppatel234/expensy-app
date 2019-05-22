@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import TypoGraphy from 'Components/TypoGraphy';
+import Typography from 'Components/Typography';
 
 export const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -38,7 +38,7 @@ export const ListItem = styled.View`
   align-items: center;
 `;
 
-export const ListText = styled(TypoGraphy)`
+export const ListText = styled(Typography)`
   margin-left: 20px;
 `;
 

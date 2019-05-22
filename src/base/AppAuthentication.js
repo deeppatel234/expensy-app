@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import TouchID from 'react-native-touch-id';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import TouchID from "react-native-touch-id";
 import SplashLoading from "Screens/splash/SplashLoading";
 
 class AppAuthentication extends Component {
@@ -9,19 +9,21 @@ class AppAuthentication extends Component {
 
     this.state = {
       isAuthenticated: !props.setting.fingerPrintLock,
-      errorMessage: false,
+      errorMessage: false
     };
   }
 
   componentDidMount() {
-    const { setting: { fingerPrintLock } } = this.props;
-    if(fingerPrintLock) {
-      TouchID.authenticate('')
+    const {
+      setting: { fingerPrintLock }
+    } = this.props;
+    if (fingerPrintLock) {
+      TouchID.authenticate("")
         .then(() => {
           this.setState({ isAuthenticated: true });
         })
         .catch(() => {
-          this.setState({ errorMessage: 'Authentication Error' });
+          this.setState({ errorMessage: "Authentication Error" });
         });
     }
   }
@@ -30,7 +32,7 @@ class AppAuthentication extends Component {
     const { isAuthenticated, errorMessage } = this.state;
     const { children } = this.props;
 
-    if(isAuthenticated) {
+    if (isAuthenticated) {
       return children;
     }
 
@@ -39,9 +41,9 @@ class AppAuthentication extends Component {
 }
 
 // Maps state from store to props
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    setting: state.setting,
+    setting: state.setting
   };
 };
 

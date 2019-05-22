@@ -7,7 +7,7 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 
 import Redux from "Redux/ReduxRegistry";
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Header from 'Components/Header';
@@ -132,7 +132,7 @@ class CreateWallet extends Component {
                   <LeftIcon>
                     <TouchableHighlight onPress={this.showCurrencyModal}>
                       <Avatar>
-                        <TypoGraphy color={BLACK}>{CurrencyCode[props.values.currency].unicode}</TypoGraphy>
+                        <Typography color={BLACK}>{CurrencyCode[props.values.currency].unicode}</Typography>
                       </Avatar>
                     </TouchableHighlight>
                   </LeftIcon>

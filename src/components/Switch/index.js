@@ -1,23 +1,22 @@
 import React from "react";
+import { Switch } from "react-native";
 import { withTheme } from "styled-components";
-import { SwitchComp } from "./style";
-import { LightenDarkenColor } from 'Utils/utility';
 
-import { PRIMARY } from 'Src/theme';
+import { LightenDarkenColor } from "Utils/utility";
+import { PRIMARY, LIGHT_GRAY } from "Src/theme";
 
-const Switch = ({ theme, ...props }) => {
-  const lightenColor = LightenDarkenColor(PRIMARY, 30);
-  return (
-    <SwitchComp
-      trackColor={{ true: lightenColor,  false: lightenColor }}
-      thumbColor={theme.primary}
-      {...props}
-    />
-  );
+const lightenColor = LightenDarkenColor(PRIMARY, 30);
+
+const SwitchComp = ({ theme, ...props }) => (
+  <Switch
+    trackColor={{ true: lightenColor, false: LIGHT_GRAY }}
+    thumbColor={theme.primary}
+    {...props}
+  />
+);
+
+SwitchComp.defaultProps = {
+  appearance: "black"
 };
 
-Switch.defaultProps = {
-  appearance: "default"
-};
-
-export default withTheme(Switch);
+export default withTheme(SwitchComp);

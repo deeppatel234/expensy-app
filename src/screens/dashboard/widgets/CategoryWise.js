@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import _capitalize from "lodash/capitalize";
 import _isEmpty from "lodash/isEmpty";
 
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 import Loader from "Components/Loader";
 import Avatar from "Components/Avatar";
 
@@ -54,9 +54,9 @@ class CategoryWise extends Component {
         ) : (
           <React.Fragment>
             <WidgetTitle>
-              <TypoGraphy type="title">{`${_capitalize(
+              <Typography type="title">{`${_capitalize(
                 type
-              )} by Category`}</TypoGraphy>
+              )} by Category`}</Typography>
             </WidgetTitle>
             {amounts.map(amount => (
               <Details key={amount.category}>
@@ -64,9 +64,9 @@ class CategoryWise extends Component {
                   <IconWrapper marginPosition="right">
                     <Avatar.Icon iconKey={categories[amount.category].icon} />
                   </IconWrapper>
-                  <TypoGraphy>{categories[amount.category].name}</TypoGraphy>
+                  <Typography>{categories[amount.category].name}</Typography>
                 </LeftDetails>
-                <TypoGraphy>{amount.total.toFixed(2)}</TypoGraphy>
+                <Typography>{amount.total.toFixed(2)}</Typography>
               </Details>
             ))}
           </React.Fragment>

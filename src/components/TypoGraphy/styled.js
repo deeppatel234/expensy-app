@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from "styled-components";
 
-export const TypoGraphyText = styled.Text`
+export const TypographyText = styled.Text`
   color: ${props => props.color || props.theme[props.appearance]};
 `;

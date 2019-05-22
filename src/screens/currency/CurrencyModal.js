@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TouchableHighlight } from 'react-native';
 
-import TypoGraphy from 'Components/TypoGraphy';
+import Typography from 'Components/Typography';
 import Modal from 'Components/Modal';
 
 import CurrencyCode from 'Utils/CurrencyCode';
@@ -18,10 +18,10 @@ const CurrencyModal = ({ visible, onClose, onSelect }) => (
           <TouchableHighlight key={code} onPress={() => onSelect(code)}>
             <ListItem>
               <ListDetails>
-                <TypoGraphy>{CurrencyCode[code].name}</TypoGraphy>
-                <TypoGraphy type="small">
+                <Typography>{CurrencyCode[code].name}</Typography>
+                <Typography type="small">
                   {CurrencyCode[code].unicode}
-                </TypoGraphy>
+                </Typography>
               </ListDetails>
             </ListItem>
           </TouchableHighlight>

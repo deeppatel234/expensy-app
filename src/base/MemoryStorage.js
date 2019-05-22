@@ -1,4 +1,5 @@
-import Registry from './Registry';
+import Registry from "Base/Registry";
+
 /**
  * Memory Storage for store temporary session data
  *

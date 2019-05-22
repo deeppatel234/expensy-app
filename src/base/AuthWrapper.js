@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-native';
-import SplashLoading from "Screens/splash/SplashLoading";
+import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-native";
 
-import Auth from './Auth';
+import SplashLoading from "Screens/splash/SplashLoading";
+import MemoryStorage from "Base/MemoryStorage";
+import LocalStorage from "Base/LocalStorage";
 
 /**
  * use to redirect to app if not authenticated otherwise open given component
@@ -11,46 +12,46 @@ import Auth from './Auth';
  *  This is rendered if authenticated
  * </AuthWrapper>
  */
-class AuthWrapper extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: true,
-      isAuthenticated: false,
-    };
+
+const checkAuth = async () => {
+  if (MemoryStorage.get("token")) {
+    return Promise.resolve();
   }
 
-  componentDidMount() {
-    Auth.isAuthenticated().then(() => {
-      this.setState({
-        isLoading: false,
-        isAuthenticated: true,
+  const authToken = await LocalStorage.getToken();
+  if (!authToken) {
+    return Promise.reject();
+  }
+
+  MemoryStorage.set("token", authToken);
+  return Promise.resolve();
+};
+
+const AuthWrapper = ({ children, location }) => {
+  const [isLoading, setLoading] = useState(true);
+  const [isAuthenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    checkAuth()
+      .then(() => {
+        setAuthenticated(true);
+        setLoading(false);
+      })
+      .catch(() => {
+        setAuthenticated(false);
+        setLoading(false);
       });
-    }).catch(() => {
-      this.setState({
-        isLoading: false,
-        isAuthenticated: false,
-      });
-    });
+  });
+
+  if (isLoading) {
+    return <SplashLoading message="Authenticating User" />;
   }
 
-  render() {
-    const { isLoading, isAuthenticated } = this.state;
-    const { location } = this.props;
-
-    if (isLoading) {
-      return <SplashLoading message="Authenticating User" />;
-    }
-
-    if (isAuthenticated) {
-      const { children } = this.props;
-      return children;
-    }
-
-    return (
-      <Redirect to={{ pathname: '/login', state: { from: location } }} />
-    );
+  if (isAuthenticated) {
+    return children;
   }
-}
+
+  return <Redirect to={{ pathname: "/login", state: { from: location } }} />;
+};
 
 export default AuthWrapper;

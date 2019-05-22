@@ -1,23 +1,25 @@
-import React from 'react';
+import React from "react";
 
-import TypoGraphy from '../TypoGraphy';
+import Typography from "Components/Typography";
 
-import { ButtonElement } from './styled';
+import { ButtonElement } from "./styled";
 
 const APPEARANCE_MAP = {
-  primary: 'white',
-  black: 'primary',
+  primary: "white",
+  black: "primary"
 };
 
-const Button = (props) => (
-  <ButtonElement  {...props}>
-    <TypoGraphy appearance={APPEARANCE_MAP[props.appearance]}>{props.text}</TypoGraphy>
+const Button = props => (
+  <ButtonElement {...props}>
+    <Typography appearance={APPEARANCE_MAP[props.appearance]}>
+      {props.text}
+    </Typography>
   </ButtonElement>
 );
 
 Button.defaultProps = {
-  appearance: 'black',
-  block: false,
+  appearance: "black",
+  block: false
 };
 
 export default Button;

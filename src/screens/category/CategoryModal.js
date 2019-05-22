@@ -5,7 +5,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-import TypoGraphy from 'Components/TypoGraphy';
+import Typography from 'Components/Typography';
 import Avatar from 'Components/Avatar';
 import Modal from 'Components/Modal';
 
@@ -25,7 +25,7 @@ const CategoryModal = ({ visible, onSelect, onClose, categories }) => (
             <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
               <ListItem>
                 <Avatar.Icon iconKey={category.icon} />
-                <ListText><TypoGraphy>{category.name}</TypoGraphy></ListText>
+                <ListText><Typography>{category.name}</Typography></ListText>
               </ListItem>
             </TouchableHighlight>
           ))

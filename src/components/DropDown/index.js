@@ -1,25 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import {
-  Picker,
-  PickerWrapper
-} from './styled';
+import { Picker, PickerWrapper } from "./styled";
 
-const DropDown = ({ options, ...props }) => {
-  return (
-    <PickerWrapper>
-      <Picker {...props}>
-        {
-          options.map(o => <Picker.Item key={o.value} label={o.text} value={o.value} />)
-        }
-      </Picker>
-    </PickerWrapper>
-  )
-}
+const DropDown = ({ options, ...props }) => (
+  <PickerWrapper>
+    <Picker {...props}>
+      {options.map(o => (
+        <Picker.Item key={o.value} label={o.text} value={o.value} />
+      ))}
+    </Picker>
+  </PickerWrapper>
+);
 
 DropDown.defaultProps = {
-  appearance: 'black',
-  color: false,
+  appearance: "black",
+  color: false
 };
 
 export default DropDown;

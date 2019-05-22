@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import { RadioGroupProvider } from './RadioGroupContext';
+import React, { Component } from "react";
+import { RadioGroupProvider } from "./RadioGroupContext";
 
-import { RadioGroupWrapper } from './style';
-
+import { RadioGroupWrapper } from "./styled";
 
 class RadioGroup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedValue: props.selectedValue || props.defaultValue,
+      selectedValue: props.selectedValue || props.defaultValue
     };
     this.onChangeRadioButton = this.onChangeRadioButton.bind(this);
   }
@@ -19,7 +18,9 @@ class RadioGroup extends Component {
     if (selectedValue) {
       this.triggerOnchange(value);
     } else {
-      this.setState({ selectedValue: value }, () => this.triggerOnchange(value));
+      this.setState({ selectedValue: value }, () =>
+        this.triggerOnchange(value)
+      );
     }
   }
 
@@ -37,9 +38,7 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const {
-      children,
-    } = this.props;
+    const { children } = this.props;
 
     const { selectedValue } = this.state;
 
@@ -47,15 +46,13 @@ class RadioGroup extends Component {
       <RadioGroupProvider
         value={{
           selectedValue,
-          onChange: this.onChangeRadioButton,
+          onChange: this.onChangeRadioButton
         }}
       >
-        <RadioGroupWrapper>
-          {children}
-        </RadioGroupWrapper>
+        <RadioGroupWrapper>{children}</RadioGroupWrapper>
       </RadioGroupProvider>
     );
   }
-};
+}
 
 export default RadioGroup;

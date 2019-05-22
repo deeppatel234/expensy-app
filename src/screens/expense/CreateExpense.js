@@ -13,7 +13,7 @@ import CategoryModal from "Screens/category/CategoryModal";
 
 import DatePicker from "Components/DatePicker";
 import TextInput from "Components/TextInput";
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 import Radio from "Components/RadioButton";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
@@ -157,13 +157,13 @@ class CreateExpense extends Component {
                         <Avatar.Icon iconKey={this.getWalletIcon(props.values.wallet)} />
                       </LeftIcon>
                       <RightInput>
-                        <TypoGraphy>
+                        <Typography>
                           {props.values.wallet
                             ? wallets[props.values.wallet].name
                             : "Select Wallet"}
-                        </TypoGraphy>
+                        </Typography>
                         {
-                          props.errors.wallet && <TypoGraphy type="small" appearance="red">{props.errors.wallet}</TypoGraphy>
+                          props.errors.wallet && <Typography type="small" appearance="red">{props.errors.wallet}</Typography>
                         }
                       </RightInput>
                     </IconInputWrapper>
@@ -176,13 +176,13 @@ class CreateExpense extends Component {
                         <Avatar.Icon iconKey={this.getCategoryIcon(props.values.category)} />
                       </LeftIcon>
                       <RightInput>
-                        <TypoGraphy>
+                        <Typography>
                           {props.values.category
                             ? categories[props.values.category].name
                             : "Select Category"}
-                        </TypoGraphy>
+                        </Typography>
                         {
-                          props.errors.category && <TypoGraphy type="small" appearance="red">{props.errors.category}</TypoGraphy>
+                          props.errors.category && <Typography type="small" appearance="red">{props.errors.category}</Typography>
                         }
                       </RightInput>
                     </IconInputWrapper>
@@ -192,9 +192,9 @@ class CreateExpense extends Component {
                   <IconInputWrapper>
                     <LeftIcon>
                       <Avatar>
-                        <TypoGraphy color={BLACK}>
+                        <Typography color={BLACK}>
                           {this.getCurrencyCode(props.values.wallet)}
-                        </TypoGraphy>
+                        </Typography>
                       </Avatar>
                     </LeftIcon>
                     <RightInput>

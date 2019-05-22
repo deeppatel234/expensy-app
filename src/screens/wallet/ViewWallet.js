@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import TypoGraphy from 'Components/TypoGraphy';
+import Typography from 'Components/Typography';
 import Avatar from 'Components/Avatar';
 import Link from 'Components/Link';
 import Header from 'Components/Header';
@@ -30,8 +30,8 @@ const ViewWallet = ({ wallets }) => (
             <ListItem key={wallet._id}>
               <Avatar.Icon iconKey={wallet.icon} />
               <ListDetails>
-                <TypoGraphy>{wallet.name}</TypoGraphy>
-                <TypoGraphy type="small">{wallet.balance} {CurrencyCode[wallet.currency].unicode}</TypoGraphy>
+                <Typography>{wallet.name}</Typography>
+                <Typography type="small">{wallet.balance} {CurrencyCode[wallet.currency].unicode}</Typography>
               </ListDetails>
             </ListItem>
           ))

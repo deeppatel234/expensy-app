@@ -1,9 +1,9 @@
 import React from "react";
-import { withTheme } from 'styled-components';
+import { withTheme } from "styled-components";
 
+import { TYPO_STYLE } from "Components/Typography";
+import Typography from "Components/Typography";
 import { Input, InputWrapper, Error } from "./styled";
-import { TYPO_STYLE } from "../TypoGraphy";
-import TypoGraphy from "../TypoGraphy";
 
 const TextInput = ({ appearance, theme, color, error, ...props }) => (
   <InputWrapper>
@@ -14,15 +14,19 @@ const TextInput = ({ appearance, theme, color, error, ...props }) => (
       placeholderTextColor={color || theme[appearance]}
       error={error}
     />
-    {
-      error && <Error><TypoGraphy type="small" appearance="red">{error}</TypoGraphy></Error>
-    }
+    {error && (
+      <Error>
+        <Typography type="small" appearance="red">
+          {error}
+        </Typography>
+      </Error>
+    )}
   </InputWrapper>
 );
 
 TextInput.defaultProps = {
-  appearance: 'black',
-  color: false,
+  appearance: "black",
+  color: false
 };
 
 export default withTheme(TextInput);

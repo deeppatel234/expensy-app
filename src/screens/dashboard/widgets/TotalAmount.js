@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TypoGraphy from 'Components/TypoGraphy';
+import Typography from 'Components/Typography';
 import Loader from 'Components/Loader';
 
 import Models from 'Models';
@@ -38,20 +38,20 @@ class TotalAmount extends Component {
             : (
               <React.Fragment>
                 <WidgetTitle>
-                  <TypoGraphy type="title">Overview</TypoGraphy>
+                  <Typography type="title">Overview</Typography>
                 </WidgetTitle>
                 <Details>
-                  <TypoGraphy>Total Income</TypoGraphy>
-                  <TypoGraphy>{fixedAmount(amounts.income)}</TypoGraphy>
+                  <Typography>Total Income</Typography>
+                  <Typography>{fixedAmount(amounts.income)}</Typography>
                 </Details>
                 <Details>
-                  <TypoGraphy>Total Expense</TypoGraphy>
-                  <TypoGraphy appearance="red">- {fixedAmount(amounts.expense)}</TypoGraphy>
+                  <Typography>Total Expense</Typography>
+                  <Typography appearance="red">- {fixedAmount(amounts.expense)}</Typography>
                 </Details>
                 <Line />
                 <Details>
-                  <TypoGraphy>Total Amount</TypoGraphy>
-                  <TypoGraphy>{fixedAmount(amounts.income - amounts.expense)}</TypoGraphy>
+                  <Typography>Total Amount</Typography>
+                  <Typography>{fixedAmount(amounts.income - amounts.expense)}</Typography>
                 </Details>
               </React.Fragment>
             )

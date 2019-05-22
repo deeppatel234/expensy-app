@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 import Loader from "Components/Loader";
 
 import { WHITE } from 'Src/theme';
@@ -16,18 +16,18 @@ const SplashLoading = ({ message }) => {
   return (
     <Wrapper>
       <AppNameWrapper>
-        <TypoGraphy type="appLogo" color={WHITE}>Expensy</TypoGraphy>
+        <Typography type="appLogo" color={WHITE}>Expensy</Typography>
       </AppNameWrapper>
       <LoadingWrapper>
         { message && (
           <React.Fragment>
             <Loader color={WHITE} />
-            <TypoGraphy color={WHITE}>{message}</TypoGraphy>
+            <Typography color={WHITE}>{message}</Typography>
           </React.Fragment>
         )}
       </LoadingWrapper>
       <FooterWrapper>
-        <TypoGraphy color={WHITE}>Your Personal expense manager</TypoGraphy>
+        <Typography color={WHITE}>Your Personal expense manager</Typography>
       </FooterWrapper>
     </Wrapper>
   );

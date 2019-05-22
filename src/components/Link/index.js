@@ -1,17 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-native';
+import React from "react";
+import { Link } from "react-router-native";
 
-import Button from '../Button';
+import Button from "Components/Button";
 
-const ButtonLink = ({ component, ...props }) => {
-  return (
-    <Link {...props} component={component || Button} />
-  );
-};
+const ButtonLink = ({ component, ...props }) => (
+  <Link {...props} component={component || Button} />
+);
 
 ButtonLink.defaultProps = {
-  appearance: 'black',
-  component: false,
+  appearance: "black",
+  component: false
 };
 
 export default ButtonLink;

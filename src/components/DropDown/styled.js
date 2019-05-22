@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const PickerWrapper = styled.View`
   margin-bottom: 20px;

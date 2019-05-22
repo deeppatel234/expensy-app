@@ -7,7 +7,7 @@ import Request from "Base/Request";
 import LocalStorage from "Base/LocalStorage";
 import MemoryStorage from "Base/MemoryStorage";
 
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 import Loader from "Components/Loader";
 import TextInput from "Components/TextInput";
 import Button from "Components/Button";
@@ -93,9 +93,9 @@ class SignUP extends Component {
       <ReduxLoader models={['network']}>
         <Wrapper>
           <AppNameWrapper>
-            <TypoGraphy type="appLogo" color={PRIMARY}>
+            <Typography type="appLogo" color={PRIMARY}>
               Expensy
-            </TypoGraphy>
+            </Typography>
           </AppNameWrapper>
           <SignUpWrapper>
             <Formik
@@ -153,20 +153,20 @@ class SignUP extends Component {
             </Formik>
             {errorMessage && (
               <ErrorMessage>
-                <TypoGraphy appearance="red">{errorMessage}</TypoGraphy>
+                <Typography appearance="red">{errorMessage}</Typography>
               </ErrorMessage>
             )}
           </SignUpWrapper>
           <LoginFormWrapper>
             <LoginLink>
-              <TypoGraphy color={PRIMARY}>already have an account</TypoGraphy>
+              <Typography color={PRIMARY}>already have an account</Typography>
             </LoginLink>
             <Link to="/login" text="Login" borderRadius block />
           </LoginFormWrapper>
           <FooterWrapper>
-            <TypoGraphy color={PRIMARY}>
+            <Typography color={PRIMARY}>
               Your Personal expense manager
-            </TypoGraphy>
+            </Typography>
           </FooterWrapper>
         </Wrapper>
       </ReduxLoader>

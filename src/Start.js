@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { NativeRouter, Route, Switch } from "react-router-native";
 
-import PrivateRoute from "Base/PrivateRoute";
+import AuthWrapper from 'Base/AuthWrapper';
 import SQLLite from "Src/sql/sqllite";
 import DBConfig from "Src/sql/DBConfig";
 
@@ -10,6 +10,9 @@ import Login from "Screens/login";
 import SignUp from "Screens/signup";
 import Main from "Src/Main";
 import SplashLoading from "Screens/splash/SplashLoading";
+
+
+const MainApp = () => <AuthWrapper><Main /></AuthWrapper>;
 
 class Start extends Component {
   constructor(props) {
@@ -59,7 +62,7 @@ class Start extends Component {
         <Switch>
           <Route path="/signup" component={SignUp} />
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/" component={Main} />
+          <Route path="/" component={MainApp} />
         </Switch>
       </NativeRouter>
     );

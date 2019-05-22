@@ -1,10 +1,10 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from "@react-native-community/async-storage";
 
 const KEYS = {
-  AUTH_TOKEN: 'authToken',
-  DB_CONFIG: 'dbConfig',
-  LAST_SYNC: 'lastSync',
-  SETTINGS: 'settings',
+  AUTH_TOKEN: "authToken",
+  DB_CONFIG: "dbConfig",
+  LAST_SYNC: "lastSync",
+  SETTINGS: "settings"
 };
 
 export default {

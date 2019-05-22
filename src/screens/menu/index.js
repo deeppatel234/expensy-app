@@ -7,7 +7,7 @@ import { Link } from "react-router-native";
 
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 
 import Redux from "Redux/ReduxRegistry";
 
@@ -67,12 +67,12 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
               </Avatar>
             </AvatarContainer>
             <UserDetails>
-              <TypoGraphy type="small" appearance="white">
+              <Typography type="small" appearance="white">
                 {user.name}
-              </TypoGraphy>
-              <TypoGraphy type="small" appearance="white">
+              </Typography>
+              <Typography type="small" appearance="white">
                 {user.email}
-              </TypoGraphy>
+              </Typography>
             </UserDetails>
           </BottomContent>
         </TopMenu>
@@ -82,10 +82,10 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
               <Link key={menu.url} to={menu.url} onPress={closeMenuDrawer}>
                 <MenuItem>
                   <MenuIcon>
-                    <Icon type={menu.icon.type} name={menu.icon.name} size={20} />
+                    <Icon type={menu.icon.type} name={menu.icon.name} />
                   </MenuIcon>
                   <MenuName>
-                    <TypoGraphy type="small">{menu.text}</TypoGraphy>
+                    <Typography type="small">{menu.text}</Typography>
                   </MenuName>
                 </MenuItem>
               </Link>
@@ -95,10 +95,10 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
             <TouchableOpacity onPress={logout}>
               <MenuItem>
                 <MenuIcon>
-                  <Icon type="AntDesign" name="logout" size={20} />
+                  <Icon type="AntDesign" name="logout" />
                 </MenuIcon>
                 <MenuName>
-                  <TypoGraphy type="small">Signout</TypoGraphy>
+                  <Typography type="small">Signout</Typography>
                 </MenuName>
               </MenuItem>
             </TouchableOpacity>

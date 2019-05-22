@@ -1,33 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 
 import SplashLoading from "Screens/splash/SplashLoading";
 import Redux from "Redux/ReduxRegistry";
 
-class ReduxLoader extends Component {
-  constructor(props) {
-    super(props);
+const ReduxLoader = ({ children, models }) => {
+  const [isLoading, setLoading] = useState(true);
+  const [error, serError] = useState(false);
 
-    this.state = {
-      isLoaded: false,
-    };
-  }
-
-  componentDidMount() {
-    const { models } = this.props;
+  useEffect(() => {
     Promise.all(models.map(model => Redux.get(model, "fetch")()))
-      .then(() => this.setState({ isLoaded: true }));
-  }
+      .then(() => setLoading(false))
+      .catch(err => serError(err));
+  });
 
-  render() {
-    const { children } = this.props;
-    const { isLoaded } = this.state;
+  return isLoading ? <SplashLoading message={error} /> : children;
+};
 
-    if(isLoaded) {
-      return children;
-    }
-
-    return <SplashLoading />;
-  }
-}
-
-export default ReduxLoader
+export default ReduxLoader;

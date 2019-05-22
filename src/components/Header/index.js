@@ -1,36 +1,37 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { TouchableOpacity } from 'react-native';
+import React from "react";
+import { connect } from "react-redux";
+import { TouchableOpacity } from "react-native";
 
-import Icon from 'Components/Icon';
-import TypoGraphy from 'Components/TypoGraphy';
+import Icon from "Components/Icon";
+import Typography from "Components/Typography";
 
 import Redux from "Redux/ReduxRegistry";
 
-import {
-  HeaderWrapper,
-  MenuButton,
-} from './style';
+import { HeaderWrapper, MenuButton } from "./styled";
 
 const Header = ({ text, openMenuDrawer, menu = true }) => (
   <HeaderWrapper>
-    {
-      menu && (
-        <MenuButton>
-          <TouchableOpacity onPress={openMenuDrawer}>
-            <Icon type="Feather" name="menu" size={30} />
-          </TouchableOpacity>
-        </MenuButton>
-      )
-    }
-    <TypoGraphy type="heading" appearance="primary">{text}</TypoGraphy>
+    {menu && (
+      <MenuButton>
+        <TouchableOpacity onPress={openMenuDrawer}>
+          <Icon type="Feather" name="menu" size={30} />
+        </TouchableOpacity>
+      </MenuButton>
+    )}
+    <Typography type="heading" appearance="primary">
+      {text}
+    </Typography>
   </HeaderWrapper>
 );
 
 const mapDispatchToProps = dispatch => {
   return {
-    openMenuDrawer: () => dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(true)),
+    openMenuDrawer: () =>
+      dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(true))
   };
 };
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Header);

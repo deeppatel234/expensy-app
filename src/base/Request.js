@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
-import MemoryStorage from './MemoryStorage';
-import { API_URL } from '../../appConfig';
+import MemoryStorage from "Base/MemoryStorage";
+import { API_URL } from "../../appConfig";
 
 class Request {
   constructor() {
@@ -9,20 +9,20 @@ class Request {
      * base request for api data
      */
     this.apiRequest = axios.create({
-      method: 'post',
-      baseURL: API_URL,
+      method: "post",
+      baseURL: API_URL
     });
     /**
      * get request for external call
      */
     this.getRequest = axios.create({
-      method: 'get',
+      method: "get"
     });
     /**
      * post request for external call
      */
     this.postRequest = axios.create({
-      method: 'post',
+      method: "post"
     });
   }
 
@@ -35,50 +35,52 @@ class Request {
    * @param {Object} payload.data
    */
   api(payload) {
-    const {
-      model,
-      method,
-      data = {},
-    } = payload;
+    const { model, method, data = {} } = payload;
 
     return new Promise((resolve, rejects) => {
       this.apiRequest({
         url: `${model}/${method}`,
         data,
         headers: {
-          authorization: MemoryStorage.get('token'),
-        },
-      }).then((res) => {
-        if (res.data.error) {
-          rejects(res.data.error);
-        } else {
-          resolve(res.data);
+          authorization: MemoryStorage.get("token")
         }
-      }).catch(rejects);
+      })
+        .then(res => {
+          if (res.data.error) {
+            rejects(res.data.error);
+          } else {
+            resolve(res.data);
+          }
+        })
+        .catch(rejects);
     });
   }
 
   get(payload) {
     return new Promise((resolve, rejects) => {
-      this.getRequest(payload).then((res) => {
-        if (res.data.error) {
-          rejects(res.data.error);
-        } else {
-          resolve(res.data);
-        }
-      }).catch(rejects);
+      this.getRequest(payload)
+        .then(res => {
+          if (res.data.error) {
+            rejects(res.data.error);
+          } else {
+            resolve(res.data);
+          }
+        })
+        .catch(rejects);
     });
   }
 
   post(payload) {
     return new Promise((resolve, rejects) => {
-      this.postRequest(payload).then((res) => {
-        if (res.data.error) {
-          rejects(res.data.error);
-        } else {
-          resolve(res.data);
-        }
-      }).catch(rejects);
+      this.postRequest(payload)
+        .then(res => {
+          if (res.data.error) {
+            rejects(res.data.error);
+          } else {
+            resolve(res.data);
+          }
+        })
+        .catch(rejects);
     });
   }
 }

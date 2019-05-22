@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TouchID from 'react-native-touch-id';
 
-import TypoGraphy from 'Components/TypoGraphy';
+import Typography from 'Components/Typography';
 import Icon from 'Components/Icon';
 import Switch from 'Components/Switch';
 import Header from 'Components/Header';
@@ -45,7 +45,7 @@ class Setting extends Component {
     const { isLoading, isFingerPrintSupported } = this.state;
 
     if (isLoading) {
-      <TypoGraphy>Loading</TypoGraphy>
+      <Typography>Loading</Typography>
     }
 
     return (
@@ -57,13 +57,13 @@ class Setting extends Component {
           <SettingItem>
             <SettingNameWrapper>
               <SettingIcon>
-                <Icon type="MaterialCommunityIcons" name="theme-light-dark" size={20} />
+                <Icon type="MaterialCommunityIcons" name="theme-light-dark" />
               </SettingIcon>
-              <TypoGraphy>Theme</TypoGraphy>
+              <Typography>Theme</Typography>
             </SettingNameWrapper>
             <ThemeSwitchWrapper>
               <ThemeName>
-                <TypoGraphy type="small">{setting.isLightTheme ? 'light' : 'dark'}</TypoGraphy>
+                <Typography type="small">{setting.isLightTheme ? 'light' : 'dark'}</Typography>
               </ThemeName>
               <Switch value={setting.isLightTheme} onValueChange={changeTheme} />
             </ThemeSwitchWrapper>
@@ -73,9 +73,9 @@ class Setting extends Component {
               <SettingItem>
                 <SettingNameWrapper>
                   <SettingIcon>
-                    <Icon type="MaterialCommunityIcons" name="fingerprint" size={20} />
+                    <Icon type="MaterialCommunityIcons" name="fingerprint" />
                   </SettingIcon>
-                  <TypoGraphy>Fingerprint Lock</TypoGraphy>
+                  <Typography>Fingerprint Lock</Typography>
                 </SettingNameWrapper>
                 <Switch value={setting.fingerPrintLock} onValueChange={changeFingerPrintLock} />
               </SettingItem>
@@ -84,9 +84,9 @@ class Setting extends Component {
           {/* <SettingItem>
             <SettingNameWrapper>
               <SettingIcon>
-                <Icon type="MaterialCommunityIcons" name="lock-outline" size={20} />
+                <Icon type="MaterialCommunityIcons" name="lock-outline" />
               </SettingIcon>
-              <TypoGraphy>Pin Lock</TypoGraphy>
+              <Typography>Pin Lock</Typography>
             </SettingNameWrapper>
             <Switch value={setting.pinLock} onValueChange={changePinLock} />
           </SettingItem> */}

@@ -1,23 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import Icon from 'Components/Icon';
+import Icon from "Components/Icon";
 
-import { FooterWrapper, FooterButton } from './style';
+import { FooterWrapper, FooterButton } from "./styled";
 
 const Footer = ({ children, ...props }) => (
-  <FooterWrapper {...props}>
-    {children}
-  </FooterWrapper>
+  <FooterWrapper {...props}>{children}</FooterWrapper>
 );
 
-const AddButton = (props) => (
-  <Footer.Button {...props} >
+const AddButton = props => (
+  <Footer.Button {...props}>
     <Icon iconType="MaterialIcons" icon="add" appearance="white" size={30} />
   </Footer.Button>
 );
 
-const CloseButton = (props) => (
-  <Footer.Button {...props} >
+const CloseButton = props => (
+  <Footer.Button {...props}>
     <Icon iconType="MaterialIcons" icon="close" appearance="white" size={30} />
   </Footer.Button>
 );

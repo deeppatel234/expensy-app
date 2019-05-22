@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import _capitalize from "lodash/capitalize";
 import _isEmpty from "lodash/isEmpty";
 
-import TypoGraphy from "Components/TypoGraphy";
+import Typography from "Components/Typography";
 import Loader from "Components/Loader";
 import Avatar from "Components/Avatar";
 
@@ -57,7 +57,7 @@ class TransactionList extends Component {
         ) : (
           <React.Fragment>
             <WidgetTitle>
-              <TypoGraphy type="title">Last 5 Transaction</TypoGraphy>
+              <Typography type="title">Last 5 Transaction</Typography>
             </WidgetTitle>
             {transactionList.map(transaction => (
               <Details key={transaction._id}>
@@ -66,8 +66,8 @@ class TransactionList extends Component {
                     <Avatar.Icon iconKey={categories[transaction.category].icon} />
                   </IconWrapper>
                   <SubDetails>
-                    <TypoGraphy>{categories[transaction.category].name}</TypoGraphy>
-                    <TypoGraphy appearance="gray">{transaction.description}</TypoGraphy>
+                    <Typography>{categories[transaction.category].name}</Typography>
+                    <Typography appearance="gray">{transaction.description}</Typography>
                   </SubDetails>
                 </LeftDetails>
                 <RightDetails>
@@ -75,11 +75,11 @@ class TransactionList extends Component {
                     <RightText>
                       {
                         EXPENSE_TYPES.EXPENSE === transaction.type
-                          ? <TypoGraphy appearance="red">{transaction.amount.toFixed(2)}</TypoGraphy>
-                          : <TypoGraphy>{transaction.amount.toFixed(2)}</TypoGraphy>
+                          ? <Typography appearance="red">{transaction.amount.toFixed(2)}</Typography>
+                          : <Typography>{transaction.amount.toFixed(2)}</Typography>
                       }
                     </RightText>
-                    <TypoGraphy appearance="gray">{transaction.dateTime}</TypoGraphy>
+                    <Typography appearance="gray">{transaction.dateTime}</Typography>
                   </SubDetails>
                   <IconWrapper marginPosition="left">
                     <Avatar.Icon iconKey={wallets[transaction.wallet].icon} />

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { RadioGroupConsumer } from './RadioGroupContext';
+import { RadioGroupConsumer } from "./RadioGroupContext";
 
-import Button from 'Components/Button';
+import Button from "Components/Button";
 
 /*
   Example:
@@ -14,29 +14,16 @@ import Button from 'Components/Button';
   </Radio.Group>
 */
 
-const RadioButton = (props) => {
-  const {
-    value,
-    ...restProps
-  } = props;
-
-  return (
-    <RadioGroupConsumer>
-      {
-        ({
-          onChange,
-          selectedValue,
-        }) => {
-          const appearance = (selectedValue === value) ? 'primary' : 'default';
-
-          return (
-            <Button appearance={appearance} onPress={() => onChange(value)} {...restProps} />
-          )
-        }
-      }
-    </RadioGroupConsumer>
-  );
-};
+const RadioButton = ({ value, ...props }) => (
+  <RadioGroupConsumer>
+    {({ onChange, selectedValue }) => (
+      <Button
+        appearance={selectedValue === value ? "primary" : "black"}
+        onPress={() => onChange(value)}
+        {...props}
+      />
+    )}
+  </RadioGroupConsumer>
+);
 
 export default RadioButton;
-

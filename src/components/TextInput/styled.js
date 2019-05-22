@@ -11,6 +11,6 @@ export const Error = styled.View`
 export const Input = styled.TextInput`
   background: ${props => props.theme.white};
   padding: 5px 10px;
-  border-bottom-color: ${props => props.error ? props.theme.danger : props.theme.light};
+  border-bottom-color: ${props => props.error ? props.theme.red : props.theme.lightGray};
   border-bottom-width: 1px;
 `;

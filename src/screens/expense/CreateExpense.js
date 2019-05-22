@@ -163,7 +163,7 @@ class CreateExpense extends Component {
                             : "Select Wallet"}
                         </TypoGraphy>
                         {
-                          props.errors.wallet && <TypoGraphy type="small" appearance="danger">{props.errors.wallet}</TypoGraphy>
+                          props.errors.wallet && <TypoGraphy type="small" appearance="red">{props.errors.wallet}</TypoGraphy>
                         }
                       </RightInput>
                     </IconInputWrapper>
@@ -182,7 +182,7 @@ class CreateExpense extends Component {
                             : "Select Category"}
                         </TypoGraphy>
                         {
-                          props.errors.category && <TypoGraphy type="small" appearance="danger">{props.errors.category}</TypoGraphy>
+                          props.errors.category && <TypoGraphy type="small" appearance="red">{props.errors.category}</TypoGraphy>
                         }
                       </RightInput>
                     </IconInputWrapper>

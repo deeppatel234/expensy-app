@@ -13,7 +13,7 @@ import TextInput from "Components/TextInput";
 import Button from "Components/Button";
 import Link from "Components/Link";
 
-import { PRIMARY_COLOR } from "Src/theme";
+import { PRIMARY } from "Src/theme";
 import ReduxLoader from 'Base/ReduxLoader';
 
 import {
@@ -84,7 +84,7 @@ class Login extends Component {
       <ReduxLoader models={['network']}>
         <Wrapper>
           <AppNameWrapper>
-            <TypoGraphy type="appLogo" color={PRIMARY_COLOR}>
+            <TypoGraphy type="appLogo" color={PRIMARY}>
               Expensy
             </TypoGraphy>
           </AppNameWrapper>
@@ -129,18 +129,18 @@ class Login extends Component {
             </Formik>
             {errorMessage && (
               <ErrorMessage>
-                <TypoGraphy appearance="danger">{errorMessage}</TypoGraphy>
+                <TypoGraphy appearance="red">{errorMessage}</TypoGraphy>
               </ErrorMessage>
             )}
           </LoginFormWrapper>
           <SignUpWrapper>
             <SignUpLink>
-              <TypoGraphy color={PRIMARY_COLOR}>Don't have an account</TypoGraphy>
+              <TypoGraphy color={PRIMARY}>Don't have an account</TypoGraphy>
             </SignUpLink>
             <Link to="/signup" text="Sign Up" borderRadius block />
           </SignUpWrapper>
           <FooterWrapper>
-            <TypoGraphy color={PRIMARY_COLOR}>
+            <TypoGraphy color={PRIMARY}>
               Your Personal expense manager
             </TypoGraphy>
           </FooterWrapper>

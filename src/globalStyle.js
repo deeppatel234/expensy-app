@@ -68,6 +68,6 @@ export const FormSpace = styled.View`
 `;
 
 export const BorderBottom = styled.View`
-  border-bottom-color: ${props => props.theme.light};
+  border-bottom-color: ${props => props.theme.lightGray};
   border-bottom-width: 1px;
 `;

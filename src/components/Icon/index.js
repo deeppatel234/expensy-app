@@ -39,7 +39,7 @@ const Icon = ({ iconType, icon, appearance, theme, color, name, type, ...props})
 };
 
 Icon.defaultProps = {
-  appearance: 'default',
+  appearance: 'black',
   color: false,
 };
 

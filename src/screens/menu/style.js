@@ -12,8 +12,8 @@ export const ShadowContainer = styled.View`
   flex-direction: column;
   flex: 1;
   border-right-width: 1;
-  border-color: ${props => props.theme.light};
-  shadow-color: ${props => props.theme.light};
+  border-color: ${props => props.theme.lightGray};
+  shadow-color: ${props => props.theme.lightGray};
   shadow-opacity: 0.5;
   shadow-radius: 2;
   elevation: 1;

@@ -3,10 +3,10 @@ import { withTheme } from "styled-components";
 import { SwitchComp } from "./style";
 import { LightenDarkenColor } from 'Utils/utility';
 
-import { PRIMARY_COLOR } from 'Src/theme';
+import { PRIMARY } from 'Src/theme';
 
 const Switch = ({ theme, ...props }) => {
-  const lightenColor = LightenDarkenColor(PRIMARY_COLOR, 30);
+  const lightenColor = LightenDarkenColor(PRIMARY, 30);
   return (
     <SwitchComp
       trackColor={{ true: lightenColor,  false: lightenColor }}

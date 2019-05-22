@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const WidgetWrapper = styled.View`
-  border-color: ${props => props.theme.light};
+  border-color: ${props => props.theme.lightGray};
   border-width: 1px;
   padding: 10px;
   margin: 5px;
@@ -16,7 +16,7 @@ export const Details = styled.View`
 `;
 
 export const Line = styled.View`
-  border-bottom-color: ${props => props.theme.light};
+  border-bottom-color: ${props => props.theme.lightGray};
   border-bottom-width: 1px;
   margin: 10px 0;
 `;

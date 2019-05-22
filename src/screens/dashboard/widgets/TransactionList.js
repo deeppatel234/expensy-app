@@ -67,7 +67,7 @@ class TransactionList extends Component {
                   </IconWrapper>
                   <SubDetails>
                     <TypoGraphy>{categories[transaction.category].name}</TypoGraphy>
-                    <TypoGraphy appearance="muted">{transaction.description}</TypoGraphy>
+                    <TypoGraphy appearance="gray">{transaction.description}</TypoGraphy>
                   </SubDetails>
                 </LeftDetails>
                 <RightDetails>
@@ -75,11 +75,11 @@ class TransactionList extends Component {
                     <RightText>
                       {
                         EXPENSE_TYPES.EXPENSE === transaction.type
-                          ? <TypoGraphy appearance="danger">{transaction.amount.toFixed(2)}</TypoGraphy>
+                          ? <TypoGraphy appearance="red">{transaction.amount.toFixed(2)}</TypoGraphy>
                           : <TypoGraphy>{transaction.amount.toFixed(2)}</TypoGraphy>
                       }
                     </RightText>
-                    <TypoGraphy appearance="muted">{transaction.dateTime}</TypoGraphy>
+                    <TypoGraphy appearance="gray">{transaction.dateTime}</TypoGraphy>
                   </SubDetails>
                   <IconWrapper marginPosition="left">
                     <Avatar.Icon iconKey={wallets[transaction.wallet].icon} />

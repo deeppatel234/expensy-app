@@ -18,7 +18,7 @@ const DropDown = ({ options, ...props }) => {
 }
 
 DropDown.defaultProps = {
-  appearance: 'default',
+  appearance: 'black',
   color: false,
 };
 

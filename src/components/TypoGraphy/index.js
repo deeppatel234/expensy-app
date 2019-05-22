@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { TypoGraphyText } from './styled';
 
@@ -39,7 +39,7 @@ const TypoGraphy = ({ children , type, ...props}) => {
 
 TypoGraphy.defaultProps = {
   type: 'default',
-  appearance: 'default',
+  appearance: 'black',
   color: false,
 };
 

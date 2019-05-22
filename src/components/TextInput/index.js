@@ -15,13 +15,13 @@ const TextInput = ({ appearance, theme, color, error, ...props }) => (
       error={error}
     />
     {
-      error && <Error><TypoGraphy type="small" appearance="danger">{error}</TypoGraphy></Error>
+      error && <Error><TypoGraphy type="small" appearance="red">{error}</TypoGraphy></Error>
     }
   </InputWrapper>
 );
 
 TextInput.defaultProps = {
-  appearance: 'default',
+  appearance: 'black',
   color: false,
 };
 

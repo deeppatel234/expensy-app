@@ -46,7 +46,7 @@ class TotalAmount extends Component {
                 </Details>
                 <Details>
                   <TypoGraphy>Total Expense</TypoGraphy>
-                  <TypoGraphy appearance="danger">- {fixedAmount(amounts.expense)}</TypoGraphy>
+                  <TypoGraphy appearance="red">- {fixedAmount(amounts.expense)}</TypoGraphy>
                 </Details>
                 <Line />
                 <Details>

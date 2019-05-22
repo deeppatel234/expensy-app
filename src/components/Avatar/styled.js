@@ -11,7 +11,7 @@ export const AvatarWrapper = styled.View`
   background: ${props =>
     props.color ||
     (props.colorChar && getAvatarColor(props.colorChar)) ||
-    props.theme.light};
+    props.theme.lightGray};
   height: ${AVATAR_SIZE};
   width: ${AVATAR_SIZE};
   border-radius: ${AVATAR_BORDER_RADIUS};

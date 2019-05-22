@@ -25,7 +25,7 @@ const Date = ({ date, onDateChange, color, theme, appearance }) => {
 };
 
 Date.defaultProps = {
-  appearance: 'default',
+  appearance: 'black',
   color: false,
 };
 

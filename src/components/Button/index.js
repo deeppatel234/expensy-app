@@ -6,7 +6,7 @@ import { ButtonElement } from './styled';
 
 const APPEARANCE_MAP = {
   primary: 'white',
-  default: 'primary',
+  black: 'primary',
 };
 
 const Button = (props) => (
@@ -16,7 +16,7 @@ const Button = (props) => (
 );
 
 Button.defaultProps = {
-  appearance: 'default',
+  appearance: 'black',
   block: false,
 };
 

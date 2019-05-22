@@ -10,7 +10,7 @@ const ButtonLink = ({ component, ...props }) => {
 };
 
 ButtonLink.defaultProps = {
-  appearance: 'default',
+  appearance: 'black',
   component: false,
 };
 

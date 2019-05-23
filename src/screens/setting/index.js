@@ -35,7 +35,7 @@ const Setting = ({
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
-  });
+  }, []);
 
   if (isLoading) {
     <Typography>Loading</Typography>;

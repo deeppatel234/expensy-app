@@ -11,7 +11,7 @@ const ReduxLoader = ({ children, models }) => {
     Promise.all(models.map(model => Redux.get(model, "fetch")()))
       .then(() => setLoading(false))
       .catch(err => serError(err));
-  });
+  }, []);
 
   return isLoading ? <SplashLoading message={error} /> : children;
 };

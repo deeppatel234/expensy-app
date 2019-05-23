@@ -34,7 +34,7 @@ const AuthWrapper = ({ children, history }) => {
     checkAuth()
       .then(() => setAuthenticated(true))
       .catch(() => history.push("/login"));
-  });
+  }, []);
 
   if (isAuthenticated) {
     return children;

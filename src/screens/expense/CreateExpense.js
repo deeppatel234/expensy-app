@@ -92,7 +92,7 @@ const CreateExpense = ({ history, categories, wallets }) => {
       <Formik
         initialValues={{
           type: "expense",
-          amount: "0",
+          amount: "",
           dateTime: formatDate(new Date(), "DD/MM/YYYY")
         }}
         onSubmit={onSubmitForm}
@@ -174,6 +174,7 @@ const CreateExpense = ({ history, categories, wallets }) => {
                   </Avatar>
                   <RightInput>
                     <TextInput
+                      placeholder="0"
                       onChangeText={handleChange("amount")}
                       onBlur={handleBlur("amount")}
                       value={values.amount}

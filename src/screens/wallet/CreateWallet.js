@@ -40,7 +40,7 @@ const INITIAL_WALLET_VALUES = {
   icon: "PLACEHOLDER",
   currency: "INDIAN_RUPEE",
   type: "bank",
-  balance: "0"
+  balance: ""
 };
 
 const CreateWallet = ({ createWallet, history }) => {

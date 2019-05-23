@@ -1,31 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { ThemeProvider } from 'styled-components';
-import { connect } from 'react-redux';
+import { Provider } from "react-redux";
+import store from "Redux/store";
 
-import AppAuthentication from 'Base/AppAuthentication';
-import Start from 'Src/Start';
+import App from "Src/App";
+import ReduxLoader from "Base/ReduxLoader";
 
-import { light, dark } from 'Src/theme';
-
-import { SafeAreaView } from 'Src/globalStyle';
-
-const App = ({ isLightTheme }) => (
-  <ThemeProvider theme={isLightTheme ? light : dark}>
-    <AppAuthentication>
-      <SafeAreaView>
-        <Start />
-      </SafeAreaView>
-    </AppAuthentication>
-  </ThemeProvider>
+const MainApp = () => (
+  <Provider store={store}>
+    <ReduxLoader models={["setting", "network"]}>
+      <App />
+    </ReduxLoader>
+  </Provider>
 );
 
-// Maps state from store to props
-const mapStateToProps = (state) => {
-  return {
-    isLightTheme: state.setting.isLightTheme,
-  };
-};
-
-export default connect(mapStateToProps, null)(App);
-
+export default MainApp;

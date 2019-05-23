@@ -8,5 +8,5 @@ export const Wrapper = styled.View`
 `;
 
 export const IconWrapper = styled.View`
-  margin: 10px;
+  margin: 10px 9px;
 `;

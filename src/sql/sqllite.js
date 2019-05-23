@@ -9,12 +9,11 @@ class SQLLite {
 
   connect() {
     return openDatabase({
-      name: "TestDatabase",
+      name: "ExpensyDatabase",
       location: "default"
     }).then((db) => {
       this.db = db;
-      console.tron.log('Database connected');
-    }).catch(err => console.tron.log('Error in connecting to database', err));
+    });
   }
 }
 

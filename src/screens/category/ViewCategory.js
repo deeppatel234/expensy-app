@@ -3,20 +3,13 @@ import { connect } from "react-redux";
 
 import Redux from "Redux/ReduxRegistry";
 
-import Typography from 'Components/Typography';
-import Avatar from 'Components/Avatar';
-import Header from 'Components/Header';
-import Link from 'Components/Link';
-import Footer from 'Components/Footer';
+import Header from "Components/Header";
+import Link from "Components/Link";
+import Footer from "Components/Footer";
 
-import {
-  Container,
-  Heading,
-  Content,
-  ListWrapper,
-  ListItem,
-  ListText,
-} from 'Src/globalStyle';
+import CategoryPanel from "./components/CategoryPanel";
+
+import { Container, Heading, Content, ListWrapper } from "Src/globalStyle";
 
 const ViewCategory = ({ categories }) => (
   <Container>
@@ -25,18 +18,13 @@ const ViewCategory = ({ categories }) => (
     </Heading>
     <Content>
       <ListWrapper>
-        {
-          Object.values(categories).map((category) => (
-            <ListItem key={category._id}>
-              <Avatar.Icon iconKey={category.icon} />
-              <ListText><Typography>{category.name}</Typography></ListText>
-            </ListItem>
-          ))
-        }
+        {Object.values(categories).map(category => (
+          <CategoryPanel key={category._id} category={category} />
+        ))}
       </ListWrapper>
     </Content>
     <Footer>
-      <Link to='/create-category' component={Footer.AddButton} />
+      <Link to="/create-category" component={Footer.AddButton} />
     </Footer>
   </Container>
 );
@@ -50,8 +38,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteCategory: category => dispatch(Redux.get("category", "delete")(category)),
+    deleteCategory: category =>
+      dispatch(Redux.get("category", "delete")(category))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewCategory);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ViewCategory);

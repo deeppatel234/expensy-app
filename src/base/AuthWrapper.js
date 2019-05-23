@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-native";
+import { withRouter } from "react-router-native";
 
 import SplashLoading from "Screens/splash/SplashLoading";
 import MemoryStorage from "Base/MemoryStorage";
@@ -27,31 +27,20 @@ const checkAuth = async () => {
   return Promise.resolve();
 };
 
-const AuthWrapper = ({ children, location }) => {
-  const [isLoading, setLoading] = useState(true);
+const AuthWrapper = ({ children, history }) => {
   const [isAuthenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
     checkAuth()
-      .then(() => {
-        setAuthenticated(true);
-        setLoading(false);
-      })
-      .catch(() => {
-        setAuthenticated(false);
-        setLoading(false);
-      });
+      .then(() => setAuthenticated(true))
+      .catch(() => history.push("/login"));
   });
-
-  if (isLoading) {
-    return <SplashLoading message="Authenticating User" />;
-  }
 
   if (isAuthenticated) {
     return children;
   }
 
-  return <Redirect to={{ pathname: "/login", state: { from: location } }} />;
+  return <SplashLoading message="Authenticating User" />;
 };
 
-export default AuthWrapper;
+export default withRouter(AuthWrapper);

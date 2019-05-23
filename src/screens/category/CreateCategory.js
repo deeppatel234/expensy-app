@@ -1,14 +1,13 @@
-import React, { Component } from "react";
+import React, { useState, useCallback } from "react";
 import { connect } from "react-redux";
-import { TouchableHighlight } from "react-native";
 import { Formik } from "formik";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 import Redux from "Redux/ReduxRegistry";
-import Header from 'Components/Header';
+import Header from "Components/Header";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
-import Footer from 'Components/Footer';
+import Footer from "Components/Footer";
 
 import IconModal from "Screens/icon/IconModal";
 
@@ -17,103 +16,73 @@ import {
   Heading,
   Content,
   IconInputWrapper,
-  LeftIcon,
   RightInput
 } from "Src/globalStyle";
 
 const CategorySchema = Yup.object().shape({
-  name: Yup.string()
-    .required('Required'),
+  name: Yup.string().required("Required")
 });
 
-class CreateCategory extends Component {
-  constructor(props) {
-    super(props);
+const CreateCategory = ({ createCategory, history }) => {
+  const [iconModalVisible, setIconModalVisible] = useState(false);
 
-    this.state = {
-      iconModalVisible: false
-    };
+  const onSelectIcon = useCallback((data, setFieldValue) => {
+    setFieldValue("icon", data);
+    setIconModalVisible(false);
+  }, []);
 
-    this.onSelectIcon = this.onSelectIcon.bind(this);
-    this.showIconModal = this.showIconModal.bind(this);
-    this.closeIconModal = this.closeIconModal.bind(this);
-    this.onSubmitForm = this.onSubmitForm.bind(this);
-  }
-
-  onSubmitForm(values) {
-    const { createCategory, history } = this.props;
+  const onSubmitForm = useCallback(values => {
     createCategory(values).then(() => history.goBack());
-  }
+  }, []);
 
-  showIconModal() {
-    this.setState({ iconModalVisible: true });
-  }
-
-  closeIconModal() {
-    this.setState({ iconModalVisible: false });
-  }
-
-  onSelectIcon(data, props) {
-    props.setFieldValue("icon", data);
-    this.setState({ iconModalVisible: false });
-  }
-
-  render() {
-    const { iconModalVisible } = this.state;
-
-    return (
-      <Container>
-        <Heading>
-          <Header text="Add Category" />
-        </Heading>
-        <Formik
-          initialValues={{ icon: "PLACEHOLDER" }}
-          onSubmit={this.onSubmitForm}
-          validationSchema={CategorySchema}
-          validateOnChange={false}
-          validateOnBlur={false}
-        >
-          {props => (
-            <React.Fragment>
-              <Content>
-                <IconInputWrapper>
-                  <LeftIcon>
-                    <TouchableHighlight onPress={this.showIconModal}>
-                      <Avatar.Icon iconKey={props.values.icon} />
-                    </TouchableHighlight>
-                  </LeftIcon>
-                  <RightInput>
-                    <TextInput
-                      placeholder="Category Name"
-                      onChangeText={props.handleChange("name")}
-                      onBlur={props.handleBlur("name")}
-                      value={props.values.name}
-                      error={props.errors.name}
-                    />
-                  </RightInput>
-                </IconInputWrapper>
-                <IconModal
-                  visible={iconModalVisible}
-                  onSelect={data => this.onSelectIcon(data, props)}
-                  onClose={this.closeIconModal}
-                />
-              </Content>
-              <Footer>
-                <Footer.AddButton onPress={props.handleSubmit} />
-              </Footer>
-            </React.Fragment>
-          )}
-        </Formik>
-      </Container>
-    );
-  }
-}
-
-// Maps state from store to props
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  };
+  return (
+    <Container>
+      <Heading>
+        <Header text="Add Category" />
+      </Heading>
+      <Formik
+        initialValues={{ icon: "PLACEHOLDER" }}
+        onSubmit={onSubmitForm}
+        validationSchema={CategorySchema}
+        validateOnChange={false}
+        validateOnBlur={false}
+      >
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          errors,
+          handleSubmit,
+          setFieldValue
+        }) => (
+          <React.Fragment>
+            <Content>
+              <IconInputWrapper>
+                <Avatar.Icon iconKey={values.icon} onPress={() => setIconModalVisible(true)} />
+                <RightInput>
+                  <TextInput
+                    placeholder="Category Name"
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    value={values.name}
+                    error={errors.name}
+                  />
+                </RightInput>
+              </IconInputWrapper>
+              <IconModal
+                visible={iconModalVisible}
+                onSelect={data => onSelectIcon(data, setFieldValue)}
+                onClose={() => setIconModalVisible(false)}
+              />
+            </Content>
+            <Footer>
+              <Footer.AddButton onPress={handleSubmit} />
+            </Footer>
+          </React.Fragment>
+        )}
+      </Formik>
+    </Container>
+  );
 };
 
 const mapDispatchToProps = dispatch => {
@@ -124,6 +93,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CreateCategory);

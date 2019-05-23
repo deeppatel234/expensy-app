@@ -2,36 +2,31 @@ import styled from 'styled-components';
 import { WHITE } from 'Src/theme';
 
 export const Wrapper = styled.View`
-  background-color: ${WHITE};
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   width: 100%;
+  background-color: ${WHITE};
 `;
 
 export const AppNameWrapper = styled.View`
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
+  padding: 50px 0 20px 0;
 `;
 
 export const SignUpWrapper = styled.View`
-  height: 50%;
-  margin: 0 70px;
+  margin: 10px 70px;
 `;
 
 export const LoginFormWrapper = styled.View`
-  height: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 70px;
+  align-self: center;
+  padding: 20px 70px;
 `;
 
 export const FooterWrapper = styled.View`
-  height: 10%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
+  margin: 30px 0;
 `;
 
 export const LoginLink = styled.View`
@@ -39,9 +34,6 @@ export const LoginLink = styled.View`
 `;
 
 export const ErrorMessage = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-self: center;
   margin: 10px 0;
 `;
-

@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import Typography from 'Components/Typography';
 
 export const SafeAreaView = styled.SafeAreaView`
   flex: 1;
@@ -28,39 +27,33 @@ export const Content = styled.ScrollView`
   margin-bottom: 30px;
 `;
 
-export const ListWrapper = styled.View`
-`;
-
-export const ListItem = styled.View`
-  padding: 15px 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const ListText = styled(Typography)`
-  margin-left: 20px;
-`;
-
-export const ListDetails = styled.View`
-  margin-left: 20px;
-`;
-
 export const IconInputWrapper = styled.View`
   display: flex;
   flex-direction: row;
   width: 100%;
+
   ${props => props.center && css`
     align-items: center;
   `}
 `;
 
-export const LeftIcon = styled.View`
-  margin-right: 20px;
+export const RightInput = styled.View`
+  margin-left: 20px;
+  flex: 1;
 `;
 
-export const RightInput = styled.View`
-  flex: 1;
+export const ListWrapper = styled.View`
+`;
+
+export const ListItem = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px 10px;
+`;
+
+export const RightList = styled.View`
+  margin-left: 20px;
 `;
 
 export const FormSpace = styled.View`

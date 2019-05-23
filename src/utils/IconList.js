@@ -1,8 +1,8 @@
 export default {
   PLACEHOLDER: {
     type: 'icon',
-    icon: 'ios-help',
-    iconType: 'Ionicons',
+    icon: 'question',
+    iconType: 'AntDesign',
     group: 'category',
   },
   CREDIT_CARD: {

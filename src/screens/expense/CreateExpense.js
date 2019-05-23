@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { useState, useCallback } from "react";
 import { connect } from "react-redux";
 
 import { Formik } from "formik";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 import { TouchableHighlight } from "react-native";
 
@@ -17,21 +17,20 @@ import Typography from "Components/Typography";
 import Radio from "Components/RadioButton";
 import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
-import Header from 'Components/Header';
-import Footer from 'Components/Footer';
+import Header from "Components/Header";
+import Footer from "Components/Footer";
 
 import CurrencyCode from "Utils/CurrencyCode";
 
-import { EXPENSE_TYPES } from 'Models/ExpenseModel';
+import { EXPENSE_TYPES } from "Models/ExpenseModel";
 
-import { BLACK } from 'Src/theme';
+import { BLACK } from "Src/theme";
 
 import {
   Container,
   Heading,
   Content,
   IconInputWrapper,
-  LeftIcon,
   RightInput,
   FormSpace,
   BorderBottom
@@ -41,62 +40,29 @@ import models from "../../sql/models";
 
 const CategorySchema = Yup.object().shape({
   amount: Yup.string()
-    .required('Required')
+    .required("Required")
     .test("len", "Amount should be greater than 0", val => {
       return parseFloat(val || 0) > 0;
     }),
-  wallet: Yup.string()
-    .required('Required'),
-  category: Yup.string()
-    .required('Required'),
+  wallet: Yup.string().required("Required"),
+  category: Yup.string().required("Required")
 });
 
-class CreateExpense extends Component {
-  constructor(props) {
-    super(props);
+const CreateExpense = ({ history, categories, wallets }) => {
+  const [walletModalVisible, setWalletModalVisible] = useState(false);
+  const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
-    this.state = {
-      walletModalVisible: false,
-      categoryModalVisible: false
-    };
+  const onSelectCategory = useCallback((data, setFieldValue) => {
+    setFieldValue("category", data._id);
+    setCategoryModalVisible(false);
+  }, []);
 
-    this.onSelectWallet = this.onSelectWallet.bind(this);
-    this.onSelectCategory = this.onSelectCategory.bind(this);
-    this.showWalletModal = this.showWalletModal.bind(this);
-    this.closeWalletModal = this.closeWalletModal.bind(this);
-    this.showCategoryModal = this.showCategoryModal.bind(this);
-    this.closeCategoryModal = this.closeCategoryModal.bind(this);
-    this.onSubmitForm = this.onSubmitForm.bind(this);
-  }
+  const onSelectWallet = useCallback((data, setFieldValue) => {
+    setFieldValue("wallet", data._id);
+    setWalletModalVisible(false);
+  }, []);
 
-  onSelectWallet(data, props) {
-    props.setFieldValue("wallet", data._id);
-    this.setState({ walletModalVisible: false });
-  }
-
-  onSelectCategory(data, props) {
-    props.setFieldValue("category", data._id);
-    this.setState({ categoryModalVisible: false });
-  }
-
-  showWalletModal() {
-    this.setState({ walletModalVisible: true });
-  }
-
-  showCategoryModal() {
-    this.setState({ categoryModalVisible: true });
-  }
-
-  closeCategoryModal() {
-    this.setState({ categoryModalVisible: false });
-  }
-
-  closeWalletModal() {
-    this.setState({ walletModalVisible: false });
-  }
-
-  onSubmitForm(values) {
-    const { history } = this.props;
+  const onSubmitForm = useCallback(values => {
     values.amount = parseFloat(values.amount || 0);
     models
       .get("expense")
@@ -104,161 +70,175 @@ class CreateExpense extends Component {
       .then(() => {
         history.goBack();
       });
-  }
+  }, []);
 
-  getCategoryIcon(category) {
-    const { categories } = this.props;
-    return category ? categories[category].icon : 'PLACEHOLDER';
-  }
+  const getCategoryIcon = useCallback(category => {
+    return category ? categories[category].icon : "PLACEHOLDER";
+  });
 
-  getWalletIcon(wallet) {
-    const { wallets } = this.props;
-    return wallet ? wallets[wallet].icon : 'PLACEHOLDER';
-  }
+  const getWalletIcon = useCallback(wallet => {
+    return wallet ? wallets[wallet].icon : "PLACEHOLDER";
+  });
 
-  getCurrencyCode(wallet) {
-    const { wallets } = this.props;
+  const getCurrencyCode = useCallback(wallet => {
     return CurrencyCode[wallets[wallet].currency].unicode;
-  }
+  });
 
-  render() {
-    const { walletModalVisible, categoryModalVisible } = this.state;
-    const { categories, wallets } = this.props;
-
-    return (
-      <Container>
-        <Heading>
-          <Header text="Add Transaction" />
-        </Heading>
-        <Formik
-          initialValues={{
-            type: "expense",
-            amount: "0",
-            dateTime: formatDate(new Date(), "DD/MM/YYYY")
-          }}
-          onSubmit={this.onSubmitForm}
-          validationSchema={CategorySchema}
-          validateOnChange={false}
-          validateOnBlur={false}
-        >
-          {props => (
-            <React.Fragment>
-              <Content>
+  return (
+    <Container>
+      <Heading>
+        <Header text="Add Transaction" />
+      </Heading>
+      <Formik
+        initialValues={{
+          type: "expense",
+          amount: "0",
+          dateTime: formatDate(new Date(), "DD/MM/YYYY")
+        }}
+        onSubmit={onSubmitForm}
+        validationSchema={CategorySchema}
+        validateOnChange={false}
+        validateOnBlur={false}
+      >
+        {({
+          values,
+          handleChange,
+          handleBlur,
+          errors,
+          handleSubmit,
+          setFieldValue
+        }) => (
+          <React.Fragment>
+            <Content>
+              <FormSpace>
+                <Radio.Group
+                  selectedValue={values.type}
+                  onChange={handleChange("type")}
+                >
+                  <Radio.Button
+                    value={EXPENSE_TYPES.EXPENSE}
+                    text="Expense"
+                    style={{ flexGrow: 1 }}
+                  />
+                  <Radio.Button
+                    value={EXPENSE_TYPES.INCOME}
+                    text="Incomes"
+                    style={{ flexGrow: 1 }}
+                  />
+                </Radio.Group>
+              </FormSpace>
+              <TouchableHighlight onPress={() => setWalletModalVisible(true)}>
                 <FormSpace>
-                  <Radio.Group selectedValue={props.values.type} onChange={props.handleChange("type")}>
-                    <Radio.Button value={EXPENSE_TYPES.EXPENSE} text="Expense" style={{ flexGrow: 1 }} />
-                    <Radio.Button value={EXPENSE_TYPES.INCOME} text="Incomes" style={{ flexGrow: 1 }} />
-                  </Radio.Group>
-                </FormSpace>
-                <TouchableHighlight onPress={this.showWalletModal}>
-                  <FormSpace>
-                    <IconInputWrapper center>
-                      <LeftIcon>
-                        <Avatar.Icon iconKey={this.getWalletIcon(props.values.wallet)} />
-                      </LeftIcon>
-                      <RightInput>
-                        <Typography>
-                          {props.values.wallet
-                            ? wallets[props.values.wallet].name
-                            : "Select Wallet"}
-                        </Typography>
-                        {
-                          props.errors.wallet && <Typography type="small" appearance="red">{props.errors.wallet}</Typography>
-                        }
-                      </RightInput>
-                    </IconInputWrapper>
-                  </FormSpace>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={this.showCategoryModal}>
-                  <FormSpace>
-                    <IconInputWrapper center>
-                      <LeftIcon>
-                        <Avatar.Icon iconKey={this.getCategoryIcon(props.values.category)} />
-                      </LeftIcon>
-                      <RightInput>
-                        <Typography>
-                          {props.values.category
-                            ? categories[props.values.category].name
-                            : "Select Category"}
-                        </Typography>
-                        {
-                          props.errors.category && <Typography type="small" appearance="red">{props.errors.category}</Typography>
-                        }
-                      </RightInput>
-                    </IconInputWrapper>
-                  </FormSpace>
-                </TouchableHighlight>
-                {props.values.wallet && (
-                  <IconInputWrapper>
-                    <LeftIcon>
-                      <Avatar>
-                        <Typography color={BLACK}>
-                          {this.getCurrencyCode(props.values.wallet)}
-                        </Typography>
-                      </Avatar>
-                    </LeftIcon>
+                  <IconInputWrapper center>
+                    <Avatar.Icon iconKey={getWalletIcon(values.wallet)} />
                     <RightInput>
-                      <TextInput
-                        onChangeText={props.handleChange("amount")}
-                        onBlur={props.handleBlur("amount")}
-                        value={props.values.amount}
-                        keyboardType="numeric"
-                        error={props.errors.amount}
-                      />
+                      <Typography>
+                        {values.wallet
+                          ? wallets[values.wallet].name
+                          : "Select Wallet"}
+                      </Typography>
+                      {errors.wallet && (
+                        <Typography type="small" appearance="red">
+                          {errors.wallet}
+                        </Typography>
+                      )}
                     </RightInput>
                   </IconInputWrapper>
-                )}
+                </FormSpace>
+              </TouchableHighlight>
+              <TouchableHighlight onPress={() => setCategoryModalVisible(true)}>
+                <FormSpace>
+                  <IconInputWrapper center>
+                    <Avatar.Icon iconKey={getCategoryIcon(values.category)} />
+                    <RightInput>
+                      <Typography>
+                        {values.category
+                          ? categories[values.category].name
+                          : "Select Category"}
+                      </Typography>
+                      {errors.category && (
+                        <Typography type="small" appearance="red">
+                          {errors.category}
+                        </Typography>
+                      )}
+                    </RightInput>
+                  </IconInputWrapper>
+                </FormSpace>
+              </TouchableHighlight>
+              {values.wallet && (
                 <IconInputWrapper>
-                  <LeftIcon>
-                    <Avatar>
-                      <Icon type="SimpleLineIcons" name="note" size={18} color={BLACK} />
-                    </Avatar>
-                  </LeftIcon>
+                  <Avatar>
+                    <Typography color={BLACK}>
+                      {getCurrencyCode(values.wallet)}
+                    </Typography>
+                  </Avatar>
                   <RightInput>
                     <TextInput
-                      onChangeText={props.handleChange("description")}
-                      onBlur={props.handleBlur("description")}
-                      value={props.values.description}
-                      placeholder="Write some note..."
+                      onChangeText={handleChange("amount")}
+                      onBlur={handleBlur("amount")}
+                      value={values.amount}
+                      keyboardType="numeric"
+                      error={errors.amount}
                     />
                   </RightInput>
                 </IconInputWrapper>
-                <IconInputWrapper>
-                  <LeftIcon>
-                    <Avatar>
-                      <Icon type="Octicons" name="calendar" size={18} color={BLACK} />
-                    </Avatar>
-                  </LeftIcon>
-                  <RightInput>
-                    <BorderBottom>
-                      <DatePicker
-                        date={props.values.dateTime}
-                        onDateChange={props.handleChange("dateTime")}
-                      />
-                    </BorderBottom>
-                    </RightInput>
-                </IconInputWrapper>
-                <WalletModal
-                  visible={walletModalVisible}
-                  onSelect={data => this.onSelectWallet(data, props)}
-                  onClose={this.closeWalletModal}
-                />
-                <CategoryModal
-                  visible={categoryModalVisible}
-                  onSelect={data => this.onSelectCategory(data, props)}
-                  onClose={this.closeCategoryModal}
-                />
-              </Content>
-              <Footer>
-                <Footer.AddButton onPress={props.handleSubmit} />
-              </Footer>
-            </React.Fragment>
-          )}
-        </Formik>
-      </Container>
-    );
-  }
-}
+              )}
+              <IconInputWrapper>
+                <Avatar>
+                  <Icon
+                    type="SimpleLineIcons"
+                    name="note"
+                    size={18}
+                    color={BLACK}
+                  />
+                </Avatar>
+                <RightInput>
+                  <TextInput
+                    onChangeText={handleChange("description")}
+                    onBlur={handleBlur("description")}
+                    value={values.description}
+                    placeholder="Write some note..."
+                  />
+                </RightInput>
+              </IconInputWrapper>
+              <IconInputWrapper>
+                <Avatar>
+                  <Icon
+                    type="Octicons"
+                    name="calendar"
+                    size={18}
+                    color={BLACK}
+                  />
+                </Avatar>
+                <RightInput>
+                  <BorderBottom>
+                    <DatePicker
+                      date={values.dateTime}
+                      onDateChange={handleChange("dateTime")}
+                    />
+                  </BorderBottom>
+                </RightInput>
+              </IconInputWrapper>
+              <WalletModal
+                visible={walletModalVisible}
+                onSelect={data => onSelectWallet(data, setFieldValue)}
+                onClose={() => setWalletModalVisible(false)}
+              />
+              <CategoryModal
+                visible={categoryModalVisible}
+                onSelect={data => onSelectCategory(data, setFieldValue)}
+                onClose={() => setCategoryModalVisible(false)}
+              />
+            </Content>
+            <Footer>
+              <Footer.AddButton onPress={handleSubmit} />
+            </Footer>
+          </React.Fragment>
+        )}
+      </Formik>
+    </Container>
+  );
+};
 
 // Maps state from store to props
 const mapStateToProps = state => {

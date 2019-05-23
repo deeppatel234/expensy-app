@@ -1,44 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import {
-  TouchableHighlight,
-} from 'react-native';
+import Modal from "Components/Modal";
 
-import Typography from 'Components/Typography';
-import Avatar from 'Components/Avatar';
-import Modal from 'Components/Modal';
+import CategoryPanel from "./components/CategoryPanel";
 
-import {
-  Content,
-  ListWrapper,
-  ListItem,
-  ListText,
-} from 'Src/globalStyle';
+import { Content, ListWrapper } from "Src/globalStyle";
 
 const CategoryModal = ({ visible, onSelect, onClose, categories }) => (
   <Modal visible={visible} onClose={onClose} heading="Categories">
     <Content>
       <ListWrapper>
-        {
-          Object.values(categories).map((category) => (
-            <TouchableHighlight key={category._id} onPress={() => onSelect(category)}>
-              <ListItem>
-                <Avatar.Icon iconKey={category.icon} />
-                <ListText><Typography>{category.name}</Typography></ListText>
-              </ListItem>
-            </TouchableHighlight>
-          ))
-        }
+        {Object.values(categories).map(category => (
+          <CategoryPanel
+            key={category._id}
+            onPress={() => onSelect(category)}
+            category={category}
+          />
+        ))}
       </ListWrapper>
     </Content>
   </Modal>
 );
 
 // Maps state from store to props
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    categories: state.categories,
+    categories: state.categories
   };
 };
 

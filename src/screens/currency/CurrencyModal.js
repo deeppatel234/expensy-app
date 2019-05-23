@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { TouchableHighlight } from 'react-native';
+import { TouchableHighlight } from "react-native";
 
-import Typography from 'Components/Typography';
-import Modal from 'Components/Modal';
+import Typography from "Components/Typography";
+import Modal from "Components/Modal";
+import Avatar from "Components/Avatar";
 
-import CurrencyCode from 'Utils/CurrencyCode';
+import CurrencyCode from "Utils/CurrencyCode";
+import { BLACK } from "Src/theme";
 
-import { Content, ListWrapper, ListItem, ListDetails } from 'Src/globalStyle';
-
+import { Content, ListWrapper, ListItem, RightList } from "Src/globalStyle";
 
 const CurrencyModal = ({ visible, onClose, onSelect }) => (
   <Modal visible={visible} onClose={onClose} heading="Currency">
@@ -17,12 +18,14 @@ const CurrencyModal = ({ visible, onClose, onSelect }) => (
         {Object.keys(CurrencyCode).map(code => (
           <TouchableHighlight key={code} onPress={() => onSelect(code)}>
             <ListItem>
-              <ListDetails>
-                <Typography>{CurrencyCode[code].name}</Typography>
-                <Typography type="small">
+              <Avatar>
+                <Typography color={BLACK}>
                   {CurrencyCode[code].unicode}
                 </Typography>
-              </ListDetails>
+              </Avatar>
+              <RightList>
+                <Typography>{CurrencyCode[code].name}</Typography>
+              </RightList>
             </ListItem>
           </TouchableHighlight>
         ))}

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from "react-native";
 import { Link } from "react-router-native";
 
 import Avatar from "Components/Avatar";
@@ -11,7 +11,7 @@ import Typography from "Components/Typography";
 
 import Redux from "Redux/ReduxRegistry";
 
-import { BLACK } from 'Src/theme';
+import { BLACK } from "Src/theme";
 
 import {
   TopMenu,
@@ -26,7 +26,7 @@ import {
   MenuItem,
   MenuIcon,
   MenuName
-} from "./style";
+} from "./styled";
 
 const MENU = [
   {
@@ -53,7 +53,7 @@ const MENU = [
 
 const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
   const logout = () => {
-    logoutUser().then(() => history.push('/login'));
+    logoutUser().then(() => history.push("/login"));
   };
 
   return (
@@ -106,7 +106,7 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
         </MenuItemContainer>
       </ShadowContainer>
     </MenuContainer>
-  )
+  );
 };
 
 // Maps state from store to props
@@ -120,11 +120,13 @@ const mapDispatchToProps = dispatch => {
   return {
     closeMenuDrawer: () =>
       dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(false)),
-    logoutUser: () => Redux.get("user").logoutUser(),
+    logoutUser: () => Redux.get("user").logoutUser()
   };
 };
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Menu));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Menu)
+);

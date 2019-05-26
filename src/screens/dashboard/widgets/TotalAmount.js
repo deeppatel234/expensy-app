@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import Typography from "Components/Typography";
+import TypographyCurrency from "Components/Typography/Currency";
 import Loader from "Components/Loader";
 
 import Models from "Models";
@@ -38,20 +39,20 @@ const TotalAmount = () => {
           </WidgetTitle>
           <Details>
             <Typography>Total Income</Typography>
-            <Typography>{fixedAmount(amounts.income)}</Typography>
+            <TypographyCurrency>{fixedAmount(amounts.income)}</TypographyCurrency>
           </Details>
           <Details>
             <Typography>Total Expense</Typography>
-            <Typography appearance="red">
+            <TypographyCurrency appearance="red">
               - {fixedAmount(amounts.expense)}
-            </Typography>
+            </TypographyCurrency>
           </Details>
           <Line />
           <Details>
             <Typography>Total Amount</Typography>
-            <Typography>
+            <TypographyCurrency>
               {fixedAmount(amounts.income - amounts.expense)}
-            </Typography>
+            </TypographyCurrency>
           </Details>
         </React.Fragment>
       )}

@@ -7,7 +7,6 @@ import Modal from "Components/Modal";
 import Avatar from "Components/Avatar";
 
 import CurrencyCode from "Utils/CurrencyCode";
-import { BLACK } from "Src/theme";
 
 import { Content, ListWrapper, ListItem, RightList } from "Src/globalStyle";
 
@@ -18,11 +17,7 @@ const CurrencyModal = ({ visible, onClose, onSelect }) => (
         {Object.keys(CurrencyCode).map(code => (
           <TouchableHighlight key={code} onPress={() => onSelect(code)}>
             <ListItem>
-              <Avatar>
-                <Typography color={BLACK}>
-                  {CurrencyCode[code].unicode}
-                </Typography>
-              </Avatar>
+              <Avatar.Currency currency={code} />
               <RightList>
                 <Typography>{CurrencyCode[code].name}</Typography>
               </RightList>

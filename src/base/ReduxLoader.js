@@ -10,7 +10,10 @@ const ReduxLoader = ({ children, models }) => {
   useEffect(() => {
     Promise.all(models.map(model => Redux.get(model, "fetch")()))
       .then(() => setLoading(false))
-      .catch(err => serError(err));
+      .catch((err) => {
+        serError('Error in loading data...');
+        console.tron.error(err);
+      });
   }, []);
 
   return isLoading ? <SplashLoading message={error} /> : children;

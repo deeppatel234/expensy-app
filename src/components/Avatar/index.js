@@ -2,9 +2,11 @@ import React from "react";
 import { TouchableHighlight } from "react-native";
 
 import Icon from "Components/Icon";
+import Typography from "Components/Typography";
 import IconList from "Utils/IconList";
+import CurrencyCode from "Utils/CurrencyCode";
 
-import { WHITE } from "Src/theme";
+import { WHITE, BLACK } from "Src/theme";
 
 import { AvatarWrapper, AvatarImage } from "./styled";
 
@@ -39,6 +41,14 @@ Avatar.Icon = ({ onPress, ...props }) => {
     </TouchableHighlight>
   );
 };
+
+Avatar.Currency = ({ currency, ...props }) => (
+  <Avatar {...props}>
+    <Typography color={BLACK}>
+      {CurrencyCode[currency].unicode}
+    </Typography>
+  </Avatar>
+);
 
 Avatar.defaultProps = {
   color: false

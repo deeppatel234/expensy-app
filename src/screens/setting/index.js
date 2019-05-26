@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { TouchableHighlight } from "react-native";
 import { connect } from "react-redux";
 import TouchID from "react-native-touch-id";
 
 import Typography from "Components/Typography";
 import Icon from "Components/Icon";
+import Avatar from "Components/Avatar";
 import Switch from "Components/Switch";
 import Header from "Components/Header";
 
 import Redux from "Redux/ReduxRegistry";
 
 import { Container, Heading, Content } from "Src/globalStyle";
+
+import CurrencyModal from "Screens/currency/CurrencyModal";
 
 import {
   SettingItem,
@@ -24,9 +28,11 @@ const Setting = ({
   changeFingerPrintLock,
   changeTheme,
   changePinLock,
+  changeCurrency,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isFingerPrintSupported, setIsFingerPrintSupported] = useState(true);
+  const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
 
   useEffect(() => {
     TouchID.isSupported()
@@ -35,6 +41,11 @@ const Setting = ({
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
+  }, []);
+
+  const onSelectCurrency = useCallback((data) => {
+    changeCurrency(data);
+    setCurrencyModalVisible(false);
   }, []);
 
   if (isLoading) {
@@ -86,6 +97,24 @@ const Setting = ({
           </SettingNameWrapper>
           <Switch value={setting.pinLock} onValueChange={changePinLock} />
         </SettingItem> */}
+        <SettingItem>
+          <SettingNameWrapper>
+            <SettingIcon>
+              <Icon type="MaterialCommunityIcons" name="currency-inr" />
+            </SettingIcon>
+            <Typography>Currency</Typography>
+          </SettingNameWrapper>
+          <TouchableHighlight
+            onPress={() => setCurrencyModalVisible(true)}
+          >
+            <Avatar.Currency currency={setting.currency} />
+          </TouchableHighlight>
+        </SettingItem>
+        <CurrencyModal
+          visible={currencyModalVisible}
+          onSelect={onSelectCurrency}
+          onClose={() => setCurrencyModalVisible(false)}
+        />
       </Content>
     </Container>
   );
@@ -104,6 +133,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(Redux.get("setting", "changeFingerPrintLock")(isLocked)),
     changeTheme: isLightTheme =>
       dispatch(Redux.get("setting", "changeTheme")(isLightTheme)),
+    changeCurrency: currency =>
+      dispatch(Redux.get("setting", "changeCurrency")(currency)),
     changePinLock: isLocked =>
       dispatch(Redux.get("setting", "changePinLock")(isLocked))
   };

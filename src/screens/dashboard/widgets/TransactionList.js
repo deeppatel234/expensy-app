@@ -3,9 +3,11 @@ import _capitalize from "lodash/capitalize";
 import _isEmpty from "lodash/isEmpty";
 
 import Typography from "Components/Typography";
+import TypographyCurrency from "Components/Typography/Currency";
 import Loader from "Components/Loader";
 import Avatar from "Components/Avatar";
 
+import { fixedAmount } from "Utils/utility";
 import Models from "Models";
 import { EXPENSE_TYPES } from "Models/ExpenseModel";
 
@@ -69,11 +71,11 @@ const TransactionList = ({ categories, wallets }) => {
                 <SubDetails>
                   <RightText>
                     {EXPENSE_TYPES.EXPENSE === transaction.type ? (
-                      <Typography appearance="red">
-                        {transaction.amount.toFixed(2)}
-                      </Typography>
+                      <TypographyCurrency appearance="red">
+                        {fixedAmount(transaction.amount)}
+                      </TypographyCurrency>
                     ) : (
-                      <Typography>{transaction.amount.toFixed(2)}</Typography>
+                      <TypographyCurrency>{fixedAmount(transaction.amount)}</TypographyCurrency>
                     )}
                   </RightText>
                   <Typography appearance="gray">

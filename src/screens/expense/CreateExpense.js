@@ -20,8 +20,6 @@ import Icon from "Components/Icon";
 import Header from "Components/Header";
 import Footer from "Components/Footer";
 
-import CurrencyCode from "Utils/CurrencyCode";
-
 import { EXPENSE_TYPES } from "Models/ExpenseModel";
 
 import { BLACK } from "Src/theme";
@@ -48,7 +46,7 @@ const CategorySchema = Yup.object().shape({
   category: Yup.string().required("Required")
 });
 
-const CreateExpense = ({ history, categories, wallets }) => {
+const CreateExpense = ({ history, categories, wallets, currency }) => {
   const [walletModalVisible, setWalletModalVisible] = useState(false);
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
@@ -78,10 +76,6 @@ const CreateExpense = ({ history, categories, wallets }) => {
 
   const getWalletIcon = useCallback(wallet => {
     return wallet ? wallets[wallet].icon : "PLACEHOLDER";
-  });
-
-  const getCurrencyCode = useCallback(wallet => {
-    return CurrencyCode[wallets[wallet].currency].unicode;
   });
 
   return (
@@ -165,25 +159,19 @@ const CreateExpense = ({ history, categories, wallets }) => {
                   </IconInputWrapper>
                 </FormSpace>
               </TouchableHighlight>
-              {values.wallet && (
-                <IconInputWrapper>
-                  <Avatar>
-                    <Typography color={BLACK}>
-                      {getCurrencyCode(values.wallet)}
-                    </Typography>
-                  </Avatar>
-                  <RightInput>
-                    <TextInput
-                      placeholder="0"
-                      onChangeText={handleChange("amount")}
-                      onBlur={handleBlur("amount")}
-                      value={values.amount}
-                      keyboardType="numeric"
-                      error={errors.amount}
-                    />
-                  </RightInput>
-                </IconInputWrapper>
-              )}
+              <IconInputWrapper>
+                <Avatar.Currency currency={currency} />
+                <RightInput>
+                  <TextInput
+                    placeholder="0"
+                    onChangeText={handleChange("amount")}
+                    onBlur={handleBlur("amount")}
+                    value={values.amount}
+                    keyboardType="numeric"
+                    error={errors.amount}
+                  />
+                </RightInput>
+              </IconInputWrapper>
               <IconInputWrapper>
                 <Avatar>
                   <Icon
@@ -245,7 +233,8 @@ const CreateExpense = ({ history, categories, wallets }) => {
 const mapStateToProps = state => {
   return {
     wallets: state.wallets,
-    categories: state.categories
+    categories: state.categories,
+    currency: state.setting.currency,
   };
 };
 

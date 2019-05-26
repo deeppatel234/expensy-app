@@ -6,7 +6,8 @@ const DEFAULT_SETTINGS = {
   fingerPrintLock: false,
   pinLock: false,
   pin: false,
-  isLightTheme: true
+  isLightTheme: true,
+  currency: 'INDIAN_RUPEE',
 };
 
 class SettingRedux extends BaseRedux {
@@ -16,6 +17,7 @@ class SettingRedux extends BaseRedux {
       CHANGE_MENU_DRAWER_VISIBILITY: "CHANGE_MENU_DRAWER_VISIBILITY",
       CHANGE_FINGERPRINT_LOCK: "CHANGE_FINGERPRINT_LOCK",
       CHANGE_PIN_LOCK: "CHANGE_PIN_LOCK",
+      CHANGE_CURRENCY: "CHANGE_CURRENCY",
       CHANGE_THEME: "CHANGE_THEME"
     };
   }
@@ -32,6 +34,15 @@ class SettingRedux extends BaseRedux {
         return {
           type: self.constants.SETTING_FETCH_DATA_SUCCESS,
           setting
+        };
+      },
+      changeCurrency(currency) {
+        return dispatch => {
+          dispatch({
+            type: self.constants.CHANGE_CURRENCY,
+            currency
+          });
+          self.saveSetting({ currency });
         };
       },
       changeTheme(isLightTheme) {
@@ -88,6 +99,8 @@ class SettingRedux extends BaseRedux {
             return { ...state, ...action.setting };
           case self.constants.CHANGE_THEME:
             return { ...state, isLightTheme: action.isLightTheme };
+          case self.constants.CHANGE_CURRENCY:
+            return { ...state, currency: action.currency };
           case self.constants.CHANGE_MENU_DRAWER_VISIBILITY:
             return { ...state, isDrawerOpen: action.isVisible };
           case self.constants.CHANGE_FINGERPRINT_LOCK:

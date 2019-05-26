@@ -1,13 +1,10 @@
 import React, { useState, useCallback } from "react";
 import { connect } from "react-redux";
 
-import { TouchableHighlight } from "react-native";
-
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 import Redux from "Redux/ReduxRegistry";
-import Typography from "Components/Typography";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Header from "Components/Header";
@@ -16,10 +13,6 @@ import Radio from "Components/RadioButton";
 
 import IconModal from "Screens/icon/IconModal";
 
-import CurrencyModal from "Screens/currency/CurrencyModal";
-import CurrencyCode from "Utils/CurrencyCode";
-
-import { BLACK } from "Src/theme";
 import { WALLET_TYPES } from "Models/WalletModel";
 
 import {
@@ -38,23 +31,16 @@ const WalletSchema = Yup.object().shape({
 
 const INITIAL_WALLET_VALUES = {
   icon: "PLACEHOLDER",
-  currency: "INDIAN_RUPEE",
   type: "bank",
   balance: ""
 };
 
-const CreateWallet = ({ createWallet, history }) => {
+const CreateWallet = ({ createWallet, history, currency }) => {
   const [iconModalVisible, setIconModalVisible] = useState(false);
-  const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
 
   const onSelectIcon = useCallback((data, setFieldValue) => {
     setFieldValue("icon", data);
     setIconModalVisible(false);
-  }, []);
-
-  const onSelectCurrency = useCallback((data, setFieldValue) => {
-    setFieldValue("currency", data);
-    setCurrencyModalVisible(false);
   }, []);
 
   const onSubmitForm = useCallback(values => {
@@ -117,15 +103,7 @@ const CreateWallet = ({ createWallet, history }) => {
                 </RightInput>
               </IconInputWrapper>
               <IconInputWrapper>
-                <TouchableHighlight
-                  onPress={() => setCurrencyModalVisible(true)}
-                >
-                  <Avatar>
-                    <Typography color={BLACK}>
-                      {CurrencyCode[values.currency].unicode}
-                    </Typography>
-                  </Avatar>
-                </TouchableHighlight>
+                <Avatar.Currency currency={currency} />
                 <RightInput>
                   <TextInput
                     placeholder="Initial Balance"
@@ -142,11 +120,6 @@ const CreateWallet = ({ createWallet, history }) => {
                 onSelect={data => onSelectIcon(data, setFieldValue)}
                 onClose={() => setIconModalVisible(false)}
               />
-              <CurrencyModal
-                visible={currencyModalVisible}
-                onSelect={data => onSelectCurrency(data, setFieldValue)}
-                onClose={() => setCurrencyModalVisible(false)}
-              />
             </Content>
             <Footer>
               <Footer.AddButton onPress={handleSubmit} />
@@ -158,6 +131,14 @@ const CreateWallet = ({ createWallet, history }) => {
   );
 };
 
+// Maps state from store to props
+const mapStateToProps = state => {
+  return {
+    currency: state.setting.currency
+  };
+};
+
+
 const mapDispatchToProps = dispatch => {
   return {
     createWallet: wallet => dispatch(Redux.get("wallet", "create")(wallet))
@@ -165,6 +146,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CreateWallet);

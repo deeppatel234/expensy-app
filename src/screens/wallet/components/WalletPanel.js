@@ -3,8 +3,8 @@ import React from "react";
 import { TouchableHighlight } from "react-native";
 
 import Typography from "Components/Typography";
+import TypographyCurrency from "Components/Typography/Currency";
 import Avatar from "Components/Avatar";
-import CurrencyCode from "Utils/CurrencyCode";
 
 import { ListItem, RightList } from "Src/globalStyle";
 
@@ -13,9 +13,9 @@ const Panel = ({ wallet }) => (
     <Avatar.Icon iconKey={wallet.icon} />
     <RightList>
       <Typography>{wallet.name}</Typography>
-      <Typography type="small">
-        {wallet.balance} {CurrencyCode[wallet.currency].unicode}
-      </Typography>
+      <TypographyCurrency type="small">
+        {wallet.balance}
+      </TypographyCurrency>
     </RightList>
   </ListItem>
 );

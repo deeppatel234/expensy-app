@@ -8,7 +8,7 @@ import ReduxLoader from "Base/ReduxLoader";
 
 const MainApp = () => (
   <Provider store={store}>
-    <ReduxLoader models={["setting", "network"]}>
+    <ReduxLoader models={["network", "sync"]}>
       <App />
     </ReduxLoader>
   </Provider>

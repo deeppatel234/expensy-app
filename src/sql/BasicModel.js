@@ -195,7 +195,7 @@ class BasicModel {
 
   async syncTable(updateStore, syncTime) {
     if (!this.isConnected()) {
-      return true;
+      return Promise.reject();
     }
 
     const time = syncTime[this.tableName()];

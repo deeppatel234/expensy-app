@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, BackButton } from "react-router-native";
 import { connect } from "react-redux";
-import Drawer from 'react-native-drawer';
+import Drawer from "react-native-drawer";
 
 import Dashboard from "Screens/dashboard";
 import CreateCategory from "Screens/category/CreateCategory";
@@ -12,23 +12,33 @@ import ViewWallet from "Screens/wallet/ViewWallet";
 
 import CreateExpense from "Screens/expense/CreateExpense";
 import Setting from "Screens/setting";
-import ReduxLoader from 'Base/ReduxLoader';
+import InitSyncScreen from "Screens/onboarding/SyncScreen";
+import ReduxLoader from "Base/ReduxLoader";
 
 import Menu from "Screens/menu";
 
 import Redux from "Redux/ReduxRegistry";
-import Models from 'Models';
 
-class Main extends Component {
-  componentDidMount() {
-    Models.syncTables();
+const Main = ({
+  isDrawerOpen,
+  closeMenuDrawer,
+  initSyncComplete,
+  syncComplete,
+  startSync
+}) => {
+  useEffect(() => {
+    if (!syncComplete) {
+      startSync();
+    }
+  }, []);
+
+  if (!initSyncComplete) {
+    return <InitSyncScreen />;
   }
 
-  render() {
-    const { isDrawerOpen, closeMenuDrawer } = this.props;
-
-    return (
-      <ReduxLoader models={['wallet', 'category', 'user']}>
+  return (
+    <ReduxLoader models={["setting"]}>
+      <ReduxLoader models={["wallet", "category", "user"]}>
         <BackButton>
           <Drawer
             tapToClose
@@ -52,20 +62,24 @@ class Main extends Component {
           </Drawer>
         </BackButton>
       </ReduxLoader>
-    );
-  }
-}
+    </ReduxLoader>
+  );
+};
 
 // Maps state from store to props
 const mapStateToProps = state => {
   return {
     isDrawerOpen: state.setting.isDrawerOpen,
+    initSyncComplete: state.sync.initSyncComplete,
+    syncComplete: state.sync.syncComplete
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    closeMenuDrawer: () => dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(false)),
+    closeMenuDrawer: () =>
+      dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(false)),
+    startSync: () => dispatch(Redux.get("sync", "startSync")())
   };
 };
 

@@ -1,5 +1,4 @@
 import BaseRedux from "./BaseRedux";
-import LocalStorage from "Base/LocalStorage";
 
 const DEFAULT_SETTINGS = {
   isDrawerOpen: false,
@@ -24,7 +23,7 @@ class SettingRedux extends BaseRedux {
 
   saveSetting(obj) {
     const { setting } = this.getState();
-    return LocalStorage.setSettings({ ...setting, ...obj });
+    return this.models.get('user').saveUserSetting({ ...setting, ...obj });
   }
 
   getActions() {
@@ -82,10 +81,10 @@ class SettingRedux extends BaseRedux {
         };
       },
       fetch() {
-        return LocalStorage.getSettings().then(setting => {
-          const settings = setting ? JSON.parse(setting) : DEFAULT_SETTINGS;
-          self.dispatch(self.actions.fetchDataSuccess(settings));
-        });
+        return self.models
+          .get("user")
+          .getUserSetting()
+          .then(setting => self.dispatch(self.actions.fetchDataSuccess(setting)));
       }
     };
   }

@@ -4,7 +4,8 @@ const KEYS = {
   AUTH_TOKEN: "authToken",
   DB_CONFIG: "dbConfig",
   LAST_SYNC: "lastSync",
-  SETTINGS: "settings"
+  SETTINGS: "settings",
+  APP_SYNC: "appSync",
 };
 
 export default {
@@ -47,5 +48,13 @@ export default {
 
   clearStorage() {
     return AsyncStorage.multiRemove(Object.values(KEYS));
-  }
+  },
+
+  setAppSync(obj) {
+    return AsyncStorage.setItem(KEYS.APP_SYNC, JSON.stringify(obj));
+  },
+
+  getAppSync() {
+    return AsyncStorage.getItem(KEYS.APP_SYNC);
+  },
 };

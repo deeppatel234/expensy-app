@@ -68,7 +68,7 @@ const SignUP = () => {
   }, []);
 
   if (redirectToApp) {
-    return <Redirect to="/" />;
+    return <Redirect to="/signuponboarding" />;
   }
 
   return (

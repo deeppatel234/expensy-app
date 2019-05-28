@@ -10,6 +10,7 @@ import AppAuthentication from "Base/AppAuthentication";
 import Login from "Screens/login";
 import SignUp from "Screens/signup";
 import Main from "Src/Main";
+import OnBoarding from "Screens/onboarding";
 
 import { light, dark } from "Src/theme";
 
@@ -21,6 +22,14 @@ const MainApp = () => (
   </AuthWrapper>
 );
 
+const SignUpOnBoarding = () => (
+  <OnBoarding type="signup" />
+);
+
+const LoginOnBoarding = () => (
+  <OnBoarding type="login" />
+);
+
 const App = ({ isLightTheme }) => (
   <ThemeProvider theme={isLightTheme ? light : dark}>
     <AppAuthentication>
@@ -30,6 +39,8 @@ const App = ({ isLightTheme }) => (
             <Switch>
               <Route path="/signup" component={SignUp} />
               <Route path="/login" component={Login} />
+              <Route path="/signuponboarding" component={SignUpOnBoarding} />
+              <Route path="/loginonboarding" component={LoginOnBoarding} />
               <Route path="/" component={MainApp} />
             </Switch>
           </NativeRouter>

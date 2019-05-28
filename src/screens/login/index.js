@@ -59,7 +59,7 @@ const Login = () => {
   }, []);
 
   if (redirectToApp) {
-    return <Redirect to="/" />;
+    return <Redirect to="/loginonboarding" />;
   }
 
   return (

@@ -10,7 +10,7 @@ const FONT_FAMILY = {
   BOLD: "Montserrat-Bold"
 };
 
-export const TYPO_STYLE = StyleSheet.create({
+export const TYPO_STYLE = {
   appLogo: {
     fontFamily: FONT_FAMILY.REGULAR,
     fontSize: 40
@@ -31,11 +31,17 @@ export const TYPO_STYLE = StyleSheet.create({
     fontFamily: FONT_FAMILY.REGULAR,
     fontSize: 12
   }
-});
+};
 
-const Typography = ({ children, type, ...props }) => {
+const Typography = ({ children, type, size, ...props }) => {
+  let style = TYPO_STYLE[type];
+
+  if (size) {
+    style = { ...style, fontSize: size };
+  }
+
   return (
-    <TypographyText style={TYPO_STYLE[type]} {...props}>
+    <TypographyText style={style} {...props}>
       {children}
     </TypographyText>
   );

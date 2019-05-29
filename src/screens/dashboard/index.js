@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import Header from "Components/Header";
-import Link from "Components/Link";
 import Footer from 'Components/Footer';
 
 import {
@@ -30,9 +29,7 @@ class Dashboard extends Component {
           <CategoryWise type="expense" categories={categories} />
           <CategoryWise type="income" categories={categories} />
         </Content>
-        <Footer>
-          <Link to='/create-expense' component={Footer.AddButton} />
-        </Footer>
+        <Footer actionIcon="add" actionLink="/create-expense" />
       </Container>
     );
   }

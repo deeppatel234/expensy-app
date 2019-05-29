@@ -219,9 +219,7 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
                 onClose={() => setCategoryModalVisible(false)}
               />
             </Content>
-            <Footer>
-              <Footer.AddButton onPress={handleSubmit} />
-            </Footer>
+            <Footer actionIcon="add" onActionClick={handleSubmit} />
           </React.Fragment>
         )}
       </Formik>

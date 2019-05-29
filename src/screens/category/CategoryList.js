@@ -29,9 +29,7 @@ const CategoryList = ({ categories }) => (
         ))}
       </ListWrapper>
     </Content>
-    <Footer>
-      <Link to="/create-category" component={Footer.AddButton} />
-    </Footer>
+    <Footer actionIcon="add" actionLink="/create-category" />
   </Container>
 );
 

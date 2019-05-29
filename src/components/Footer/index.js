@@ -1,41 +1,63 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import Icon from "Components/Icon";
+import Link from "Components/Link";
 
-import { FooterWrapper, FooterButton } from "./styled";
+import Redux from "Redux/ReduxRegistry";
 
-const Footer = ({ children, ...props }) => (
-  <FooterWrapper {...props}>{children}</FooterWrapper>
+import {
+  FooterWrapper,
+  FooterButton,
+  LeftFooter,
+  RightFooter,
+  MenuButton
+} from "./styled";
+
+const ActionButton = ({ actionIcon, ...props }) => (
+  <FooterButton {...props}>
+    <Icon
+      iconType="MaterialIcons"
+      icon={actionIcon}
+      appearance="white"
+      size={25}
+    />
+  </FooterButton>
 );
 
-const AddButton = props => (
-  <Footer.Button {...props}>
-    <Icon iconType="MaterialIcons" icon="add" appearance="white" size={30} />
-  </Footer.Button>
+const Footer = ({
+  openMenuDrawer,
+  menu = true,
+  actionIcon,
+  actionLink,
+  onActionClick,
+  ...props
+}) => (
+  <FooterWrapper {...props}>
+    <LeftFooter>
+      {menu && (
+        <MenuButton onPress={openMenuDrawer}>
+          <Icon type="Feather" name="menu" appearance="white" size={25} />
+        </MenuButton>
+      )}
+    </LeftFooter>
+    {actionLink ? (
+      <Link to={actionLink} actionIcon={actionIcon} component={ActionButton} />
+    ) : (
+      <ActionButton actionIcon={actionIcon} onPress={onActionClick} />
+    )}
+    <RightFooter />
+  </FooterWrapper>
 );
 
-const EditButton = props => (
-  <Footer.Button {...props}>
-    <Icon iconType="MaterialIcons" icon="edit" appearance="white" size={30} />
-  </Footer.Button>
-);
+const mapDispatchToProps = dispatch => {
+  return {
+    openMenuDrawer: () =>
+      dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(true))
+  };
+};
 
-const SaveButton = props => (
-  <Footer.Button {...props}>
-    <Icon iconType="MaterialIcons" icon="save" appearance="white" size={30} />
-  </Footer.Button>
-);
-
-const CloseButton = props => (
-  <Footer.Button {...props}>
-    <Icon iconType="MaterialIcons" icon="close" appearance="white" size={30} />
-  </Footer.Button>
-);
-
-Footer.Button = FooterButton;
-Footer.AddButton = AddButton;
-Footer.CloseButton = CloseButton;
-Footer.EditButton = EditButton;
-Footer.SaveButton = SaveButton;
-
-export default Footer;
+export default connect(
+  null,
+  mapDispatchToProps
+)(Footer);

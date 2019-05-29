@@ -19,13 +19,11 @@ const AppModal = ({ visible, onClose, heading, children, ...props }) => (
       <Container>
         {heading && (
           <Heading>
-            <Header text={heading} menu={false} />
+            <Header text={heading} />
           </Heading>
         )}
         {children}
-        <Footer>
-          <Footer.CloseButton onPress={onClose} />
-        </Footer>
+        <Footer actionIcon="close" onActionClick={onClose} menu={false} />
       </Container>
     </SafeAreaView>
   </Modal>

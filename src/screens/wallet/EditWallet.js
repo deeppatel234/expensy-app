@@ -93,9 +93,7 @@ const EditForm = ({ wallet, onSubmitForm }) => {
               onClose={() => setIconModalVisible(false)}
             />
           </Content>
-          <Footer>
-            <Footer.SaveButton onPress={handleSubmit} />
-          </Footer>
+          <Footer actionIcon="save" onActionClick={handleSubmit} />
         </React.Fragment>
       )}
     </Formik>
@@ -120,9 +118,7 @@ const EditWallet = ({ updateWallet, wallet }) => {
           <Content>
             <WalletPanel wallet={wallet} />
           </Content>
-          <Footer>
-            <Footer.EditButton onPress={() => setEditMode(true)} />
-          </Footer>
+          <Footer actionIcon="edit" onActionClick={() => setEditMode(true)} />
         </React.Fragment>
       )}
     </Container>

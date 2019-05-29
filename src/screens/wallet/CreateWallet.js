@@ -121,9 +121,7 @@ const CreateWallet = ({ createWallet, history, currency }) => {
                 onClose={() => setIconModalVisible(false)}
               />
             </Content>
-            <Footer>
-              <Footer.AddButton onPress={handleSubmit} />
-            </Footer>
+            <Footer actionIcon="add" onActionClick={handleSubmit} />
           </React.Fragment>
         )}
       </Formik>

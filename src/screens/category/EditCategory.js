@@ -71,9 +71,7 @@ const EditForm = ({ category, onSubmitForm }) => {
               onClose={() => setIconModalVisible(false)}
             />
           </Content>
-          <Footer>
-            <Footer.SaveButton onPress={handleSubmit} />
-          </Footer>
+          <Footer actionIcon="save" onActionClick={handleSubmit} />
         </React.Fragment>
       )}
     </Formik>
@@ -101,9 +99,7 @@ const EditCategory = ({ updateCategory, history, category }) => {
             <Content>
               <CategoryPanel category={category} />
             </Content>
-            <Footer>
-              <Footer.EditButton onPress={() => setEditMode(true)} />
-            </Footer>
+            <Footer actionIcon="edit" onActionClick={() => setEditMode(true)} />
           </React.Fragment>
         )
       }

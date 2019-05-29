@@ -75,9 +75,7 @@ const CreateCategory = ({ createCategory, history }) => {
                 onClose={() => setIconModalVisible(false)}
               />
             </Content>
-            <Footer>
-              <Footer.AddButton onPress={handleSubmit} />
-            </Footer>
+            <Footer actionIcon="add" onActionClick={handleSubmit} />
           </React.Fragment>
         )}
       </Formik>

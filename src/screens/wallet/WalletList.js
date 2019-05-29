@@ -31,9 +31,7 @@ const WalletList = ({ wallets }) => (
         ))}
       </ListWrapper>
     </Content>
-    <Footer>
-      <Link to="/create-wallet" component={Footer.AddButton} />
-    </Footer>
+    <Footer actionIcon="add" actionLink="/create-wallet" />
   </Container>
 );
 

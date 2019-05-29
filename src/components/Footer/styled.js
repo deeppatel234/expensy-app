@@ -3,8 +3,10 @@ import styled from "styled-components";
 export const FooterWrapper = styled.View`
   width: 100%;
   background-color: ${props => props.theme.primary};
-  height: 40px;
+  height: 48px;
   position: relative;
+  display: flex;
+  justify-content: center;
 `;
 
 export const FooterButton = styled.TouchableOpacity`
@@ -18,7 +20,20 @@ export const FooterButton = styled.TouchableOpacity`
   align-self: center;
   border-radius: 50px;
   border-width: 5px;
-  height: 65px;
-  width: 65px;
-  margin-bottom: 10px;
+  height: 61px;
+  width: 61px;
+  margin-bottom: 15px;
+`;
+
+export const LeftFooter = styled.View`
+  margin-left: 20px;
+`;
+
+export const RightFooter = styled.View`
+  margin-right: 20px;
+`;
+
+export const MenuButton = styled.TouchableOpacity`
+  height: 26px;
+  width: 26px;
 `;

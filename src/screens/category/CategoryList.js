@@ -11,7 +11,8 @@ import CategoryPanel from "./components/CategoryPanel";
 
 import { Container, Heading, Content, ListWrapper } from "Src/globalStyle";
 
-const ViewCategory = ({ categories }) => (
+
+const CategoryList = ({ categories }) => (
   <Container>
     <Heading>
       <Header text="Categories" />
@@ -19,7 +20,12 @@ const ViewCategory = ({ categories }) => (
     <Content>
       <ListWrapper>
         {Object.values(categories).map(category => (
-          <CategoryPanel key={category._id} category={category} />
+          <Link
+            key={category._id}
+            to={`/edit-category/${category._id}`}
+            category={category}
+            component={CategoryPanel}
+          />
         ))}
       </ListWrapper>
     </Content>
@@ -46,4 +52,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ViewCategory);
+)(CategoryList);

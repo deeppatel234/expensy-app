@@ -5,7 +5,8 @@ import Drawer from "react-native-drawer";
 
 import Dashboard from "Screens/dashboard";
 import CreateCategory from "Screens/category/CreateCategory";
-import ViewCategory from "Screens/category/ViewCategory";
+import CategoryList from "Screens/category/CategoryList";
+import EditCategory from "Screens/category/EditCategory";
 
 import CreateWallet from "Screens/wallet/CreateWallet";
 import ViewWallet from "Screens/wallet/ViewWallet";
@@ -51,7 +52,8 @@ const Main = ({
             onClose={closeMenuDrawer}
           >
             <Switch>
-              <Route path="/view-category" component={ViewCategory} />
+              <Route path="/view-category" component={CategoryList} />
+              <Route path="/edit-category/:id" component={EditCategory} />
               <Route path="/create-category" component={CreateCategory} />
               <Route path="/view-wallet" component={ViewWallet} />
               <Route path="/create-wallet" component={CreateWallet} />

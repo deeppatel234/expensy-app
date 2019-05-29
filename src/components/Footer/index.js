@@ -14,6 +14,18 @@ const AddButton = props => (
   </Footer.Button>
 );
 
+const EditButton = props => (
+  <Footer.Button {...props}>
+    <Icon iconType="MaterialIcons" icon="edit" appearance="white" size={30} />
+  </Footer.Button>
+);
+
+const SaveButton = props => (
+  <Footer.Button {...props}>
+    <Icon iconType="MaterialIcons" icon="save" appearance="white" size={30} />
+  </Footer.Button>
+);
+
 const CloseButton = props => (
   <Footer.Button {...props}>
     <Icon iconType="MaterialIcons" icon="close" appearance="white" size={30} />
@@ -23,5 +35,7 @@ const CloseButton = props => (
 Footer.Button = FooterButton;
 Footer.AddButton = AddButton;
 Footer.CloseButton = CloseButton;
+Footer.EditButton = EditButton;
+Footer.SaveButton = SaveButton;
 
 export default Footer;

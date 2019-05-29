@@ -30,6 +30,12 @@ class CategoriesRedux extends BaseRedux {
           category
         };
       },
+      updateSuccess(category) {
+        return {
+          type: self.constants.CATEGORIES_UPDATE_DATA,
+          category
+        };
+      },
       create(category) {
         return dispatch => {
           return self.models
@@ -39,9 +45,11 @@ class CategoriesRedux extends BaseRedux {
         };
       },
       update(category) {
-        return {
-          type: self.constants.CATEGORIES_UPDATE_DATA,
-          category
+        return dispatch => {
+          return self.models
+            .get("category")
+            .update(category, { _id: category._id })
+            .then(() => dispatch(self.actions.updateSuccess(category)));
         };
       },
       delete(category) {
@@ -71,8 +79,7 @@ class CategoriesRedux extends BaseRedux {
           case self.constants.CATEGORIES_CREATE_DATA:
             return { ...state, [action.category._id]: action.category };
           case self.constants.CATEGORIES_UPDATE_DATA:
-            // TODO: handle this;
-            return state;
+            return { ...state, [action.category._id]: action.category };
           default:
             return state;
         }

@@ -9,7 +9,8 @@ import CategoryList from "Screens/category/CategoryList";
 import EditCategory from "Screens/category/EditCategory";
 
 import CreateWallet from "Screens/wallet/CreateWallet";
-import ViewWallet from "Screens/wallet/ViewWallet";
+import WalletList from "Screens/wallet/WalletList";
+import EditWallet from "Screens/wallet/EditWallet";
 
 import CreateExpense from "Screens/expense/CreateExpense";
 import Setting from "Screens/setting";
@@ -55,7 +56,8 @@ const Main = ({
               <Route path="/view-category" component={CategoryList} />
               <Route path="/edit-category/:id" component={EditCategory} />
               <Route path="/create-category" component={CreateCategory} />
-              <Route path="/view-wallet" component={ViewWallet} />
+              <Route path="/view-wallet" component={WalletList} />
+              <Route path="/edit-wallet/:id" component={EditWallet} />
               <Route path="/create-wallet" component={CreateWallet} />
               <Route path="/create-expense" component={CreateExpense} />
               <Route path="/setting" component={Setting} />

@@ -14,7 +14,7 @@ import {
   ListWrapper,
 } from "Src/globalStyle";
 
-const ViewWallet = ({ wallets }) => (
+const WalletList = ({ wallets }) => (
   <Container>
     <Heading>
       <Header text="Wallets" />
@@ -22,7 +22,12 @@ const ViewWallet = ({ wallets }) => (
     <Content>
       <ListWrapper>
         {Object.values(wallets).map(wallet => (
-          <WalletPanel key={wallet._id} wallet={wallet} />
+          <Link
+            key={wallet._id}
+            to={`/edit-wallet/${wallet._id}`}
+            wallet={wallet}
+            component={WalletPanel}
+          />
         ))}
       </ListWrapper>
     </Content>
@@ -39,4 +44,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ViewWallet);
+export default connect(mapStateToProps)(WalletList);

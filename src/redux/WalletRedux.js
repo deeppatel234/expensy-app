@@ -30,6 +30,12 @@ class WalletRedux extends BaseRedux {
           wallet
         };
       },
+      updateSuccess(wallet) {
+        return {
+          type: self.constants.WALLET_UPDATE_DATA,
+          wallet
+        };
+      },
       create(wallet) {
         return dispatch => {
           return self.models
@@ -39,9 +45,11 @@ class WalletRedux extends BaseRedux {
         };
       },
       update(wallet) {
-        return {
-          type: self.constants.WALLET_UPDATE_DATA,
-          wallet
+        return dispatch => {
+          return self.models
+              .get("wallet")
+              .update(wallet, { _id: wallet._id })
+              .then(() => dispatch(self.actions.updateSuccess(wallet)));
         };
       },
       delete(wallet) {
@@ -71,8 +79,7 @@ class WalletRedux extends BaseRedux {
           case self.constants.WALLET_CREATE_DATA:
             return { ...state, [action.wallet._id]: action.wallet };
           case self.constants.WALLET_UPDATE_DATA:
-            // TODO: handle this;
-            return state;
+            return { ...state, [action.wallet._id]: { ...state[action.wallet._id] ,...action.wallet } };
           default:
             return state;
         }

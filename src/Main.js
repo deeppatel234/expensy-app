@@ -39,33 +39,31 @@ const Main = ({
   }
 
   return (
-    <ReduxLoader models={["setting"]}>
-      <ReduxLoader models={["wallet", "category", "user"]}>
-        <BackButton>
-          <Drawer
-            tapToClose
-            open={isDrawerOpen}
-            type="static"
-            content={<Menu />}
-            openDrawerOffset={100}
-            tweenDuration={150}
-            tweenHandler={Drawer.tweenPresets.parallax}
-            onClose={closeMenuDrawer}
-          >
-            <Switch>
-              <Route path="/view-category" component={CategoryList} />
-              <Route path="/edit-category/:id" component={EditCategory} />
-              <Route path="/create-category" component={CreateCategory} />
-              <Route path="/view-wallet" component={WalletList} />
-              <Route path="/edit-wallet/:id" component={EditWallet} />
-              <Route path="/create-wallet" component={CreateWallet} />
-              <Route path="/create-expense" component={CreateExpense} />
-              <Route path="/setting" component={Setting} />
-              <Route path="/" component={Dashboard} />
-            </Switch>
-          </Drawer>
-        </BackButton>
-      </ReduxLoader>
+    <ReduxLoader models={["wallet", "category", "user"]}>
+      <BackButton>
+        <Drawer
+          tapToClose
+          open={isDrawerOpen}
+          type="static"
+          content={<Menu />}
+          openDrawerOffset={100}
+          tweenDuration={150}
+          tweenHandler={Drawer.tweenPresets.parallax}
+          onClose={closeMenuDrawer}
+        >
+          <Switch>
+            <Route path="/view-category" component={CategoryList} />
+            <Route path="/edit-category/:id" component={EditCategory} />
+            <Route path="/create-category" component={CreateCategory} />
+            <Route path="/view-wallet" component={WalletList} />
+            <Route path="/edit-wallet/:id" component={EditWallet} />
+            <Route path="/create-wallet" component={CreateWallet} />
+            <Route path="/create-expense" component={CreateExpense} />
+            <Route path="/setting" component={Setting} />
+            <Route path="/" component={Dashboard} />
+          </Switch>
+        </Drawer>
+      </BackButton>
     </ReduxLoader>
   );
 };

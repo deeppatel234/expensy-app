@@ -1,7 +1,8 @@
 import _sortBy from 'lodash/sortBy';
 
-import Registry from '../../base/Registry';
-import LocalStorage from '../../base/LocalStorage';
+import Registry from 'Base/Registry';
+import LocalStorage from 'Base/LocalStorage';
+import MemoryStorage from "Base/MemoryStorage";
 
 import UserModel from './UserModel';
 import CategoryModel from './CategoryModel';
@@ -18,6 +19,10 @@ class ModelRegistry extends Registry {
   }
 
   async syncTables(updateStore = true) {
+    if (!MemoryStorage.get('token')) {
+      return Promise.reject();
+    }
+
     const syncTimes = await LocalStorage.getLastSync();
     const values = this.getValues();
     for(let i = 0; i < values.length; i++) {

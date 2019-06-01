@@ -8,6 +8,7 @@ import Icon from "Components/Icon";
 import Avatar from "Components/Avatar";
 import Switch from "Components/Switch";
 import Header from "Components/Header";
+import Footer from "Components/Footer";
 
 import Redux from "Redux/ReduxRegistry";
 
@@ -116,6 +117,7 @@ const Setting = ({
           onClose={() => setCurrencyModalVisible(false)}
         />
       </Content>
+      <Footer actionIcon="home" actionLink="/" />
     </Container>
   );
 };

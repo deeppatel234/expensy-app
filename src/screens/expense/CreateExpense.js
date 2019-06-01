@@ -5,7 +5,7 @@ import _capitalize from "lodash/capitalize";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { TouchableHighlight } from "react-native";
+import { TouchableHighlight, Alert } from "react-native";
 
 import formatDate from "date-fns/format";
 
@@ -68,6 +68,16 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
     setWalletModal({ visible: false });
   }, [walletModal]);
 
+  const onChangeType = useCallback((data, onChange) => {
+    if (data !== EXPENSE_TYPES.TRANSFER || Object.keys(wallets).length > 1) {
+      onChange(data);
+    } else {
+      Alert.alert(
+        'Warning',
+        'You can not transfer money into same wallet. please add two or more wallet to use this feature.')
+    }
+  }, [wallets]);
+
   const onSubmitForm = useCallback(values => {
     values.amount = parseFloat(values.amount || 0);
     if (values.type !== EXPENSE_TYPES.TRANSFER) {
@@ -116,7 +126,7 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
               <FormSpace>
                 <Radio.Group
                   selectedValue={values.type}
-                  onChange={handleChange("type")}
+                  onChange={data => onChangeType(data, handleChange("type"))}
                 >
                   {Object.keys(EXPENSE_TYPES).map(type => (
                     <Radio.Button

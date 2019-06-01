@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { connect } from "react-redux";
+import _capitalize from "lodash/capitalize";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -37,17 +38,24 @@ import {
 import models from "../../sql/models";
 
 const CategorySchema = Yup.object().shape({
+  type: Yup.string().required("Required"),
   amount: Yup.string()
     .required("Required")
     .test("len", "Amount should be greater than 0", val => {
       return parseFloat(val || 0) > 0;
     }),
   wallet: Yup.string().required("Required"),
+  toWallet: Yup.string().when("type", {
+    is: "transfer",
+    then: Yup.string().required("Required")
+  }),
   category: Yup.string().required("Required")
 });
 
 const CreateExpense = ({ history, categories, wallets, currency }) => {
-  const [walletModalVisible, setWalletModalVisible] = useState(false);
+  const [walletModal, setWalletModal] = useState({
+    visible: false
+  });
   const [categoryModalVisible, setCategoryModalVisible] = useState(false);
 
   const onSelectCategory = useCallback((data, setFieldValue) => {
@@ -56,18 +64,19 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
   }, []);
 
   const onSelectWallet = useCallback((data, setFieldValue) => {
-    setFieldValue("wallet", data._id);
-    setWalletModalVisible(false);
-  }, []);
+    setFieldValue(walletModal.field, data._id);
+    setWalletModal({ visible: false });
+  }, [walletModal]);
 
   const onSubmitForm = useCallback(values => {
     values.amount = parseFloat(values.amount || 0);
+    if (values.type !== EXPENSE_TYPES.TRANSFER) {
+      delete values.toWallet;
+    }
     models
       .get("expense")
       .create(values, true)
-      .then(() => {
-        history.goBack();
-      });
+      .then(history.goBack);
   }, []);
 
   const getCategoryIcon = useCallback(category => {
@@ -109,19 +118,21 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
                   selectedValue={values.type}
                   onChange={handleChange("type")}
                 >
-                  <Radio.Button
-                    value={EXPENSE_TYPES.EXPENSE}
-                    text="Expense"
-                    style={{ flexGrow: 1 }}
-                  />
-                  <Radio.Button
-                    value={EXPENSE_TYPES.INCOME}
-                    text="Incomes"
-                    style={{ flexGrow: 1 }}
-                  />
+                  {Object.keys(EXPENSE_TYPES).map(type => (
+                    <Radio.Button
+                      key={type}
+                      value={EXPENSE_TYPES[type]}
+                      text={_capitalize(type)}
+                      style={{ flexGrow: 1 }}
+                    />
+                  ))}
                 </Radio.Group>
               </FormSpace>
-              <TouchableHighlight onPress={() => setWalletModalVisible(true)}>
+              <TouchableHighlight
+                onPress={() =>
+                  setWalletModal({ visible: true, field: "wallet" })
+                }
+              >
                 <FormSpace>
                   <IconInputWrapper center>
                     <Avatar.Icon iconKey={getWalletIcon(values.wallet)} />
@@ -129,6 +140,8 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
                       <Typography>
                         {values.wallet
                           ? wallets[values.wallet].name
+                          : values.type === EXPENSE_TYPES.TRANSFER
+                          ? "Select Transfer From Wallet"
                           : "Select Wallet"}
                       </Typography>
                       {errors.wallet && (
@@ -140,6 +153,31 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
                   </IconInputWrapper>
                 </FormSpace>
               </TouchableHighlight>
+              {values.type === EXPENSE_TYPES.TRANSFER && (
+                <TouchableHighlight
+                  onPress={() =>
+                    setWalletModal({ visible: true, field: "toWallet" })
+                  }
+                >
+                  <FormSpace>
+                    <IconInputWrapper center>
+                      <Avatar.Icon iconKey={getWalletIcon(values.toWallet)} />
+                      <RightInput>
+                        <Typography>
+                          {values.toWallet
+                            ? wallets[values.toWallet].name
+                            : "Select Transfer To Wallet"}
+                        </Typography>
+                        {errors.toWallet && (
+                          <Typography type="small" appearance="red">
+                            {errors.toWallet}
+                          </Typography>
+                        )}
+                      </RightInput>
+                    </IconInputWrapper>
+                  </FormSpace>
+                </TouchableHighlight>
+              )}
               <TouchableHighlight onPress={() => setCategoryModalVisible(true)}>
                 <FormSpace>
                   <IconInputWrapper center>
@@ -209,9 +247,9 @@ const CreateExpense = ({ history, categories, wallets, currency }) => {
                 </RightInput>
               </IconInputWrapper>
               <WalletModal
-                visible={walletModalVisible}
+                visible={walletModal.visible}
                 onSelect={data => onSelectWallet(data, setFieldValue)}
-                onClose={() => setWalletModalVisible(false)}
+                onClose={() => setWalletModal({ visible: false })}
               />
               <CategoryModal
                 visible={categoryModalVisible}
@@ -232,7 +270,7 @@ const mapStateToProps = state => {
   return {
     wallets: state.wallets,
     categories: state.categories,
-    currency: state.setting.currency,
+    currency: state.setting.currency
   };
 };
 

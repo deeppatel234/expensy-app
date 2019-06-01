@@ -10,6 +10,7 @@ class Request {
      */
     this.apiRequest = axios.create({
       method: "post",
+      timeout: 1500,
       baseURL: API_URL
     });
     /**

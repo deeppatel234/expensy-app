@@ -6,6 +6,7 @@ import BasicModel from '../BasicModel';
 export const EXPENSE_TYPES = {
   INCOME: 'income',
   EXPENSE: 'expense',
+  TRANSFER: 'transfer',
 };
 
 class ExpenseModel extends BasicModel {

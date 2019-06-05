@@ -12,6 +12,7 @@ import {
 
 import TotalAmount from "./widgets/TotalAmount";
 import CategoryWise from "./widgets/CategoryWise";
+import WalletOverview from "./widgets/WalletOverview";
 import TransactionList from "./widgets/TransactionList";
 
 class Dashboard extends Component {
@@ -25,6 +26,7 @@ class Dashboard extends Component {
         </Heading>
         <Content>
           <TotalAmount />
+          <WalletOverview wallets={wallets} />
           <TransactionList categories={categories} wallets={wallets} />
           <CategoryWise type="expense" categories={categories} />
           <CategoryWise type="income" categories={categories} />

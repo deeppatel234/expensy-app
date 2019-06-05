@@ -11,10 +11,10 @@ import {
   MenuButton
 } from "./styled";
 
-const ActionButton = ({ actionIcon, ...props }) => (
+const ActionButton = ({ actionIcon, iconType = "MaterialIcons", ...props }) => (
   <FooterButton {...props}>
     <Icon
-      iconType="MaterialIcons"
+      iconType={iconType}
       icon={actionIcon}
       appearance="white"
       size={25}
@@ -22,15 +22,16 @@ const ActionButton = ({ actionIcon, ...props }) => (
   </FooterButton>
 );
 
-const TransactionMenu = (props) => (
+const TransactionMenu = props => (
   <MenuButton {...props}>
     <Icon type="Feather" name="list" appearance="white" size={25} />
   </MenuButton>
-)
+);
 
 const Footer = ({
   openMenuDrawer,
   menu = true,
+  iconType,
   actionIcon,
   actionLink,
   onActionClick,
@@ -43,13 +44,20 @@ const Footer = ({
       </LeftFooter>
     )}
     {actionLink ? (
-      <Link to={actionLink} actionIcon={actionIcon} component={ActionButton} />
+      <Link
+        to={actionLink}
+        iconType={iconType}
+        actionIcon={actionIcon}
+        component={ActionButton}
+      />
     ) : (
-      <ActionButton actionIcon={actionIcon} onPress={onActionClick} />
+      <ActionButton
+        iconType={iconType}
+        actionIcon={actionIcon}
+        onPress={onActionClick}
+      />
     )}
-    {menu && (
-      <RightFooter />
-    )}
+    {menu && <RightFooter />}
   </FooterWrapper>
 );
 

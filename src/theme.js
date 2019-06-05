@@ -4,6 +4,8 @@ export const WHITE = '#ffffff';
 export const RED = '#dc3545';
 export const GRAY = '#6c757d';
 export const LIGHT_GRAY = '#e5e5e5'
+export const GREEN = '#28a745';
+export const TEAL = '#17a2b8';
 
 export const light = {
   primary: PRIMARY,
@@ -12,6 +14,8 @@ export const light = {
   red: RED,
   gray: GRAY,
   lightGray: LIGHT_GRAY,
+  green: GREEN,
+  teal: TEAL,
 };
 
 export const dark = {
@@ -21,4 +25,6 @@ export const dark = {
   red: RED,
   gray: WHITE,
   lightGray: WHITE,
+  green: WHITE,
+  teal: WHITE,
 };

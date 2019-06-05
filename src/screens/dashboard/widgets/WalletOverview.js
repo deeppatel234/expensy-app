@@ -34,7 +34,7 @@ const WalletOverview = ({ wallets }) => (
               <Typography appearance="gray">{type}</Typography>
             </SubDetails>
           </LeftDetails>
-          <TypographyCurrency appearance={balance > 0 ? "black" : "red"}>
+          <TypographyCurrency appearance={balance >= 0 ? "black" : "red"}>
             {fixedAmount(balance)}
           </TypographyCurrency>
         </Details>

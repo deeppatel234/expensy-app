@@ -27,7 +27,7 @@ class Dashboard extends Component {
         <Content>
           <TotalAmount />
           <WalletOverview wallets={wallets} />
-          <TransactionList categories={categories} wallets={wallets} />
+          {/* <TransactionList categories={categories} wallets={wallets} /> */}
           <CategoryWise type="expense" categories={categories} />
           <CategoryWise type="income" categories={categories} />
         </Content>

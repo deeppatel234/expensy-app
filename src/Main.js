@@ -12,6 +12,8 @@ import CreateWallet from "Screens/wallet/CreateWallet";
 import WalletList from "Screens/wallet/WalletList";
 import EditWallet from "Screens/wallet/EditWallet";
 
+import TransactionList from "Screens/transaction/TransactionList";
+
 import CreateExpense from "Screens/expense/CreateExpense";
 import Setting from "Screens/setting";
 import InitSyncScreen from "Screens/onboarding/SyncScreen";
@@ -59,6 +61,7 @@ const Main = ({
             <Route path="/edit-wallet/:id" component={EditWallet} />
             <Route path="/create-wallet" component={CreateWallet} />
             <Route path="/create-expense" component={CreateExpense} />
+            <Route path="/transaction-list" component={TransactionList} />
             <Route path="/setting" component={Setting} />
             <Route path="/" component={Dashboard} />
           </Switch>

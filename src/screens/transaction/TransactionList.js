@@ -10,16 +10,17 @@ import Loader from "Components/Loader";
 import Icon from "Components/Icon";
 import TypographyCurrency from "Components/Typography/Currency";
 
-import { Container, Heading, Content } from "Src/globalStyle";
+import { Container, Heading, Content, FlexRow } from "Src/globalStyle";
 import models from "Models";
 import { EXPENSE_TYPES } from "Models/ExpenseModel";
 import { fixedAmount } from "Utils/utility";
+
+import TotalOverview from './TotalOverview';
 
 import {
   TransactionWrapper,
   CardHeader,
   CardContent,
-  FlexRow,
   SubDetails,
   AmountText,
   TransferIcon,
@@ -40,7 +41,6 @@ const TransactionList = ({ wallets, categories }) => {
     .get("expense")
     .readAll()
     .then((list) => {
-      console.tron.log(list);
       setTransactionList(list);
       setIsLoading(false);
     });
@@ -58,6 +58,9 @@ const TransactionList = ({ wallets, categories }) => {
       <Content>
         {
           isLoading && <Loader />
+        }
+        {
+          !isLoading && <TotalOverview list={transactionList} />
         }
         {
           !isLoading && transactionList.map(({

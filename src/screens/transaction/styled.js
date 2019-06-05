@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-
-export const FlexRow = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
+import { FlexRow } from "Src/globalStyle";
 
 export const TransactionWrapper = styled.View`
   margin-bottom: 5px;

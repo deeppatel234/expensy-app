@@ -1,5 +1,11 @@
 import styled, { css } from 'styled-components';
 
+export const FlexRow = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const SafeAreaView = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.theme.primary};

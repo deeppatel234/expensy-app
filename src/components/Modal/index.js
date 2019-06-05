@@ -19,7 +19,7 @@ const AppModal = ({ visible, onClose, heading, children, ...props }) => (
       <Container>
         {heading && (
           <Heading>
-            <Header text={heading} />
+            <Header text={heading} menu={false} />
           </Heading>
         )}
         {children}

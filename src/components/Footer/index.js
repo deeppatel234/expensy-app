@@ -1,10 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import Icon from "Components/Icon";
 import Link from "Components/Link";
-
-import Redux from "Redux/ReduxRegistry";
 
 import {
   FooterWrapper,
@@ -25,6 +22,12 @@ const ActionButton = ({ actionIcon, ...props }) => (
   </FooterButton>
 );
 
+const TransactionMenu = (props) => (
+  <MenuButton {...props}>
+    <Icon type="Feather" name="list" appearance="white" size={25} />
+  </MenuButton>
+)
+
 const Footer = ({
   openMenuDrawer,
   menu = true,
@@ -34,30 +37,20 @@ const Footer = ({
   ...props
 }) => (
   <FooterWrapper {...props}>
-    <LeftFooter>
-      {menu && (
-        <MenuButton onPress={openMenuDrawer}>
-          <Icon type="Feather" name="menu" appearance="white" size={25} />
-        </MenuButton>
-      )}
-    </LeftFooter>
+    {menu && (
+      <LeftFooter>
+        <Link to="/transaction-list" component={TransactionMenu} />
+      </LeftFooter>
+    )}
     {actionLink ? (
       <Link to={actionLink} actionIcon={actionIcon} component={ActionButton} />
     ) : (
       <ActionButton actionIcon={actionIcon} onPress={onActionClick} />
     )}
-    <RightFooter />
+    {menu && (
+      <RightFooter />
+    )}
   </FooterWrapper>
 );
 
-const mapDispatchToProps = dispatch => {
-  return {
-    openMenuDrawer: () =>
-      dispatch(Redux.get("setting", "changeMenuDrawerVisibility")(true))
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Footer);
+export default Footer;

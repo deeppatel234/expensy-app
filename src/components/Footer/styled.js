@@ -27,10 +27,16 @@ export const FooterButton = styled.TouchableOpacity`
 
 export const LeftFooter = styled.View`
   margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const RightFooter = styled.View`
   margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const MenuButton = styled.TouchableOpacity`

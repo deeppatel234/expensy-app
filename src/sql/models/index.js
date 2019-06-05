@@ -36,6 +36,7 @@ class ModelRegistry extends Registry {
 
   set(seq, key, value) {
     value.sequence = seq;
+    value.models = this.data;
     super.set(key, value);
   }
 

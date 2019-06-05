@@ -26,13 +26,13 @@ import {
 
 const WalletSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
-  balance: Yup.number().default(0)
+  initialBalance: Yup.number().default(0)
 });
 
 const INITIAL_WALLET_VALUES = {
   icon: "PLACEHOLDER",
   type: "bank",
-  balance: ""
+  initialBalance: "",
 };
 
 const CreateWallet = ({ createWallet, history, currency }) => {
@@ -44,7 +44,8 @@ const CreateWallet = ({ createWallet, history, currency }) => {
   }, []);
 
   const onSubmitForm = useCallback(values => {
-    values.balance = parseFloat(values.balance || 0);
+    values.initialBalance = parseFloat(values.initialBalance || 0);
+    values.balance = values.initialBalance;
     createWallet(values).then(() => history.goBack());
   }, []);
 
@@ -107,11 +108,11 @@ const CreateWallet = ({ createWallet, history, currency }) => {
                 <RightInput>
                   <TextInput
                     placeholder="Initial Balance"
-                    onChangeText={handleChange("balance")}
-                    onBlur={handleBlur("balance")}
-                    value={values.balance}
+                    onChangeText={handleChange("initialBalance")}
+                    onBlur={handleBlur("initialBalance")}
+                    value={values.initialBalance}
                     keyboardType="numeric"
-                    error={errors.balance}
+                    error={errors.initialBalance}
                   />
                 </RightInput>
               </IconInputWrapper>

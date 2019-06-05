@@ -224,7 +224,7 @@ class BasicModel {
 
     syncTime[this.tableName()] = syncResponse.syncTime;
 
-    return true;
+    return !_isEmpty(syncResponse.records);
   }
 
   async createSync(param) {

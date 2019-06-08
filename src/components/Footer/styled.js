@@ -40,6 +40,6 @@ export const RightFooter = styled.View`
 `;
 
 export const MenuButton = styled.TouchableOpacity`
-  height: 26px;
-  width: 26px;
+  height: 100%;
+  width: 30px;
 `;

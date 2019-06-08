@@ -9,7 +9,7 @@ import Avatar from "Components/Avatar";
 
 import { fixedAmount } from "Utils/utility";
 import Models from "Models";
-import { EXPENSE_TYPES } from "Models/ExpenseModel";
+import { TRANSACTION_TYPE } from "Models/ExpenseModel";
 
 import {
   WidgetWrapper,
@@ -70,7 +70,7 @@ const TransactionList = ({ categories, wallets }) => {
               <RightDetails>
                 <SubDetails>
                   <RightText>
-                    {EXPENSE_TYPES.EXPENSE === transaction.type ? (
+                    {TRANSACTION_TYPE.EXPENSE === transaction.type ? (
                       <TypographyCurrency appearance="red">
                         {fixedAmount(transaction.amount)}
                       </TypographyCurrency>

@@ -31,7 +31,7 @@ class Dashboard extends Component {
           <CategoryWise type="expense" categories={categories} />
           <CategoryWise type="income" categories={categories} />
         </Content>
-        <Footer actionIcon="add" actionLink="/create-expense" />
+        <Footer actionIcon="add" actionLink="/create-transaction" />
       </Container>
     );
   }

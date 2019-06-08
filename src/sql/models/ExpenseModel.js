@@ -7,7 +7,7 @@ import BasicModel from "../BasicModel";
 import store from 'Redux/store';
 import Redux from "Redux/ReduxRegistry";
 
-export const EXPENSE_TYPES = {
+export const TRANSACTION_TYPE = {
   INCOME: "income",
   EXPENSE: "expense",
   TRANSFER: "transfer"
@@ -39,7 +39,7 @@ class ExpenseModel extends BasicModel {
     const createdData = await super.create(data, sync);
     const { wallets } = store.getState();
 
-    if (createdData.type === EXPENSE_TYPES.TRANSFER) {
+    if (createdData.type === TRANSACTION_TYPE.TRANSFER) {
       const fromWallet = wallets[createdData.wallet];
       const toWallet = wallets[createdData.toWallet];
 
@@ -51,10 +51,10 @@ class ExpenseModel extends BasicModel {
     } else {
       const walletData = wallets[createdData.wallet];
 
-      if (createdData.type === EXPENSE_TYPES.EXPENSE) {
+      if (createdData.type === TRANSACTION_TYPE.EXPENSE) {
         walletData.balance -= createdData.amount;
       }
-      if (createdData.type === EXPENSE_TYPES.INCOME) {
+      if (createdData.type === TRANSACTION_TYPE.INCOME) {
         walletData.balance += createdData.amount;
       }
       Redux.get("wallet", "update")(walletData);
@@ -76,13 +76,13 @@ class ExpenseModel extends BasicModel {
         const { initialBalance } = wallets[w];
         finalBalance[w] = initialBalance;
         data[w].forEach(({ type, total, toWallet }) => {
-          if (type === EXPENSE_TYPES.EXPENSE || type === EXPENSE_TYPES.TRANSFER) {
+          if (type === TRANSACTION_TYPE.EXPENSE || type === TRANSACTION_TYPE.TRANSFER) {
             finalBalance[w] -= total;
           }
-          if (type === EXPENSE_TYPES.INCOME) {
+          if (type === TRANSACTION_TYPE.INCOME) {
             finalBalance[w] += total;
           }
-          if (type === EXPENSE_TYPES.TRANSFER) {
+          if (type === TRANSACTION_TYPE.TRANSFER) {
             if (!finalBalance[toWallet]) {
               finalBalance[toWallet] = 0;
             }
@@ -109,7 +109,7 @@ class ExpenseModel extends BasicModel {
   async getTotalAmount() {
     const amounts = {};
 
-    const types = Object.values(EXPENSE_TYPES);
+    const types = Object.values(TRANSACTION_TYPE);
     for (let i = 0; i < types.length; i++) {
       let localRecords = await this.db.executeSql(
         `SELECT SUM(amount) as total from ${this.tableName()} WHERE type="${

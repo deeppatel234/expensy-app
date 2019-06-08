@@ -1,36 +1,16 @@
-import React, { useEffect, useState } from 'React';
+import React, { useEffect, useState } from "React";
 import { connect } from "react-redux";
 
 import Footer from "Components/Footer";
 import Header from "Components/Header";
-import Typography from "Components/Typography";
-import Avatar from "Components/Avatar";
-import Badge from "Components/Badge";
 import Loader from "Components/Loader";
-import Icon from "Components/Icon";
-import TypographyCurrency from "Components/Typography/Currency";
+import Link from "Components/Link";
 
-import { Container, Heading, Content, FlexRow } from "Src/globalStyle";
+import { Container, Heading, Content } from "Src/globalStyle";
 import models from "Models";
-import { EXPENSE_TYPES } from "Models/ExpenseModel";
-import { fixedAmount } from "Utils/utility";
 
-import TotalOverview from './TotalOverview';
-
-import {
-  TransactionWrapper,
-  CardHeader,
-  CardContent,
-  SubDetails,
-  AmountText,
-  TransferIcon,
-} from './styled';
-
-const EXPENSE_COLOR = {
-  [EXPENSE_TYPES.INCOME]: "green",
-  [EXPENSE_TYPES.EXPENSE]: "red",
-  [EXPENSE_TYPES.TRANSFER]: "teal"
-};
+import TotalOverview from "./components/TotalOverview";
+import TransactionPanel from "./components/TransactionPanel";
 
 const TransactionList = ({ wallets, categories }) => {
   const [transactionList, setTransactionList] = useState([]);
@@ -38,17 +18,15 @@ const TransactionList = ({ wallets, categories }) => {
 
   useEffect(() => {
     models
-    .get("expense")
-    .readAll()
-    .then((list) => {
-      setTransactionList(list);
-      setIsLoading(false);
-    });
+      .get("expense")
+      .readAll()
+      .then(list => {
+        setTransactionList(list);
+        setIsLoading(false);
+      });
   }, []);
 
-  const onFilterShowClick = () => {
-
-  };
+  const onFilterShowClick = () => {};
 
   return (
     <Container>
@@ -56,75 +34,25 @@ const TransactionList = ({ wallets, categories }) => {
         <Header text="Transactions" />
       </Heading>
       <Content>
-        {
-          isLoading && <Loader />
-        }
-        {
-          !isLoading && <TotalOverview list={transactionList} />
-        }
-        {
-          !isLoading && transactionList.map(({
-            _id,
-            type,
-            wallet,
-            toWallet,
-            category,
-            description,
-            dateTime,
-            amount,
-          }) => (
-            <TransactionWrapper key={_id}>
-              <CardHeader>
-                <Badge appearance={EXPENSE_COLOR[type]}>
-                  <Typography appearance="white" size={10}>{type}</Typography>
-                </Badge>
-                <Badge appearance="primary">
-                  <Typography appearance="white" size={10}>{wallets[wallet].type}</Typography>
-                </Badge>
-              </CardHeader>
-              <CardContent>
-                <FlexRow>
-                  <Avatar.Icon
-                    iconKey={categories[category].icon}
-                  />
-                  <SubDetails type="left">
-                    <Typography>
-                      {categories[category].name}
-                    </Typography>
-                    <Typography appearance="gray">
-                      {description}
-                    </Typography>
-                  </SubDetails>
-                </FlexRow>
-                <FlexRow>
-                  <SubDetails type="right">
-                    <AmountText>
-                      <TypographyCurrency appearance={EXPENSE_TYPES.EXPENSE === type ? 'red' : 'black'}>
-                        {fixedAmount(amount)}
-                      </TypographyCurrency>
-                    </AmountText>
-                    <Typography appearance="gray">
-                      {dateTime}
-                    </Typography>
-                  </SubDetails>
-                  <Avatar.Icon iconKey={wallets[wallet].icon} />
-                  {
-                    EXPENSE_TYPES.TRANSFER === type && (
-                      <React.Fragment>
-                        <TransferIcon>
-                          <Icon iconType="AntDesign" icon="arrowright" />
-                        </TransferIcon>
-                        <Avatar.Icon iconKey={wallets[toWallet].icon} />
-                      </React.Fragment>
-                    )
-                  }
-                </FlexRow>
-              </CardContent>
-            </TransactionWrapper>
-          ))
-        }
+        {isLoading && <Loader />}
+        {!isLoading && <TotalOverview list={transactionList} />}
+        {!isLoading &&
+          transactionList.map(data => (
+            <Link
+              key={data._id}
+              to={`/view-transaction/${data._id}`}
+              data={data}
+              wallets={wallets}
+              categories={categories}
+              component={TransactionPanel}
+            />
+          ))}
       </Content>
-      <Footer iconType="AntDesign" actionIcon="filter" onActionClick={onFilterShowClick} />
+      <Footer
+        iconType="AntDesign"
+        actionIcon="filter"
+        onActionClick={onFilterShowClick}
+      />
     </Container>
   );
 };
@@ -133,11 +61,11 @@ const TransactionList = ({ wallets, categories }) => {
 const mapStateToProps = state => {
   return {
     categories: state.categories,
-    wallets: state.wallets,
+    wallets: state.wallets
   };
 };
 
 export default connect(
   mapStateToProps,
-  null,
+  null
 )(TransactionList);

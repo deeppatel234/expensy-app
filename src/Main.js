@@ -13,8 +13,9 @@ import WalletList from "Screens/wallet/WalletList";
 import EditWallet from "Screens/wallet/EditWallet";
 
 import TransactionList from "Screens/transaction/TransactionList";
+import CreateTransaction from "Screens/transaction/CreateTransaction";
+import ViewTransaction from "Screens/transaction/ViewTransaction";
 
-import CreateExpense from "Screens/expense/CreateExpense";
 import Setting from "Screens/setting";
 import InitSyncScreen from "Screens/onboarding/SyncScreen";
 import ReduxLoader from "Base/ReduxLoader";
@@ -60,8 +61,9 @@ const Main = ({
             <Route path="/view-wallet" component={WalletList} />
             <Route path="/edit-wallet/:id" component={EditWallet} />
             <Route path="/create-wallet" component={CreateWallet} />
-            <Route path="/create-expense" component={CreateExpense} />
+            <Route path="/create-transaction" component={CreateTransaction} />
             <Route path="/transaction-list" component={TransactionList} />
+            <Route path="/view-transaction/:id" component={ViewTransaction} />
             <Route path="/setting" component={Setting} />
             <Route path="/" component={Dashboard} />
           </Switch>

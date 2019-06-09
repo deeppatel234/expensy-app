@@ -16,7 +16,6 @@ import {
   CardHeader,
   CardContent,
   SubDetails,
-  AmountText,
   TransferIcon
 } from "./styled";
 
@@ -49,19 +48,16 @@ const Panel = ({
         <Avatar.Icon iconKey={categories[category].icon} />
         <SubDetails type="left">
           <Typography>{categories[category].name}</Typography>
-          <Typography appearance="gray">{description}</Typography>
+          <Typography appearance="gray">{dateTime}</Typography>
         </SubDetails>
       </FlexRow>
       <FlexRow>
         <SubDetails type="right">
-          <AmountText>
-            <TypographyCurrency
-              appearance={TRANSACTION_TYPE.EXPENSE === type ? "red" : "black"}
-            >
-              {fixedAmount(amount)}
-            </TypographyCurrency>
-          </AmountText>
-          <Typography appearance="gray">{dateTime}</Typography>
+          <TypographyCurrency
+            appearance={TRANSACTION_TYPE.EXPENSE === type ? "red" : "black"}
+          >
+            {fixedAmount(amount)}
+          </TypographyCurrency>
         </SubDetails>
         <Avatar.Icon iconKey={wallets[wallet].icon} />
         {TRANSACTION_TYPE.TRANSFER === type && (

@@ -18,7 +18,7 @@ import Avatar from "Components/Avatar";
 import Icon from "Components/Icon";
 import Footer from "Components/Footer";
 
-import { TRANSACTION_TYPE } from "Models/ExpenseModel";
+import { TRANSACTION_TYPE } from "Models/TransactionModel";
 
 import { BLACK } from "Src/theme";
 

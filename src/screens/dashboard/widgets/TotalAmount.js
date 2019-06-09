@@ -15,7 +15,7 @@ const TotalAmount = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    Models.get("expense")
+    Models.get("money_transaction")
       .getTotalAmount()
       .then(totalAmount => {
         setAmount(totalAmount);

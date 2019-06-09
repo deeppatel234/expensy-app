@@ -13,9 +13,9 @@ export const TRANSACTION_TYPE = {
   TRANSFER: "transfer"
 };
 
-class ExpenseModel extends BasicModel {
+class TransactionModel extends BasicModel {
   tableName() {
-    return "expense";
+    return "money_transaction";
   }
 
   initFields() {
@@ -137,4 +137,4 @@ class ExpenseModel extends BasicModel {
   }
 }
 
-export default ExpenseModel;
+export default TransactionModel;

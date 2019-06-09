@@ -18,7 +18,7 @@ const TransactionList = ({ wallets, categories }) => {
 
   useEffect(() => {
     models
-      .get("expense")
+      .get("money_transaction")
       .readAll()
       .then(list => {
         setTransactionList(list);

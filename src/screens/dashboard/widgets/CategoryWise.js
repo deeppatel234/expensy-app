@@ -24,7 +24,7 @@ const CategoryWise = ({ type, categories }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    Models.get("expense")
+    Models.get("money_transaction")
       .getAmountByCategory(type)
       .then(amount => {
         setAmount(amount);

@@ -39,8 +39,8 @@ const ViewTransaction = ({
 
   useEffect(() => {
     models
-      .get("expense")
-      .read({ _id: '5cf3a227333117034c8cca80' })
+      .get("money_transaction")
+      .read({ _id: id })
       .then(res => {
         console.tron.log(res[0]);
         setData(res[0]);

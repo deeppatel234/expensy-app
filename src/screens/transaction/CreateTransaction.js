@@ -16,7 +16,7 @@ import models from "../../sql/models";
 const CreateTransaction = ({ history }) => {
   const onSubmitForm = values => {
     models
-      .get("expense")
+      .get("money_transaction")
       .create(values, true)
       .then(history.goBack);
   };

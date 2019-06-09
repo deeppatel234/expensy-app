@@ -8,7 +8,7 @@ import Icon from "Components/Icon";
 import TypographyCurrency from "Components/Typography/Currency";
 
 import { FlexRow } from "Src/globalStyle";
-import { TRANSACTION_TYPE } from "Models/ExpenseModel";
+import { TRANSACTION_TYPE } from "Models/TransactionModel";
 import { fixedAmount } from "Utils/utility";
 
 import {

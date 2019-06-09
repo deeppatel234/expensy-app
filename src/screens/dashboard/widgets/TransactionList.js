@@ -9,7 +9,7 @@ import Avatar from "Components/Avatar";
 
 import { fixedAmount } from "Utils/utility";
 import Models from "Models";
-import { TRANSACTION_TYPE } from "Models/ExpenseModel";
+import { TRANSACTION_TYPE } from "Models/TransactionModel";
 
 import {
   WidgetWrapper,
@@ -28,7 +28,7 @@ const TransactionList = ({ categories, wallets }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    Models.get("expense")
+    Models.get("money_transaction")
       .getTransactionList(5)
       .then(transactionList => {
         setList(transactionList);

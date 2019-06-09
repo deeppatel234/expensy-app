@@ -7,7 +7,7 @@ import MemoryStorage from "Base/MemoryStorage";
 import UserModel from './UserModel';
 import CategoryModel from './CategoryModel';
 import WalletModel from './WalletModel';
-import ExpenseModel from './ExpenseModel';
+import TransactionModel from './TransactionModel';
 
 class ModelRegistry extends Registry {
   initTables() {
@@ -65,6 +65,6 @@ const modelRegistry = new ModelRegistry();
 modelRegistry.set(1, 'user', new UserModel());
 modelRegistry.set(2, 'category', new CategoryModel());
 modelRegistry.set(3, 'wallet', new WalletModel());
-modelRegistry.set(4, 'expense', new ExpenseModel());
+modelRegistry.set(4, 'money_transaction', new TransactionModel());
 
 export default modelRegistry;

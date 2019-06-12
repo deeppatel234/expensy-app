@@ -9,7 +9,7 @@ const Date = ({ date, onDateChange, color, theme, appearance }) => (
   <DatePicker
     date={date}
     placeholder="Select Date"
-    format="DD/MM/YYYY"
+    format="YYYY-MM-DD"
     onDateChange={onDateChange}
     showIcon={false}
     customStyles={{

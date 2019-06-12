@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { RadioGroupProvider } from "./RadioGroupContext";
 
-import { RadioGroupWrapper } from "./styled";
-
 class RadioGroup extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +36,7 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { multiple, children } = this.props;
 
     const { selectedValue } = this.state;
 
@@ -46,10 +44,11 @@ class RadioGroup extends Component {
       <RadioGroupProvider
         value={{
           selectedValue,
-          onChange: this.onChangeRadioButton
+          multiple,
+          onChange: this.onChangeRadioButton,
         }}
       >
-        <RadioGroupWrapper>{children}</RadioGroupWrapper>
+        {children}
       </RadioGroupProvider>
     );
   }

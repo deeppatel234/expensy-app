@@ -30,7 +30,7 @@ const CreateTransaction = ({ history }) => {
         transactionValues={{
           type: "expense",
           amount: "",
-          dateTime: formatDate(new Date(), "DD/MM/YYYY")
+          dateTime: formatDate(new Date(), "YYYY-MM-DD")
         }}
         submitIcon="add"
         onSubmitForm={onSubmitForm}

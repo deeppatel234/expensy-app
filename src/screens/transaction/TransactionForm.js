@@ -27,7 +27,8 @@ import {
   IconInputWrapper,
   RightInput,
   FormSpace,
-  BorderBottom
+  BorderBottom,
+  FlexRow,
 } from "Src/globalStyle";
 
 const CategorySchema = Yup.object().shape({
@@ -124,14 +125,16 @@ const TransactionForm = ({
                 selectedValue={values.type}
                 onChange={data => onChangeType(data, handleChange("type"))}
               >
-                {Object.keys(TRANSACTION_TYPE).map(type => (
-                  <Radio.Button
-                    key={type}
-                    value={TRANSACTION_TYPE[type]}
-                    text={_capitalize(type)}
-                    style={{ flexGrow: 1 }}
-                  />
-                ))}
+                <FlexRow>
+                  {Object.keys(TRANSACTION_TYPE).map(type => (
+                    <Radio.Button
+                      key={type}
+                      value={TRANSACTION_TYPE[type]}
+                      text={_capitalize(type)}
+                      style={{ flexGrow: 1 }}
+                    />
+                  ))}
+                </FlexRow>
               </Radio.Group>
             </FormSpace>
             <TouchableHighlight

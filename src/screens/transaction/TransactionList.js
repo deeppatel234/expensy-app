@@ -9,24 +9,48 @@ import Link from "Components/Link";
 import { Container, Heading, Content } from "Src/globalStyle";
 import models from "Models";
 
+import FilterModal, { DATE_CONST } from "./components/Filters";
 import TotalOverview from "./components/TotalOverview";
 import TransactionPanel from "./components/TransactionPanel";
 
+import { TRANSACTION_TYPE } from "Models/TransactionModel";
+
+const DEFAULT_FILTERS = {
+  type: [TRANSACTION_TYPE.EXPENSE, TRANSACTION_TYPE.INCOME],
+  dateFilterType: 'TODAY',
+};
+
 const TransactionList = ({ wallets, categories }) => {
   const [transactionList, setTransactionList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
 
   useEffect(() => {
-    models
+    fetchData();
+  }, [filters]);
+
+  const fetchData = () => {
+    const { type, dateFilterType } = filters;
+    setIsLoading(true);
+    return models
       .get("money_transaction")
-      .readAll()
-      .then(list => {
+      .filter(type, DATE_CONST[dateFilterType])
+      .then((list) => {
         setTransactionList(list);
         setIsLoading(false);
       });
-  }, []);
+  };
 
-  const onFilterShowClick = () => {};
+  const onFilterShowClick = () => {
+    setFilterModalVisible(true);
+  };
+
+  const onSelectFilter = (newFilters) => {
+    setFilters(newFilters);
+    setFilterModalVisible(false);
+    fetchData();
+  };
 
   return (
     <Container>
@@ -47,6 +71,12 @@ const TransactionList = ({ wallets, categories }) => {
               component={TransactionPanel}
             />
           ))}
+        <FilterModal
+          filters={filters}
+          visible={filterModalVisible}
+          onSelect={onSelectFilter}
+          onClose={() => setFilterModalVisible(false)}
+        />
       </Content>
       <Footer
         iconType="AntDesign"

@@ -135,6 +135,14 @@ class TransactionModel extends BasicModel {
     );
     return this.getRowData(localRecords);
   }
+
+  async filter(type, dates) {
+    const { startDate, endDate } = dates;
+    let localRecords = await this.db.executeSql(
+      `SELECT * FROM ${this.tableName()} WHERE type IN (${type.map(t => `'${t}'`).join(',')}) AND dateTime BETWEEN ${startDate} AND ${endDate}`
+    );
+    return this.getRowData(localRecords);
+  }
 }
 
 export default TransactionModel;

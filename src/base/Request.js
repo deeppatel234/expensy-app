@@ -36,11 +36,11 @@ class Request {
    * @param {Object} payload.data
    */
   api(payload) {
-    const { model, method, data = {} } = payload;
+    const { model, method, data = {}, version = 1 } = payload;
 
     return new Promise((resolve, rejects) => {
       this.apiRequest({
-        url: `${model}/${method}`,
+        url: `${model}/v${version}/${method}`,
         data,
         headers: {
           authorization: MemoryStorage.get("token")

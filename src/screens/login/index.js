@@ -15,6 +15,7 @@ import Link from "Components/Link";
 
 import { PRIMARY } from "Src/theme";
 import ReduxLoader from "Base/ReduxLoader";
+import deviceInfo from "Utils/deviceInfo";
 
 import {
   Wrapper,
@@ -44,7 +45,7 @@ const Login = () => {
     Request.api({
       model: "user",
       method: "login",
-      data: values
+      data: { ...values, deviceInfo }
     })
       .then(({ token }) => {
         LocalStorage.setToken(token).then(() => {

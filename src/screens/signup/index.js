@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import Request from "Base/Request";
 import LocalStorage from "Base/LocalStorage";
 import MemoryStorage from "Base/MemoryStorage";
+import deviceInfo from "Utils/deviceInfo";
 
 import Typography from "Components/Typography";
 import Loader from "Components/Loader";
@@ -13,7 +14,6 @@ import TextInput from "Components/TextInput";
 import Button from "Components/Button";
 import Link from "Components/Link";
 import ReduxLoader from "Base/ReduxLoader";
-
 import { PRIMARY } from "Src/theme";
 
 import {
@@ -53,7 +53,7 @@ const SignUP = () => {
     Request.api({
       model: "user",
       method: "signup",
-      data: { record: valueToSend }
+      data: { record: valueToSend, deviceInfo }
     })
       .then(({ token }) => {
         LocalStorage.setToken(token).then(() => {

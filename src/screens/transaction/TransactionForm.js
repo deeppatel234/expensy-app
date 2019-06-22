@@ -39,7 +39,7 @@ const CategorySchema = Yup.object().shape({
       return parseFloat(val || 0) > 0;
     }),
   wallet: Yup.string().required("Required"),
-  toWallet: Yup.string().when("type", {
+  toWallet: Yup.string().nullable().when("type", {
     is: "transfer",
     then: Yup.string().required("Required")
   }),
@@ -89,7 +89,7 @@ const TransactionForm = ({
   const onSubmit = useCallback(values => {
     values.amount = parseFloat(values.amount || 0);
     if (values.type !== TRANSACTION_TYPE.TRANSFER) {
-      delete values.toWallet;
+      values.toWallet = null;
     }
     onSubmitForm(values);
   }, []);

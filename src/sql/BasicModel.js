@@ -91,7 +91,11 @@ class BasicModel {
   buildEqualQuery(data, joinWith = ',') {
     const List = [];
     Object.keys(data).forEach((key) => {
-      List.push(`${key}='${data[key]}'`)
+      if(data[key] === null) {
+        List.push(`${key} = NULL`);
+      } else {
+        List.push(`${key} = '${data[key]}'`)
+      }
     });
     return List.join(joinWith);
   }

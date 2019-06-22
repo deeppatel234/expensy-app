@@ -62,6 +62,35 @@ class TransactionModel extends BasicModel {
     return createdData;
   }
 
+  async update(set, where, data) {
+    await super.update(set, where);
+    if (
+      set.toWallet !== data.toWallet
+    ) {
+      await this.calculateWalletBalance();
+    } else if (
+      set.wallet !== data.wallet ||
+      set.amount !== data.amount
+    ) {
+      const { wallets } = store.getState();
+
+      if (data.type === TRANSACTION_TYPE.EXPENSE) {
+        wallets[data.wallet].balance += data.amount;
+      }
+      if (data.type === TRANSACTION_TYPE.INCOME) {
+        wallets[data.wallet].balance -= data.amount;
+      }
+
+      if (set.type === TRANSACTION_TYPE.EXPENSE) {
+        wallets[set.wallet].balance -= set.amount;
+      }
+      if (set.type === TRANSACTION_TYPE.INCOME) {
+        wallets[set.wallet].balance += set.amount;
+      }
+      await this.models.wallet.updateBalance(finalBalance);
+    }
+  }
+
   // calculate wallet balance after sync complete
   async calculateWalletBalance() {
     try {
@@ -72,9 +101,9 @@ class TransactionModel extends BasicModel {
       const finalBalance = {};
       const { wallets } = store.getState();
 
+      Object.keys(wallets).forEach(w => finalBalance[w] = wallets[w].initialBalance);
+
       Object.keys(data).forEach((w) => {
-        const { initialBalance } = wallets[w];
-        finalBalance[w] = initialBalance;
         data[w].forEach(({ type, total, toWallet }) => {
           if (type === TRANSACTION_TYPE.EXPENSE || type === TRANSACTION_TYPE.TRANSFER) {
             finalBalance[w] -= total;

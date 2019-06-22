@@ -22,6 +22,7 @@ import {
   IconInputWrapper,
   RightInput,
   FormSpace,
+  FlexRow,
 } from "Src/globalStyle";
 
 const WalletSchema = Yup.object().shape({
@@ -60,16 +61,18 @@ const EditForm = ({ wallet, onSubmitForm }) => {
                 selectedValue={values.type}
                 onChange={handleChange("type")}
               >
-                <Radio.Button
-                  value={WALLET_TYPES.BANK}
-                  text="Bank"
-                  style={{ flexGrow: 1 }}
-                />
-                <Radio.Button
-                  value={WALLET_TYPES.CASH}
-                  text="Cash"
-                  style={{ flexGrow: 1 }}
-                />
+                <FlexRow>
+                  <Radio.Button
+                    value={WALLET_TYPES.BANK}
+                    text="Bank"
+                    style={{ flexGrow: 1 }}
+                  />
+                  <Radio.Button
+                    value={WALLET_TYPES.CASH}
+                    text="Cash"
+                    style={{ flexGrow: 1 }}
+                  />
+                </FlexRow>
               </Radio.Group>
             </FormSpace>
             <IconInputWrapper>

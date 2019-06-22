@@ -1,3 +1,3 @@
-export const DOMAIN = '10.20.24.234';
+export const DOMAIN = '192.168.0.102';
 
 export const API_URL = `http://${DOMAIN}:5050/api/`;

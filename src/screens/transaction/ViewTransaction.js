@@ -42,7 +42,6 @@ const ViewTransaction = ({
       .get("money_transaction")
       .read({ _id: id })
       .then(res => {
-        console.tron.log(res[0]);
         setData(res[0]);
         setIsLoading(false);
       });
@@ -53,9 +52,13 @@ const ViewTransaction = ({
   };
 
   const onSubmitForm = (values) => {
-    console.tron.log('update from view', values);
-    setData(values);
-    setEdit(false);
+    models
+      .get("money_transaction")
+      .update(values, { _id: id }, data)
+      .then(res => {
+        setData(values);
+        setEdit(false);
+      });
   };
 
   if (isLoading) {

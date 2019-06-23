@@ -62,7 +62,7 @@ const Setting = ({
         <SettingItem>
           <SettingNameWrapper>
             <SettingIcon>
-              <Icon type="MaterialCommunityIcons" name="theme-light-dark" />
+              <Icon iconType="MaterialCommunityIcons" icon="theme-light-dark" />
             </SettingIcon>
             <Typography>Theme</Typography>
           </SettingNameWrapper>
@@ -79,7 +79,7 @@ const Setting = ({
           <SettingItem>
             <SettingNameWrapper>
               <SettingIcon>
-                <Icon type="MaterialCommunityIcons" name="fingerprint" />
+                <Icon iconType="MaterialCommunityIcons" icon="fingerprint" />
               </SettingIcon>
               <Typography>Fingerprint Lock</Typography>
             </SettingNameWrapper>
@@ -92,7 +92,7 @@ const Setting = ({
         {/* <SettingItem>
           <SettingNameWrapper>
             <SettingIcon>
-              <Icon type="MaterialCommunityIcons" name="lock-outline" />
+              <Icon iconType="MaterialCommunityIcons" icon="lock-outline" />
             </SettingIcon>
             <Typography>Pin Lock</Typography>
           </SettingNameWrapper>
@@ -101,7 +101,7 @@ const Setting = ({
         <SettingItem>
           <SettingNameWrapper>
             <SettingIcon>
-              <Icon type="MaterialCommunityIcons" name="currency-inr" />
+              <Icon iconType="MaterialCommunityIcons" icon="currency-inr" />
             </SettingIcon>
             <Typography>Currency</Typography>
           </SettingNameWrapper>

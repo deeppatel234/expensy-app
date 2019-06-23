@@ -10,7 +10,7 @@ const Header = ({ menu = true, text, openMenuDrawer }) => (
   <HeaderWrapper>
     {menu && (
       <MenuButton onPress={openMenuDrawer}>
-        <Icon type="Feather" name="menu" appearance="primary" size={32} />
+        <Icon iconType="Feather" icon="menu" appearance="primary" size={32} />
       </MenuButton>
     )}
     <Typography type="heading" appearance="primary">

@@ -36,15 +36,13 @@ const Icon = ({
   appearance,
   theme,
   color,
-  name,
-  type,
   ...props
 }) => {
-  const IconComp = ICON_TYPE[iconType || type];
+  const IconComp = ICON_TYPE[iconType];
   return (
     <IconComp
       size={20}
-      name={icon || name}
+      name={icon}
       style={{ color: color || theme[appearance] }}
       {...props}
     />

@@ -81,7 +81,11 @@ class TransactionModel extends BasicModel {
     await super.update(set, where);
     if (set.toWallet !== data.toWallet) {
       await this.calculateWalletBalance();
-    } else if (set.wallet !== data.wallet || set.amount !== data.amount) {
+    } else if (
+      set.type !== data.type ||
+      set.wallet !== data.wallet ||
+      set.amount !== data.amount
+    ) {
       const { wallets } = store.getState();
 
       if (data.type === TRANSACTION_TYPE.EXPENSE) {
@@ -97,6 +101,9 @@ class TransactionModel extends BasicModel {
       if (set.type === TRANSACTION_TYPE.INCOME) {
         wallets[set.wallet].balance += set.amount;
       }
+      const finalBalance = {};
+      finalBalance[data.wallet] = wallets[data.wallet].balance;
+      finalBalance[set.wallet] = wallets[set.wallet].balance;
       await this.models.wallet.updateBalance(finalBalance);
     }
   }
@@ -185,7 +192,9 @@ class TransactionModel extends BasicModel {
     let localRecords = await this.db.executeSql(
       `SELECT * FROM ${this.tableName()} WHERE type IN (${type
         .map(t => `'${t}'`)
-        .join(",")}) AND sync != "delete" AND dateTime BETWEEN ${startDate} AND ${endDate}`
+        .join(
+          ","
+        )}) AND sync != "delete" AND dateTime BETWEEN ${startDate} AND ${endDate}`
     );
     return this.getRowData(localRecords);
   }

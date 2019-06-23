@@ -31,22 +31,27 @@ import {
 const MENU = [
   {
     url: "/",
-    icon: { type: "AntDesign", name: "dashboard" },
+    icon: { iconType: "AntDesign", icon: "dashboard" },
     text: "Dashboard"
   },
   {
+    url: "/transaction-list",
+    icon: { iconType: "Feather", icon: "list" },
+    text: "Transactions"
+  },
+  {
     url: "/view-wallet",
-    icon: { type: "AntDesign", name: "wallet" },
+    icon: { iconType: "AntDesign", icon: "wallet" },
     text: "Wallets"
   },
   {
     url: "/view-category",
-    icon: { type: "AntDesign", name: "API" },
+    icon: { iconType: "AntDesign", icon: "API" },
     text: "Categories"
   },
   {
     url: "/setting",
-    icon: { type: "AntDesign", name: "setting" },
+    icon: { iconType: "AntDesign", icon: "setting" },
     text: "Settings"
   }
 ];
@@ -63,7 +68,7 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
           <BottomContent>
             <AvatarContainer>
               <Avatar>
-                <Icon type="AntDesign" name="user" color={BLACK} />
+                <Icon iconType="AntDesign" icon="user" color={BLACK} />
               </Avatar>
             </AvatarContainer>
             <UserDetails>
@@ -82,7 +87,7 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
               <Link key={menu.url} to={menu.url} onPress={closeMenuDrawer}>
                 <MenuItem>
                   <MenuIcon>
-                    <Icon type={menu.icon.type} name={menu.icon.name} />
+                    <Icon iconType={menu.icon.iconType} icon={menu.icon.icon} />
                   </MenuIcon>
                   <MenuName>
                     <Typography type="small">{menu.text}</Typography>
@@ -95,7 +100,7 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
             <TouchableOpacity onPress={logout}>
               <MenuItem>
                 <MenuIcon>
-                  <Icon type="AntDesign" name="logout" />
+                  <Icon iconType="AntDesign" icon="logout" />
                 </MenuIcon>
                 <MenuName>
                   <Typography type="small">Signout</Typography>

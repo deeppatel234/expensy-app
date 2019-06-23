@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "React";
 import { connect } from "react-redux";
-import _isEmpty from "lodash";
+import _isEmpty from "lodash/isEmpty";
 
 import Footer from "Components/Footer";
 import Header from "Components/Header";

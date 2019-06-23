@@ -220,8 +220,8 @@ const TransactionForm = ({
             <IconInputWrapper>
               <Avatar>
                 <Icon
-                  type="SimpleLineIcons"
-                  name="note"
+                  iconType="SimpleLineIcons"
+                  icon="note"
                   size={18}
                   color={BLACK}
                 />
@@ -237,7 +237,7 @@ const TransactionForm = ({
             </IconInputWrapper>
             <IconInputWrapper>
               <Avatar>
-                <Icon type="Octicons" name="calendar" size={18} color={BLACK} />
+                <Icon iconType="Octicons" icon="calendar" size={18} color={BLACK} />
               </Avatar>
               <RightInput>
                 <BorderBottom>

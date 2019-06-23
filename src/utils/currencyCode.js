@@ -1,4 +1,9 @@
 export default {
+  INDIAN_RUPEE: {
+    unicode: "\u20B9",
+    name: "INDIAN RUPEE",
+    symbol: "₹"
+  },
   DOLLAR: { unicode: "\u0024", name: "DOLLAR", symbol: "$" },
   CENT: { unicode: "\u00A2", name: "CENT", symbol: "¢" },
   POUND: { unicode: "\u00A3", name: "POUND", symbol: "£" },
@@ -73,11 +78,6 @@ export default {
   },
   SPESMILO: { unicode: "\u20B7", name: "SPESMILO", symbol: "₷" },
   TENGE: { unicode: "\u20B8", name: "TENGE", symbol: "₸" },
-  INDIAN_RUPEE: {
-    unicode: "\u20B9",
-    name: "INDIAN RUPEE",
-    symbol: "₹"
-  },
   TURKISH_LIRA: {
     unicode: "\u20BA",
     name: "TURKISH LIRA",

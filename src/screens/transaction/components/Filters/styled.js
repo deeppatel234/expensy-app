@@ -14,7 +14,7 @@ export const FilterWrapper = styled.View`
   position: absolute;
   bottom: 80;
   padding: 0 20px;
-  background: white;
+  background: ${props => props.theme.white};
   width: 100%;
 `;
 

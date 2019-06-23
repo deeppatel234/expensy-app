@@ -83,7 +83,7 @@ const FilterModal = ({ filters, visible, onClose, onSelect }) => {
           <FilterWrapper>
             <FilterBox>
               <FilterTitle>
-                <Typography>Dates</Typography>
+                <Typography>Date</Typography>
               </FilterTitle>
               <DateBadges>
                 <Radio.Group

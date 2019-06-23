@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 
 export const ButtonElement = styled.TouchableOpacity`
-  background: ${props => props.theme.white};
+  background: ${props => props.theme[props.appearance]};
   border: 1px solid ${props => props.theme.lightGray};
   padding: 10px 20px;
   align-items: center;

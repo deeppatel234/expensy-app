@@ -51,10 +51,7 @@ export const RightInput = styled.View`
 export const ListWrapper = styled.View`
 `;
 
-export const ListItem = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+export const ListItem = styled(FlexRow)`
   padding: 15px 10px;
 `;
 
@@ -69,4 +66,9 @@ export const FormSpace = styled.View`
 export const BorderBottom = styled.View`
   border-bottom-color: ${props => props.theme.lightGray};
   border-bottom-width: 1px;
+`;
+
+export const FooterActionButtons = styled(FlexRow)`
+  justify-content: center;
+  padding-bottom: 50px;
 `;

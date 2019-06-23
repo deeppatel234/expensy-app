@@ -4,7 +4,7 @@ import _keyBy from "lodash/keyBy";
 import _isEmpty from "lodash/isEmpty";
 
 import BasicModel from "../BasicModel";
-import store from 'Redux/store';
+import store from "Redux/store";
 import Redux from "Redux/ReduxRegistry";
 
 export const TRANSACTION_TYPE = {
@@ -62,16 +62,26 @@ class TransactionModel extends BasicModel {
     return createdData;
   }
 
+  async delete(data) {
+    await super.delete({ _id: data._id });
+
+    if (data.type === TRANSACTION_TYPE.TRANSFER) {
+      await this.calculateWalletBalance();
+    } else {
+      const { wallets } = store.getState();
+      const balance = TRANSACTION_TYPE.EXPENSE
+        ? wallets[data.wallet].balance + data.amount
+        : wallets[data.wallet].balance - data.amount;
+
+      await this.models.wallet.updateBalance({ [data.wallet]: balance });
+    }
+  }
+
   async update(set, where, data) {
     await super.update(set, where);
-    if (
-      set.toWallet !== data.toWallet
-    ) {
+    if (set.toWallet !== data.toWallet) {
       await this.calculateWalletBalance();
-    } else if (
-      set.wallet !== data.wallet ||
-      set.amount !== data.amount
-    ) {
+    } else if (set.wallet !== data.wallet || set.amount !== data.amount) {
       const { wallets } = store.getState();
 
       if (data.type === TRANSACTION_TYPE.EXPENSE) {
@@ -95,17 +105,22 @@ class TransactionModel extends BasicModel {
   async calculateWalletBalance() {
     try {
       let localRecords = await this.db.executeSql(
-        `SELECT wallet, toWallet, type, SUM(amount) as total from ${this.tableName()} GROUP BY wallet, toWallet, type`
+        `SELECT wallet, toWallet, type, SUM(amount) as total from ${this.tableName()} WHERE sync != "delete" GROUP BY wallet, toWallet, type`
       );
       const data = _groupBy(this.getRowData(localRecords), "wallet");
       const finalBalance = {};
       const { wallets } = store.getState();
 
-      Object.keys(wallets).forEach(w => finalBalance[w] = wallets[w].initialBalance);
+      Object.keys(wallets).forEach(
+        w => (finalBalance[w] = wallets[w].initialBalance)
+      );
 
-      Object.keys(data).forEach((w) => {
+      Object.keys(data).forEach(w => {
         data[w].forEach(({ type, total, toWallet }) => {
-          if (type === TRANSACTION_TYPE.EXPENSE || type === TRANSACTION_TYPE.TRANSFER) {
+          if (
+            type === TRANSACTION_TYPE.EXPENSE ||
+            type === TRANSACTION_TYPE.TRANSFER
+          ) {
             finalBalance[w] -= total;
           }
           if (type === TRANSACTION_TYPE.INCOME) {
@@ -129,7 +144,7 @@ class TransactionModel extends BasicModel {
 
   async syncTable(updateStore, syncTime) {
     const sup = await super.syncTable(updateStore, syncTime);
-    if(sup) {
+    if (sup) {
       await this.calculateWalletBalance();
     }
     return sup;
@@ -141,26 +156,26 @@ class TransactionModel extends BasicModel {
     const types = Object.values(TRANSACTION_TYPE);
     for (let i = 0; i < types.length; i++) {
       let localRecords = await this.db.executeSql(
-        `SELECT SUM(amount) as total from ${this.tableName()} WHERE type="${
+        `SELECT SUM(amount) as total from ${this.tableName()} WHERE sync != "delete" AND type="${
           types[i]
         }"`
       );
       let records = this.getRowData(localRecords);
-      amounts[types[i]] = (records && records.length) ? records[0].total : 0;
+      amounts[types[i]] = records && records.length ? records[0].total : 0;
     }
     return amounts;
   }
 
   async getAmountByCategory(type) {
     let localRecords = await this.db.executeSql(
-      `SELECT category, SUM(amount) as total from ${this.tableName()} WHERE type="${type}" GROUP BY category`
+      `SELECT category, SUM(amount) as total from ${this.tableName()} WHERE type="${type}" AND sync != "delete" GROUP BY category`
     );
     return this.getRowData(localRecords);
   }
 
   async getTransactionList(limit) {
     let localRecords = await this.db.executeSql(
-      `SELECT * FROM ( SELECT * FROM ${this.tableName()} ORDER BY date(dateTime) DESC LIMIT ${limit}) ORDER BY date(dateTime) ASC;`
+      `SELECT * FROM ( SELECT * FROM ${this.tableName()} WHERE sync != "delete" ORDER BY date(dateTime) DESC LIMIT ${limit}) ORDER BY date(dateTime) ASC;`
     );
     return this.getRowData(localRecords);
   }
@@ -168,7 +183,9 @@ class TransactionModel extends BasicModel {
   async filter(type, dates) {
     const { startDate, endDate } = dates;
     let localRecords = await this.db.executeSql(
-      `SELECT * FROM ${this.tableName()} WHERE type IN (${type.map(t => `'${t}'`).join(',')}) AND dateTime BETWEEN ${startDate} AND ${endDate}`
+      `SELECT * FROM ${this.tableName()} WHERE type IN (${type
+        .map(t => `'${t}'`)
+        .join(",")}) AND sync != "delete" AND dateTime BETWEEN ${startDate} AND ${endDate}`
     );
     return this.getRowData(localRecords);
   }

@@ -124,10 +124,10 @@ class BasicModel {
   }
 
   read(where) {
-    const whereList = this.buildEqualQuery(this.filterFields(where));
+    const whereList = this.buildEqualQuery(this.filterFields(where), ' AND ');
     return new Promise(async (res, rej) => {
       try {
-        const data = await this.db.executeSql(`SELECT * from ${this.tableName()} WHERE ${whereList}`);
+        const data = await this.db.executeSql(`SELECT * from ${this.tableName()} WHERE ${whereList} AND sync != "delete"`);
         res(this.getRowData(data));
       } catch (err) {
         rej(err);
@@ -191,6 +191,14 @@ class BasicModel {
     return this.db.sqlBatch(sqlQueries);
   }
 
+  deleteMulti(data) {
+    const sqlQueries = [];
+    data.forEach((data) => {
+      sqlQueries.push([`DELETE FROM ${this.tableName()} WHERE _id = "${data._id}"`]);
+    });
+    return this.db.sqlBatch(sqlQueries);
+  }
+
   /**
    * =================
    *   Sync Methods
@@ -217,8 +225,16 @@ class BasicModel {
 
 
     if(!_isEmpty(syncResponse.records)) {
-      // TODO: delete record
-      await this.replaceOrCreateMulti(syncResponse.records, { sync: '1' });
+      const recordToDelete = syncResponse.records.filter(r => r.archive);
+      const recordToUpdate = syncResponse.records.filter(r => !r.archive);
+
+      if (!_isEmpty(recordToUpdate)) {
+        await this.replaceOrCreateMulti(recordToUpdate, { sync: '1' });
+      }
+
+      if (!_isEmpty(recordToDelete)) {
+        await this.deleteMulti(recordToDelete);
+      }
 
       if (updateStore) {
         const updatedRecord = await this.readAll();

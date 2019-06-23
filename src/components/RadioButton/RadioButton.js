@@ -18,7 +18,7 @@ const RadioButton = ({ value, ...props }) => (
   <RadioGroupConsumer>
     {({ onChange, selectedValue }) => (
       <Button
-        appearance={selectedValue === value ? "primary" : "black"}
+        appearance={selectedValue === value ? "primary" : "white"}
         onPress={() => onChange(value)}
         {...props}
       />

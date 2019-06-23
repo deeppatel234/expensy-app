@@ -23,7 +23,7 @@ const AvatarIcon = ({ iconKey, ...props }) => {
     <Avatar colorChar={icon && icon[0]} {...props} bgColor>
       {type === "image" && <Avatar.Image source={image} />}
       {type === "icon" && (
-        <Icon iconType={iconType} icon={icon} color={WHITE} />
+        <Icon iconType={props.iconType || iconType} icon={props.icon || icon} color={WHITE} />
       )}
     </Avatar>
   )

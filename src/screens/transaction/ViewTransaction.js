@@ -9,6 +9,7 @@ import Badge from "Components/Badge";
 import Header from "Components/Header";
 import Footer from "Components/Footer";
 import Loader from "Components/Loader";
+import Button from "Components/Button";
 
 import { TRANSACTION_TYPE_COLOR } from "./components/TransactionPanel";
 import TransactionForm from "./TransactionForm";
@@ -23,6 +24,7 @@ import {
   RightList,
   FormSpace,
   FlexRow,
+  FooterActionButtons
 } from "Src/globalStyle";
 
 const ViewTransaction = ({
@@ -31,7 +33,8 @@ const ViewTransaction = ({
   currency,
   match: {
     params: { id }
-  }
+  },
+  history,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(false);
@@ -51,7 +54,16 @@ const ViewTransaction = ({
     setEdit(true);
   };
 
-  const onSubmitForm = (values) => {
+  const onDeleteClick = () => {
+    models
+      .get("money_transaction")
+      .delete(data)
+      .then(() => {
+        history.goBack();
+      });
+  }
+
+  const onSubmitForm = values => {
     models
       .get("money_transaction")
       .update(values, { _id: id }, data)
@@ -77,7 +89,7 @@ const ViewTransaction = ({
           onSubmitForm={onSubmitForm}
         />
       </Container>
-    )
+    );
   }
 
   return (
@@ -99,23 +111,21 @@ const ViewTransaction = ({
             <RightList>
               <Typography>{wallets[data.wallet].name}</Typography>
             </RightList>
-            {
-              data.toWallet && (
-                <React.Fragment>
-                  <RightList>
-                    <Icon iconType="AntDesign" icon="arrowright" />
-                  </RightList>
-                  <RightList>
-                    <FlexRow>
-                      <Avatar.Icon iconKey={wallets[data.toWallet].icon} />
-                      <RightList>
-                        <Typography>{wallets[data.toWallet].name}</Typography>
-                      </RightList>
-                    </FlexRow>
-                  </RightList>
-                </React.Fragment>
-              )
-            }
+            {data.toWallet && (
+              <React.Fragment>
+                <RightList>
+                  <Icon iconType="AntDesign" icon="arrowright" />
+                </RightList>
+                <RightList>
+                  <FlexRow>
+                    <Avatar.Icon iconKey={wallets[data.toWallet].icon} />
+                    <RightList>
+                      <Typography>{wallets[data.toWallet].name}</Typography>
+                    </RightList>
+                  </FlexRow>
+                </RightList>
+              </React.Fragment>
+            )}
           </FlexRow>
         </FormSpace>
         <FormSpace>
@@ -152,12 +162,7 @@ const ViewTransaction = ({
         <FormSpace>
           <FlexRow>
             <Avatar>
-              <Icon
-                type="Octicons"
-                name="calendar"
-                size={18}
-                color={BLACK}
-              />
+              <Icon type="Octicons" name="calendar" size={18} color={BLACK} />
             </Avatar>
             <RightList>
               <Typography>{data.dateTime}</Typography>
@@ -165,6 +170,14 @@ const ViewTransaction = ({
           </FlexRow>
         </FormSpace>
       </Content>
+      <FooterActionButtons>
+        <Button
+          text="delete"
+          borderRadius
+          appearance="red"
+          onPress={onDeleteClick}
+        />
+      </FooterActionButtons>
       <Footer actionIcon="edit" onActionClick={onEditFormClick} />
     </Container>
   );

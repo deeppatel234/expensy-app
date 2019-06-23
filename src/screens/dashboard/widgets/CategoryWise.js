@@ -33,7 +33,7 @@ const CategoryWise = ({ type, categories }) => {
       .catch(() => setIsVisible(false));
   }, []);
 
-  if (_isEmpty(categories) || !isVisible) {
+  if (_isEmpty(categories) || !isVisible || _isEmpty(amounts)) {
     return false;
   }
 

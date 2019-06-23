@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "React";
 import { connect } from "react-redux";
+import _isEmpty from "lodash";
 
 import Footer from "Components/Footer";
 import Header from "Components/Header";
 import Loader from "Components/Loader";
 import Link from "Components/Link";
+import Empty from "Components/Empty";
 
 import { Container, Heading, Content } from "Src/globalStyle";
 import models from "Models";
@@ -58,9 +60,11 @@ const TransactionList = ({ wallets, categories }) => {
         <Header text="Transactions" />
       </Heading>
       <Content>
+        <FilterModal.ShowFilter filters={filters} />
         {isLoading && <Loader />}
-        {!isLoading && <TotalOverview list={transactionList} />}
-        {!isLoading &&
+        {!isLoading && _isEmpty(transactionList) && <Empty />}
+        {!_isEmpty(transactionList) && <TotalOverview list={transactionList} />}
+        {!_isEmpty(transactionList) &&
           transactionList.map(data => (
             <Link
               key={data._id}

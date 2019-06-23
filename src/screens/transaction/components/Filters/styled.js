@@ -31,3 +31,16 @@ export const DateBadges = styled(FlexRow)`
 export const FilterTitle = styled.View`
   margin: 7px 0;
 `;
+
+export const ShowFilterWrapper = styled(FlexRow)`
+  margin-bottom: 10px;
+`;
+
+export const BadgeWrapper = styled(FlexRow)`
+  margin-left: 10px;
+  flex-wrap: wrap;
+`;
+
+export const BadgeSpace = styled.View`
+  margin: 0 3px;
+`;

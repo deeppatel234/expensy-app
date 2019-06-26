@@ -11,6 +11,10 @@ class UserRedux extends BaseRedux {
     this.dispatch(this.actions.logout());
   }
 
+  syncComplete(user) {
+    this.dispatch(this.actions.fetchDataSuccess(user));
+  }
+
   getConstants() {
     return {
       USER_FETCH_DATA_SUCCESS: "USER_FETCH_DATA_SUCCESS",

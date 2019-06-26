@@ -6,11 +6,16 @@ class CategoriesRedux extends BaseRedux {
     this.dispatch(this.actions.fetchDataSuccess(categories));
   }
 
+  syncUpdate(category) {
+    this.dispatch(this.actions.updateByMId(category));
+  }
+
   getConstants() {
     return {
       CATEGORIES_FETCH_DATA_SUCCESS: "CATEGORIES_FETCH_DATA_SUCCESS",
       CATEGORIES_CREATE_DATA: "CATEGORIES_CREATE_DATA",
       CATEGORIES_UPDATE_DATA: "CATEGORIES_UPDATE_DATA",
+      CATEGORIES_UPDATE_MID_DATA: "CATEGORIES_UPDATE_MID_DATA",
       CATEGORIES_DELETE_DATA: "CATEGORIES_DELETE_DATA"
     };
   }
@@ -36,12 +41,24 @@ class CategoriesRedux extends BaseRedux {
           category
         };
       },
+      updateByMId(category) {
+        return {
+          type: self.constants.CATEGORIES_UPDATE_MID_DATA,
+          category
+        };
+      },
       create(category) {
         return dispatch => {
-          return self.models
-            .get("category")
-            .create(category, true)
-            .then(dbRes => dispatch(self.actions.createSuccess(dbRes)));
+          return new Promise((resolve, reject) => {
+            self.models
+              .get("category")
+              .create(category)
+              .then(dbRes => {
+                dispatch(self.actions.createSuccess(dbRes));
+                resolve();
+                self.models.get("category").createSync(dbRes);
+              }).catch(reject);
+          });
         };
       },
       update(category) {
@@ -80,6 +97,10 @@ class CategoriesRedux extends BaseRedux {
             return { ...state, [action.category._id]: action.category };
           case self.constants.CATEGORIES_UPDATE_DATA:
             return { ...state, [action.category._id]: action.category };
+          case self.constants.CATEGORIES_UPDATE_MID_DATA:
+            const copyState = { ...state };
+            delete copyState[action.category.mid];
+            return { ...copyState, [action.category._id]: action.category };
           default:
             return state;
         }

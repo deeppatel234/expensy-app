@@ -106,21 +106,14 @@ class BasicModel {
    * =================
    */
 
-  create(data, sync) {
+  create(data) {
     let createData = this.prepareSaveData(this.filterFields(data));
     createData = { ...createData, sync: 'create' };
 
     const { keysString, replaceString, values } = this.getKeyValue(createData);
 
     return this.db.executeSql(`INSERT INTO ${this.tableName()} (${keysString}) VALUES (${replaceString})`, values)
-      .then(async () => {
-        try {
-          if (sync) {
-            await this.createSync(createData);
-          }
-        } catch(err) {}
-        return createData;
-      });
+      .then(() => createData);
   }
 
   read(where) {
@@ -262,6 +255,7 @@ class BasicModel {
     });
     await this.update({ _id: createdData._id, sync: '1' }, { mid: record.mid });
     param._id = createdData._id;
+    redux.get(this.tableName()) && redux.get(this.tableName()).syncUpdate(param);
   }
 }
 

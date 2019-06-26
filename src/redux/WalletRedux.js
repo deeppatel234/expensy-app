@@ -6,11 +6,16 @@ class WalletRedux extends BaseRedux {
     this.dispatch(this.actions.fetchDataSuccess(wallets));
   }
 
+  syncUpdate(category) {
+    this.dispatch(this.actions.updateByMId(category));
+  }
+
   getConstants() {
     return {
       WALLET_FETCH_DATA_SUCCESS: "WALLET_FETCH_DATA_SUCCESS",
       WALLET_CREATE_DATA: "WALLET_CREATE_DATA",
       WALLET_UPDATE_DATA: "WALLET_UPDATE_DATA",
+      WALLET_UPDATE_MID_DATA: "WALLET_UPDATE_MID_DATA",
       WALLET_DELETE_DATA: "WALLET_DELETE_DATA"
     };
   }
@@ -36,12 +41,24 @@ class WalletRedux extends BaseRedux {
           wallet
         };
       },
+      updateByMId(wallet) {
+        return {
+          type: self.constants.WALLET_UPDATE_MID_DATA,
+          wallet
+        };
+      },
       create(wallet) {
         return dispatch => {
-          return self.models
-            .get("wallet")
-            .create(wallet, true)
-            .then(dbRes => dispatch(self.actions.createSuccess(dbRes)));
+          return new Promise((resolve, reject) => {
+            self.models
+              .get("wallet")
+              .create(wallet)
+              .then(dbRes => {
+                dispatch(self.actions.createSuccess(dbRes));
+                resolve();
+                self.models.get("wallet").createSync(dbRes);
+              }).catch(reject);
+          });
         };
       },
       update(wallet) {
@@ -80,6 +97,10 @@ class WalletRedux extends BaseRedux {
             return { ...state, [action.wallet._id]: action.wallet };
           case self.constants.WALLET_UPDATE_DATA:
             return { ...state, [action.wallet._id]: { ...state[action.wallet._id] ,...action.wallet } };
+          case self.constants.WALLET_UPDATE_MID_DATA:
+              const copyState = { ...state };
+              delete copyState[action.wallet.mid];
+              return { ...copyState, [action.wallet._id]: action.wallet };
           default:
             return state;
         }

@@ -17,7 +17,7 @@ const CreateTransaction = ({ history }) => {
   const onSubmitForm = values => {
     models
       .get("money_transaction")
-      .create(values, true)
+      .create(values)
       .then(history.goBack);
   };
 

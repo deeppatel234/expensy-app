@@ -50,7 +50,6 @@ const CategoryMenu = props => (
 
 const Footer = ({
   openMenuDrawer,
-  menu = true,
   iconType,
   actionIcon,
   actionLink,
@@ -58,12 +57,10 @@ const Footer = ({
   ...props
 }) => (
   <FooterWrapper {...props}>
-    {menu && (
-      <LeftFooter>
-        <Link to="/" component={DashboardMenu} />
-        <Link to="/transaction-list" component={TransactionMenu} />
-      </LeftFooter>
-    )}
+    <LeftFooter>
+      <Link to="/" component={DashboardMenu} />
+      <Link to="/transaction-list" component={TransactionMenu} />
+    </LeftFooter>
     <ActionButtonWrapper>
       {actionLink ? (
         <Link
@@ -80,13 +77,11 @@ const Footer = ({
         />
       )}
     </ActionButtonWrapper>
-    {menu && (
-      <RightFooter>
-        <Link to="/setting" component={SettingMenu} />
-        <Link to="/view-wallet" component={WalletMenu} />
-        <Link to="/view-category" component={CategoryMenu} />
-      </RightFooter>
-    )}
+    <RightFooter>
+      <Link to="/setting" component={SettingMenu} />
+      <Link to="/view-wallet" component={WalletMenu} />
+      <Link to="/view-category" component={CategoryMenu} />
+    </RightFooter>
   </FooterWrapper>
 );
 

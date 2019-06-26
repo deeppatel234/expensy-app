@@ -23,7 +23,7 @@ const AppModal = ({ visible, onClose, heading, children, ...props }) => (
           </Heading>
         )}
         {children}
-        <Footer actionIcon="close" onActionClick={onClose} menu={false} />
+        <Footer actionIcon="close" onActionClick={onClose} />
       </Container>
     </SafeAreaView>
   </Modal>

@@ -3,7 +3,7 @@ import ModelRegistry from 'Models';
 
 class DBConfig {
   constructor() {
-    this.DB_VERSION = 1;
+    this.DB_VERSION = 2;
   }
 
   async init() {

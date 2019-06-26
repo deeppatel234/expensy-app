@@ -13,7 +13,7 @@ import {
 import TotalAmount from "./widgets/TotalAmount";
 import CategoryWise from "./widgets/CategoryWise";
 import WalletOverview from "./widgets/WalletOverview";
-import TransactionList from "./widgets/TransactionList";
+// import TransactionList from "./widgets/TransactionList";
 
 class Dashboard extends Component {
   render() {

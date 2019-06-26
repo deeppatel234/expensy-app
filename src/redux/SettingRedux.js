@@ -23,7 +23,13 @@ class SettingRedux extends BaseRedux {
 
   saveSetting(obj) {
     const { setting } = this.getState();
-    return this.models.get('user').saveUserSetting({ ...setting, ...obj });
+    return this.models.get('user').saveSetting({ ...setting, ...obj }, true);
+  }
+
+  syncComplete(updatedSetting) {
+    const { setting } = this.getState();
+    this.models.get('user').saveSetting({ ...setting, ...updatedSetting });
+    this.dispatch(this.actions.fetchDataSuccess({ ...setting, ...updatedSetting }));
   }
 
   getActions() {
@@ -83,7 +89,7 @@ class SettingRedux extends BaseRedux {
       fetch() {
         return self.models
           .get("user")
-          .getUserSetting()
+          .getSetting()
           .then(setting => self.dispatch(self.actions.fetchDataSuccess(setting)));
       }
     };

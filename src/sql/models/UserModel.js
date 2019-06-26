@@ -1,6 +1,8 @@
 import _pick from "lodash/pick";
 import BasicModel from "../BasicModel";
-import LocalStorage from "Base/LocalStorage";
+import redux from "Redux/ReduxRegistry";
+
+const settingToSave = ["currency", "isLightTheme"];
 
 class UserModel extends BasicModel {
   tableName() {
@@ -10,7 +12,8 @@ class UserModel extends BasicModel {
   initFields() {
     return {
       name: "TEXT NOT NULL",
-      email: "TEXT NOT NULL"
+      email: "TEXT NOT NULL",
+      setting: "TEXT"
     };
   }
 
@@ -27,55 +30,56 @@ class UserModel extends BasicModel {
     });
   }
 
+  async updateTable_V2() {
+    return this.db.executeSql(`
+      ALTER TABLE ${this.tableName()} ADD COLUMN setting TEXT;
+    `);
+  }
+
   async getUser() {
-    let user;
-    if (this.isConnected()) {
-      try {
-        user = await this.request.api({ model: "user", method: "myinfo" });
-      } catch (err) {}
-    }
-
-    if (user) {
-      await this.replaceOrCreate(user);
-    } else {
-      const data = await this.readAll();
-      user = data.length ? data[0] : false;
-    }
-
-    return user;
+    const data = await this.readAll();
+    const { setting, ...rest } = data.length ? data[0] : {};
+    return rest;
   }
 
-  async getUserSetting() {
-    let setting = {};
-    if (this.isConnected()) {
-      try {
-        setting = await this.request.api({ model: "setting", method: "get" });
-      } catch (err) {}
-    }
-
-    let localSetting = await LocalStorage.getSettings();
-    localSetting = localSetting ? JSON.parse(localSetting) : {};
-
-    return { ...localSetting, ...setting };
+  async getSetting() {
+    const data = await this.readAll();
+    const { setting } = data.length ? data[0] : false;
+    return setting ? JSON.parse(setting) : {};
   }
 
-  async saveUserSetting(setting) {
-    await LocalStorage.setSettings(setting);
-    const settingToSave = ["currency", "isLightTheme"];
+  async saveSetting(setting, sync) {
+    const settingsToUpdate = { ...setting, updatedTime: new Date().toUTCString() };
 
-    if (this.isConnected()) {
+    if (sync && this.isConnected()) {
       try {
-        setting = await this.request.api({
+        await this.request.api({
           model: "setting",
           method: "save",
           data: { setting: _pick(setting, settingToSave) }
         });
       } catch (err) {}
     }
+
+    await this.db.executeSql(
+      `UPDATE ${this.tableName()} SET setting = '${JSON.stringify(settingsToUpdate)}'`
+    );
   }
 
-  syncTable() {
-    return Promise.resolve();
+  async syncTable() {
+    if (!this.isConnected()) {
+      return Promise.reject();
+    }
+
+    const localSetting = await this.getSetting();
+    const { user, setting } = await this.request.api({
+      model: "user",
+      method: "sync",
+      data: { setting: _pick(localSetting, settingToSave) }
+    });
+    await this.replaceOrCreate({ ...user });
+    redux.get("user").syncComplete(user);
+    redux.get("setting").syncComplete({ ...setting, updatedTime: setting.writeAt });
   }
 }
 

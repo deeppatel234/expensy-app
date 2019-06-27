@@ -13,7 +13,6 @@ import TextInput from "Components/TextInput";
 import Button from "Components/Button";
 import Link from "Components/Link";
 
-import { PRIMARY } from "Src/theme";
 import ReduxLoader from "Base/ReduxLoader";
 import deviceInfo from "Utils/deviceInfo";
 
@@ -67,7 +66,7 @@ const Login = () => {
     <ReduxLoader models={["network"]}>
       <Wrapper>
         <AppNameWrapper>
-          <Typography type="appLogo" color={PRIMARY}>
+          <Typography type="appLogo" appearance="primary">
             Expensy
           </Typography>
         </AppNameWrapper>
@@ -124,12 +123,12 @@ const Login = () => {
         </LoginFormWrapper>
         <SignUpWrapper>
           <SignUpLink>
-            <Typography color={PRIMARY}>Don't have an account</Typography>
+            <Typography appearance="primary">Don't have an account</Typography>
           </SignUpLink>
           <Link to="/signup" text="Sign Up" borderRadius block />
         </SignUpWrapper>
         <FooterWrapper>
-          <Typography color={PRIMARY}>Your Personal expense manager</Typography>
+          <Typography appearance="primary">Your Personal expense manager</Typography>
         </FooterWrapper>
       </Wrapper>
     </ReduxLoader>

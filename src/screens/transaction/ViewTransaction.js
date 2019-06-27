@@ -15,7 +15,6 @@ import { TRANSACTION_TYPE_COLOR } from "./components/TransactionPanel";
 import TransactionForm from "./TransactionForm";
 
 import models from "Models";
-import { WHITE, BLACK } from "Src/theme";
 
 import {
   Container,
@@ -100,7 +99,7 @@ const ViewTransaction = ({
       <Content>
         <FormSpace>
           <Badge appearance={TRANSACTION_TYPE_COLOR[data.type]}>
-            <Typography type="title" color={WHITE}>
+            <Typography type="title" color="white">
               {data.type}
             </Typography>
           </Badge>
@@ -151,7 +150,7 @@ const ViewTransaction = ({
                 iconType="SimpleLineIcons"
                 icon="note"
                 size={18}
-                color={BLACK}
+                color="black"
               />
             </Avatar>
             <RightList>
@@ -162,7 +161,7 @@ const ViewTransaction = ({
         <FormSpace>
           <FlexRow>
             <Avatar>
-              <Icon iconType="Octicons" icon="calendar" size={18} color={BLACK} />
+              <Icon iconType="Octicons" icon="calendar" size={18} color="black" />
             </Avatar>
             <RightList>
               <Typography>{data.dateTime}</Typography>

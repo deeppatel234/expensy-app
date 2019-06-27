@@ -9,7 +9,7 @@ const TextInput = ({ appearance, theme, color, error, ...props }) => (
   <InputWrapper>
     <Input
       {...props}
-      style={{ ...TYPO_STYLE.small, color: color || theme[appearance] }}
+      style={{ ...TYPO_STYLE.small, color: color ? theme.brand[color] : theme[appearance] }}
       placeholderStyle={TYPO_STYLE.small}
       placeholderTextColor={color || theme[appearance]}
       error={error}

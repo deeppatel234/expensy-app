@@ -17,7 +17,7 @@ const Date = ({ date, onDateChange, color, theme, appearance }) => (
         borderWidth: 0,
         alignItems: "flex-start"
       },
-      dateText: { ...TYPO_STYLE.default, color: color || theme[appearance] }
+      dateText: { ...TYPO_STYLE.default, color: color ? theme.brand[color] : theme[appearance] }
     }}
   />
 );

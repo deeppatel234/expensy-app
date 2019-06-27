@@ -16,6 +16,8 @@ import { Container, Heading, Content } from "Src/globalStyle";
 
 import CurrencyModal from "Screens/currency/CurrencyModal";
 
+import ColorThemeModal from "./components/ColorTheme";
+
 import {
   SettingItem,
   ThemeSwitchWrapper,
@@ -24,16 +26,20 @@ import {
   SettingIcon
 } from "./styled";
 
+import { ColorIcon } from "./components/styled";
+
 const Setting = ({
   setting,
   changeFingerPrintLock,
   changeTheme,
+  changeColor,
   changePinLock,
-  changeCurrency,
+  changeCurrency
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isFingerPrintSupported, setIsFingerPrintSupported] = useState(true);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
+  const [colorModalVisible, setColorModalVisible] = useState(false);
 
   useEffect(() => {
     TouchID.isSupported()
@@ -44,9 +50,14 @@ const Setting = ({
       .catch(() => setIsLoading(false));
   }, []);
 
-  const onSelectCurrency = useCallback((data) => {
+  const onSelectCurrency = useCallback(data => {
     changeCurrency(data);
     setCurrencyModalVisible(false);
+  }, []);
+
+  const onSelectColor = useCallback(data => {
+    changeColor(data);
+    setColorModalVisible(false);
   }, []);
 
   if (isLoading) {
@@ -75,6 +86,20 @@ const Setting = ({
             <Switch value={setting.isLightTheme} onValueChange={changeTheme} />
           </ThemeSwitchWrapper>
         </SettingItem>
+        {setting.isLightTheme && (
+          <SettingItem>
+            <SettingNameWrapper>
+              <SettingIcon>
+                <Icon iconType="MaterialCommunityIcons" icon="format-color-fill" />
+              </SettingIcon>
+              <Typography>Color</Typography>
+            </SettingNameWrapper>
+            <ColorIcon
+              onPress={() => setColorModalVisible(true)}
+              appearance="primary"
+            />
+          </SettingItem>
+        )}
         {isFingerPrintSupported && (
           <SettingItem>
             <SettingNameWrapper>
@@ -105,9 +130,7 @@ const Setting = ({
             </SettingIcon>
             <Typography>Currency</Typography>
           </SettingNameWrapper>
-          <TouchableHighlight
-            onPress={() => setCurrencyModalVisible(true)}
-          >
+          <TouchableHighlight onPress={() => setCurrencyModalVisible(true)}>
             <Avatar.Currency currency={setting.currency} />
           </TouchableHighlight>
         </SettingItem>
@@ -115,6 +138,11 @@ const Setting = ({
           visible={currencyModalVisible}
           onSelect={onSelectCurrency}
           onClose={() => setCurrencyModalVisible(false)}
+        />
+        <ColorThemeModal
+          visible={colorModalVisible}
+          onSelect={onSelectColor}
+          onClose={() => setColorModalVisible(false)}
         />
       </Content>
       <Footer actionIcon="home" actionLink="/" />
@@ -135,6 +163,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(Redux.get("setting", "changeFingerPrintLock")(isLocked)),
     changeTheme: isLightTheme =>
       dispatch(Redux.get("setting", "changeTheme")(isLightTheme)),
+    changeColor: color => dispatch(Redux.get("setting", "changeColor")(color)),
     changeCurrency: currency =>
       dispatch(Redux.get("setting", "changeCurrency")(currency)),
     changePinLock: isLocked =>

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { WHITE } from 'Src/theme';
 
 export const Wrapper = styled.View`
   display: flex;
@@ -7,7 +6,7 @@ export const Wrapper = styled.View`
   justify-content: space-between;
   height: 100%;
   width: 100%;
-  background-color: ${WHITE};
+  background-color: ${props => props.theme.brand.white};
 `;
 
 export const AppNameWrapper = styled.View`

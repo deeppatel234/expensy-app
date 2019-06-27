@@ -20,8 +20,6 @@ import Footer from "Components/Footer";
 
 import { TRANSACTION_TYPE } from "Models/TransactionModel";
 
-import { BLACK } from "Src/theme";
-
 import {
   Content,
   IconInputWrapper,
@@ -223,7 +221,7 @@ const TransactionForm = ({
                   iconType="SimpleLineIcons"
                   icon="note"
                   size={18}
-                  color={BLACK}
+                  color="black"
                 />
               </Avatar>
               <RightInput>
@@ -237,7 +235,7 @@ const TransactionForm = ({
             </IconInputWrapper>
             <IconInputWrapper>
               <Avatar>
-                <Icon iconType="Octicons" icon="calendar" size={18} color={BLACK} />
+                <Icon iconType="Octicons" icon="calendar" size={18} color="black" />
               </Avatar>
               <RightInput>
                 <BorderBottom>

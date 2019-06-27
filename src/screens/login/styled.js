@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { WHITE } from 'Src/theme';
 
 export const Wrapper = styled.View`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  background-color: ${WHITE};
+  background-color: ${props => props.theme.brand.white};
   height: 100%;
   width: 100%;
 `;

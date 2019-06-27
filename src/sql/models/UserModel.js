@@ -2,7 +2,7 @@ import _pick from "lodash/pick";
 import BasicModel from "../BasicModel";
 import redux from "Redux/ReduxRegistry";
 
-const settingToSave = ["currency", "isLightTheme"];
+const settingToSave = ["currency", "isLightTheme", "color"];
 
 class UserModel extends BasicModel {
   tableName() {

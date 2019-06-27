@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Modal from "Components/Modal";
 
-import CategoryPanel from "./components/CategoryPanel";
+import CategoryPanel from "./components/Panel";
 
 import { Content, ListWrapper } from "Src/globalStyle";
 

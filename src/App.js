@@ -12,7 +12,7 @@ import SignUp from "Screens/signup";
 import Main from "Src/Main";
 import OnBoarding from "Screens/onboarding";
 
-import { light, dark } from "Src/theme";
+import getTheme from "Src/theme";
 import ReduxLoader from "Base/ReduxLoader";
 
 import { SafeAreaView } from "Src/globalStyle";
@@ -31,8 +31,8 @@ const SignUpOnBoarding = () => <OnBoarding type="signup" />;
 
 const LoginOnBoarding = () => <OnBoarding type="login" />;
 
-const App = ({ isLightTheme }) => (
-  <ThemeProvider theme={isLightTheme ? light : dark}>
+const App = ({ isLightTheme, color }) => (
+  <ThemeProvider theme={getTheme(isLightTheme, color)}>
     <InitDatabase>
       <SafeAreaView>
         <NativeRouter>
@@ -52,7 +52,8 @@ const App = ({ isLightTheme }) => (
 // Maps state from store to props
 const mapStateToProps = state => {
   return {
-    isLightTheme: state.setting.isLightTheme
+    isLightTheme: state.setting.isLightTheme,
+    color: state.setting.color
   };
 };
 

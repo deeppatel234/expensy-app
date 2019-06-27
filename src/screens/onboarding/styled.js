@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { WHITE } from 'Src/theme';
 
 // Welcome Page
 export const WelcomeWrapper = styled.View`
-  background-color: ${WHITE};
+  background-color: ${props => props.theme.brand.white};
   height: 100%;
   width: 100%;
   padding: 30px;
@@ -31,7 +30,7 @@ export const FooterButton = styled.View`
 // Currency Choose Page
 
 export const CurrencyChooseWrapper = styled.View`
-  background-color: ${WHITE};
+  background-color: ${props => props.theme.brand.white};
   height: 100%;
   width: 100%;
   padding: 30px;

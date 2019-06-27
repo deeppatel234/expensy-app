@@ -14,7 +14,6 @@ import TextInput from "Components/TextInput";
 import Button from "Components/Button";
 import Link from "Components/Link";
 import ReduxLoader from "Base/ReduxLoader";
-import { PRIMARY } from "Src/theme";
 
 import {
   Wrapper,
@@ -75,7 +74,7 @@ const SignUP = () => {
     <ReduxLoader models={["network"]}>
       <Wrapper>
         <AppNameWrapper>
-          <Typography type="appLogo" color={PRIMARY}>
+          <Typography type="appLogo" appearance="primary">
             Expensy
           </Typography>
         </AppNameWrapper>
@@ -146,12 +145,12 @@ const SignUP = () => {
         </SignUpWrapper>
         <LoginFormWrapper>
           <LoginLink>
-            <Typography color={PRIMARY}>already have an account</Typography>
+            <Typography appearance="primary">already have an account</Typography>
           </LoginLink>
           <Link to="/login" text="Login" borderRadius block />
         </LoginFormWrapper>
         <FooterWrapper>
-          <Typography color={PRIMARY}>Your Personal expense manager</Typography>
+          <Typography appearance="primary">Your Personal expense manager</Typography>
         </FooterWrapper>
       </Wrapper>
     </ReduxLoader>

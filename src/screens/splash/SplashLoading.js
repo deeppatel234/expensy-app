@@ -3,8 +3,6 @@ import React from "react";
 import Typography from "Components/Typography";
 import Loader from "Components/Loader";
 
-import { WHITE } from "Src/theme";
-
 import {
   Wrapper,
   AppNameWrapper,
@@ -15,20 +13,20 @@ import {
 const SplashLoading = ({ message }) => (
   <Wrapper>
     <AppNameWrapper>
-      <Typography type="appLogo" color={WHITE}>
+      <Typography type="appLogo" color="white">
         Expensy
       </Typography>
     </AppNameWrapper>
     <LoadingWrapper>
       {message && (
         <React.Fragment>
-          <Loader color={WHITE} />
-          <Typography color={WHITE}>{message}</Typography>
+          <Loader color="white" />
+          <Typography color="white">{message}</Typography>
         </React.Fragment>
       )}
     </LoadingWrapper>
     <FooterWrapper>
-      <Typography color={WHITE}>Your Personal expense manager</Typography>
+      <Typography color="white">Your Personal expense manager</Typography>
     </FooterWrapper>
   </Wrapper>
 );

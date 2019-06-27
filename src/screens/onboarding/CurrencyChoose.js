@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import Typography from "Components/Typography";
 import Button from "Components/Button";
 
-import { PRIMARY } from "Src/theme";
 import Redux from "Redux/ReduxRegistry";
 import Avatar from "Components/Avatar";
 import CurrencyModal from "Screens/currency/CurrencyModal";
@@ -32,12 +31,12 @@ const CurrencyChoose = ({ onDone, setting, changeCurrency }) => {
   return (
     <CurrencyChooseWrapper>
       <AppName>
-        <Typography type="appLogo" color={PRIMARY}>
+        <Typography type="appLogo" appearance="primary">
           Expensy
         </Typography>
       </AppName>
       <SelectText>
-        <Typography type="title" color={PRIMARY} size={25}>
+        <Typography type="title" appearance="primary" size={25}>
           Select Your Currency
         </Typography>
         <CurrencyTextWrapper>

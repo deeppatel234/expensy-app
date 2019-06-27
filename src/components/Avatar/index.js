@@ -6,8 +6,6 @@ import Typography from "Components/Typography";
 import IconList from "Utils/IconList";
 import CurrencyCode from "Utils/CurrencyCode";
 
-import { WHITE, BLACK } from "Src/theme";
-
 import { AvatarWrapper, AvatarImage } from "./styled";
 
 const Avatar = AvatarWrapper;
@@ -23,7 +21,7 @@ const AvatarIcon = ({ iconKey, ...props }) => {
     <Avatar colorChar={icon && icon[0]} {...props} bgColor>
       {type === "image" && <Avatar.Image source={image} />}
       {type === "icon" && (
-        <Icon iconType={props.iconType || iconType} icon={props.icon || icon} color={WHITE} />
+        <Icon iconType={props.iconType || iconType} icon={props.icon || icon} color="white" />
       )}
     </Avatar>
   )
@@ -44,7 +42,7 @@ Avatar.Icon = ({ onPress, ...props }) => {
 
 Avatar.Currency = ({ currency, ...props }) => (
   <Avatar {...props}>
-    <Typography color={BLACK}>
+    <Typography color="black">
       {CurrencyCode[currency].unicode}
     </Typography>
   </Avatar>

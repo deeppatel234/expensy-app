@@ -4,13 +4,11 @@ import { connect } from "react-redux";
 import Redux from "Redux/ReduxRegistry";
 
 import Header from "Components/Header";
-import Link from "Components/Link";
 import Footer from "Components/Footer";
 
-import CategoryPanel from "./components/CategoryPanel";
+import { EditPanel } from "./components/Panel";
 
 import { Container, Heading, Content, ListWrapper } from "Src/globalStyle";
-
 
 const CategoryList = ({ categories }) => (
   <Container>
@@ -20,12 +18,7 @@ const CategoryList = ({ categories }) => (
     <Content>
       <ListWrapper>
         {Object.values(categories).map(category => (
-          <Link
-            key={category._id}
-            to={`/edit-category/${category._id}`}
-            category={category}
-            component={CategoryPanel}
-          />
+          <EditPanel key={category._id} category={category} />
         ))}
       </ListWrapper>
     </Content>

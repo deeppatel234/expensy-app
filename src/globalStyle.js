@@ -55,6 +55,11 @@ export const ListItem = styled(FlexRow)`
   padding: 15px 10px;
 `;
 
+export const ListDetails = styled(FlexRow)`
+  padding: 15px 10px;
+  justify-content: space-between;
+`;
+
 export const RightList = styled.View`
   margin-left: 20px;
 `;

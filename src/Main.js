@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import Drawer from "react-native-drawer";
 
 import Dashboard from "Screens/dashboard";
-import CreateCategory from "Screens/category/CreateCategory";
-import CategoryList from "Screens/category/CategoryList";
-import EditCategory from "Screens/category/EditCategory";
+import CreateCategory from "Screens/category/Create";
+import CategoryList from "Screens/category/List";
+import EditCategory from "Screens/category/Edit";
 
 import CreateWallet from "Screens/wallet/CreateWallet";
 import WalletList from "Screens/wallet/WalletList";
@@ -65,7 +65,7 @@ const Main = ({
             <Route path="/transaction-list" component={TransactionList} />
             <Route path="/view-transaction/:id" component={ViewTransaction} />
             <Route path="/setting" component={Setting} />
-            <Route path="/" component={Dashboard} />
+            <Route path="/" component={CategoryList} />
           </Switch>
         </Drawer>
       </BackButton>

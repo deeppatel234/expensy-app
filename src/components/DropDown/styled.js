@@ -7,5 +7,5 @@ export const PickerWrapper = styled.View`
 `;
 
 export const Picker = styled.Picker`
-  color: ${props => props.color || props.theme[props.appearance]};
+  color: ${props => props.color ? props.theme.brand[props.color] : props.theme[props.appearance]};
 `;

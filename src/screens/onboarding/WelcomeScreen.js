@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import Typography from "Components/Typography";
 import Button from "Components/Button";
 
-import { PRIMARY } from "Src/theme";
-
 import { WelcomeWrapper, HelloText, WelcomeText, FooterButton } from "./styled";
 
 const WelcomePage = ({ onDone }) => (
@@ -14,7 +12,7 @@ const WelcomePage = ({ onDone }) => (
       <Typography type="appLogo">Hello</Typography>
     </HelloText>
     <WelcomeText>
-      <Typography type="title" color={PRIMARY} size={25}>
+      <Typography type="title" appearance="primary" size={25}>
         Welcome to Expensy
       </Typography>
     </WelcomeText>

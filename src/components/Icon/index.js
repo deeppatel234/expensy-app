@@ -43,7 +43,7 @@ const Icon = ({
     <IconComp
       size={20}
       name={icon}
-      style={{ color: color || theme[appearance] }}
+      style={{ color: color ? theme.brand[color] : theme[appearance] }}
       {...props}
     />
   );

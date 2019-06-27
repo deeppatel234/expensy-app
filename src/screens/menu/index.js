@@ -11,7 +11,6 @@ import Typography from "Components/Typography";
 
 import Redux from "Redux/ReduxRegistry";
 
-import { BLACK } from "Src/theme";
 
 import {
   TopMenu,
@@ -68,7 +67,7 @@ const Menu = ({ user, logoutUser, closeMenuDrawer, history }) => {
           <BottomContent>
             <AvatarContainer>
               <Avatar>
-                <Icon iconType="AntDesign" icon="user" color={BLACK} />
+                <Icon iconType="AntDesign" icon="user" color="black" />
               </Avatar>
             </AvatarContainer>
             <UserDetails>

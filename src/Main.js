@@ -8,9 +8,9 @@ import CreateCategory from "Screens/category/Create";
 import CategoryList from "Screens/category/List";
 import EditCategory from "Screens/category/Edit";
 
-import CreateWallet from "Screens/wallet/CreateWallet";
-import WalletList from "Screens/wallet/WalletList";
-import EditWallet from "Screens/wallet/EditWallet";
+import CreateWallet from "Screens/wallet/Create";
+import WalletList from "Screens/wallet/List";
+import EditWallet from "Screens/wallet/Edit";
 
 import TransactionList from "Screens/transaction/TransactionList";
 import CreateTransaction from "Screens/transaction/CreateTransaction";
@@ -65,7 +65,7 @@ const Main = ({
             <Route path="/transaction-list" component={TransactionList} />
             <Route path="/view-transaction/:id" component={ViewTransaction} />
             <Route path="/setting" component={Setting} />
-            <Route path="/" component={CategoryList} />
+            <Route path="/" component={Dashboard} />
           </Switch>
         </Drawer>
       </BackButton>

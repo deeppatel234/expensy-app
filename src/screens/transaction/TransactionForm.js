@@ -7,7 +7,7 @@ import * as Yup from "yup";
 
 import { TouchableHighlight, Alert } from "react-native";
 
-import WalletModal from "Screens/wallet/WalletModal";
+import WalletModal from "Screens/wallet/Modal";
 import CategoryModal from "Screens/category/Modal";
 
 import DatePicker from "Components/DatePicker";

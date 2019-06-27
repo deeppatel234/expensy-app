@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Modal from "Components/Modal";
 
-import WalletPanel from "./components/WalletPanel";
+import WalletPanel from "./components/Panel";
 
 import { Content, ListWrapper } from "Src/globalStyle";
 

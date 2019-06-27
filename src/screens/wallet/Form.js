@@ -1,36 +1,32 @@
 import React, { useState, useCallback } from "react";
 import { connect } from "react-redux";
+
 import { Formik } from "formik";
 import * as Yup from "yup";
-
-import Redux from "Redux/ReduxRegistry";
-import Header from "Components/Header";
 import TextInput from "Components/TextInput";
 import Avatar from "Components/Avatar";
 import Footer from "Components/Footer";
 import Radio from "Components/RadioButton";
 
 import IconModal from "Screens/icon/IconModal";
-import WalletPanel from "./components/WalletPanel";
 
 import { WALLET_TYPES } from "Models/WalletModel";
 
 import {
-  Container,
-  Heading,
   Content,
   IconInputWrapper,
   RightInput,
   FormSpace,
-  FlexRow,
+  FlexRow
 } from "Src/globalStyle";
 
 const WalletSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
+  initialBalance: Yup.number().default(0),
   balance: Yup.number().default(0)
 });
 
-const EditForm = ({ wallet, onSubmitForm }) => {
+const Form = ({ mode, wallet, currency, onSubmitForm, actionIcon }) => {
   const [iconModalVisible, setIconModalVisible] = useState(false);
 
   const onSelectIcon = useCallback((data, setFieldValue) => {
@@ -90,59 +86,42 @@ const EditForm = ({ wallet, onSubmitForm }) => {
                 />
               </RightInput>
             </IconInputWrapper>
+            {mode === "create" && (
+              <IconInputWrapper>
+                <Avatar.Currency currency={currency} />
+                <RightInput>
+                  <TextInput
+                    placeholder="Initial Balance"
+                    onChangeText={handleChange("initialBalance")}
+                    onBlur={handleBlur("initialBalance")}
+                    value={values.initialBalance}
+                    keyboardType="numeric"
+                    error={errors.initialBalance}
+                  />
+                </RightInput>
+              </IconInputWrapper>
+            )}
             <IconModal
               visible={iconModalVisible}
               onSelect={data => onSelectIcon(data, setFieldValue)}
               onClose={() => setIconModalVisible(false)}
             />
           </Content>
-          <Footer actionIcon="save" onActionClick={handleSubmit} />
+          <Footer actionIcon={actionIcon} onActionClick={handleSubmit} />
         </React.Fragment>
       )}
     </Formik>
   );
 };
 
-const EditWallet = ({ updateWallet, wallet }) => {
-  const [editMode, setEditMode] = useState(false);
-
-  const onSubmitForm = useCallback(values => {
-    updateWallet(values).then(() => setEditMode(false));
-  }, []);
-
-  return (
-    <Container>
-      <Heading>
-        <Header text="Wallet" />
-      </Heading>
-      {editMode && <EditForm wallet={wallet} onSubmitForm={onSubmitForm} />}
-      {!editMode && (
-        <React.Fragment>
-          <Content>
-            <WalletPanel wallet={wallet} />
-          </Content>
-          <Footer actionIcon="edit" onActionClick={() => setEditMode(true)} />
-        </React.Fragment>
-      )}
-    </Container>
-  );
-};
-
-const mapStateToProps = (state, props) => {
-  const { id } = props.match.params;
+// Maps state from store to props
+const mapStateToProps = state => {
   return {
-    wallet: state.wallets[id]
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    updateWallet: wallet =>
-      dispatch(Redux.get("wallet", "update")(wallet))
+    currency: state.setting.currency
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(EditWallet);
+  null
+)(Form);

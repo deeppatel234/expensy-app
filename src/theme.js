@@ -46,8 +46,8 @@ const dark = () => ({
   red: RED,
   gray: WHITE,
   lightGray: WHITE,
-  green: WHITE,
-  teal: WHITE,
+  green: GREEN,
+  teal: TEAL,
 });
 
 export default getTheme = (isLightTheme, color = 'BLUE') => {

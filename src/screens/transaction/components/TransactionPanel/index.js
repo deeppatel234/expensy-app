@@ -33,7 +33,7 @@ const Panel = ({
   <TransactionWrapper>
     <CardHeader>
       <Badge appearance={TRANSACTION_TYPE_COLOR[type]}>
-        <Typography appearance="white" size={10}>
+        <Typography color="white" size={10}>
           {type}
         </Typography>
       </Badge>

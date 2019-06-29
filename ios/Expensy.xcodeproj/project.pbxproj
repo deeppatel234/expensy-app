@@ -85,6 +85,7 @@
 		1A6C9646587D48C2B37E5BE3 /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B484B0B7E64C4F82A10C33D5 /* libTouchID.a */; };
 		6244CCE5D0D343EBACD6389F /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C259CD4F97594814B163F33C /* libRNDeviceInfo.a */; };
 		F264D1817FDF4373AD965349 /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A4B2F7D7A8F429FAF20A282 /* libRNDeviceInfo-tvOS.a */; };
+		816BA069936C468597672BF1 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5135BD6A247F4B26855B088F /* Fontisto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -426,6 +427,7 @@
 		701F46A41320430E9C6E981B /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNDeviceInfo.xcodeproj"; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		C259CD4F97594814B163F33C /* libRNDeviceInfo.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo.a"; path = "libRNDeviceInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		8A4B2F7D7A8F429FAF20A282 /* libRNDeviceInfo-tvOS.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo-tvOS.a"; path = "libRNDeviceInfo-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		5135BD6A247F4B26855B088F /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -746,6 +748,7 @@
 				56B0939E1D9D43A1A6E533DA /* Montserrat-Regular.ttf */,
 				C301B38186E243368A3E2416 /* Montserrat-Medium.ttf */,
 				096116B9920C478BBC8726C8 /* Montserrat-SemiBold.ttf */,
+				5135BD6A247F4B26855B088F /* Fontisto.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1234,6 +1237,7 @@
 				3145591A022E4800A0DECF46 /* Montserrat-Regular.ttf in Resources */,
 				59977EB54CDA4FC0A96718A2 /* Montserrat-Medium.ttf in Resources */,
 				2DC2B53985454BC3B340DB18 /* Montserrat-SemiBold.ttf in Resources */,
+				816BA069936C468597672BF1 /* Fontisto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

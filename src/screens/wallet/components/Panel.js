@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import Typography from "Components/Typography";
 import Icon from "Components/Icon";
@@ -21,9 +21,9 @@ const Panel = ({ wallet }) => (
 );
 
 const EditIcon = props => (
-  <TouchableHighlight {...props}>
-    <Icon iconType="MaterialIcons" icon="edit" />
-  </TouchableHighlight>
+  <TouchableOpacity {...props}>
+    <Icon iconType="Feather" icon="edit-2" />
+  </TouchableOpacity>
 );
 
 export const EditPanel = ({ wallet }) => (
@@ -49,9 +49,9 @@ const WalletPanel = ({ wallet, onPress }) => {
   }
 
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Panel wallet={wallet} />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

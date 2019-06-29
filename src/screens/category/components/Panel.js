@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import Link from "Components/Link";
 import Icon from "Components/Icon";
@@ -18,10 +18,10 @@ const Panel = ({ category }) => (
   </ListItem>
 );
 
-const EditIcon = (props) => (
-  <TouchableHighlight {...props}>
-    <Icon iconType="MaterialIcons" icon="edit" />
-  </TouchableHighlight>
+const EditIcon = ({ ...props }) => (
+  <TouchableOpacity {...props}>
+    <Icon iconType="Feather" icon="edit-2" />
+  </TouchableOpacity>
 );
 
 export const EditPanel = ({ category }) => (
@@ -46,9 +46,9 @@ const CategoryPanel = ({ category, onPress }) => {
   }
 
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Panel category={category} />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

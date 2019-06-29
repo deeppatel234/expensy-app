@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import TouchID from "react-native-touch-id";
 
@@ -130,9 +130,9 @@ const Setting = ({
             </SettingIcon>
             <Typography>Currency</Typography>
           </SettingNameWrapper>
-          <TouchableHighlight onPress={() => setCurrencyModalVisible(true)}>
+          <TouchableOpacity onPress={() => setCurrencyModalVisible(true)}>
             <Avatar.Currency currency={setting.currency} />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </SettingItem>
         <CurrencyModal
           visible={currencyModalVisible}

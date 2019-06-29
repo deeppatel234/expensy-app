@@ -5,7 +5,7 @@ import _capitalize from "lodash/capitalize";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import { TouchableHighlight, Alert } from "react-native";
+import { TouchableOpacity, Alert } from "react-native";
 
 import WalletModal from "Screens/wallet/Modal";
 import CategoryModal from "Screens/category/Modal";
@@ -135,7 +135,7 @@ const TransactionForm = ({
                 </FlexRow>
               </Radio.Group>
             </FormSpace>
-            <TouchableHighlight
+            <TouchableOpacity
               onPress={() => setWalletModal({ visible: true, field: "wallet" })}
             >
               <FormSpace>
@@ -157,9 +157,9 @@ const TransactionForm = ({
                   </RightInput>
                 </IconInputWrapper>
               </FormSpace>
-            </TouchableHighlight>
+            </TouchableOpacity>
             {values.type === TRANSACTION_TYPE.TRANSFER && (
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() =>
                   setWalletModal({ visible: true, field: "toWallet" })
                 }
@@ -181,9 +181,9 @@ const TransactionForm = ({
                     </RightInput>
                   </IconInputWrapper>
                 </FormSpace>
-              </TouchableHighlight>
+              </TouchableOpacity>
             )}
-            <TouchableHighlight onPress={() => setCategoryModalVisible(true)}>
+            <TouchableOpacity onPress={() => setCategoryModalVisible(true)}>
               <FormSpace>
                 <IconInputWrapper center>
                   <Avatar.Icon iconKey={getCategoryIcon(values.category)} />
@@ -201,7 +201,7 @@ const TransactionForm = ({
                   </RightInput>
                 </IconInputWrapper>
               </FormSpace>
-            </TouchableHighlight>
+            </TouchableOpacity>
             <IconInputWrapper>
               <Avatar.Currency currency={currency} />
               <RightInput>

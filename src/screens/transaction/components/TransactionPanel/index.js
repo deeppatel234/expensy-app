@@ -1,5 +1,5 @@
 import React from "React";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import Typography from "Components/Typography";
 import Avatar from "Components/Avatar";
@@ -79,9 +79,9 @@ const TransactionPanel = ({ onPress, ...props }) => {
   }
 
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <Panel {...props} />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

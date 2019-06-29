@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 
 import Typography from "Components/Typography";
@@ -40,14 +40,14 @@ const CurrencyChoose = ({ onDone, setting, changeCurrency }) => {
           Select Your Currency
         </Typography>
         <CurrencyTextWrapper>
-          <TouchableHighlight onPress={() => setCurrencyModalVisible(true)}>
+          <TouchableOpacity onPress={() => setCurrencyModalVisible(true)}>
             <CurrencyText>
               <CurrencyIcon>
                 <Avatar.Currency currency={setting.currency} />
               </CurrencyIcon>
               <Typography>{CurrencyCode[setting.currency].name}</Typography>
             </CurrencyText>
-          </TouchableHighlight>
+          </TouchableOpacity>
         </CurrencyTextWrapper>
         <CurrencyModal
           visible={currencyModalVisible}

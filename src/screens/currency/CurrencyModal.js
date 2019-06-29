@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import Typography from "Components/Typography";
 import Modal from "Components/Modal";
@@ -15,14 +15,14 @@ const CurrencyModal = ({ visible, onClose, onSelect }) => (
     <Content>
       <ListWrapper>
         {Object.keys(CurrencyCode).map(code => (
-          <TouchableHighlight key={code} onPress={() => onSelect(code)}>
+          <TouchableOpacity key={code} onPress={() => onSelect(code)}>
             <ListItem>
               <Avatar.Currency currency={code} />
               <RightList>
                 <Typography>{CurrencyCode[code].name}</Typography>
               </RightList>
             </ListItem>
-          </TouchableHighlight>
+          </TouchableOpacity>
         ))}
       </ListWrapper>
     </Content>

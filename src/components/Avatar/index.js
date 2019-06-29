@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableHighlight } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import Icon from "Components/Icon";
 import Typography from "Components/Typography";
@@ -34,9 +34,9 @@ Avatar.Icon = ({ onPress, ...props }) => {
   }
 
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <AvatarIcon {...props} />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 

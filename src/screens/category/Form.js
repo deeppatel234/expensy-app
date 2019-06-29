@@ -61,6 +61,7 @@ const CategoryForm = ({ category, actionIcon, onSubmitForm }) => {
             </IconInputWrapper>
             <IconModal
               visible={iconModalVisible}
+              group="category"
               onSelect={data => onSelectIcon(data, setFieldValue)}
               onClose={() => setIconModalVisible(false)}
             />

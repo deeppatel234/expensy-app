@@ -329,37 +329,44 @@ export default {
     iconType: 'SimpleLineIcons',
     group: 'category',
   },
-  AXIS_BANK: {
-    image: require('Src/assets/icons/axis.jpg'),
-    group: 'Wallet',
-    type: "image",
+  PERCENT: {
+    type: 'icon',
+    icon: 'percent',
+    iconType: 'Feather',
+    group: 'category',
   },
-  SBI_BANK: {
-    image: require('Src/assets/icons/sbi.jpg'),
+  MONEY: {
+    type: 'icon',
+    icon: 'money',
+    iconType: 'FontAwesome',
+    group: 'category',
+  },
+  ALLAHABAD_BANK: {
+    image: require('Src/assets/icons/allahabad-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
   AMAZON_PAY: {
-    image: require('Src/assets/icons/amazon.jpg'),
+    image: require('Src/assets/icons/amazon-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
-  PAYTM_PAY: {
-    image: require('Src/assets/icons/paytm.jpg'),
+  ANDHRA_BANK: {
+    image: require('Src/assets/icons/andhra-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  AXIS_BANK: {
+    image: require('Src/assets/icons/axis-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
   BANK_OF_BARODA: {
-    image: require('Src/assets/icons/bob.jpg'),
+    image: require('Src/assets/icons/bob-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
-  PAYTM_PAY: {
-    image: require('Src/assets/icons/paytm.jpg'),
-    group: 'Wallet',
-    type: "image",
-  },
-  CANARA_BANK: {
+  CANERA_BANK: {
     image: require('Src/assets/icons/canara-bank.jpg'),
     group: 'Wallet',
     type: "image",
@@ -370,17 +377,22 @@ export default {
     type: "image",
   },
   CITY_BANK: {
-    image: require('Src/assets/icons/citybank.jpg'),
+    image: require('Src/assets/icons/city-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
   FREECHARGE_BANK: {
-    image: require('Src/assets/icons/freecharge.jpg'),
+    image: require('Src/assets/icons/freecharge-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
   HDFC_BANK: {
-    image: require('Src/assets/icons/hdfc.jpg'),
+    image: require('Src/assets/icons/hdfc-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  HDBC_BANK: {
+    image: require('Src/assets/icons/hsbc-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
@@ -395,12 +407,37 @@ export default {
     type: "image",
   },
   INDUS_BANK: {
-    image: require('Src/assets/icons/indusbank.jpg'),
+    image: require('Src/assets/icons/indusind-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  KOTAK_BANK: {
+    image: require('Src/assets/icons/kotak-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },
   MOBIKWIK: {
-    image: require('Src/assets/icons/mobikwik.jpg'),
+    image: require('Src/assets/icons/mobikwik-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  PAYTM_PAY: {
+    image: require('Src/assets/icons/paytm-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  PNB_PAY: {
+    image: require('Src/assets/icons/pnb-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  RBL_PAY: {
+    image: require('Src/assets/icons/rbl-bank.jpg'),
+    group: 'Wallet',
+    type: "image",
+  },
+  SBI_BANK: {
+    image: require('Src/assets/icons/sbi-bank.jpg'),
     group: 'Wallet',
     type: "image",
   },

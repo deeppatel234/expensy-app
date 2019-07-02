@@ -6,15 +6,19 @@ import store from "Redux/store";
 
 import App from "Src/App";
 import getTheme from "Src/theme";
+import StatusBar from "Components/StatusBar";
 import ReduxLoader from "Base/ReduxLoader";
 
 const MainApp = () => (
   <ThemeProvider theme={getTheme(true, 'BLUE')}>
-    <Provider store={store}>
-      <ReduxLoader models={["network", "sync"]}>
-        <App />
-      </ReduxLoader>
-    </Provider>
+    <React.Fragment>
+      <StatusBar />
+      <Provider store={store}>
+        <ReduxLoader models={["network", "sync"]}>
+          <App />
+        </ReduxLoader>
+      </Provider>
+    </React.Fragment>
   </ThemeProvider>
 );
 

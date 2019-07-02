@@ -14,6 +14,7 @@ import OnBoarding from "Screens/onboarding";
 
 import getTheme from "Src/theme";
 import ReduxLoader from "Base/ReduxLoader";
+import StatusBar from "Components/StatusBar";
 
 import { SafeAreaView } from "Src/globalStyle";
 
@@ -34,17 +35,20 @@ const LoginOnBoarding = () => <OnBoarding type="login" />;
 const App = ({ isLightTheme, color }) => (
   <ThemeProvider theme={getTheme(isLightTheme, color)}>
     <InitDatabase>
-      <SafeAreaView>
-        <NativeRouter>
-          <Switch>
-            <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
-            <Route path="/signuponboarding" component={SignUpOnBoarding} />
-            <Route path="/loginonboarding" component={LoginOnBoarding} />
-            <Route path="/" component={MainApp} />
-          </Switch>
-        </NativeRouter>
-      </SafeAreaView>
+      <React.Fragment>
+        <StatusBar />
+        <SafeAreaView>
+          <NativeRouter>
+            <Switch>
+              <Route path="/signup" component={SignUp} />
+              <Route path="/login" component={Login} />
+              <Route path="/signuponboarding" component={SignUpOnBoarding} />
+              <Route path="/loginonboarding" component={LoginOnBoarding} />
+              <Route path="/" component={MainApp} />
+            </Switch>
+          </NativeRouter>
+        </SafeAreaView>
+      </React.Fragment>
     </InitDatabase>
   </ThemeProvider>
 );

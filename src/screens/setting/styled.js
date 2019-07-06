@@ -27,3 +27,7 @@ export const SettingNameWrapper = styled.View`
 export const SettingIcon = styled.View`
   margin-right: 10px;
 `;
+
+export const ChangePinButton = styled.View`
+  align-self: flex-end;
+`;

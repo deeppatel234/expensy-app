@@ -19,4 +19,8 @@ export const ButtonElement = styled.TouchableOpacity`
     background: ${props.theme.primary};
     border: 1px solid ${props => props.theme.primary};
   `}
+
+  ${props => props.small && css`
+    padding: 5px 10px;
+  `}
 `;

@@ -77,3 +77,7 @@ export const FooterActionButtons = styled(FlexRow)`
   justify-content: center;
   padding-bottom: 50px;
 `;
+
+export const CenterButton = styled.View`
+  align-self: center;
+`;

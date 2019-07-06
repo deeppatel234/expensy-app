@@ -124,6 +124,9 @@ class SettingRedux extends BaseRedux {
           case self.constants.CHANGE_FINGERPRINT_LOCK:
             return { ...state, fingerPrintLock: action.isLocked };
           case self.constants.CHANGE_PIN_LOCK:
+            if (!action.isLocked) {
+              return { ...state, pinLock: action.isLocked, pin: action.pin, fingerPrintLock: false };
+            }
             return { ...state, pinLock: action.isLocked, pin: action.pin };
           default:
             return state;

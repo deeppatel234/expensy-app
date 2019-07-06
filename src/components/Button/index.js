@@ -20,7 +20,8 @@ const Button = props => (
 
 Button.defaultProps = {
   appearance: "white",
-  block: false
+  block: false,
+  small: false,
 };
 
 export default Button;

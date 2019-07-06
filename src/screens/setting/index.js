@@ -9,12 +9,14 @@ import Avatar from "Components/Avatar";
 import Switch from "Components/Switch";
 import Header from "Components/Header";
 import Footer from "Components/Footer";
+import Button from "Components/Button";
 
 import Redux from "Redux/ReduxRegistry";
 
 import { Container, Heading, Content } from "Src/globalStyle";
 
 import CurrencyModal from "Screens/currency/CurrencyModal";
+import PinLockModal from "Screens/pinlock/Modal";
 
 import ColorThemeModal from "./components/ColorTheme";
 
@@ -23,7 +25,8 @@ import {
   ThemeSwitchWrapper,
   ThemeName,
   SettingNameWrapper,
-  SettingIcon
+  SettingIcon,
+  ChangePinButton,
 } from "./styled";
 
 import { ColorIcon } from "./components/styled";
@@ -40,6 +43,9 @@ const Setting = ({
   const [isFingerPrintSupported, setIsFingerPrintSupported] = useState(true);
   const [currencyModalVisible, setCurrencyModalVisible] = useState(false);
   const [colorModalVisible, setColorModalVisible] = useState(false);
+  const [pinModalVisible, setPinModalVisible] = useState(false);
+  const [isOpenFromFP, setIsOpenFromFP] = useState(false);
+  const [isChangePin, setIsChangePin] = useState(false);
 
   useEffect(() => {
     TouchID.isSupported()
@@ -58,6 +64,33 @@ const Setting = ({
   const onSelectColor = useCallback(data => {
     changeColor(data);
     setColorModalVisible(false);
+  }, []);
+
+  const onChangeFingerPrint = data => {
+    if (setting.pinLock || !data) {
+      changeFingerPrintLock(data);
+    } else {
+      setIsOpenFromFP(true);
+      setPinModalVisible(true);
+    }
+  };
+
+  const onSelectSetPin = useCallback((data, state) => {
+    changePinLock(true, data.pin);
+    if (state) {
+      changeFingerPrintLock(true);
+    }
+    setPinModalVisible(false);
+    setIsOpenFromFP(false);
+    setIsChangePin(false);
+  }, []);
+
+  const onChangePinLock = useCallback(data => {
+    if (data) {
+      setPinModalVisible(true);
+    } else {
+      changePinLock(false);
+    }
   }, []);
 
   if (isLoading) {
@@ -90,7 +123,10 @@ const Setting = ({
           <SettingItem>
             <SettingNameWrapper>
               <SettingIcon>
-                <Icon iconType="MaterialCommunityIcons" icon="format-color-fill" />
+                <Icon
+                  iconType="MaterialCommunityIcons"
+                  icon="format-color-fill"
+                />
               </SettingIcon>
               <Typography>Color</Typography>
             </SettingNameWrapper>
@@ -100,6 +136,31 @@ const Setting = ({
             />
           </SettingItem>
         )}
+        <SettingItem>
+          <SettingNameWrapper>
+            <SettingIcon>
+              <Icon iconType="MaterialCommunityIcons" icon="lock-outline" />
+            </SettingIcon>
+            <Typography>Pin Lock</Typography>
+          </SettingNameWrapper>
+          <Switch value={setting.pinLock} onValueChange={onChangePinLock} />
+        </SettingItem>
+        {
+          setting.pinLock && (
+            <ChangePinButton>
+              <Button
+                onPress={() => {
+                  setIsChangePin(true);
+                  setPinModalVisible(true);
+                }}
+                appearance="primary"
+                text="Change Pin"
+                borderRadius
+                small
+              />
+            </ChangePinButton>
+          )
+        }
         {isFingerPrintSupported && (
           <SettingItem>
             <SettingNameWrapper>
@@ -110,19 +171,10 @@ const Setting = ({
             </SettingNameWrapper>
             <Switch
               value={setting.fingerPrintLock}
-              onValueChange={changeFingerPrintLock}
+              onValueChange={onChangeFingerPrint}
             />
           </SettingItem>
         )}
-        {/* <SettingItem>
-          <SettingNameWrapper>
-            <SettingIcon>
-              <Icon iconType="MaterialCommunityIcons" icon="lock-outline" />
-            </SettingIcon>
-            <Typography>Pin Lock</Typography>
-          </SettingNameWrapper>
-          <Switch value={setting.pinLock} onValueChange={changePinLock} />
-        </SettingItem> */}
         <SettingItem>
           <SettingNameWrapper>
             <SettingIcon>
@@ -138,6 +190,18 @@ const Setting = ({
           visible={currencyModalVisible}
           onSelect={onSelectCurrency}
           onClose={() => setCurrencyModalVisible(false)}
+        />
+        <PinLockModal
+          visible={pinModalVisible}
+          isOpenFromFP={isOpenFromFP}
+          isChangePin={isChangePin}
+          onSelect={onSelectSetPin}
+          currentPin={setting.pin}
+          onClose={() => {
+            setPinModalVisible(false);
+            setIsOpenFromFP(false);
+            setIsChangePin(false);
+          }}
         />
         <ColorThemeModal
           visible={colorModalVisible}
@@ -166,8 +230,8 @@ const mapDispatchToProps = dispatch => {
     changeColor: color => dispatch(Redux.get("setting", "changeColor")(color)),
     changeCurrency: currency =>
       dispatch(Redux.get("setting", "changeCurrency")(currency)),
-    changePinLock: isLocked =>
-      dispatch(Redux.get("setting", "changePinLock")(isLocked))
+    changePinLock: (isLocked, pin) =>
+      dispatch(Redux.get("setting", "changePinLock")(isLocked, pin))
   };
 };
 

@@ -3,7 +3,6 @@ package com.devivetech.expensy;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.horcrux.svg.SvgPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.rnfingerprint.FingerprintAuthPackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
@@ -30,7 +29,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SvgPackage(),
             new RNDeviceInfo(),
             new FingerprintAuthPackage(),
             new NetInfoPackage(),

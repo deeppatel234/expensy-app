@@ -7,3 +7,9 @@ export const Wrapper = styled.View`
   align-items: center;
   justify-content: center;
 `;
+
+export const AvatarImage = styled.Image`
+  height: 100px;
+  width: 160px;
+  margin-bottom: 10px;
+`;

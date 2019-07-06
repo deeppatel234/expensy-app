@@ -27,3 +27,13 @@ export const LightenDarkenColor = (col, amt) => {
 };
 
 export const fixedAmount = (amount) => amount ? amount.toFixed(2) : 0;
+
+export const formatDate = (date) => {
+  let month = `${date.getMonth() + 1}`;
+  let day = `${date.getDate()}`;
+  const year = date.getFullYear();
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
+
+  return [year, month, day].join('-');
+};

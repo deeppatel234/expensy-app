@@ -1,10 +1,9 @@
 import React from "react";
 import _capitalize from "lodash/capitalize";
 
-import formatDate from "date-fns/format";
-
 import Header from "Components/Header";
 import TransactionForm from "./TransactionForm";
+import { formatDate } from "Utils/utility";
 
 import {
   Container,
@@ -30,7 +29,7 @@ const CreateTransaction = ({ history }) => {
         transactionValues={{
           type: "expense",
           amount: "",
-          dateTime: formatDate(new Date(), "YYYY-MM-DD")
+          dateTime: formatDate(new Date())
         }}
         submitIcon="add"
         onSubmitForm={onSubmitForm}

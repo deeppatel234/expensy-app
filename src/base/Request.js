@@ -1,89 +1,38 @@
-import axios from "axios";
-
 import MemoryStorage from "Base/MemoryStorage";
 import { API_URL } from "../../appConfig";
 
-class Request {
-  constructor() {
-    /**
-     * base request for api data
-     */
-    this.apiRequest = axios.create({
-      method: "post",
-      timeout: 1500,
-      baseURL: API_URL
-    });
-    /**
-     * get request for external call
-     */
-    this.getRequest = axios.create({
-      method: "get"
-    });
-    /**
-     * post request for external call
-     */
-    this.postRequest = axios.create({
-      method: "post"
-    });
-  }
+/**
+  * Request data from API server
+  *
+  * @param {Object} payload
+  * @param {String} payload.model
+  * @param {String} payload.method
+  * @param {Object} payload.data
+*/
+const api = (payload) => {
+ const { model, method, data = {}, version = 1 } = payload;
 
-  /**
-   * Request data from API server
-   *
-   * @param {Object} payload
-   * @param {String} payload.model
-   * @param {String} payload.method
-   * @param {Object} payload.data
-   */
-  api(payload) {
-    const { model, method, data = {}, version = 1 } = payload;
-
-    return new Promise((resolve, rejects) => {
-      this.apiRequest({
-        url: `${model}/v${version}/${method}`,
-        data,
-        headers: {
-          authorization: MemoryStorage.get("token")
-        }
-      })
-        .then(res => {
-          if (res.data.error) {
-            rejects(res.data.error);
-          } else {
-            resolve(res.data);
-          }
-        })
-        .catch(rejects);
-    });
-  }
-
-  get(payload) {
-    return new Promise((resolve, rejects) => {
-      this.getRequest(payload)
-        .then(res => {
-          if (res.data.error) {
-            rejects(res.data.error);
-          } else {
-            resolve(res.data);
-          }
-        })
-        .catch(rejects);
-    });
-  }
-
-  post(payload) {
-    return new Promise((resolve, rejects) => {
-      this.postRequest(payload)
-        .then(res => {
-          if (res.data.error) {
-            rejects(res.data.error);
-          } else {
-            resolve(res.data);
-          }
-        })
-        .catch(rejects);
-    });
-  }
+ return new Promise((resolve, rejects) => {
+   fetch(`${API_URL}/api/${model}/v${version}/${method}`, {
+     method: 'POST',
+     headers: {
+       Accept: 'application/json',
+       'Content-Type': 'application/json',
+       authorization: MemoryStorage.get("token"),
+     },
+     body: JSON.stringify(data),
+   }).then((res) => res.json())
+   .then((res) => {
+     if (res.error) {
+       rejects(res.error);
+     } else {
+       resolve(res);
+     }
+   })
+   .catch(rejects);
+ });
 }
 
-export default new Request();
+export default {
+  api,
+};

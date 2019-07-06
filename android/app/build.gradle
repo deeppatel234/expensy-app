@@ -105,8 +105,8 @@ android {
         applicationId "com.devivetech.expensy"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
-        versionName "2.1"
+        versionCode 4
+        versionName "2.2"
     }
     signingConfigs {
         release {

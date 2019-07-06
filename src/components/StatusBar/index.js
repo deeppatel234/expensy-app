@@ -7,7 +7,7 @@ const StatusBarComp = ({ theme, appearance, ...props }) => (
 );
 
 StatusBarComp.defaultProps = {
-  appearance: "primary"
+  appearance: "statusBar"
 };
 
 export default withTheme(StatusBarComp);

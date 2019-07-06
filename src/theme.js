@@ -37,6 +37,7 @@ const light = (color) => ({
   lightGray: LIGHT_GRAY,
   green: GREEN,
   teal: TEAL,
+  statusBar: COLORS[color],
 });
 
 const dark = () => ({
@@ -48,6 +49,7 @@ const dark = () => ({
   lightGray: WHITE,
   green: GREEN,
   teal: TEAL,
+  statusBar: BLACK,
 });
 
 export default getTheme = (isLightTheme, color = 'BLUE') => {

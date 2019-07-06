@@ -2,41 +2,61 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import TouchID from "react-native-touch-id";
 import SplashLoading from "Screens/splash/SplashLoading";
+import PinLock from "Screens/pinlock";
 
 class AppAuthentication extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isAuthenticated: !props.setting.fingerPrintLock,
-      errorMessage: false
+      isAuthenticated: !props.setting.fingerPrintLock && !props.setting.pinLock,
+      enablePinLock: false,
     };
+
+    this.onPinPassed = this.onPinPassed.bind(this);
   }
 
   componentDidMount() {
     const {
-      setting: { fingerPrintLock }
+      setting: { fingerPrintLock, pinLock, pin }
     } = this.props;
     if (fingerPrintLock) {
-      TouchID.authenticate("")
+      return TouchID.authenticate("", {
+        cancelText: "Use pin"
+      })
         .then(() => {
           this.setState({ isAuthenticated: true });
         })
         .catch(() => {
-          this.setState({ errorMessage: "Authentication Error" });
+          this.setState({
+            enablePinLock: pin,
+          });
         });
+    }
+    if (pinLock) {
+      this.setState({
+        enablePinLock: pin,
+      });
     }
   }
 
+  onPinPassed() {
+    this.setState({ isAuthenticated: true });
+  }
+
   render() {
-    const { isAuthenticated, errorMessage } = this.state;
+    const { isAuthenticated, enablePinLock } = this.state;
     const { children } = this.props;
 
     if (isAuthenticated) {
       return children;
     }
 
-    return <SplashLoading message={errorMessage} />;
+    if (enablePinLock) {
+      return <PinLock userPin={enablePinLock} onPassed={this.onPinPassed} />
+    }
+
+    return <SplashLoading />;
   }
 }
 
